@@ -46,7 +46,7 @@
 <meta name="author" content="KM · Karla Marquez Vanity Home">
 <meta name="copyright" content="© 2026 KM · Karla Marquez Vanity Home. Todos los derechos reservados.">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FurnitureStore","name":"KM · Karla Marquez Vanity Home","description":"Taller familiar que fabrica a mano y a pedido peinadoras con luces LED, vanitys, clósets, camas, gaveteros, escritorios y espejos en Barquisimeto, Venezuela.","telephone":"+58 424-5949602","address":{"@type":"PostalAddress","streetAddress":"Calle 13 entre 7A y 8, Santa Isabel","addressLocality":"Barquisimeto","addressRegion":"Lara","addressCountry":"VE"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"21:00"},"sameAs":["https://www.instagram.com/repisaskm/"],"copyrightHolder":{"@type":"Organization","name":"KM · Karla Marquez Vanity Home"},"copyrightYear":2026}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FurnitureStore","name":"KM · Karla Marquez Vanity Home","description":"Taller familiar que fabrica a mano y a pedido peinadoras con luces LED, vanitys, clósets, camas, gaveteros, escritorios y espejos en Barquisimeto, Venezuela.","telephone":"+58 424-5949602","address":{"@type":"PostalAddress","streetAddress":"Calle 13 entre 7A y 8, Santa Isabel","addressLocality":"Barquisimeto","addressRegion":"Lara","addressCountry":"VE"},"geo":{"@type":"GeoCoordinates","latitude":10.062477,"longitude":-69.383933},"hasMap":"https://maps.app.goo.gl/iMkkXCv3fQVNeXQo7","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"21:00"},"sameAs":["https://www.instagram.com/repisaskm/"],"copyrightHolder":{"@type":"Organization","name":"KM · Karla Marquez Vanity Home"},"copyrightYear":2026}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalnia:wdth,wght@100..125,100..700&display=swap">
@@ -525,11 +525,11 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <span style="font-size:15px;color:rgba(23,20,26,.68)">WhatsApp todos los días, de 8 am a 9 pm.</span>
       </div>
       <div data-reveal="up" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle%2013%20entre%207A%20y%208%2C%20Santa%20Isabel%2C%20Barquisimeto%2C%20Lara%2C%20Venezuela" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;background:#17141A;color:#F2ECE4;font-size:15px;font-weight:700">Cómo llegar <span aria-hidden="true">↗</span></a>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=10.062477%2C-69.383933" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;background:#17141A;color:#F2ECE4;font-size:15px;font-weight:700">Cómo llegar <span aria-hidden="true">↗</span></a>
         <a href="https://www.instagram.com/repisaskm/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(23,20,26,.25);color:#17141A;font-size:15px;font-weight:600">Instagram @repisaskm <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <div ref="{{ mapRef }}" role="region" aria-label="Mapa: zona de Santa Isabel, Barquisimeto" style="position:relative;flex:1.5 1 380px;min-height:clamp(320px,50vh,540px);border-radius:8px;overflow:hidden;isolation:isolate;background:#E4DDD3">
+    <div ref="{{ mapRef }}" role="region" aria-label="Mapa: ubicación del taller KM en Barquisimeto" style="position:relative;flex:1.5 1 380px;min-height:clamp(320px,50vh,540px);border-radius:8px;overflow:hidden;isolation:isolate;background:#E4DDD3">
       <sc-if value="{{ mapPending }}" hint-placeholder-val="{{ true }}">
         <span style="position:absolute;inset:0;display:grid;place-items:center;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,26,.5)">Cargando mapa…</span>
       </sc-if>
@@ -843,7 +843,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 /* © 2026 KM · Karla Marquez Vanity Home. Todos los derechos reservados.
    Diseño, código, textos y fotografías protegidos por derecho de autor. Prohibida su copia o reproducción sin autorización. */
 const WHATSAPP = "584245949602"; // ← Número de WhatsApp de KM: código de país + número, sin "+" ni espacios
-const MAPA = { lat: 10.059, lng: -69.3728, zoom: 15 }; // Santa Isabel, Barquisimeto (aprox.). Ajusta al punto exacto del taller.
+const MAPA = { lat: 10.062477, lng: -69.383933, zoom: 16 }; // Punto exacto del taller (Google Maps de Sergio, 15-oct-2026: maps.app.goo.gl/iMkkXCv3fQVNeXQo7).
 
 const FRASES = ["Enciende tu rincón.", "La luz que te ve primero.", "Cada mañana merece un camerino.", "Hecho a mano para tu mejor reflejo."];
 const LUCES = {
