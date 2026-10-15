@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100E13">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="marca/icon-192.png">
+<link rel="apple-touch-icon" href="marca/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KM Vanity">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Peinadoras con luces LED, vanitys y clósets hechos a mano y a pedido en Barquisimeto, Venezuela.">
+<meta property="og:title" content="KM · Karla Marquez Vanity Home">
+<meta property="og:description" content="Peinadoras con luces, vanitys y clósets hechos a mano en Barquisimeto.">
+<title>KM · Karla Marquez Vanity Home</title>
+<meta name="author" content="KM · Karla Marquez Vanity Home">
+<meta name="copyright" content="© 2026 KM · Karla Marquez Vanity Home. Todos los derechos reservados.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FurnitureStore","name":"KM · Karla Marquez Vanity Home","description":"Taller familiar que fabrica a mano y a pedido peinadoras con luces LED, vanitys, clósets, camas, gaveteros, escritorios y espejos en Barquisimeto, Venezuela.","telephone":"+58 424-5949602","address":{"@type":"PostalAddress","streetAddress":"Calle 13 entre 7A y 8, Santa Isabel","addressLocality":"Barquisimeto","addressRegion":"Lara","addressCountry":"VE"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"21:00"},"sameAs":["https://www.instagram.com/repisaskm/"],"copyrightHolder":{"@type":"Organization","name":"KM · Karla Marquez Vanity Home"},"copyrightYear":2026}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalnia:wdth,wght@100..125,100..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,300..600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+body{margin:0;background:#100E13;color:#F2ECE4;font-family:'Karla',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
+a{color:#C9B8EE;text-decoration:none}
+a:hover{color:#F2ECE4}
+h1,h2,h3,p,ol,figure,address{margin:0}
+::selection{background:#C9B8EE;color:#100E13}
+@keyframes kmPulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.8);opacity:0}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;min-height:100vh;background:#100E13;color:#F2ECE4;font-family:'Karla',system-ui,sans-serif;overflow-x:clip">
+<div ref="{{ grainRef }}" aria-hidden="true" style="position:fixed;inset:0;z-index:100;pointer-events:none;opacity:0"></div>
+
+<header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(14px,3.4vw,40px);color:var(--fg, #F2ECE4);border-bottom:1px solid transparent;transition:background-color .5s ease,color .5s ease,border-color .5s ease">
+  <a href="#inicio" aria-label="KM, Karla Marquez Vanity Home" style="display:flex;align-items:center;flex:none;color:inherit">
+    <span style="position:relative;display:block;flex:none;height:36px;aspect-ratio:1080/250;max-width:max(0px, calc((100vw - 600px) * 999));overflow:hidden">
+      <img src="marca/horizontal-blanco.svg" alt="" width="1080" height="250" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;opacity:var(--lw, 1);transition:opacity .5s ease">
+      <img src="marca/horizontal-tinta.svg" alt="" width="1080" height="250" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;opacity:var(--lt, 0);transition:opacity .5s ease">
+    </span>
+    <span style="position:relative;display:block;flex:none;height:42px;aspect-ratio:375/460;max-width:max(0px, calc((600px - 100vw) * 999));overflow:hidden">
+      <img src="marca/km-blanco.svg" alt="" width="375" height="460" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;opacity:var(--lw, 1);transition:opacity .5s ease">
+      <img src="marca/km-tinta.svg" alt="" width="375" height="460" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;opacity:var(--lt, 0);transition:opacity .5s ease">
+    </span>
+  </a>
+  <nav aria-label="Secciones" style="display:flex;gap:clamp(18px,2vw,30px);font-size:14.5px;max-width:max(0px, calc((100vw - 1120px) * 999));overflow:hidden;white-space:nowrap">
+    <a href="#tienda" style="color:inherit">Tienda</a>
+    <a href="#taller" style="color:inherit">El taller</a>
+    <a href="#a-tu-gusto" style="color:inherit">A tu gusto</a>
+    <a href="#como-pedir" style="color:inherit">Cómo pedir</a>
+    <a href="#preguntas" style="color:inherit">Preguntas</a>
+    <a href="#donde" style="color:inherit">Dónde estamos</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button type="button" onClick="{{ openCart }}" aria-label="{{ cartAria }}" style="position:relative;width:44px;height:44px;border-radius:50%;border:1px solid var(--line, rgba(242,236,228,.28));display:grid;place-items:center;color:inherit">
+      <span aria-hidden="true" style="position:relative;display:block;width:15px;height:13px;margin-top:5px;border:1.5px solid currentColor;border-radius:2px 2px 4px 4px"><span style="position:absolute;left:50%;top:-7px;width:8px;height:6px;margin-left:-4px;border:1.5px solid currentColor;border-bottom:0;border-radius:5px 5px 0 0"></span></span>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}"><span data-cbadge="" style="position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 12px 2px rgba(201,184,238,.6)">{{ cartCount }}</span></sc-if>
+    </button>
+    <a href="#tienda" onClick="{{ goTienda }}" style="display:flex;align-items:center;gap:0;height:44px;min-width:44px;justify-content:center;padding:0 18px;border-radius:999px;background:var(--fg, #F2ECE4);color:var(--bg, #100E13);font-size:14.5px;font-weight:700;transition:background-color .5s ease,color .5s ease"><span aria-hidden="true" style="flex:none;display:grid;grid-template-columns:repeat(2,4px);gap:2px"><span style="width:4px;height:4px;border-radius:1px;background:currentColor"></span><span style="width:4px;height:4px;border-radius:1px;background:currentColor"></span><span style="width:4px;height:4px;border-radius:1px;background:currentColor"></span><span style="width:4px;height:4px;border-radius:1px;background:currentColor"></span></span><span style="display:block;max-width:max(0px, calc((100vw - 430px) * 999));overflow:hidden;white-space:nowrap"><span style="display:block;padding-left:9px">Ver catálogo</span></span></a>
+    <button type="button" onClick="{{ openMenu }}" aria-label="Abrir menú" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--line, rgba(242,236,228,.28));display:grid;place-items:center">
+      <span style="display:flex;flex-direction:column;gap:5px"><span style="display:block;width:16px;height:1.5px;background:currentColor"></span><span style="display:block;width:16px;height:1.5px;background:currentColor"></span></span>
+    </button>
+  </div>
+</header>
+
+<section id="inicio" data-tone="night" data-screen-label="Portada" ref="{{ heroRef }}" onPointerMove="{{ heroMove }}" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px clamp(26px,5.6vw,88px) clamp(28px,6vh,64px);overflow:hidden;isolation:isolate">
+  <div data-hlight="" aria-hidden="true" style="position:absolute;left:0;top:0;width:720px;height:720px;margin:-360px 0 0 -360px;border-radius:50%;background:radial-gradient(circle,var(--halo2, rgba(201,184,238,.2)) 0%,rgba(16,14,19,0) 62%);pointer-events:none;z-index:-2;opacity:0;transition:opacity .8s ease"></div>
+  <div data-flip="" style="position:absolute;z-index:-1;top:clamp(78px,10vh,104px);right:clamp(0px,calc(9vw - 30px),150px);height:min(76vh,125vw);aspect-ratio:4/5;max-width:100%">
+    <div data-hintro="" style="position:absolute;inset:0">
+      <div style="position:absolute;inset:1px;overflow:hidden;opacity:{{ heroDim }};transition:opacity .7s ease">
+        <img data-on="{{ h0.on }}" src="fotos/T04_tocador-de-nueve-cajones-con-bombillas-y-dos-estanterias_01_frontal.webp" alt="Peinadora de 9 gavetas con bombillos, encendida" width="800" height="1000" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.06);opacity:{{ h0.op }};transform:scale({{ h0.sc }});transition:opacity 1.6s ease,transform 7s linear">
+        <sc-if value="{{ heroMore }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="0">
+          <img data-on="{{ s.on }}" src="{{ s.src }}" alt="{{ s.alt }}" width="800" height="1000" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.06);opacity:{{ s.op }};transform:scale({{ s.sc }});transition:opacity 1.6s ease,transform 7s linear">
+        </sc-for></sc-if>
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:-2px;pointer-events:none;background:radial-gradient(ellipse 70% 62% at 50% 44%,rgba(16,14,19,0) 38%,rgba(16,14,19,.6) 70%,#100E13 90%),linear-gradient(90deg,#100E13 0%,#100E13 3%,rgba(16,14,19,0) 18%,rgba(16,14,19,0) 82%,#100E13 97%,#100E13 100%),linear-gradient(180deg,#100E13 0%,#100E13 3%,rgba(16,14,19,0) 15%,rgba(16,14,19,0) 50%,rgba(16,14,19,.85) 80%,#100E13 93%,#100E13 100%)"></div>
+    </div>
+    <button type="button" onClick="{{ heroOpen }}" style="position:absolute;left:clamp(18px,2vw,26px);top:clamp(16px,2vw,26px);display:flex;flex-direction:column;align-items:flex-start;gap:5px;max-width:70%;text-align:left;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.84);text-shadow:0 1px 12px rgba(16,14,19,.95)">
+      <span style="color:#C9B8EE;white-space:nowrap">{{ heroCap.num }} — {{ heroCap.code }}</span>
+      <span style="letter-spacing:.06em">{{ heroCap.name }} →</span>
+    </button>
+  </div>
+
+  <div aria-hidden="true" style="position:absolute;inset:76px clamp(8px,1.3vw,20px) clamp(8px,1.3vw,20px);border:1px solid rgba(242,236,228,.08);border-radius:clamp(16px,2vw,30px);pointer-events:none;z-index:1">
+    <div style="position:absolute;top:0;left:6%;right:6%;display:flex;justify-content:space-between;transform:translateY(-50%)">
+      <sc-for list="{{ hbTop }}" as="b" hint-placeholder-count="9">
+        <span data-hbulb="" data-o="{{ b.o }}" onClick="{{ bulbTap }}" style="position:relative;display:block;width:clamp(11px,1.05vw,16px);height:clamp(11px,1.05vw,16px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#3B3542,#1A171E);box-shadow:inset 0 0 0 1px rgba(242,236,228,.12);pointer-events:auto;cursor:pointer;transition:transform .3s ease-out"><span data-glow="" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 50%,#EEE6FF 100%);box-shadow:0 0 8px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58)),0 0 80px 24px var(--halo2, rgba(201,184,238,.2))"></span></span>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:0;top:9%;bottom:14%;display:flex;flex-direction:column;justify-content:space-between;transform:translateX(-50%)">
+      <sc-for list="{{ hbLeft }}" as="b" hint-placeholder-count="5">
+        <span data-hbulb="" data-o="{{ b.o }}" onClick="{{ bulbTap }}" style="position:relative;display:block;width:clamp(11px,1.05vw,16px);height:clamp(11px,1.05vw,16px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#3B3542,#1A171E);box-shadow:inset 0 0 0 1px rgba(242,236,228,.12);pointer-events:auto;cursor:pointer;transition:transform .3s ease-out"><span data-glow="" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 50%,#EEE6FF 100%);box-shadow:0 0 8px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58)),0 0 80px 24px var(--halo2, rgba(201,184,238,.2))"></span></span>
+      </sc-for>
+    </div>
+    <div style="position:absolute;right:0;top:9%;bottom:14%;display:flex;flex-direction:column;justify-content:space-between;transform:translateX(50%)">
+      <sc-for list="{{ hbRight }}" as="b" hint-placeholder-count="5">
+        <span data-hbulb="" data-o="{{ b.o }}" onClick="{{ bulbTap }}" style="position:relative;display:block;width:clamp(11px,1.05vw,16px);height:clamp(11px,1.05vw,16px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#3B3542,#1A171E);box-shadow:inset 0 0 0 1px rgba(242,236,228,.12);pointer-events:auto;cursor:pointer;transition:transform .3s ease-out"><span data-glow="" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 50%,#EEE6FF 100%);box-shadow:0 0 8px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58)),0 0 80px 24px var(--halo2, rgba(201,184,238,.2))"></span></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(18px,2.8vh,30px)">
+    <p data-hin="" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9B8EE"><span style="width:7px;height:7px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 6px 1px rgba(255,250,244,.9),0 0 16px 4px var(--halo, rgba(201,184,238,.58))"></span>Taller familiar · Barquisimeto, Venezuela</p>
+    <sc-if value="{{ fr.a }}" hint-placeholder-val="{{ true }}">
+      <h1 data-hw="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:420;font-size:min(15.5vw,15vh,176px);line-height:.9;letter-spacing:-.035em;color:#F7F2EA;text-shadow:0 2px 40px rgba(16,14,19,.6)">
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">Enciende</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">tu rincón.</span></span>
+      </h1>
+    </sc-if>
+    <sc-if value="{{ fr.b }}" hint-placeholder-val="{{ false }}">
+      <h1 data-hw="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:420;font-size:min(12.6vw,12vh,150px);line-height:.92;letter-spacing:-.035em;color:#F7F2EA;text-shadow:0 2px 40px rgba(16,14,19,.6)">
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">La luz</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">que te ve</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">primero.</span></span>
+      </h1>
+    </sc-if>
+    <sc-if value="{{ fr.c }}" hint-placeholder-val="{{ false }}">
+      <h1 data-hw="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:420;font-size:min(12.6vw,12vh,150px);line-height:.92;letter-spacing:-.035em;color:#F7F2EA;text-shadow:0 2px 40px rgba(16,14,19,.6)">
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">Cada mañana</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">merece un</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">camerino.</span></span>
+      </h1>
+    </sc-if>
+    <sc-if value="{{ fr.d }}" hint-placeholder-val="{{ false }}">
+      <h1 data-hw="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:420;font-size:min(12.6vw,12vh,150px);line-height:.92;letter-spacing:-.035em;color:#F7F2EA;text-shadow:0 2px 40px rgba(16,14,19,.6)">
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">Hecho a mano</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">para tu mejor</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">reflejo.</span></span>
+      </h1>
+    </sc-if>
+    <p data-hin="" style="max-width:32ch;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:rgba(242,236,228,.8);text-wrap:pretty">Peinadoras con luces, vanitys y clósets. Hechos a mano y a pedido en Barquisimeto.</p>
+    <div data-hin="" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px">
+      <a href="#tienda" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:16px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px -12px rgba(201,184,238,.75)">Ver el catálogo <span aria-hidden="true">↓</span></a>
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;height:44px;color:#F2ECE4;font-size:16px;border-bottom:1px solid rgba(242,236,228,.35)"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="vida-real" data-tone="day" data-screen-label="Vida real" style="position:relative;z-index:2;margin-top:-28px;border-radius:28px 28px 0 0;background:#F4EFE8;color:#17141A;padding:clamp(64px,10vh,112px) 0 clamp(16px,3vh,32px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(14px,4vw,56px) clamp(28px,4.5vh,48px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 56px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>En casa de nuestras clientas</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(44px,6.6vw,104px);line-height:.95;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Ya somos parte</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">de miles de hogares</span></span>
+      </h2>
+    </div>
+    <p data-reveal="up" style="max-width:30ch;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Diseños que acompañan tus espacios.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:clamp(12px,1.4vw,20px)">
+    <div data-vr-row="A" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 1. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
+      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
+        <sc-for list="{{ vrA }}" as="c" hint-placeholder-count="6">
+          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+    <div data-vr-row="B" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 2. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
+      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
+        <sc-for list="{{ vrB }}" as="c" hint-placeholder-count="6">
+          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:#F4EFE8;color:#17141A">
+  <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,10vh,112px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px 56px;padding:0 2px">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>La tienda · 72 modelos</p>
+        <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(52px,8.4vw,128px);line-height:.92;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Elige</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">el tuyo.</span></span>
+        </h2>
+      </div>
+      <div data-reveal="up" style="flex:0 1 420px;display:flex;flex-direction:column;gap:16px">
+        <p style="font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Todos hechos a mano y a pedido, del color que quieras. Toca uno para ver su ficha.</p>
+        <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ app.go }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px 0 8px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)">
+            <img src="marca/icon-192.png" alt="" width="36" height="36" style="display:block;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px rgba(242,236,228,.18)">
+            <span style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.1;text-align:left"><span>Instala la app de KM</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#C9B8EE">Gratis · un toque desde tu inicio</span></span>
+          </button>
+        </sc-if>
+        <label style="position:relative;display:flex;align-items:center">
+          <span aria-hidden="true" style="position:absolute;left:18px;width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(23,20,26,.55)"></span>
+          <input type="search" value="{{ q }}" onChange="{{ onSearch }}" placeholder="Busca: led, lila, 9 gavetas, cama…" aria-label="Buscar modelo" style="width:100%;height:50px;padding:0 18px 0 44px;border-radius:999px;border:1px solid rgba(23,20,26,.18);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
+        </label>
+        
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;position:sticky;top:68px;z-index:5;margin:0 -14px;padding:10px 14px;background:rgba(244,239,232,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
+      <div role="tablist" aria-label="Categorías" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
+          <button type="button" role="tab" aria-selected="{{ c.pressed }}" onClick="{{ c.select }}" style="flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;transition:background-color .3s ease,color .3s ease,border-color .3s ease">{{ c.name }}<span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;font-weight:400;opacity:.62">{{ c.count }}</span></button>
+        </sc-for>
+      </div>
+      <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">{{ countLabel }}</p>
+    </div>
+    <div ref="{{ gridRef }}" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,21vw,300px),1fr));gap:clamp(30px,3vw,48px) clamp(12px,1.6vw,24px)">
+      <sc-for list="{{ items }}" as="p" hint-placeholder-count="8">
+        <article data-pcard="" style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <button type="button" data-flip="" onClick="{{ p.open }}" onMouseEnter="{{ cardIn }}" onMouseLeave="{{ cardOut }}" aria-label="{{ p.aria }}" style="position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#E8DFD3;cursor:pointer">
+            <img data-a="" src="{{ p.src }}" alt="{{ p.name }}" loading="lazy" decoding="async" width="800" height="1000" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform 1.1s cubic-bezier(.16,1,.3,1)">
+            <img data-b="" data-src="{{ p.src2 }}" alt="" aria-hidden="true" decoding="async" width="800" height="1000" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease">
+            <sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.88);white-space:nowrap;font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#17141A"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 8px 2px rgba(201,184,238,.9)"></span>{{ p.badge }}</span>
+            </sc-if>
+          </button>
+          <div style="display:flex;flex-direction:column;gap:5px;padding:0 2px;flex:1">
+            <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.58)">{{ p.cat }} · {{ p.code }}</p>
+            <button type="button" onClick="{{ p.open }}" style="font-size:clamp(15px,1.15vw,16.5px);font-weight:600;line-height:1.3;color:#17141A;text-wrap:pretty">{{ p.name }}</button>
+          </div>
+          <button type="button" onClick="{{ p.add }}" style="display:flex;align-items:center;justify-content:center;gap:8px;height:42px;border-radius:999px;border:1px solid rgba(23,20,26,.85);background:{{ p.abg }};color:{{ p.afg }};font-size:14px;font-weight:700;transition:background-color .25s ease,color .25s ease">{{ p.addLabel }}</button>
+        </article>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:40px 0">
+        <p style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-size:clamp(26px,3vw,38px);font-weight:300">No lo encontramos así.</p>
+        <p style="max-width:34ch;font-size:16px;line-height:1.5;color:rgba(23,20,26,.7)">Cuéntanos qué buscas por WhatsApp y te lo hacemos a tu gusto.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px">
+          <a href="{{ waBusqueda }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700">Escribir por WhatsApp</a>
+          <button type="button" onClick="{{ clearSearch }}" style="height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(23,20,26,.25);font-size:15px;color:#17141A">Ver todo</button>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:8px">
+        <div style="width:min(240px,60%);height:2px;border-radius:2px;background:rgba(23,20,26,.1);overflow:hidden"><div style="height:100%;width:{{ seenPct }};background:#17141A;transition:width .6s cubic-bezier(.16,1,.3,1)"></div></div>
+        <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">{{ seenLabel }}</p>
+        <button type="button" onClick="{{ more }}" style="height:52px;padding:0 28px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15.5px;font-weight:700">Ver más modelos</button>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<section data-tone="night" data-screen-label="Manifiesto" style="position:relative;z-index:3;margin-top:-28px;border-radius:28px 28px 0 0;background:#100E13;padding:clamp(110px,18vh,200px) clamp(22px,6vw,96px)">
+  <p ref="{{ manRef }}" style="max-width:1180px;margin:0 auto;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(31px,5.2vw,78px);line-height:1.1;letter-spacing:-.022em;text-wrap:balance"><span data-w="" style="transition:opacity .5s ease">Es </span><span data-w="" style="transition:opacity .5s ease">lo </span><span data-w="" style="transition:opacity .5s ease">primero </span><span data-w="" style="transition:opacity .5s ease">que </span><span data-w="" style="transition:opacity .5s ease">te </span><span data-w="" style="transition:opacity .5s ease">ve </span><span data-w="" style="transition:opacity .5s ease">cada </span><span data-w="" style="transition:opacity .5s ease">mañana. </span><span data-w="" style="transition:opacity .5s ease">Por </span><span data-w="" style="transition:opacity .5s ease">eso </span><span data-w="" style="transition:opacity .5s ease">lo </span><span data-w="" style="transition:opacity .5s ease">hacemos </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">a </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">mano, </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">a </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">pedido </span><span data-w="" style="transition:opacity .5s ease">y </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">en </span><span data-w="" style="transition:opacity .5s ease;color:#C9B8EE">familia, </span><span data-w="" style="transition:opacity .5s ease">en </span><span data-w="" style="transition:opacity .5s ease">nuestro </span><span data-w="" style="transition:opacity .5s ease">taller </span><span data-w="" style="transition:opacity .5s ease">de </span><span data-w="" style="transition:opacity .5s ease">Barquisimeto.</span></p>
+</section>
+
+<section id="taller" data-screen-label="Del taller a tu casa" style="position:relative">
+  <div data-tone="night" style="background:#100E13">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,12vh,140px) clamp(20px,5vw,64px) 0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 56px">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9B8EE"><span style="width:7px;height:7px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 6px 1px rgba(255,250,244,.9),0 0 16px 4px var(--halo, rgba(201,184,238,.58))"></span>Del taller a tu casa</p>
+        <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(54px,9vw,140px);line-height:.92;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Seis etapas.</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">Todas a mano.</span></span>
+        </h2>
+      </div>
+      <p data-reveal="up" style="max-width:32ch;font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:rgba(242,236,228,.72);text-wrap:pretty">Cada mueble pasa por nuestras manos en seis etapas, una por una, hasta que está listo para tu casa.</p>
+    </div>
+  </div>
+  <div style="position:relative"><ol style="list-style:none;padding:0">
+    <li data-tone="night" style="background:linear-gradient(180deg,#100E13 0%,#100E13 55%,#1C1725 100%);color:#F2ECE4">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(242,236,228,.2)">01</span>
+        <div style="flex:1 1 300px;max-width:580px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s0 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#C9B8EE">Etapa 1 de 6</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Corte</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(242,236,228,.76)">Medimos y cortamos cada pieza de tu mueble.</p>
+        </div>
+  <div style="flex:1 1 100%;max-width:1000px;margin-left:auto"><div style="display:grid;gap:clamp(8px,1.4vw,18px);grid-template-columns:minmax(0,2fr) minmax(0,1fr);align-items:center"><figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/01_corte_accion.webp" alt="Manos guiando una lámina por la sierra de mesa" loading="lazy" decoding="async" width="1448" height="1086" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Corte en la sierra de mesa</figcaption></figure><figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/01_corte_sierra.webp" alt="Disco de la sierra cortando una lámina" loading="lazy" decoding="async" width="1024" height="1536" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">La sierra</figcaption></figure><figure data-reveal="up" data-delay="160" style="display:flex;flex-direction:column;gap:8px;min-width:0;grid-column:1/-1;width:82%"><img src="fotos/taller/01_corte_material.webp" alt="Láminas cortadas apiladas junto a un mueble en armado" loading="lazy" decoding="async" width="1983" height="793" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Piezas listas para armar</figcaption></figure></div></div>
+      </div>
+    </li>
+    <li data-tone="night" style="background:linear-gradient(180deg,#1C1725 0%,#1C1725 55%,#2B2340 100%);color:#F2ECE4">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(242,236,228,.2)">02</span>
+        <div style="flex:1 1 300px;max-width:580px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s1 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#C9B8EE">Etapa 2 de 6</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Armado</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(242,236,228,.76)">Lo armamos pieza por pieza, aquí en el taller.</p>
+        </div>
+  <div style="flex:1 1 100%;max-width:1000px;margin-left:auto"><div style="display:grid;gap:clamp(8px,1.4vw,18px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start"><figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px;min-width:0;grid-row:span 2"><img src="fotos/taller/02_armado_panel.webp" alt="Artesano revisando una repisa del mueble" loading="lazy" decoding="async" width="972" height="1619" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Revisamos cada pieza</figcaption></figure><figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/02_armado_canto.webp" alt="Clavadora uniendo un canto a una lámina" loading="lazy" decoding="async" width="1536" height="1024" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Unión del canto</figcaption></figure><figure data-reveal="up" data-delay="160" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/02_armado_union.webp" alt="Clavadora fijando una esquina interior del mueble" loading="lazy" decoding="async" width="1536" height="1024" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Fijamos cada esquina</figcaption></figure></div></div>
+      </div>
+    </li>
+    <li data-tone="night" style="background:linear-gradient(180deg,#2B2340 0%,#2B2340 58%,#9D91BD 100%);color:#F2ECE4">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(242,236,228,.2)">03</span>
+        <div style="flex:1 1 300px;max-width:580px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s2 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#C9B8EE">Etapa 3 de 6</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Pintura</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(242,236,228,.76)">Le damos el color que elegiste.</p>
+        </div>
+  <div style="flex:1 1 100%;max-width:1000px;margin-left:auto"><div style="display:grid;gap:clamp(8px,1.4vw,18px);grid-template-columns:minmax(0,1fr)"><figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/03_pintura_pistola.webp" alt="Pistola aplicando pintura sobre láminas" loading="lazy" decoding="async" width="1536" height="1024" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Pintura con pistola</figcaption></figure><figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px;min-width:0;width:65%;justify-self:end"><img src="fotos/taller/03_pintura_repaso.webp" alt="Repaso con esponja de un mueble negro" loading="lazy" decoding="async" width="1448" height="1086" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(0,0,0,.7)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.62)">Repaso de acabado</figcaption></figure></div></div>
+      </div>
+    </li>
+    <li data-tone="day" style="background:linear-gradient(180deg,#9D91BD 0%,#9D91BD 50%,#CBC2DE 100%);color:#17141A">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(23,20,26,.16)">04</span>
+        <div style="flex:1 1 300px;max-width:580px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s3 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#241A40">Etapa 4 de 6</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Remate de pintura</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(23,20,26,.8)">Repasamos cada borde y cada detalle hasta que quede impecable.</p>
+        </div>
+  <div style="flex:1 1 100%;max-width:1000px;margin-left:auto"><div style="display:grid;gap:clamp(8px,1.4vw,18px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start"><figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/04_remate_lijado.webp" alt="Lijadora sobre el borde de un mueble" loading="lazy" decoding="async" width="1448" height="1086" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(23,20,26,.5)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.64)">Preparación del acabado</figcaption></figure><figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px;min-width:0;"><img src="fotos/taller/04_remate_interior.webp" alt="Repaso del interior de un mueble blanco" loading="lazy" decoding="async" width="1448" height="1086" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(23,20,26,.5)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.64)">Repaso por dentro</figcaption></figure><figure data-reveal="up" data-delay="160" style="display:flex;flex-direction:column;gap:8px;min-width:0;grid-column:1/-1"><img src="fotos/taller/04_remate_muebles.webp" alt="Muebles blancos terminados en el taller" loading="lazy" decoding="async" width="2172" height="724" style="display:block;width:100%;height:auto;border-radius:4px;box-shadow:0 24px 50px -28px rgba(23,20,26,.5)"><figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.64)">Terminados en el taller</figcaption></figure></div></div>
+      </div>
+    </li>
+    <li data-tone="day" style="background:linear-gradient(180deg,#CBC2DE 0%,#CBC2DE 50%,#E7E1EA 100%);color:#17141A">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(23,20,26,.14)">05</span>
+        <div style="flex:1 1 300px;max-width:580px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s4 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#4E3486">Etapa 5 de 6</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Accesorios</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(23,20,26,.78)">Luces, correderas y tiradores, cada cosa en su lugar.</p>
+          <figure data-reveal="up" style="display:flex;flex-direction:column;gap:10px;width:min(100%,260px);margin-top:6px">
+            <img src="fotos/T19_tocador-led-de-nueve-cajones-con-tiradores-curvos_02_lateral.webp" alt="Peinadora LED de 9 gavetas con tiradores curvos, vista lateral" loading="lazy" decoding="async" width="800" height="1000" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:4px;filter:saturate(.9) contrast(1.05);box-shadow:0 30px 60px -30px rgba(23,20,26,.5)">
+            <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.66)">Ref. T19 · Luz LED y tiradores curvos</figcaption>
+          </figure>
+        </div>
+      </div>
+    </li>
+    <li data-tone="day" style="background:linear-gradient(180deg,#E7E1EA 0%,#EDE7E8 50%,#F1ECE5 100%);color:#17141A">
+      <div style="max-width:1320px;margin:0 auto;min-height:min(78vh,760px);padding:clamp(56px,9vh,104px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,5vw,96px)">
+        <span data-snum="" aria-hidden="true" style="flex:none;width:clamp(170px,30vw,420px);font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(120px,22vw,320px);line-height:.8;letter-spacing:-.05em;color:rgba(23,20,26,.14)">06</span>
+        <div style="flex:1 1 300px;max-width:620px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-for list="{{ sb.s5 }}" as="b" hint-placeholder-count="6"><span data-rb="{{ b.lit }}" style="position:relative;display:block;width:11px;height:11px;border-radius:50%;flex:none;background:{{ b.bg }};box-shadow:{{ b.sh }}"><span data-g="" style="position:absolute;inset:0;border-radius:50%;opacity:0;background:radial-gradient(circle at 42% 38%,#FFFFFF 0%,#FFFAF4 55%,#EEE6FF 100%);box-shadow:{{ b.gl }}"></span></span></sc-for>
+            <span style="margin-left:8px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#4E3486">6 de 6 · Listo</span>
+          </div>
+          <h3 data-stitle="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(46px,6.6vw,100px);line-height:.95;letter-spacing:-.03em">Embalado</h3>
+          <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:rgba(23,20,26,.78)">Lo protegemos bien para que llegue perfecto a tu casa. Así salen del taller:</p>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:clamp(8px,1.4vw,18px);margin-top:4px">
+            <figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px">
+              <img src="fotos/EMBALAJE_01_T21_tocador-lila_individual-web.webp" alt="Peinadora lila con bombillos, embalada" loading="lazy" decoding="async" width="640" height="1920" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px rgba(23,20,26,.55)">
+              <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:rgba(23,20,26,.62)">Ref. T21</figcaption>
+            </figure>
+            <figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px">
+              <img src="fotos/EMBALAJE_02_M02_cajonera-blanca_individual-web.webp" alt="Gavetero alto de 5 gavetas, embalado" loading="lazy" decoding="async" width="640" height="1440" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px rgba(23,20,26,.55)">
+              <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:rgba(23,20,26,.62)">Ref. M02</figcaption>
+            </figure>
+            <figure data-reveal="up" data-delay="180" style="display:flex;flex-direction:column;gap:8px">
+              <img src="fotos/EMBALAJE_03_E02_estanteria-curva_individual-web.webp" alt="Repisa blanca de curvas, embalada" loading="lazy" decoding="async" width="640" height="1920" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px rgba(23,20,26,.55)">
+              <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:rgba(23,20,26,.62)">Ref. E02</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol></div>
+</section>
+
+<section id="a-tu-gusto" data-tone="{{ gx.tone }}" data-screen-label="Hecho a tu gusto" style="position:relative;height:calc(100svh + 300vh);background:{{ gx.bg }};color:{{ gx.fg }};transition:background-color .9s ease,color .9s ease">
+  <div style="position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden">
+  <div data-gfit="" style="width:100%;max-width:1320px;margin:0 auto;padding:max(76px,calc((100svh - 760px) / 2 + 60px)) clamp(20px,5vw,64px) 20px;display:flex;flex-direction:column;gap:clamp(14px,3vh,40px);transform-origin:50% 0">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:{{ gx.eyebrow }};transition:color .9s ease"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>Hecho a tu gusto</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(40px,min(8vw,8svh),120px);line-height:.92;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Del color</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">que lo sueñes.</span></span>
+      </h2>
+    </div>
+    <div style="display:flex;flex-direction:row-reverse;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:clamp(32px,5vw,96px)">
+      <figure data-flip="" data-reveal="up" style="flex:1 1 300px;max-width:{{ gx.figW }}">
+        <div style="position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:rgba(0,0,0,.08);box-shadow:0 40px 100px -50px rgba(23,20,26,.6)">
+          <sc-for list="{{ gustos }}" as="g" hint-placeholder-count="1">
+            <img data-on="{{ g.on }}" src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy" decoding="async" width="600" height="800" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ g.op }};transition:opacity .8s ease">
+          </sc-for>
+        </div>
+        <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ gx.muted }}">
+          <span>{{ gx.code }} · {{ gx.name }}</span>
+          <button type="button" onClick="{{ gx.open }}" style="flex:none;height:36px;color:{{ gx.fg }};border-bottom:1px solid currentColor">Ver de cerca →</button>
+        </figcaption>
+      </figure>
+      <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
+        <div role="radiogroup" aria-label="Elige un color" style="display:flex;flex-direction:column">
+          <sc-for list="{{ gustos }}" as="g" hint-placeholder-count="5">
+            <button type="button" role="radio" aria-checked="{{ g.on }}" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:.3em;padding:.04em 0;font-family:'Kalnia','Bodoni 72',Didot,serif;font-size:clamp(26px,min(6vw,6.2svh),88px);line-height:1.04;white-space:nowrap;letter-spacing:-.03em;font-weight:{{ g.fw }};opacity:{{ g.op2 }};transition:font-weight .6s cubic-bezier(.16,1,.3,1),opacity .6s ease"><span style="flex:none;width:.28em;height:.28em;border-radius:50%;background:{{ g.sw }};box-shadow:{{ g.ring }};transition:box-shadow .6s ease"></span>{{ g.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ gx.desk }}" hint-placeholder-val="{{ true }}"><p style="max-width:36ch;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:{{ gx.muted }};text-wrap:pretty">Blanco, lila, rosa o negro. Con luces, y hasta con temática. Cuéntanos qué te imaginas.</p></sc-if>
+        <a href="{{ gx.wa }}" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:{{ gx.ctaBg }};color:{{ gx.ctaFg }};font-size:16px;font-weight:700;transition:background-color .9s ease,color .9s ease">{{ gx.cta }} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="como-pedir" data-tone="day" data-screen-label="Cómo pedir" style="background:#F1ECE5;color:#17141A">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(96px,14vh,160px) clamp(20px,5vw,64px);display:flex;flex-direction:column;gap:clamp(44px,7vh,80px)">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>Cómo pedir</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(54px,9vw,140px);line-height:.92;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Así de fácil.</span></span>
+      </h2>
+    </div>
+    <ol style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(36px,3vw,48px) clamp(24px,3vw,40px)">
+      <li data-reveal="up" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
+        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">1</span>
+        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Escríbenos por WhatsApp y elige tu modelo.</p>
+      </li>
+      <li data-reveal="up" data-delay="100" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="300" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
+        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
+        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Sepáralo con el 50 % de abono.</p>
+      </li>
+      <li data-reveal="up" data-delay="200" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="600" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
+        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">3</span>
+        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo fabricamos a mano en 15 a 20 días hábiles.</p>
+      </li>
+      <li data-reveal="up" data-delay="300" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="900" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
+        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">4</span>
+        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Te llega listo y embalado.</p>
+      </li>
+    </ol>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+      <a href="{{ waPedido }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:#17141A;color:#F2ECE4;font-size:16px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.25)"></span>Empezar mi pedido</a>
+      <span style="font-size:15px;color:rgba(23,20,26,.68)">Atendemos todos los días, de 8 am a 9 pm.</span>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" data-tone="day" data-screen-label="Preguntas frecuentes" style="background:#F1ECE5;color:#17141A;border-top:1px solid rgba(23,20,26,.1)">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(88px,13vh,150px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,96px)">
+    <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:22px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>Preguntas frecuentes</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(46px,6vw,92px);line-height:.95;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Lo que siempre</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">nos preguntan.</span></span>
+      </h2>
+    </div>
+    <div data-reveal="up" style="flex:2 1 420px;border-top:1px solid rgba(23,20,26,.16)">
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t0 }}" aria-expanded="{{ fq.e0 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cuánto tarda mi mueble?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x0 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r0 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Entre 15 y 20 días hábiles desde que lo separas con tu abono.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t1 }}" aria-expanded="{{ fq.e1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cuánto es el abono?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x1 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r1 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">El 50 %. Con eso separas tu mueble y empezamos a fabricarlo.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t2 }}" aria-expanded="{{ fq.e2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cómo puedo pagar?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x2 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r2 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">En dólares en efectivo, Zelle o USDT. También en bolívares, a tasa BCV.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t3 }}" aria-expanded="{{ fq.e3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Por qué no hay precios en la página?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x3 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r3 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Porque cambian con la tasa del día. Escríbenos y te damos el precio de hoy.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t4 }}" aria-expanded="{{ fq.e4 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Puedo pedirlo en otro color?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x4 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r4 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Sí. Lo hacemos a tu gusto: blanco, lila, morado, negro y hasta con temática. Cuéntanos tu idea.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t5 }}" aria-expanded="{{ fq.e5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿En qué horario atienden?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x5 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r5 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Por WhatsApp, todos los días de 8 am a 9 pm.</p></div></div>
+      </div>
+      <div style="border-bottom:1px solid rgba(23,20,26,.16)">
+        <button type="button" onClick="{{ fq.t6 }}" aria-expanded="{{ fq.e6 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Dónde están?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x6 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r6 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">En la Calle 13 entre 7A y 8, Santa Isabel, Barquisimeto, Lara.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="donde" data-tone="day" data-screen-label="Dónde estamos" style="background:#F1ECE5;color:#17141A;border-top:1px solid rgba(23,20,26,.1)">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(88px,13vh,150px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(36px,5vw,80px)">
+    <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:24px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>Dónde estamos</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(46px,6vw,92px);line-height:.95;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Aquí nace</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">tu mueble.</span></span>
+      </h2>
+      <address data-reveal="up" style="font-style:normal;font-size:clamp(19px,1.6vw,22px);line-height:1.45">Calle 13 entre 7A y 8,<br>Santa Isabel, Barquisimeto,<br>Lara, Venezuela.</address>
+      <div data-reveal="up" style="display:flex;flex-direction:column;gap:10px">
+        <span style="display:inline-flex;align-items:center;gap:10px;align-self:flex-start;height:36px;padding:0 14px;border-radius:999px;background:rgba(23,20,26,.06);font-size:14.5px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:{{ st.dot }};box-shadow:{{ st.ring }}"></span>{{ st.label }}</span>
+        <span style="font-size:15px;color:rgba(23,20,26,.68)">WhatsApp todos los días, de 8 am a 9 pm.</span>
+      </div>
+      <div data-reveal="up" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle%2013%20entre%207A%20y%208%2C%20Santa%20Isabel%2C%20Barquisimeto%2C%20Lara%2C%20Venezuela" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;background:#17141A;color:#F2ECE4;font-size:15px;font-weight:700">Cómo llegar <span aria-hidden="true">↗</span></a>
+        <a href="https://www.instagram.com/repisaskm/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(23,20,26,.25);color:#17141A;font-size:15px;font-weight:600">Instagram @repisaskm <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div ref="{{ mapRef }}" role="region" aria-label="Mapa: zona de Santa Isabel, Barquisimeto" style="position:relative;flex:1.5 1 380px;min-height:clamp(320px,50vh,540px);border-radius:8px;overflow:hidden;isolation:isolate;background:#E4DDD3">
+      <sc-if value="{{ mapPending }}" hint-placeholder-val="{{ true }}">
+        <span style="position:absolute;inset:0;display:grid;place-items:center;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,26,.5)">Cargando mapa…</span>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section data-tone="night" data-screen-label="Cierre" style="position:relative;background:#100E13;color:#F2ECE4;overflow:hidden">
+  <div aria-hidden="true" style="position:relative;height:96px;margin:0 clamp(12px,3vw,40px)">
+    <div style="position:absolute;left:0;right:0;top:20px;height:1px;background:rgba(242,236,228,.16)"></div>
+    <div style="position:absolute;left:3%;right:3%;top:20px;display:flex;justify-content:space-between;align-items:flex-start">
+      <sc-for list="{{ garland }}" as="b" hint-placeholder-count="11">
+        <span style="display:flex;flex-direction:column;align-items:center"><span style="display:block;width:1px;height:{{ b.h }}px;background:rgba(242,236,228,.2)"></span><span data-reveal="bulb" data-delay="{{ b.d }}" style="display:block;width:13px;height:13px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 8px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58)),0 0 70px 20px var(--halo2, rgba(201,184,238,.2))"></span></span>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,11vh,130px) clamp(20px,5vw,64px) clamp(88px,13vh,150px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:30px">
+    <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(52px,9.4vw,150px);line-height:.92;letter-spacing:-.035em">
+      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">¿Ya sabes</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">cuál es el tuyo?</span></span>
+    </h2>
+    <p data-reveal="up" style="max-width:36ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:rgba(242,236,228,.74)">Escríbenos y te ayudamos a elegir. Respondemos todos los días, de 8 am a 9 pm.</p>
+    <a data-reveal="up" href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 32px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:18px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(201,184,238,.8)"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Escribir por WhatsApp</a>
+    
+  </div>
+  <footer style="border-top:1px solid rgba(242,236,228,.1);padding:28px clamp(20px,5vw,64px) calc(28px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 32px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.6)">
+    <img src="marca/horizontal-blanco.svg" alt="KM · Karla Marquez Vanity Home" width="1080" height="250" loading="lazy" decoding="async" style="display:block;flex:none;height:40px;width:auto;aspect-ratio:1080/250">
+    <span>Hecho a mano en Barquisimeto, Venezuela</span>
+    <a href="https://www.instagram.com/repisaskm/" target="_blank" rel="noopener" style="color:#C9B8EE">Instagram @repisaskm</a>
+    <span>© 2026 KM · Todos los derechos reservados. Diseño, textos y fotos protegidos por derecho de autor.</span>
+  </footer>
+</section>
+
+<sc-if value="{{ app.sheet }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Instalar la app de KM" style="position:fixed;inset:0;z-index:95;display:flex;align-items:flex-end;justify-content:center;background:rgba(16,14,19,.55)" onClick="{{ app.close }}">
+    <div onClick="{{ app.stop }}" style="width:100%;max-width:480px;margin:0 10px calc(10px + env(safe-area-inset-bottom));padding:24px 22px 22px;border-radius:22px;background:#F4EFE8;color:#17141A;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)">
+      <div style="display:flex;align-items:center;gap:14px">
+        <img src="marca/apple-touch-icon.png" alt="" width="56" height="56" style="display:block;width:56px;height:56px;border-radius:14px">
+        <div style="display:flex;flex-direction:column;gap:4px"><p style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-size:24px;line-height:1.05">Tenla en tu inicio</p><p style="font-size:14px;color:rgba(23,20,26,.68)">Así abres KM con un toque, como una app.</p></div>
+      </div>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px;line-height:1.4">
+        <sc-for list="{{ app.steps }}" as="p" hint-placeholder-count="3">
+          <li style="display:flex;align-items:flex-start;gap:12px"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:#17141A;color:#F4EFE8;display:grid;place-items:center;font-family:'DM Mono',ui-monospace,monospace;font-size:12px">{{ p.n }}</span><span>{{ p.t }}</span></li>
+        </sc-for>
+      </ol>
+      <button type="button" onClick="{{ app.close }}" style="height:50px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700">Entendido</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Menú" style="position:fixed;inset:0;z-index:80;background:#100E13;color:#F2ECE4;display:flex;flex-direction:column;padding:12px clamp(14px,3.4vw,40px) calc(28px + env(safe-area-inset-bottom));overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;min-height:44px">
+      <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:600;font-size:27px;letter-spacing:-.03em">KM</span>
+      <button type="button" onClick="{{ closeMenu }}" aria-label="Cerrar menú" style="height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(242,236,228,.28);font-size:14px;color:#F2ECE4">Cerrar ✕</button>
+    </div>
+    <nav aria-label="Menú principal" style="display:flex;flex-direction:column;gap:4px;margin:auto 0;padding:40px 0">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="6">
+        <a href="{{ l.href }}" onClick="{{ l.go }}" style="display:flex;align-items:baseline;gap:16px;color:#F2ECE4;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(40px,9vw,92px);line-height:1.08;letter-spacing:-.03em"><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.12em;color:#C9B8EE">{{ l.n }}</span>{{ l.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(242,236,228,.12);padding-top:20px">
+      <span style="font-size:14px;color:rgba(242,236,228,.66)">WhatsApp todos los días, de 8 am a 9 pm</span>
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:16px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71"></span>Escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ viewerOpen }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ viewerRef }}" role="dialog" aria-modal="true" aria-label="{{ v.name }}" style="position:fixed;inset:0;z-index:90;display:flex;align-items:{{ v.align }};justify-content:center;padding:{{ v.outerPad }};color:#17141A">
+    <div data-vbg="" onClick="{{ closeViewer }}" style="position:absolute;inset:0;background:rgba(16,14,19,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)"></div>
+    <div data-vpanel="" style="position:relative;width:100%;max-width:1080px;height:{{ v.panelH }};background:#F4EFE8;border-radius:{{ v.radius }};overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 120px -30px rgba(0,0,0,.6)">
+      <div onPointerDown="{{ sheetDown }}" style="flex:none;position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:{{ v.barPad }};border-bottom:1px solid rgba(23,20,26,.08);touch-action:none">
+        <sc-if value="{{ v.mobile }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position:absolute;left:50%;top:7px;width:42px;height:4px;margin-left:-21px;border-radius:4px;background:rgba(23,20,26,.22)"></span></sc-if>
+        <p style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">{{ v.pos }}</p>
+        <div style="flex:none;display:flex;align-items:center;gap:6px">
+          <button type="button" onClick="{{ vPrev }}" aria-label="Modelo anterior" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(23,20,26,.16);display:grid;place-items:center;font-size:15px;color:#17141A">←</button>
+          <button type="button" onClick="{{ vNext }}" aria-label="Modelo siguiente" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(23,20,26,.16);display:grid;place-items:center;font-size:15px;color:#17141A">→</button>
+          <button data-vclose="" type="button" onClick="{{ closeViewer }}" aria-label="Cerrar ficha" style="width:40px;height:40px;border-radius:50%;background:#17141A;display:grid;place-items:center;font-size:14px;color:#F4EFE8">✕</button>
+        </div>
+      </div>
+      <div ref="{{ vScrollRef }}" style="flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start">
+          <div style="flex:{{ v.galFlex }};min-width:0;position:{{ v.galPos }};top:0;padding:{{ v.galPad }}">
+            <div style="position:relative;width:100%;max-width:{{ v.galMax }};margin:0 auto;border-radius:10px;overflow:hidden;background:#E8DFD3">
+              <div ref="{{ trackRef }}" onScroll="{{ onTrack }}" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain">
+                <img ref="{{ viewerImgRef }}" src="{{ v.front }}" alt="{{ v.altF }}" width="800" height="1000" loading="lazy" decoding="async" draggable="false" style="flex:none;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start">
+                <img src="{{ v.side }}" alt="{{ v.altS }}" width="800" height="1000" loading="lazy" decoding="async" draggable="false" style="flex:none;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start">
+              </div>
+              <span style="position:absolute;left:12px;top:12px;display:flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.88);font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#17141A;pointer-events:none">{{ v.gpos }}</span>
+              <sc-if value="{{ v.showPrevImg }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ gPrev }}" aria-label="Foto anterior" style="position:absolute;left:12px;top:50%;margin-top:-22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;font-size:20px;line-height:1;color:#17141A;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);transition:background-color .25s ease,transform .3s cubic-bezier(.16,1,.3,1)" style-hover="background-color:rgba(255,255,255,.95);transform:scale(1.06)">‹</button>
+              </sc-if>
+              <sc-if value="{{ v.showNextImg }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ gNext }}" aria-label="Foto siguiente" style="position:absolute;right:12px;top:50%;margin-top:-22px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;font-size:20px;line-height:1;color:#17141A;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);transition:background-color .25s ease,transform .3s cubic-bezier(.16,1,.3,1)" style-hover="background-color:rgba(255,255,255,.95);transform:scale(1.06)">›</button>
+              </sc-if>
+              <div style="position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:6px;pointer-events:none">
+                <span style="display:block;height:6px;width:{{ v.d0 }};border-radius:6px;background:#FFFFFF;opacity:{{ v.o0 }};box-shadow:0 1px 6px rgba(0,0,0,.25);transition:width .35s cubic-bezier(.16,1,.3,1),opacity .35s ease"></span>
+                <span style="display:block;height:6px;width:{{ v.d1 }};border-radius:6px;background:#FFFFFF;opacity:{{ v.o1 }};box-shadow:0 1px 6px rgba(0,0,0,.25);transition:width .35s cubic-bezier(.16,1,.3,1),opacity .35s ease"></span>
+              </div>
+            </div>
+          </div>
+          <div style="flex:1 1 340px;min-width:0;padding:{{ v.infoPad }};display:flex;flex-direction:column;gap:20px">
+        <p data-vin="" style="font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#4E3486">Tienda / {{ v.cat }}</p>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+          <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(28px,2.7vw,40px);line-height:1.06;letter-spacing:-.02em;text-wrap:balance">{{ v.name }}</h2>
+          <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:rgba(23,20,26,.6)">Ref. {{ v.code }} · Hecho a pedido</p>
+        </div>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:4px;padding:16px 18px;border-radius:8px;background:#FFFFFF;border:1px solid rgba(23,20,26,.08)">
+          <p style="font-size:17px;font-weight:700">Precio del día por WhatsApp</p>
+          <p style="font-size:14px;line-height:1.45;color:#5A5360">Cambia con la tasa, así que te lo damos al momento. Lo separas con el 50 %.</p>
+        </div>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+          <p style="font-size:14px;font-weight:700">Detalles</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ v.feats }}" as="f" hint-placeholder-count="3">
+              <li style="display:flex;align-items:center;gap:8px;min-height:34px;padding:6px 12px;border-radius:999px;background:rgba(23,20,26,.055);font-size:14px;line-height:1.3"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 8px 2px rgba(201,184,238,.9)"></span>{{ f.t }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+          <p style="font-size:14px;font-weight:700">¿De qué color lo sueñas?</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ v.colors }}" as="c" hint-placeholder-count="6">
+              <button type="button" onClick="{{ c.pick }}" aria-pressed="{{ c.on }}" style="display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px 0 8px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};font-size:14px;color:#17141A;transition:background-color .3s ease,border-color .3s ease"><span style="width:24px;height:24px;border-radius:50%;background:{{ c.sw }};box-shadow:inset 0 0 0 1px rgba(23,20,26,.18)"></span>{{ c.label }}</button>
+            </sc-for>
+          </div>
+            <sc-if value="{{ v.palOpen }}" hint-placeholder-val="{{ false }}">
+              <div data-pal="" style="position:relative;flex:none;width:208px;height:208px;margin-top:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 18px 40px -18px rgba(23,20,26,.35),inset 0 0 0 1px rgba(23,20,26,.06)">
+                <div style="position:absolute;left:50%;top:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border-radius:50%;display:grid;place-items:center;text-align:center;padding:8px;background:{{ v.palBg }};box-shadow:inset 0 0 0 1px rgba(23,20,26,.1);transition:background-color .3s ease">
+                  <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;line-height:1.3;letter-spacing:.1em;text-transform:uppercase;color:{{ v.palFg }}">{{ v.palLabel }}</span>
+                </div>
+                <sc-for list="{{ v.pal }}" as="c" hint-placeholder-count="12">
+                  <button type="button" onClick="{{ c.pick }}" aria-label="{{ c.n }}" title="{{ c.n }}" style="position:absolute;left:{{ c.x }}px;top:{{ c.y }}px;width:34px;height:34px;border-radius:50%;background:{{ c.hex }};box-shadow:{{ c.ring }};transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease" style-hover="transform:scale(1.15)"></button>
+                </sc-for>
+              </div>
+            </sc-if>
+        </div>
+        <sc-if value="{{ v.hasCorr }}" hint-placeholder-val="{{ false }}">
+          <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+            <p style="font-size:14px;font-weight:700">Versión</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ v.corrOpts }}" as="o" hint-placeholder-count="2">
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px">
+            <div style="flex:none;display:flex;align-items:center;height:58px;border-radius:999px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF">
+              <button type="button" onClick="{{ vDec }}" aria-label="Menos" style="width:46px;height:100%;display:grid;place-items:center;font-size:20px;color:#17141A">−</button>
+              <span style="min-width:24px;text-align:center;font-size:16px;font-weight:700">{{ v.qty }}</span>
+              <button type="button" onClick="{{ vInc }}" aria-label="Más" style="width:46px;height:100%;display:grid;place-items:center;font-size:20px;color:#17141A">+</button>
+            </div>
+            <button type="button" onClick="{{ vAdd }}" style="flex:1;height:58px;padding:0 16px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:16px;font-weight:700;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 40px -16px rgba(23,20,26,.6)">Agregar a mi cotización</button>
+          </div>
+          <a href="{{ v.wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;height:50px;border-radius:999px;border:1px solid rgba(23,20,26,.25);color:#17141A;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Cotizar solo este por WhatsApp</a>
+          <p style="font-size:13.5px;text-align:center;color:rgba(23,20,26,.64)">Arma tu lista con varios modelos y cotiza todo en un solo mensaje.</p>
+        </div>
+        <div data-vin="" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:18px 0;border-top:1px solid rgba(23,20,26,.12);border-bottom:1px solid rgba(23,20,26,.12)">
+          <p style="display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.35"><span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 10px 3px rgba(201,184,238,.9)"></span>Hecho a mano en Barquisimeto</p>
+          <p style="display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.35"><span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 10px 3px rgba(201,184,238,.9)"></span>Listo en 15 a 20 días hábiles</p>
+          <p style="display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.35"><span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 10px 3px rgba(201,184,238,.9)"></span>Te llega listo y embalado</p>
+        </div>
+        <div data-vin="">
+          <div style="border-bottom:1px solid rgba(23,20,26,.12)">
+            <button type="button" onClick="{{ v.va.t0 }}" aria-expanded="{{ v.va.e0 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Cómo pedir<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x0 }})">+</span></button>
+            <div style="display:grid;grid-template-rows:{{ v.va.r0 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 18px;font-size:15px;line-height:1.55;color:#4F4954">Escríbenos por WhatsApp y elige tu modelo. Lo separas con el 50 % de abono, lo fabricamos en 15 a 20 días hábiles y te llega listo y embalado.</p></div></div>
+          </div>
+          <div style="border-bottom:1px solid rgba(23,20,26,.12)">
+            <button type="button" onClick="{{ v.va.t1 }}" aria-expanded="{{ v.va.e1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Formas de pago<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x1 }})">+</span></button>
+            <div style="display:grid;grid-template-rows:{{ v.va.r1 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 18px;font-size:15px;line-height:1.55;color:#4F4954">Dólares en efectivo, Zelle o USDT. También bolívares, a tasa BCV.</p></div></div>
+          </div>
+        </div>
+        <button data-vin="" type="button" onClick="{{ share }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:40px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#4E3486;border-bottom:1px solid rgba(78,52,134,.35)">{{ shareLabel }}</button>
+            <div style="display:flex;flex-direction:column;gap:14px;padding-top:18px;border-top:1px solid rgba(23,20,26,.1)">
+              <p style="font-size:14px;font-weight:700">También te puede gustar</p>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px">
+                <sc-for list="{{ v.related }}" as="r" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ r.open }}" style="display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left">
+                    <img src="{{ r.src }}" alt="{{ r.name }}" loading="lazy" decoding="async" width="800" height="1000" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:6px;background:#E8DFD3">
+                    <span style="font-size:12.5px;font-weight:600;line-height:1.25;color:#17141A">{{ r.name }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ v.mobile }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:none;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid rgba(23,20,26,.1);background:#F4EFE8">
+          <div style="flex:none;display:flex;align-items:center;height:50px;border-radius:999px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF">
+            <button type="button" onClick="{{ vDec }}" aria-label="Menos" style="width:40px;height:100%;display:grid;place-items:center;font-size:18px;color:#17141A">−</button>
+            <span style="min-width:20px;text-align:center;font-size:15px;font-weight:700">{{ v.qty }}</span>
+            <button type="button" onClick="{{ vInc }}" aria-label="Más" style="width:40px;height:100%;display:grid;place-items:center;font-size:18px;color:#17141A">+</button>
+          </div>
+          <button type="button" onClick="{{ vAdd }}" style="flex:1;height:50px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15.5px;font-weight:700;white-space:nowrap">Agregar a mi cotización</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{ showPill }}" hint-placeholder-val="{{ false }}">
+  <button type="button" onClick="{{ openCart }}" style="position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:10px;height:52px;padding:0 20px 0 8px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700;box-shadow:0 18px 44px -14px rgba(0,0,0,.55)"><span style="min-width:36px;height:36px;padding:0 10px;border-radius:999px;background:#C9B8EE;color:#100E13;display:grid;place-items:center;font-size:14px">{{ cartCount }}</span>Mi cotización</button>
+</sc-if>
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div data-toast="" role="status" style="position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:97;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.5);white-space:nowrap">
+    <span>{{ toast }}</span>
+    <sc-if value="{{ toastCart }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ openCart }}" style="height:36px;padding:0 14px;border-radius:999px;background:#C9B8EE;color:#100E13;font-weight:700;font-size:13.5px">Ver</button></sc-if>
+  </div>
+</sc-if>
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ cartRef }}" style="position:fixed;inset:0;z-index:95;color:#17141A">
+    <div data-cbg="" onClick="{{ closeCart }}" style="position:absolute;inset:0;background:rgba(16,14,19,.5)"></div>
+    <aside data-cpanel="" role="dialog" aria-modal="true" aria-label="Tu cotización" style="position:absolute;top:0;right:0;bottom:0;width:min(460px,100%);background:#F4EFE8;display:flex;flex-direction:column;box-shadow:-30px 0 80px -30px rgba(0,0,0,.5)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(23,20,26,.1)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <h3 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:28px;letter-spacing:-.02em">Tu cotización</h3>
+          <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">{{ cartCountLabel }}</p>
+        </div>
+        <button data-cclose="" type="button" onClick="{{ closeCart }}" aria-label="Cerrar" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(23,20,26,.18);display:grid;place-items:center;font-size:15px;color:#17141A">✕</button>
+      </div>
+      <div style="flex:1;overflow-y:auto;overscroll-behavior:contain;padding:4px 20px 24px;display:flex;flex-direction:column;gap:18px">
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:64px 0">
+            <p style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-size:30px;font-weight:300">Tu lista está vacía.</p>
+            <p style="max-width:28ch;font-size:15px;line-height:1.5;color:rgba(23,20,26,.64)">Agrega los modelos que te gustan y cotiza todo en un solo mensaje.</p>
+            <button type="button" onClick="{{ cartToShop }}" style="height:50px;padding:0 24px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700">Ver la tienda</button>
+          </div>
+        </sc-if>
+        <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="0">
+          <div style="display:grid;grid-template-columns:84px minmax(0,1fr);align-items:start;gap:14px;padding:16px 0;border-bottom:1px solid rgba(23,20,26,.1)">
+            <img src="{{ it.src }}" alt="" loading="lazy" decoding="async" width="800" height="1000" style="display:block;width:84px;height:105px;object-fit:cover;border-radius:6px;background:#E8DFD3">
+            <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                  <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.58)">{{ it.cat }} · {{ it.code }}</p>
+                  <p style="font-size:15px;font-weight:600;line-height:1.3">{{ it.name }}</p>
+                </div>
+                <button type="button" onClick="{{ it.remove }}" aria-label="Quitar" style="flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:rgba(23,20,26,.6)">✕</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <p style="font-size:12.5px;color:rgba(23,20,26,.66)">Color: <b style="font-weight:700;color:#17141A">{{ it.colorLabel }}</b></p>
+                <div role="radiogroup" aria-label="Color" style="display:flex;flex-wrap:wrap;margin-left:-5px">
+                  <sc-for list="{{ it.cols }}" as="c" hint-placeholder-count="6">
+                    <button type="button" role="radio" aria-checked="{{ c.on }}" aria-label="{{ c.label }}" onClick="{{ c.pick }}" style="width:34px;height:34px;display:grid;place-items:center;border-radius:50%"><span style="display:block;width:22px;height:22px;border-radius:50%;background:{{ c.sw }};box-shadow:{{ c.ring }};transition:box-shadow .25s ease"></span></button>
+                  </sc-for>
+                </div>
+            <sc-if value="{{ it.palOpen }}" hint-placeholder-val="{{ false }}">
+              <div data-pal="" style="position:relative;flex:none;width:208px;height:208px;margin-top:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 18px 40px -18px rgba(23,20,26,.35),inset 0 0 0 1px rgba(23,20,26,.06)">
+                <div style="position:absolute;left:50%;top:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border-radius:50%;display:grid;place-items:center;text-align:center;padding:8px;background:{{ it.palBg }};box-shadow:inset 0 0 0 1px rgba(23,20,26,.1);transition:background-color .3s ease">
+                  <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;line-height:1.3;letter-spacing:.1em;text-transform:uppercase;color:{{ it.palFg }}">{{ it.palLabel }}</span>
+                </div>
+                <sc-for list="{{ it.pal }}" as="c" hint-placeholder-count="12">
+                  <button type="button" onClick="{{ c.pick }}" aria-label="{{ c.n }}" title="{{ c.n }}" style="position:absolute;left:{{ c.x }}px;top:{{ c.y }}px;width:34px;height:34px;border-radius:50%;background:{{ c.hex }};box-shadow:{{ c.ring }};transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease" style-hover="transform:scale(1.15)"></button>
+                </sc-for>
+              </div>
+            </sc-if>
+              </div>
+              <sc-if value="{{ it.hasVer }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ it.vers }}" as="o" hint-placeholder-count="2">
+                    <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:32px;padding:0 12px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:12.5px;font-weight:600">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <div style="align-self:flex-start;display:flex;align-items:center;height:40px;border-radius:999px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF">
+                <button type="button" onClick="{{ it.dec }}" aria-label="Menos" style="width:38px;height:100%;display:grid;place-items:center;font-size:17px;color:#17141A">−</button>
+                <span style="min-width:22px;text-align:center;font-size:15px;font-weight:700">{{ it.qty }}</span>
+                <button type="button" onClick="{{ it.inc }}" aria-label="Más" style="width:38px;height:100%;display:grid;place-items:center;font-size:17px;color:#17141A">+</button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:14px;font-weight:700">Nombre y apellido</span>
+              <input data-nombre="" type="text" autocomplete="name" value="{{ nombre }}" onChange="{{ on_nombre }}" placeholder="Ej.: María Pérez" style="width:100%;height:50px;border-radius:12px;border:1px solid {{ nombreBd }};box-shadow:{{ nombreSh }};background:#FFFFFF;padding:0 14px;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <span style="font-size:14px;font-weight:700">Ciudad</span>
+              <input data-ciudad="" type="text" autocomplete="address-level2" value="{{ ciudad }}" onChange="{{ on_ciudad }}" placeholder="Ej.: Barquisimeto" style="width:100%;height:50px;border-radius:12px;border:1px solid {{ ciudadBd }};box-shadow:{{ ciudadSh }};background:#FFFFFF;padding:0 14px;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
+            </label>
+            </div>
+            <sc-if value="{{ nameErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#B4325A">{{ errMsg }}</span></sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">Tu mensaje · puedes editarlo</span>
+              <sc-if value="{{ msgCustom }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ resetMsg }}" style="height:30px;font-size:13px;font-weight:600;color:#4E3486;border-bottom:1px solid rgba(78,52,134,.35)">Restablecer</button></sc-if>
+            </div>
+            <textarea value="{{ cartMsg }}" onChange="{{ onMsg }}" rows="10" aria-label="Mensaje para WhatsApp" style="width:100%;resize:vertical;min-height:180px;padding:14px 16px;border-radius:14px 14px 14px 4px;border:1px solid rgba(23,20,26,.08);background:#E3F5D8;font-family:'Karla',system-ui,sans-serif;font-size:14.5px;line-height:1.5;color:#17141A;outline:none"></textarea>
+          </div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:14px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid rgba(23,20,26,.1);display:flex;flex-direction:column;gap:8px">
+          <button type="button" onClick="{{ sendCart }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:16px;font-weight:700"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.25)"></span>Cotizar por WhatsApp</button>
+          <p style="font-size:13px;text-align:center;line-height:1.45;color:rgba(23,20,26,.64)">Sin precios aquí: te respondemos con el precio del día, de 8 am a 9 pm.</p>
+        </div>
+      </sc-if>
+    </aside>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;frase&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Enciende tu rincón.&quot;,&quot;La luz que te ve primero.&quot;,&quot;Cada mañana merece un camerino.&quot;,&quot;Hecho a mano para tu mejor reflejo.&quot;],&quot;default&quot;:&quot;Enciende tu rincón.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Portada&quot;},&quot;luz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Lila&quot;,&quot;Blanca&quot;,&quot;Cálida&quot;],&quot;default&quot;:&quot;Lila&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Luces&quot;}}">
+/* © 2026 KM · Karla Marquez Vanity Home. Todos los derechos reservados.
+   Diseño, código, textos y fotografías protegidos por derecho de autor. Prohibida su copia o reproducción sin autorización. */
+const WHATSAPP = "584245949602"; // ← Número de WhatsApp de KM: código de país + número, sin "+" ni espacios
+const MAPA = { lat: 10.059, lng: -69.3728, zoom: 15 }; // Santa Isabel, Barquisimeto (aprox.). Ajusta al punto exacto del taller.
+
+const FRASES = ["Enciende tu rincón.", "La luz que te ve primero.", "Cada mañana merece un camerino.", "Hecho a mano para tu mejor reflejo."];
+const LUCES = {
+  "Lila": ["rgba(201,184,238,.58)", "rgba(201,184,238,.2)"],
+  "Blanca": ["rgba(220,230,255,.55)", "rgba(220,230,255,.17)"],
+  "Cálida": ["rgba(255,220,192,.55)", "rgba(255,220,192,.17)"]
+};
+const CATS = [["T", "Peinadoras"], ["C", "Sets"], ["A", "Clósets"], ["B", "Camas"], ["M", "Gaveteros"], ["D", "Escritorios"], ["E", "Espejos y repisas"]];
+const CAT = {}; CATS.forEach((c) => { CAT[c[0]] = c[1]; });
+// [nombre del archivo sin _01_frontal/_02_lateral, nombre en la tienda, detalles separados por |]
+const RAW = [
+  ["T01_tocador-amplio-led-con-vitrina-lateral-izquierda", "Peinadora amplia LED con vitrina lateral", "Espejo con luz LED|Vitrina lateral|Gavetas"],
+  ["T02_tocador-led-con-modulo-abierto-lateral-y-cajones", "Peinadora LED con módulo abierto", "Espejo con luz LED|Módulo abierto lateral|Gavetas"],
+  ["T03_tocador-compacto-sin-tiradores-sesion-de-cortina-coral", "Peinadora compacta sin tiradores", "Diseño compacto|Frentes sin tiradores"],
+  ["T04_tocador-de-nueve-cajones-con-bombillas-y-dos-estanterias", "Peinadora de 9 gavetas con bombillos", "Espejo con bombillos|9 gavetas|Dos torres de repisas"],
+  ["T05_tocador-compacto-sin-tiradores-sesion-con-tableta", "Peinadora compacta sin tiradores", "Diseño compacto|Frentes sin tiradores"],
+  ["T06_tocador-negro-compacto-con-espejo-led-y-estantes-derechos", "Peinadora negra compacta LED", "Espejo con luz LED|Repisas a la derecha|Acabado negro"],
+  ["T07_tocador-compacto-led-con-tiradores-de-ranura-y-banco", "Peinadora compacta LED con banquito", "Espejo con luz LED|Tiradores de ranura|Incluye banquito"],
+  ["T08_tocador-blanco-con-estante-derecho-y-gabinete-inferior", "Peinadora blanca con repisa y gabinete", "Repisa a la derecha|Gabinete inferior"],
+  ["T09_tocador-con-espejo-de-silueta-de-gatita-y-lazo", "Peinadora Hello Kitty", "Espejo iluminado de gatita con lazo|Gavetas"],
+  ["T10_tocador-bicolor-blanco-y-gris-con-espejo-led", "Peinadora bicolor blanco y gris", "Espejo con luz LED|Acabado blanco y gris"],
+  ["T11_tocador-blanco-con-estante-de-fondo-rosa", "Peinadora blanca con repisa rosa", "Repisa con fondo rosa"],
+  ["T12_tocador-blanco-con-espejo-ancho-y-cubierta-compartimentada", "Peinadora con espejo ancho y tope organizador", "Espejo ancho|Tope con compartimientos"],
+  ["T13_tocador-amplio-led-con-tiradores-largos-y-dos-estanterias", "Peinadora amplia LED con dos repisas", "Espejo con luz LED|Tiradores largos|Dos torres de repisas"],
+  ["T14_tocador-compacto-sin-tiradores-sesion-junto-a-cama-crema", "Peinadora compacta sin tiradores", "Diseño compacto|Frentes sin tiradores"],
+  ["T15_tocador-compacto-blanco-con-tiradores-metalicos-y-led-amarillo", "Peinadora compacta con luz cálida", "Luz LED cálida|Tiradores metálicos"],
+  ["T16_tocador-compacto-con-bombillas-y-cinco-cajones", "Peinadora compacta con bombillos", "Espejo con bombillos|5 gavetas"],
+  ["T17_tocador-compacto-led-personalizado-con-estantes-derechos", "Peinadora compacta LED personalizada", "Espejo con luz LED|Repisas a la derecha|Hecha al gusto de la clienta"],
+  ["T18_tocador-de-nueve-cajones-con-bombillas-y-dos-estanterias", "Peinadora de 9 gavetas con bombillos", "Espejo con bombillos|9 gavetas|Dos torres de repisas"],
+  ["T19_tocador-led-de-nueve-cajones-con-tiradores-curvos", "Peinadora LED de 9 gavetas con tiradores curvos", "Espejo con luz LED|9 gavetas|Tiradores curvos"],
+  ["T20_tocador-blanco-compacto-con-tres-luces-y-cinco-cajones", "Peinadora de 3 luces", "3 luces|5 gavetas|Diseño compacto"],
+  ["T21_tocador-lila-compacto-con-bombillas-y-banco", "Peinadora lila con bombillos y banquito", "Espejo con bombillos|Incluye banquito|Acabado lila"],
+  ["T22_tocador-lila-ancho-con-bombillas-y-estanterias-exteriores", "Peinadora lila ancha con bombillos", "Espejo con bombillos|Repisas a los lados|Acabado lila"],
+  ["T23_tocador-led-amplio-con-tiradores-finos-sesion-pared-gris", "Peinadora amplia LED con tiradores finos", "Espejo con luz LED|Tiradores finos"],
+  ["T24_tocador-de-nueve-cajones-con-led-y-estante-izquierdo", "Peinadora LED de 9 gavetas con repisa", "Espejo con luz LED|9 gavetas|Repisa a la izquierda"],
+  ["T25_tocador-compacto-led-con-tiradores-largos-y-seis-cajones", "Peinadora compacta LED de 6 gavetas", "Espejo con luz LED|6 gavetas|Tiradores largos"],
+  ["T26_tocador-led-de-nueve-cajones-sesion-con-figuras-decorativas", "Peinadora LED de 9 gavetas", "Espejo con luz LED|9 gavetas"],
+  ["T27_tocador-blanco-con-espejo-horizontal-y-tiradores-largos", "Peinadora con espejo horizontal", "Espejo horizontal|Tiradores largos"],
+  ["T28_tocador-led-con-cajones-izquierdos-pomos-y-banco-con-cajones", "Peinadora LED con banquito de gavetas", "Espejo con luz LED|Gavetas con pomos|Banquito con gavetas"],
+  ["T29_tocador-rosa-y-blanco-led-con-dos-torres-de-estantes", "Peinadora rosa y blanca LED", "Espejo con luz LED|Dos torres de repisas|Acabado rosa y blanco"],
+  ["T30_tocador-led-de-nueve-cajones-con-pomos-y-estanterias-laterales", "Peinadora LED de 9 gavetas con pomos", "Espejo con luz LED|9 gavetas con pomos|Repisas a los lados"],
+  ["T31_tocador-blanco-de-frentes-lisos-con-espejo-horizontal-led", "Peinadora de frentes lisos con espejo LED", "Espejo horizontal con luz LED|Frentes lisos"],
+  ["C01_conjunto-blanco-con-doble-espejo-led-y-banco-con-cajones", "Set con doble espejo LED y banquito", "Doble espejo con luz LED|Banquito con gavetas"],
+  ["C02_conjunto-blanco-con-espejo-ancho-de-cuerpo-entero-y-led", "Set con espejo de cuerpo entero", "Espejo ancho de cuerpo entero|Luz LED"],
+  ["C03_conjunto-blanco-con-bombillas-y-banco-rosa-habitacion-gris", "Set con bombillos y banquito rosa", "Espejo con bombillos|Banquito rosa"],
+  ["C04_conjunto-blanco-con-bombillas-sesion-de-suelo-moteado", "Set blanco con bombillos", "Espejo con bombillos"],
+  ["C05_conjunto-blanco-con-doble-espejo-led-amarillo-y-banco-burdeos-con-ruedas", "Set con doble espejo de luz cálida", "Doble espejo con luz LED cálida|Banquito con ruedas"],
+  ["C06_conjunto-blanco-con-bombillas-y-banco-burdeos-suelo-claro", "Set con bombillos y banquito", "Espejo con bombillos|Banquito"],
+  ["C07_conjunto-negro-con-led-y-espejo-de-cuerpo-entero-con-bombillas", "Set negro LED con espejo de cuerpo entero", "Luz LED|Espejo de cuerpo entero con bombillos|Acabado negro"],
+  ["C08_conjunto-blanco-con-doble-espejo-led-sin-banco-en-la-toma", "Set con doble espejo LED", "Doble espejo con luz LED"],
+  ["C09_conjunto-blanco-personalizado-con-doble-espejo-led-calido", "Set personalizado de luz cálida", "Doble espejo con luz LED cálida|Hecho al gusto de la clienta"],
+  ["C10_conjunto-blanco-con-bombillas-sesion-de-pared-rosa", "Set blanco con bombillos", "Espejo con bombillos"],
+  ["A01_armario-blanco-con-espejo-izquierdo-y-cajones-centrales", "Clóset blanco con espejo", "Puerta con espejo|Gavetas centrales"],
+  ["A02_armario-blanco-con-estantes-y-cuatro-cajones-centrales", "Clóset blanco con repisas y 4 gavetas", "Repisas|4 gavetas centrales"],
+  ["A03_armario-blanco-de-cuatro-puertas-con-espejo-central-y-cajones-a-la-izquierda", "Clóset de 4 puertas con espejo central", "4 puertas|Espejo central|Gavetas a la izquierda"],
+  ["A04_armario-negro-ancho-con-espejo-estrecho-y-luces-superiores", "Clóset negro ancho con luces", "Espejo|Luces superiores|Acabado negro"],
+  ["A05_armario-negro-con-espejo-y-cajones-centrales-abiertos", "Clóset negro con espejo y gavetas", "Espejo|Gavetas centrales|Acabado negro"],
+  ["A06_organizador-blanco-abierto-con-barras-y-tres-cajones", "Clóset abierto con barras", "Barras para colgar|3 gavetas"],
+  ["A07_armario-abierto-blanco-con-barra-izquierda-y-estantes-derechos", "Clóset abierto con barra y repisas", "Barra para colgar|Repisas a la derecha"],
+  ["A08_organizador-blanco-abierto-con-altillo-y-cajones-inferiores", "Clóset abierto con maletero", "Maletero arriba|Gavetas abajo"],
+  ["A09_armario-blanco-con-espejo-led-izquierdo-y-cajones-centrales", "Clóset blanco con espejo LED", "Espejo con luz LED|Gavetas centrales"],
+  ["A10_armario-blanco-con-gran-puerta-espejo-led-y-estantes-interiores", "Clóset con gran puerta espejo LED", "Puerta espejo con luz LED|Repisas por dentro"],
+  ["A11_armario-blanco-de-puertas-lisas-y-cajones-izquierdos", "Clóset de puertas lisas", "Puertas lisas|Gavetas a la izquierda"],
+  ["A12_armario-negro-con-espejo-led-derecho-y-cajones-centrales", "Clóset negro con espejo LED", "Espejo con luz LED|Gavetas centrales|Acabado negro"],
+  ["A13_organizador-abierto-fucsia-con-barras-y-tres-cajones", "Clóset abierto fucsia", "Barras para colgar|3 gavetas|Acabado fucsia"],
+  ["B01_cama-oscura-capitone-con-marco-metalico", "Cama capitoné con marco metálico", "Tapizado capitoné|Marco metálico"],
+  ["B02_cama-fucsia-con-paneles-geometricos-y-piecera-alta", "Cama fucsia geométrica", "Paneles geométricos|Piecera alta|Acabado fucsia"],
+  ["B03_cama-oscura-con-cabecera-capitone-y-base-baja", "Cama capitoné de base baja", "Cabecera capitoné|Base baja"],
+  ["B04_cama-rosa-embalada-con-base-rectangular", "Cama rosa", "Base rectangular|Acabado rosa"],
+  ["B05_cama-negra-con-cabecera-geometrica-y-marco-metalico", "Cama negra con cabecera geométrica", "Cabecera geométrica|Marco metálico"],
+  ["B06_cama-beige-con-cabecera-y-piecera-de-bloques-acolchados", "Cama beige acolchada", "Cabecera y piecera acolchadas"],
+  ["B07_cama-oscura-capitone-en-captura-de-pantalla", "Cama capitoné oscura", "Tapizado capitoné"],
+  ["B08_cama-gris-con-paneles-verticales-y-base-acolchada-redondeada", "Cama gris de paneles verticales", "Paneles verticales|Base acolchada redondeada"],
+  ["B09_cama-gris-embalada-con-mesas-laterales", "Cama gris con mesas de noche", "Mesas de noche"],
+  ["B10_cama-oscura-geometrica-con-franjas-metalicas", "Cama geométrica con franjas metálicas", "Diseño geométrico|Franjas metálicas"],
+  ["B11_cama-fucsia-con-paneles-verticales-y-base-acolchada", "Cama fucsia de paneles verticales", "Paneles verticales|Base acolchada|Acabado fucsia"],
+  ["B12_cama-gris-capitone-con-marcos-metalicos-y-piecera-alta", "Cama gris capitoné", "Tapizado capitoné|Marcos metálicos|Piecera alta"],
+  ["M01_cajonera-blanca-alta-de-cinco-cajones", "Gavetero alto de 5 gavetas", "5 gavetas"],
+  ["M02_cajonera-blanca-alta-de-cinco-cajones", "Gavetero alto de 5 gavetas", "5 gavetas"],
+  ["D01_escritorio-oscuro-con-biblioteca-lateral-y-dos-cajones", "Escritorio oscuro con biblioteca", "Biblioteca lateral|2 gavetas"],
+  ["D02_escritorio-blanco-con-biblioteca-superior-y-cajones-derechos", "Escritorio blanco con biblioteca", "Biblioteca arriba|Gavetas a la derecha"],
+  ["E01_espejo-de-cuerpo-entero-con-bombillas-y-estanteria-lateral", "Espejo de cuerpo entero con bombillos", "Bombillos|Repisa lateral"],
+  ["E02_estanteria-blanca-de-repisas-curvas", "Repisa blanca de curvas", "Repisas curvas"]
+];
+const norm = (t) => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const CORR = "TCAMD"; // categorías con gavetas o puertas/espejos corredizos: opción Sencilla / Con correderas
+const SIN_CORREDERAS = ["A07"]; // modelos de esas categorías sin gavetas ni puertas corredizas
+const PIEZAS = RAW.map((r) => {
+  const base = r[0], code = base.slice(0, 3), k = code[0];
+  const badge = code === "T09" ? "Hello Kitty" : /personalizad/.test(base) ? "Personalizado" : /-led/.test(base) ? "Luz LED" : /bombillas|luces/.test(base) ? "Bombillos" : "";
+  return { code, k, cat: CAT[k], name: r[1], feats: r[2].split("|"), fem: /^(Peinadora|Cama|Repisa)/.test(r[1]), badge,
+    corr: CORR.indexOf(k) >= 0 && SIN_CORREDERAS.indexOf(code) < 0, front: "fotos/" + base + "_01_frontal.webp", side: "fotos/" + base + "_02_lateral.webp", s: norm(r[1] + " " + CAT[k] + " " + code + " " + r[2]) };
+});
+const iOf = (c) => PIEZAS.findIndex((p) => p.code === c);
+const DEST = ["T04", "C07", "T09", "T22", "A13", "B01", "T29", "C01", "T19", "A10", "B02", "T21"].map(iOf);
+const HERO = ["T04", "C07", "T09", "T22"].map(iOf);
+const PAGE = 12;
+const VR_SPEED = 25; // px por segundo
+const VR = {
+  A: [["A_01_F014", "Peinadora blanca con espejo LED, repisas y banquito en una habitación"], ["A_02_F111", "Peinadora blanca y rosa con espejo de luz cálida y repisa alta"], ["A_03_F129", "Escritorio blanco con biblioteca y silla en un cuarto infantil"], ["A_04_F172", "Cama negra capitoné con marco de espejo"], ["A_05_F011", "Peinadora negra con espejo LED y repisas"], ["A_06_F060", "Clóset blanco abierto, embalado"], ["A_07_F055", "Peinadora morada con bombillos, repisas y banquito"], ["A_08_F082", "Peinadora blanca con espejo ancho y gavetas"], ["A_09_F009", "Clóset negro con espejo y luces superiores"], ["A_10_F073", "Peinadora blanca con espejo LED, repisas y banquito"], ["A_11_F182", "Cama fucsia acolchada con cabecera de paneles"], ["A_12_F096", "Peinadora blanca con espejo de luz cálida y banquito con gavetas"], ["A_13_F050", "Dos peinadoras blancas con espejos LED"], ["A_14_F086", "Peinadora blanca con espejo LED y repisa en un dormitorio"]],
+  B: [["B_01_F077", "Peinadora blanca con espejo LED y espejo de cuerpo entero con bombillos"], ["B_02_F093", "Escritorio negro con biblioteca lateral y dos gavetas"], ["B_03_F084", "Peinadora blanca con espejo de luz cálida, repisa y banquito"], ["B_04_F179", "Cama gris acolchada con cabecera de paneles verticales"], ["B_05_F020", "Clóset blanco abierto en un cuarto de bebé"], ["B_06_F006", "Peinadora blanca de 9 gavetas con bombillos y repisas"], ["B_07_F068", "Dos clósets blancos con espejo, embalados"], ["B_08_F122", "Escritorio blanco con biblioteca y gavetas"], ["B_09_F058", "Peinadora blanca con espejo LED, dos torres de repisas y gavetero"], ["B_10_F164", "Peinadora blanca con luz LED y espejo de cuerpo entero con bombillos"], ["B_11_F177", "Cama beige de bloques acolchados, embalada"], ["B_12_F066", "Peinadora blanca con espejo de luz cálida, repisas y gavetero"], ["B_13_F056", "Peinadora blanca con espejo LED y espejo de cuerpo entero con bombillos"], ["B_14_F025", "Peinadora blanca de 9 gavetas con bombillos y repisas"]]
+};
+const vrList = (k) => { const L = VR[k].map((r) => ({ src: "fotos/vida-real/" + r[0] + "_4x3.jpg", alt: r[1] })); return L.map((c) => ({ src: c.src, alt: c.alt, hid: "false" })).concat(L.map((c) => ({ src: c.src, alt: "", hid: "true" }))); };
+const VR_A = vrList("A"), VR_B = vrList("B");
+const PALETA = [["Rojo", "#D8343F", 1], ["Coral", "#F27E6B", 0], ["Amarillo", "#F4D35E", 0], ["Menta", "#A8E0C5", 0], ["Verde", "#4E9F76", 1], ["Turquesa", "#3DB8C0", 0], ["Celeste", "#9CCBEF", 0], ["Azul", "#3A63B8", 1], ["Lavanda", "#B9A6E8", 0], ["Fucsia", "#E0338C", 1], ["Gris", "#A3A1A8", 0], ["Beige", "#E3D3BC", 0]];
+const palPos = PALETA.map((c, k) => { const a = -Math.PI / 2 + k * 2 * Math.PI / PALETA.length; return { x: Math.round(104 + 80 * Math.cos(a) - 17), y: Math.round(104 + 80 * Math.sin(a) - 17) }; });
+const VERS = ["Sencilla", "Con correderas"];
+const CART_KEY = "km-cotizacion";
+const loadCart = () => { try { const c = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); return Array.isArray(c) ? c.filter((i) => i && PIEZAS.some((p) => p.code === i.code)) : []; } catch (e) { return []; } };
+const COLORES = [
+  { label: "Blanco", sw: "#F8F5F0" }, { label: "Lila", sw: "#C7B3EA" }, { label: "Morado", sw: "#5B3A93" }, { label: "Rosa", sw: "#EBA3C4" }, { label: "Negro", sw: "#1B181E" },
+  { label: "Otro", sw: "conic-gradient(#F8F5F0, #C7B3EA, #EBA3C4, #5B3A93, #1B181E, #F8F5F0)" }
+];
+const GUSTOS = [
+  { label: "Blanco", bg: "#F1ECE5", night: false, sw: "#FFFFFF", code: "T13" },
+  { label: "Lila", bg: "#DED3F1", night: false, sw: "#BBA4E6", code: "T21" },
+  { label: "Rosa", bg: "#F3D5E2", night: false, sw: "#E98DB7", code: "T29" },
+  { label: "Negro", bg: "#131116", night: true, sw: "#2A262F", code: "T06" },
+  { label: "Con temática", bg: "#F5E6D2", night: false, sw: "#F3C98B", code: "T09" }
+];
+const MENU = [["Tienda", "tienda"], ["El taller", "taller"], ["A tu gusto", "a-tu-gusto"], ["Cómo pedir", "como-pedir"], ["Preguntas", "preguntas"], ["Dónde estamos", "donde"]];
+const pad = (n) => String(n).padStart(2, "0");
+const wa = (m) => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
+const LIT = "0 0 8px 2px rgba(255,250,244,.9), 0 0 22px 6px var(--halo, rgba(201,184,238,.58))";
+const EASE = "cubic-bezier(.16,1,.3,1)";
+
+class Component extends DCLogic {
+  state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencilla", cat: "all", q: "", shown: PAGE, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
+  rootRef = React.createRef(); headerRef = React.createRef(); heroRef = React.createRef(); manRef = React.createRef(); gridRef = React.createRef();
+  mapRef = React.createRef(); viewerRef = React.createRef(); viewerImgRef = React.createRef(); grainRef = React.createRef(); cartRef = React.createRef(); trackRef = React.createRef(); vScrollRef = React.createRef();
+
+  componentDidMount() {
+    this._prevState = Object.assign({}, this.state);
+    this.cleanups = [];
+    document.documentElement.lang = "es";
+    const mm = (q) => !!(window.matchMedia && window.matchMedia(q).matches);
+    this.reduce = false; // la marca quiere la animación siempre activa, aunque el sistema tenga "reducir movimiento"
+    this.fine = mm("(hover: hover) and (pointer: fine)");
+    this.anim = !!Element.prototype.animate && !this.reduce;
+    this._hbulbs = Array.from(document.querySelectorAll("[data-hbulb]")).sort((a, b) => +a.getAttribute("data-o") - +b.getAttribute("data-o"));
+    this.applyVars();
+    this.introHero();
+    this.setupReveals();
+    this.setupWords();
+    this.setupStages();
+    this.setupVR();
+    this.isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    this.standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+    if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost") && !/\.dc\.html$/.test(location.pathname)) navigator.serviceWorker.register("sw.js").catch(() => {});
+    const bip = (e) => { e.preventDefault(); this.setState({ appEv: e }); };
+    const inst = () => this.setState({ appEv: null, appDone: true });
+    window.addEventListener("beforeinstallprompt", bip); window.addEventListener("appinstalled", inst);
+    this.cleanups.push(() => { window.removeEventListener("beforeinstallprompt", bip); window.removeEventListener("appinstalled", inst); });
+    if (this.isIOS && !this.standalone) this.setState({ appIOS: true });
+    this.fitGusto(); setTimeout(() => this.fitGusto(), 800);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fitGusto());
+    const onScroll = () => { if (this._tick) return; this._tick = true; requestAnimationFrame(() => { this._tick = false; this.updateHeader(); this.updateWords(); this.updateStages(); this.updateGusto(); }); };
+    const onResize = () => { onScroll(); this.fitGusto(); const m = window.innerWidth < 860, t = window.innerWidth >= 600 && m; if (m !== this.state.mobile || t !== this.state.tablet) this.setState({ mobile: m, tablet: t }); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    this.cleanups.push(() => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize); });
+    onScroll();
+    const onKey = (e) => this.onKey(e);
+    window.addEventListener("keydown", onKey);
+    this.cleanups.push(() => window.removeEventListener("keydown", onKey));
+    this.setupMap();
+    this.setupGrain();
+    this.setOpenNow();
+    const more = () => { if (!this._unm) this.setState({ heroMore: true }); };
+    if (document.readyState === "complete") setTimeout(more, 700); else window.addEventListener("load", () => setTimeout(more, 300), { once: true });
+    this.heroVisible = true;
+    if (window.IntersectionObserver && this.heroRef.current) {
+      const io = new IntersectionObserver((es) => { this.heroVisible = es[0].isIntersecting; }, { threshold: 0.1 });
+      io.observe(this.heroRef.current); this.cleanups.push(() => io.disconnect());
+    }
+    this.slideTimer = setInterval(() => {
+      if (document.hidden || !this.heroVisible || !this.state.heroMore || this.state.viewer != null) return;
+      this.setState((s) => ({ slide: (s.slide + 1) % HERO.length }));
+    }, 5200);
+    const m = (location.hash || "").match(/^#([A-Z]\d{2})$/);
+    if (m && iOf(m[1]) >= 0) setTimeout(() => this.openViewer(iOf(m[1])), 400);
+  }
+
+  componentWillUnmount() {
+    this._unm = true;
+    (this.cleanups || []).forEach((f) => { try { f(); } catch (e) {} });
+    clearInterval(this.slideTimer);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(pp, ps) {
+    // The dc runtime passes only prevProps: keep our own copy of the previous state.
+    if (ps === undefined) { ps = this._prevState || this.state; this._prevState = Object.assign({}, this.state); }
+    const s = this.state;
+    if (pp.luz !== this.props.luz) this.applyVars();
+    const g = this.gridRef.current;
+    if (g && this.anim) {
+      const cards = g.querySelectorAll("[data-pcard]");
+      if (ps.cat !== s.cat) cards.forEach((c, i) => { if (i < 8) c.animate([{ opacity: 0, transform: "translateY(26px)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: i * 50, easing: EASE, fill: "backwards" }); });
+      else if (s.shown > ps.shown) cards.forEach((c, i) => { if (i >= ps.shown) c.animate([{ opacity: 0, transform: "translateY(26px)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: (i - ps.shown) * 45, easing: EASE, fill: "backwards" }); });
+    }
+    if (ps.gusto !== s.gusto) { this._tone = null; this.updateHeader(); }
+    if (ps.pal !== s.pal && s.pal != null && this.anim) { const pe = document.querySelector("[data-pal]"); if (pe) { pe.animate([{ opacity: 0, transform: "scale(.6) rotate(-40deg)" }, { opacity: 1, transform: "none" }], { duration: 520, easing: EASE }); pe.querySelectorAll("button").forEach((b, k) => b.animate([{ opacity: 0, transform: "scale(0)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 80 + k * 28, easing: EASE, fill: "backwards" })); } }
+    if (ps.cart !== s.cart) {
+      try { localStorage.setItem(CART_KEY, JSON.stringify(s.cart)); } catch (e) {}
+      const b = document.querySelector("[data-cbadge]");
+      if (b && this.anim && s.cart.length >= ps.cart.length) b.animate([{ transform: "scale(1)" }, { transform: "scale(1.5)" }, { transform: "scale(1)" }], { duration: 500, easing: EASE });
+    }
+    if (ps.nombre !== s.nombre) { try { localStorage.setItem(CART_KEY + "-nombre", s.nombre); } catch (e) {} }
+    if (ps.ciudad !== s.ciudad) { try { localStorage.setItem(CART_KEY + "-ciudad", s.ciudad); } catch (e) {} }
+    if (ps.cart !== s.cart && s.msgCustom != null) this.setState({ msgCustom: null });
+    if (!ps.cartOpen && s.cartOpen && this.cartRef.current && this.anim) {
+      const r = this.cartRef.current, pnl = r.querySelector("[data-cpanel]"), bg = r.querySelector("[data-cbg]");
+      if (pnl) pnl.animate([{ transform: "translateX(100%)" }, { transform: "none" }], { duration: 520, easing: EASE });
+      if (bg) bg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: "ease-out" });
+      if (r.querySelectorAll) r.querySelectorAll("[data-cpanel] > div:nth-child(2) > *").forEach((el, i) => { if (i < 6) el.animate([{ opacity: 0, transform: "translateX(24px)" }, { opacity: 1, transform: "none" }], { duration: 600, delay: 120 + i * 50, easing: EASE, fill: "backwards" }); });
+    }
+    if (!ps.toast && s.toast) { const t = document.querySelector("[data-toast]"); if (t && this.anim) t.animate([{ transform: "translate(-50%, 140%)" }, { transform: "translate(-50%, 0)" }], { duration: 500, easing: EASE }); }
+    if (ps.mobile !== s.mobile) this.fitGusto();
+    if (ps.viewer == null && s.viewer != null) this.viewerIn();
+    else if (ps.viewer != null && s.viewer != null) {
+      if (ps.viewer !== s.viewer) {
+        const sc = this.vScrollRef.current, tr = this.trackRef.current;
+        if (sc) sc.scrollTop = 0;
+        if (tr) tr.scrollLeft = 0;
+        if (sc && this.anim) sc.animate([{ opacity: 0, transform: "translateX(" + (this._dir * 40) + "px)" }, { opacity: 1, transform: "none" }], { duration: 520, easing: EASE });
+      }
+    }
+  }
+
+  applyVars() {
+    const r = this.rootRef.current; if (!r) return;
+    const l = LUCES[this.props.luz] || LUCES["Lila"];
+    r.style.setProperty("--halo", l[0]);
+    r.style.setProperty("--halo2", l[1]);
+  }
+
+  introHero() {
+    if (!this.anim) return;
+    const t0 = 250, st = 55, bulbs = this._hbulbs;
+    bulbs.forEach((b, i) => {
+      const g = b.querySelector("[data-glow]");
+      if (g) g.animate([{ opacity: 0 }, { opacity: 1, offset: .3 }, { opacity: .25, offset: .45 }, { opacity: 1 }], { duration: 650, delay: t0 + i * st, easing: "ease-out", fill: "both" });
+    });
+    const lit = t0 + bulbs.length * st;
+    const stage = document.querySelector("[data-hintro]");
+    if (stage) stage.animate([{ opacity: 0, transform: "scale(1.06)" }, { opacity: 1, transform: "scale(1)" }], { duration: 2200, delay: 200, easing: EASE, fill: "both" });
+    document.querySelectorAll("[data-hl]").forEach((el, i) => el.animate([{ transform: "translateY(108%)" }, { transform: "translateY(0)" }], { duration: 1300, delay: 120 + i * 110, easing: EASE, fill: "both" }));
+    document.querySelectorAll("[data-hw]").forEach((el) => el.animate([
+      { fontWeight: 200, textShadow: "0 2px 40px rgba(16,14,19,.6), 0 0 0 rgba(255,246,236,0)" },
+      { fontWeight: 420, textShadow: "0 2px 40px rgba(16,14,19,.6), 0 0 40px rgba(255,246,236,.3)" }
+    ], { duration: 1500, delay: Math.max(600, lit - 500), easing: "cubic-bezier(.5,0,.2,1)", fill: "both" }));
+    document.querySelectorAll("[data-hin]").forEach((el, i) => el.animate([{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "none" }], { duration: 1000, delay: 650 + i * 120, easing: EASE, fill: "both" }));
+  }
+
+  setupReveals() {
+    if (!this.anim || !window.IntersectionObserver) return;
+    const io = new IntersectionObserver((es) => {
+      es.forEach((en) => { if (en.isIntersecting) { const a = en.target.__km; if (a) a.play(); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    this.cleanups.push(() => io.disconnect());
+    const vh = window.innerHeight;
+    document.querySelectorAll("[data-reveal]").forEach((el) => {
+      const t = el.getAttribute("data-reveal"); if (!t) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * .9 && r.bottom > 0) return;
+      const d = +(el.getAttribute("data-delay") || 0);
+      let kf, dur = 1000, ez = EASE;
+      if (t === "line") { kf = [{ transform: "translateY(108%)" }, { transform: "translateY(0)" }]; dur = 1200; }
+      else if (t === "bulb") { kf = [{ opacity: .12 }, { opacity: 1, offset: .25 }, { opacity: .3, offset: .4 }, { opacity: 1 }]; dur = 900; ez = "ease-out"; }
+      else if (t === "fade") kf = [{ opacity: 0 }, { opacity: 1 }];
+      else if (t === "num") { kf = [{ opacity: 0, transform: "translateX(-12%) scale(.86)", filter: "blur(14px)" }, { opacity: 1, transform: "none", filter: "blur(0px)" }]; dur = 1500; }
+      else kf = [{ opacity: 0, transform: "translateY(32px)" }, { opacity: 1, transform: "none" }];
+      const a = el.animate(kf, { duration: dur, delay: d, easing: ez, fill: "both" });
+      a.pause(); el.__km = a; io.observe(el);
+    });
+  }
+
+  setupWords() {
+    const m = this.manRef.current; if (!m || this.reduce) return;
+    this.words = Array.from(m.querySelectorAll("[data-w]"));
+    this.words.forEach((w) => { w.style.opacity = ".16"; });
+    this._lit = 0;
+  }
+  updateWords() {
+    const m = this.manRef.current; if (!m || !this.words) return;
+    const r = m.getBoundingClientRect(), vh = window.innerHeight;
+    if (r.top > vh || r.bottom < 0) return;
+    const p = Math.min(1, Math.max(0, (vh * .8 - r.top) / (r.height * .8 + vh * .2)));
+    const n = Math.round(p * this.words.length);
+    if (n === this._lit) return;
+    this._lit = n;
+    this.words.forEach((w, i) => { w.style.opacity = i < n ? "1" : ".16"; });
+  }
+
+  setupStages() {
+    const sec = document.getElementById("taller"); if (!sec) return;
+    this._stageLis = Array.from(sec.querySelectorAll("ol > li"));
+    this.updateStages();
+  }
+  splitTitle(h) {
+    const txt = h.textContent.trim(); h.setAttribute("aria-label", txt); h.textContent = "";
+    const chars = [];
+    txt.split(" ").forEach((w, wi, arr) => {
+      const ws = document.createElement("span"); ws.setAttribute("aria-hidden", "true"); ws.style.cssText = "display:inline-block;white-space:nowrap";
+      Array.from(w).forEach((ch) => {
+        const m = document.createElement("span"); m.style.cssText = "display:inline-block;overflow:hidden;vertical-align:top;padding:.04em .03em .16em;margin:-.04em -.03em -.16em";
+        const c = document.createElement("span"); c.textContent = ch; c.style.cssText = "display:inline-block;will-change:transform,opacity";
+        m.appendChild(c); ws.appendChild(m); chars.push(c);
+      });
+      h.appendChild(ws); if (wi < arr.length - 1) h.appendChild(document.createTextNode(" "));
+    });
+    h.__chars = chars;
+  }
+  updateStages() {
+    const sec = document.getElementById("taller"); if (!sec) return;
+    if (!this._stageLis || !this._stageLis.length || !this._stageLis[0].isConnected) this._stageLis = Array.from(sec.querySelectorAll("ol > li"));
+    const vh = window.innerHeight;
+    this._stageLis.forEach((li, k) => {
+      if (li._done) return;
+      const top = li.getBoundingClientRect().top;
+      let p = (vh * 1.0 - top) / (vh * .72); p = Math.max(0, Math.min(1, p));
+      if (this.reduce) p = top < vh ? 1 : 0;
+      if (li._init && p <= li._p) return;
+      li._init = true; li._p = Math.max(li._p || 0, p); const P = li._p;
+      const h = li.querySelector("[data-stitle]");
+      if (h) {
+        if (!h.__chars) this.splitTitle(h);
+        const cs = h.__chars, n = cs.length, sp = .45 / Math.max(1, n - 1);
+        cs.forEach((c, i) => {
+          let t = (P - i * sp) / .55; t = Math.max(0, Math.min(1, t));
+          const q = 1 - Math.pow(1 - t, 3), over = Math.sin(t * Math.PI) * 6;
+          c.style.transform = q >= 1 ? "none" : "translateY(" + ((1 - q) * 110 - over).toFixed(1) + "%) rotate(" + ((1 - q) * 10).toFixed(2) + "deg)";
+          c.style.opacity = String(Math.min(1, q * 1.5).toFixed(3));
+        });
+      }
+      const nm = li.querySelector("[data-snum]");
+      if (nm) {
+        if (!nm.__t) nm.__t = parseInt(nm.textContent, 10) || (k + 1);
+        const q = 1 - Math.pow(1 - P, 2);
+        nm.textContent = pad(Math.round(q * nm.__t));
+        nm.style.opacity = (.12 + .88 * q).toFixed(3);
+        nm.style.transform = q >= 1 ? "none" : "translateY(" + ((1 - q) * 48).toFixed(0) + "px) scale(" + (.9 + .1 * q).toFixed(3) + ")";
+      }
+      if (P >= .6 && !li._lit) {
+        li._lit = true;
+        li.querySelectorAll('[data-rb="1"]').forEach((bb, j) => {
+          const g = bb.firstChild; if (!g) return;
+          if (!this.anim) { g.style.opacity = "1"; return; }
+          const d = 100 + j * 230;
+          g.animate([{ opacity: 0 }, { opacity: 1, offset: .2 }, { opacity: .2, offset: .35 }, { opacity: 1, offset: .5 }, { opacity: .55, offset: .62 }, { opacity: 1 }], { duration: 850, delay: d, easing: "ease-out", fill: "forwards" });
+          bb.animate([{ transform: "scale(1)" }, { transform: "scale(1.45)" }, { transform: "scale(1)" }], { duration: 650, delay: d, easing: EASE });
+          setTimeout(() => { g.style.opacity = "1"; }, d + 900);
+        });
+      }
+      if (P >= 1) li._done = true;
+    });
+  }
+
+  gustoGeom() {
+    const sec = document.getElementById("a-tu-gusto"); if (!sec) return null;
+    const r = sec.getBoundingClientRect(), total = r.height - window.innerHeight;
+    return { r, total, top: r.top + window.scrollY };
+  }
+  installApp = async () => {
+    const ev = this.state.appEv;
+    if (ev) { ev.prompt(); try { const r = await ev.userChoice; if (r && r.outcome === "accepted") this.setState({ appDone: true }); } catch (e) {} this.setState({ appEv: null }); return; }
+    this.setState({ appSheet: true });
+  };
+  setupVR() {
+    const rows = Array.from(document.querySelectorAll("[data-vr-row]")); if (!rows.length) return;
+    const R = rows.map((el) => ({ el, tr: el.querySelector("[data-vr-track]"), dir: el.getAttribute("data-vr-row") === "A" ? -1 : 1, x: 0, w: 0, drag: null, vis: true }));
+    const measure = () => R.forEach((r) => { r.w = r.tr.scrollWidth / 2; if (r.dir > 0 && r.x === 0) r.x = -r.w; });
+    const wrap = (r) => { if (r.w > 0) { while (r.x <= -r.w) r.x += r.w; while (r.x > 0) r.x -= r.w; } };
+    const paint = (r) => { wrap(r); r.tr.style.transform = "translate3d(" + r.x.toFixed(2) + "px,0,0)"; };
+    measure(); R.forEach(paint);
+    const auto = !this.reduce;
+    let last = performance.now(), raf = 0;
+    const tick = (t) => {
+      const dt = Math.min(0.05, (t - last) / 1000); last = t;
+      R.forEach((r) => { if (!r.drag && r.vis && auto) { r.x += r.dir * VR_SPEED * dt; paint(r); } });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    const io = window.IntersectionObserver ? new IntersectionObserver((es) => es.forEach((e) => { const r = R.find((q) => q.el === e.target); if (r) r.vis = e.isIntersecting; }), { rootMargin: "100px 0px" }) : null;
+    R.forEach((r) => {
+      if (io) io.observe(r.el);
+      const down = (e) => { if (e.button && e.button !== 0) return; r.drag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, x0: r.x, on: false }; };
+      const move = (e) => {
+        const d = r.drag; if (!d || d.id !== e.pointerId) return;
+        const dx = e.clientX - d.sx, dy = e.clientY - d.sy;
+        if (!d.on) { if (Math.abs(dx) < 6) return; if (Math.abs(dy) > Math.abs(dx)) { r.drag = null; return; } d.on = true; r.el.style.cursor = "grabbing"; try { r.el.setPointerCapture(e.pointerId); } catch (er) {} }
+        r.x = d.x0 + dx; paint(r);
+      };
+      const up = (e) => { const d = r.drag; if (!d || d.id !== e.pointerId) return; r.drag = null; r.el.style.cursor = "grab"; last = performance.now(); };
+      const key = (e) => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); r.x += (e.key === "ArrowLeft" ? 1 : -1) * 160; paint(r); } };
+      r.el.addEventListener("pointerdown", down); r.el.addEventListener("pointermove", move);
+      r.el.addEventListener("pointerup", up); r.el.addEventListener("pointercancel", up); r.el.addEventListener("lostpointercapture", up);
+      r.el.addEventListener("keydown", key);
+      r.el.querySelectorAll("img").forEach((im) => { if (!im.complete) im.addEventListener("load", measure, { once: true }); });
+    });
+    window.addEventListener("resize", measure);
+    this.cleanups.push(() => { cancelAnimationFrame(raf); if (io) io.disconnect(); window.removeEventListener("resize", measure); });
+  }
+  setupDl() {
+    if (!this.anim) return;
+    const ar = document.querySelector("[data-dlarrow]"), rg = document.querySelector("[data-dlring]");
+    if (ar) this._dlA = ar.animate([
+      { transform: "translateY(-24px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1, offset: .32 },
+      { transform: "translateY(-4px)", offset: .42 }, { transform: "translateY(0)", offset: .52 },
+      { transform: "translateY(0)", opacity: 1, offset: .82 }, { transform: "translateY(18px)", opacity: 0 }
+    ], { duration: 2400, iterations: Infinity, easing: "cubic-bezier(.45,0,.2,1)" });
+    if (rg) this._dlR = rg.animate([
+      { boxShadow: "0 0 0 0 rgba(201,184,238,.75)" }, { boxShadow: "0 0 0 14px rgba(201,184,238,0)", offset: .55 }, { boxShadow: "0 0 0 14px rgba(201,184,238,0)" }
+    ], { duration: 2400, iterations: Infinity, easing: "ease-out" });
+  }
+  saveDl = async () => {
+    const f = this._dlFile;
+    try { await navigator.share({ files: [f], title: "Catálogo KM Vanity Home" }); this.showToast("Catálogo guardado", false); }
+    catch (e) { if (e && e.name === "AbortError") return; this.saveBlob(await f.text(), f.name, true); }
+  };
+  saveBlob(html, name, ios) {
+    const url = URL.createObjectURL(new Blob([html], { type: ios ? "application/octet-stream" : "text/html" }));
+    const a = document.createElement("a"); a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 60000);
+  }
+  catFallback(img, web) {
+    const e = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const btn = "display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 20px;border-radius:999px;font:700 15px/1 -apple-system,system-ui,sans-serif;text-decoration:none";
+    let h = '<div id="km-static" style="background:#F4EFE8;color:#17141A;font-family:-apple-system,system-ui,sans-serif">' +
+      '<div style="background:#100E13;color:#F2ECE4;padding:56px 22px 40px;display:flex;flex-direction:column;gap:16px">' +
+      '<p style="margin:0;font:500 11px/1.4 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#C9B8EE">Catálogo · KM Karla Marquez Vanity Home</p>' +
+      '<h1 style="margin:0;font:400 54px/.95 \'Kalnia\',\'Bodoni 72\',Didot,serif;letter-spacing:-.03em">Enciende tu rincón.</h1>' +
+      '<p style="margin:0;font-size:16px;line-height:1.5;color:rgba(242,236,228,.8)">Toca «Lo quiero» en el modelo que te guste y te escribimos el precio del día por WhatsApp.</p>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:10px">' +
+      '<a href="' + e(wa("¡Hola, KM! Vi su catálogo y quiero una cotización.")) + '" style="' + btn + ';background:#C9B8EE;color:#100E13">Cotizar por WhatsApp</a>' +
+      '<a href="' + e(web) + '" style="' + btn + ';border:1px solid rgba(242,236,228,.35);color:#F2ECE4">Ir a la web</a></div></div>';
+    CATS.forEach((c) => {
+      const L = PIEZAS.filter((p) => p.k === c[0]); if (!L.length) return;
+      h += '<h2 style="margin:0;padding:36px 16px 14px;font:400 32px/1 \'Kalnia\',\'Bodoni 72\',Didot,serif">' + e(c[1]) + '</h2>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 12px;padding:0 16px">';
+      L.forEach((p) => {
+        h += '<div style="display:flex;flex-direction:column;gap:8px;min-width:0">' +
+          '<img id="f-' + p.code + '" src="' + img[p.code + "front"] + '" alt="' + e(p.name) + '" style="display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:6px;background:#E8DFD3">' +
+          '<p style="margin:0;font:400 10px/1.3 ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#6A6370">' + e(p.cat) + ' · Ref. ' + p.code + '</p>' +
+          '<p style="margin:0;font-size:15px;font-weight:600;line-height:1.3">' + e(p.name) + '</p>' +
+          '<a href="' + e(this.waPieza(p, false)) + '" style="' + btn + ';height:40px;font-size:14px;border:1px solid #17141A;color:#17141A">Lo quiero</a></div>';
+      });
+      h += '</div>';
+    });
+    return h + '<p style="margin:0;padding:40px 16px 48px;font-size:13px;line-height:1.5;color:#6A6370">Para armar tu cotización con varios modelos, abre <a href="' + e(web) + '" style="color:#4E3486">la tienda en línea</a>. © 2026 KM · Todos los derechos reservados.</p></div>';
+  }
+  dlIn = () => { if (this._dlA) this._dlA.playbackRate = 2.2; if (this._dlR) this._dlR.playbackRate = 2.2; };
+  dlOut = () => { if (this._dlA) this._dlA.playbackRate = this.state.dl ? 2.2 : 1; if (this._dlR) this._dlR.playbackRate = this.state.dl ? 2.2 : 1; };
+  fitGusto() {
+    const el = document.querySelector("[data-gfit]"); if (!el) return;
+    el.style.transform = "none";
+    const h = el.offsetHeight, vh = window.innerHeight;
+    if (h > vh) el.style.transform = "scale(" + (vh / h).toFixed(4) + ")";
+  }
+  updateGusto() {
+    const g = this.gustoGeom(); if (!g || g.total <= 0) return;
+    if (g.r.bottom < 0 || g.r.top > window.innerHeight) return;
+    const p = Math.max(0, Math.min(.9999, -g.r.top / g.total));
+    const i = Math.floor(p * GUSTOS.length);
+    if (i !== this.state.gusto) this.setState({ gusto: i });
+  }
+  pickGusto(i) {
+    const g = this.gustoGeom();
+    this.setState({ gusto: i });
+    if (g && g.total > 0) window.scrollTo({ top: g.top + (i + .5) / GUSTOS.length * g.total, behavior: "smooth" });
+  }
+  updateHeader() {
+    const h = this.headerRef.current; if (!h) return;
+    const scrolled = window.scrollY > 30;
+    let tone = "night";
+    const el = document.elementFromPoint(Math.round(window.innerWidth / 2), 40);
+    let sec = el && el.closest ? el.closest("[data-tone]") : null;
+    if (!sec) { const el2 = document.elementFromPoint(Math.round(window.innerWidth / 2), 92); sec = el2 && el2.closest ? el2.closest("[data-tone]") : null; }
+    if (sec) tone = sec.getAttribute("data-tone") || "night";
+    if (tone === this._tone && scrolled === this._scr) return;
+    this._tone = tone; this._scr = scrolled;
+    const day = tone === "day";
+    h.style.setProperty("--fg", day ? "#17141A" : "#F2ECE4");
+    h.style.setProperty("--bg", day ? "#F1ECE5" : "#100E13");
+    h.style.setProperty("--line", day ? "rgba(23,20,26,.22)" : "rgba(242,236,228,.28)");
+    h.style.setProperty("--lw", day ? "0" : "1");
+    h.style.setProperty("--lt", day ? "1" : "0");
+    h.style.backgroundColor = scrolled ? (day ? "rgba(244,239,232,.9)" : "rgba(16,14,19,.74)") : "rgba(16,14,19,0)";
+    const bf = scrolled ? "blur(16px) saturate(1.3)" : "none";
+    h.style.backdropFilter = bf; h.style.webkitBackdropFilter = bf;
+    h.style.borderBottomColor = scrolled ? (day ? "rgba(23,20,26,.08)" : "rgba(242,236,228,.07)") : "transparent";
+  }
+
+  setupMap() {
+    const el = this.mapRef.current; if (!el) return;
+    if (!window.IntersectionObserver) return this.loadMap();
+    const io = new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting)) { io.disconnect(); this.loadMap(); } }, { rootMargin: "700px 0px" });
+    io.observe(el); this.cleanups.push(() => io.disconnect());
+  }
+  loadMap() {
+    if (window.L) return this.initMap();
+    if (!document.getElementById("km-leaflet-css")) {
+      const c = document.createElement("link");
+      c.id = "km-leaflet-css"; c.rel = "stylesheet"; c.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      c.integrity = "sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"; c.crossOrigin = "anonymous";
+      document.head.appendChild(c);
+    }
+    const j = document.createElement("script");
+    j.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    j.integrity = "sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"; j.crossOrigin = "anonymous";
+    j.onload = () => this.initMap();
+    document.head.appendChild(j);
+  }
+  initMap() {
+    const el = this.mapRef.current, L = window.L;
+    if (!el || !L || this.map || this._unm) return;
+    const touch = !this.fine;
+    const map = L.map(el, { center: [MAPA.lat, MAPA.lng], zoom: MAPA.zoom, scrollWheelZoom: false, dragging: !touch, touchZoom: !touch, doubleClickZoom: !touch, zoomControl: !touch });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(map);
+    const tp = map.getPane("tilePane");
+    if (tp) tp.style.filter = "grayscale(1) sepia(.2) hue-rotate(215deg) saturate(.7) contrast(.94) brightness(1.04)";
+    const icon = L.divIcon({ className: "", iconSize: [26, 26], iconAnchor: [13, 13], html: '<div style="width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 42% 38%,#fff,#F4EEFF 55%,#C9B8EE);box-shadow:0 0 0 7px rgba(201,184,238,.32),0 0 34px 12px rgba(201,184,238,.6)"></div>' });
+    L.marker([MAPA.lat, MAPA.lng], { icon, title: "KM · Taller", keyboard: false }).addTo(map);
+    this.map = map;
+    this.cleanups.push(() => { try { map.remove(); } catch (e) {} });
+    this.setState({ mapReady: true });
+  }
+
+  setupGrain() {
+    const g = this.grainRef.current; if (!g || !this.fine) return;
+    try {
+      const c = document.createElement("canvas"); c.width = c.height = 140;
+      const x = c.getContext("2d"), d = x.createImageData(140, 140);
+      for (let i = 0; i < d.data.length; i += 4) { const v = (Math.random() * 255) | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 12; }
+      x.putImageData(d, 0, 0);
+      g.style.backgroundImage = "url(" + c.toDataURL() + ")"; g.style.opacity = "1";
+    } catch (e) {}
+  }
+
+  setOpenNow() {
+    try {
+      const h = parseInt(new Intl.DateTimeFormat("en-US", { hour: "numeric", hourCycle: "h23", timeZone: "America/Caracas" }).format(new Date()), 10);
+      this.setState({ openNow: h >= 8 && h < 21 });
+    } catch (e) {}
+  }
+
+  onKey(e) {
+    if (this.state.cartOpen) { if (e.key === "Escape") this.closeCart(); return; }
+    if (this.state.viewer != null) {
+      if (e.key === "Escape") this.closeViewer();
+      else if (e.key === "ArrowRight") this.stepViewer(1);
+      else if (e.key === "ArrowLeft") this.stepViewer(-1);
+    } else if (this.state.menu && e.key === "Escape") this.closeMenu();
+  }
+
+  openMenu = () => { document.body.style.overflow = "hidden"; this.setState({ menu: true }); };
+  closeMenu = () => { document.body.style.overflow = ""; this.setState({ menu: false }); };
+  goTo(id, e) {
+    if (e) e.preventDefault();
+    document.body.style.overflow = "";
+    this.setState({ menu: false }, () => {
+      const t = document.getElementById(id);
+      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 64, behavior: this.reduce ? "auto" : "smooth" });
+    });
+  }
+
+  filtered() {
+    const s = this.state, q = norm(s.q.trim());
+    const all = PIEZAS.map((_, i) => i);
+    let L = s.cat === "all" ? DEST.concat(all.filter((i) => DEST.indexOf(i) < 0)) : all.filter((i) => PIEZAS[i].k === s.cat);
+    if (q) { const w = q.split(/\s+/); L = L.filter((i) => w.every((x) => PIEZAS[i].s.indexOf(x) >= 0)); }
+    return L;
+  }
+  selectCat(k) {
+    if (k === this.state.cat) return;
+    this.setState({ cat: k, shown: PAGE });
+    const t = document.getElementById("tienda"), g = this.gridRef.current;
+    if (t && g && g.getBoundingClientRect().top < 0) window.scrollTo({ top: g.getBoundingClientRect().top + window.scrollY - 190, behavior: this.reduce ? "auto" : "smooth" });
+  }
+  onSearch = (e) => this.setState({ q: e.target.value, shown: PAGE });
+  clearSearch = () => this.setState({ q: "", cat: "all", shown: PAGE });
+  cardIn = (e) => {
+    if (!this.fine) return;
+    const b = e.currentTarget, a = b.querySelector("[data-a]"), im = b.querySelector("[data-b]");
+    b._in = true;
+    if (a) a.style.transform = "scale(1.035)";
+    if (!im) return;
+    const want = im.getAttribute("data-src");
+    if (im.getAttribute("src") !== want) { im.style.opacity = "0"; im.onload = () => { if (b._in) im.style.opacity = "1"; }; im.setAttribute("src", want); }
+    else im.style.opacity = "1";
+  };
+  cardOut = (e) => {
+    const b = e.currentTarget, a = b.querySelector("[data-a]"), im = b.querySelector("[data-b]");
+    b._in = false;
+    if (a) a.style.transform = "scale(1)";
+    if (im) im.style.opacity = "0";
+  };
+
+  heroMove = (e) => {
+    if (!this.fine || this.reduce) return;
+    this._mx = e.clientX; this._my = e.clientY;
+    if (this._raf) return;
+    this._raf = requestAnimationFrame(() => {
+      this._raf = 0;
+      const L = document.querySelector("[data-hlight]"), hr = this.heroRef.current;
+      if (L && hr) { const r = hr.getBoundingClientRect(); L.style.opacity = "1"; L.style.transform = "translate(" + (this._mx - r.left) + "px," + (this._my - r.top) + "px)"; }
+      this._hbulbs.forEach((b) => {
+        const r = b.getBoundingClientRect();
+        const d = Math.hypot(r.left + r.width / 2 - this._mx, r.top + r.height / 2 - this._my);
+        b.style.transform = "scale(" + (1 + Math.max(0, 1 - d / 280) * .6).toFixed(3) + ")";
+      });
+    });
+  };
+  toggleLights = () => {
+    const on = !this.state.lights;
+    this.setState({ lights: on });
+    const n = this._hbulbs.length;
+    this._hbulbs.forEach((b, i) => {
+      const g = b.querySelector("[data-glow]"); if (!g || !g.animate) return;
+      b._off = !on;
+      const cur = getComputedStyle(g).opacity;
+      if (this.reduce) { g.animate([{ opacity: cur }, { opacity: on ? 1 : 0 }], { duration: 1, fill: "forwards" }); return; }
+      g.animate(on ? [{ opacity: cur }, { opacity: 1, offset: .3 }, { opacity: .3, offset: .45 }, { opacity: 1 }] : [{ opacity: cur }, { opacity: 0 }],
+        { duration: on ? 600 : 260, delay: on ? i * 45 : (n - i) * 22, easing: "ease-out", fill: "both" });
+    });
+  };
+  bulbTap = (e) => {
+    const b = e.currentTarget, g = b.querySelector("[data-glow]"); if (!g || !g.animate) return;
+    b._off = !b._off;
+    g.animate([{ opacity: getComputedStyle(g).opacity }, { opacity: b._off ? 0 : 1 }], { duration: 240, fill: "both", easing: "ease-out" });
+  };
+
+  setHash(i) { try { history.replaceState(null, "", "#" + PIEZAS[i].code); } catch (err) {} }
+  openViewer(i, e) {
+    let img = null;
+    const t = e && e.currentTarget;
+    if (t && t.querySelector) {
+      img = t.querySelector("img");
+      if (!img && t.closest) { const f = t.closest("[data-flip]"); if (f) img = f.querySelector('img[data-on="true"]') || f.querySelector("img"); }
+    }
+    this._from = img && this.anim ? img.getBoundingClientRect() : null;
+    this._focus = document.activeElement;
+    this._dir = 0;
+    document.body.style.overflow = "hidden";
+    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" });
+    this.setHash(i);
+  }
+  goViewer(i) { this._dir = 0; this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" }); this.setHash(i); }
+  viewerIn() {
+    const ov = this.viewerRef.current; if (!ov) return;
+    const c = ov.querySelector("[data-vclose]"); if (c) try { c.focus({ preventScroll: true }); } catch (err) {}
+    if (!this.anim) return;
+    const bg = ov.querySelector("[data-vbg]"), pn = ov.querySelector("[data-vpanel]");
+    if (bg) bg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 360, easing: "ease-out" });
+    if (pn) pn.animate(this.state.mobile ? [{ transform: "translateY(100%)" }, { transform: "none" }] : [{ opacity: 0, transform: "translateY(24px) scale(.97)" }, { opacity: 1, transform: "none" }], { duration: this.state.mobile ? 560 : 520, easing: EASE });
+    ov.querySelectorAll("[data-vin]").forEach((el, i) => el.animate([{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "none" }], { duration: 650, delay: 160 + i * 45, easing: EASE, fill: "backwards" }));
+  }
+  onTrack = () => {
+    const t = this.trackRef.current; if (!t || !t.clientWidth) return;
+    const g = Math.round(t.scrollLeft / t.clientWidth);
+    if (g !== this.state.gi) this.setState({ gi: g });
+  };
+  goImg(g) { const t = this.trackRef.current; if (t) t.scrollTo({ left: g * t.clientWidth, behavior: "smooth" }); this.setState({ gi: g }); }
+  sheetDown = (e) => {
+    if (!this.state.mobile || (e.target.closest && e.target.closest("button"))) return;
+    const pn = this.viewerRef.current && this.viewerRef.current.querySelector("[data-vpanel]"); if (!pn) return;
+    const y0 = e.clientY; let dy = 0;
+    const mv = (ev) => { dy = Math.max(0, ev.clientY - y0); pn.style.transform = "translateY(" + dy + "px)"; };
+    const up = () => {
+      window.removeEventListener("pointermove", mv); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up);
+      if (dy > 110) { this._dragClose = dy; this.closeViewer(); }
+      else { pn.style.transition = "transform .35s cubic-bezier(.16,1,.3,1)"; pn.style.transform = "none"; setTimeout(() => { pn.style.transition = ""; }, 380); }
+    };
+    window.addEventListener("pointermove", mv); window.addEventListener("pointerup", up); window.addEventListener("pointercancel", up);
+  };
+  closeViewer = () => {
+    const ov = this.viewerRef.current;
+    const done = () => {
+      document.body.style.overflow = "";
+      this.setState({ viewer: null });
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (err) {}
+      if (this._focus && this._focus.focus) try { this._focus.focus({ preventScroll: true }); } catch (err) {}
+    };
+    if (ov && this.anim) {
+      const bg = ov.querySelector("[data-vbg]"), pn = ov.querySelector("[data-vpanel]"), from = this._dragClose || 0; this._dragClose = 0;
+      if (bg) bg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" });
+      const a = pn ? pn.animate(this.state.mobile ? [{ transform: "translateY(" + from + "px)" }, { transform: "translateY(100%)" }] : [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(16px) scale(.97)" }], { duration: 300, easing: "cubic-bezier(.5,0,.75,0)", fill: "forwards" }) : null;
+      if (a) a.onfinish = done; else done();
+    } else done();
+  };
+  stepViewer(d) {
+    const L0 = this.filtered(), cur = this.state.viewer;
+    const L = L0.indexOf(cur) >= 0 ? L0 : PIEZAS.map((_, i) => i);
+    const i = L[(L.indexOf(cur) + d + L.length) % L.length];
+    this._dir = d;
+    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" });
+    this.setHash(i);
+  }
+  vDown = (e) => { this._sx = e.clientX; this._sy = e.clientY; };
+  vUp = (e) => {
+    if (this._sx == null) return;
+    const dx = e.clientX - this._sx, dy = e.clientY - this._sy;
+    this._sx = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) this.setState((s) => ({ gi: 1 - s.gi }));
+  };
+  share = () => {
+    const p = PIEZAS[this.state.viewer]; if (!p) return;
+    const url = location.href.split("#")[0] + "#" + p.code;
+    if (navigator.share) { navigator.share({ title: p.name + " · KM Vanity Home", url }).catch(() => {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => {
+      this.setState({ share: "¡Enlace copiado!" });
+      clearTimeout(this._shT); this._shT = setTimeout(() => { if (!this._unm) this.setState({ share: "" }); }, 2200);
+    }).catch(() => {});
+  };
+
+  showToast(m, withCart) {
+    clearTimeout(this._toT);
+    this.setState({ toast: m, toastCart: withCart !== false });
+    this._toT = setTimeout(() => { if (!this._unm) this.setState({ toast: "" }); }, 2600);
+  }
+  addToCart(code, qty, ver, color, custom) {
+    custom = color === "Otro" ? custom || null : null;
+    const p = PIEZAS[iOf(code)]; if (!p) return;
+    if (!p.corr) ver = null;
+    this.setState((s) => {
+      const c = s.cart.slice(), i = c.findIndex((x) => x.code === code && x.ver === ver && x.color === color && (x.custom ? x.custom.n : "") === (custom ? custom.n : ""));
+      if (i >= 0) c[i] = Object.assign({}, c[i], { qty: Math.min(20, c[i].qty + qty) }); else c.push({ code, qty, ver, color, custom });
+      return { cart: c };
+    });
+  }
+  editCart(i, fn) { this.setState((s) => { const c = s.cart.slice(); const r = fn(Object.assign({}, c[i])); if (r) c[i] = r; else c.splice(i, 1); return { cart: c }; }); }
+  openCart = () => { clearTimeout(this._toT); document.body.style.overflow = "hidden"; this.setState({ cartOpen: true, toast: "", nameErr: false }); };
+  closeCart = () => {
+    const done = () => { if (this.state.viewer == null) document.body.style.overflow = ""; this.setState({ cartOpen: false }); };
+    const r = this.cartRef.current;
+    if (r && this.anim) { const pnl = r.querySelector("[data-cpanel]"), bg = r.querySelector("[data-cbg]"); if (bg) bg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, fill: "forwards" }); if (pnl) { const a = pnl.animate([{ transform: "none" }, { transform: "translateX(100%)" }], { duration: 320, easing: "cubic-bezier(.5,0,.75,0)", fill: "forwards" }); a.onfinish = done; return; } }
+    done();
+  };
+  palFor(cur, onPick) {
+    return {
+      pal: PALETA.map((c, k) => { const on = !!cur && cur.n === c[0]; return { n: c[0], hex: c[1], x: palPos[k].x, y: palPos[k].y,
+        ring: on ? "0 0 0 3px #FFFFFF, 0 0 0 4.5px #17141A" : "inset 0 0 0 1px rgba(23,20,26,.15), 0 4px 10px -4px rgba(23,20,26,.35)", pick: () => onPick({ n: c[0], hex: c[1], d: c[2] }) }; }),
+      palBg: cur ? cur.hex : "#F4EFE8", palFg: cur ? (cur.d ? "#FFFFFF" : "#17141A") : "rgba(23,20,26,.6)", palLabel: cur ? cur.n : "Elige tu color"
+    };
+  }
+  colorText(color, custom) { return color === "Otro" ? (custom ? custom.n.toLowerCase() : "otro (te cuento)") : color.toLowerCase(); }
+  cartMessage() {
+    const s = this.state, nm = s.nombre.trim(), cd = s.ciudad.trim();
+    const lines = s.cart.map((it, k) => {
+      const p = PIEZAS[iOf(it.code)], o = ["Cantidad: " + it.qty];
+      if (it.ver) o.push("Versión: " + it.ver.toLowerCase());
+      if (it.color) o.push("Color: " + this.colorText(it.color, it.custom));
+      return (k + 1) + ". " + p.name + " (Ref. " + p.code + ")\n   " + o.join(" · ");
+    });
+    return "¡Hola, KM! " + (nm ? "Soy " + nm + (cd ? ", de " + cd : "") + ". " : cd ? "Te escribo desde " + cd + ". " : "") + "Quiero cotizar " + (s.cart.length === 1 ? "este modelo" : "estos modelos") + ":\n\n" + lines.join("\n") + "\n\n¿Me pasan el precio de hoy? ¡Gracias!";
+  }
+  sendCart = () => {
+    const miss = !this.state.nombre.trim() ? "nombre" : !this.state.ciudad.trim() ? "ciudad" : "";
+    if (miss) {
+      this.setState({ nameErr: miss });
+      const inp = document.querySelector("[data-" + miss + "]"); if (inp) try { inp.focus(); } catch (e) {}
+      return;
+    }
+    const msg = this.state.msgCustom != null && this.state.msgCustom.trim() ? this.state.msgCustom : this.cartMessage();
+    window.open(wa(msg), "_blank", "noopener");
+  };
+  downloadCatalog = async () => {
+    if (this.state.dl) return;
+    if (this._dlFile) return this.saveDl();
+    this.setState({ dl: "Preparando… 0 %" }); this.dlIn();
+    try {
+      const tpl = await (await fetch("catalogo-plantilla.html")).text();
+      const toData = async (url) => { const b = await (await fetch(url)).blob(); return await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(b); }); };
+      const jobs = []; PIEZAS.forEach((p) => { jobs.push([p, "front"]); jobs.push([p, "side"]); });
+      const img = {}; let k = 0, done = 0;
+      const worker = async () => { while (k < jobs.length) { const j = jobs[k++]; img[j[0].code + j[1]] = await toData(j[0][j[1]]); done++; if (done % 6 === 0 && !this._unm) this.setState({ dl: "Preparando… " + Math.round(done / jobs.length * 100) + " %" }); } };
+      await Promise.all([0, 1, 2, 3, 4, 5].map(worker));
+      const fecha = new Intl.DateTimeFormat("es-VE", { month: "long", year: "numeric" }).format(new Date());
+      const data = { whatsapp: WHATSAPP, web: location.href.split("#")[0], instagram: "https://www.instagram.com/repisaskm/", date: fecha, cats: CATS,
+        dest: DEST.map((i) => PIEZAS[i].code),
+        products: PIEZAS.map((p) => ({ code: p.code, k: p.k, cat: p.cat, name: p.name, feats: p.feats, fem: p.fem, badge: p.badge, corr: p.corr, front: "@", side: img[p.code + "side"] })) };
+      const json = JSON.stringify(data).replace(/</g, "\\u003c");
+      const html = tpl.replace("/*__KM_DATA__*/null", () => json).replace('<div id="app"></div>', () => '<div id="app">' + this.catFallback(img, data.web) + '</div>');
+      const name = "Catalogo-KM-Vanity-Home.html";
+      const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      let file = null; try { file = new File([html], name, { type: "text/html" }); } catch (e) {}
+      if (ios && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        this._dlFile = file;
+        this.setState({ dl: "", dlReady: true }, () => this.dlOut()); this.showToast("Catálogo listo: toca «Guardar en el iPhone»", false);
+        return;
+      }
+      this.saveBlob(html, name, ios);
+      this.setState({ dl: "" }, () => this.dlOut()); this.showToast("Catálogo descargado", false);
+    } catch (e) {
+      this.setState({ dl: "" }, () => this.dlOut()); this.showToast("No se pudo descargar. Revisa tu conexión.", false);
+    }
+  };
+
+  waPieza(p, withColor) {
+    const c = withColor ? this.state.color : null, f = p.fem;
+    let m = "¡Hola, KM! Vi en la página " + (f ? "la " : "el ") + p.name + " (Ref. " + p.code + ") y " + (f ? "la" : "lo") + " quiero.";
+    if (withColor && this.state.fq > 1) m += " Cantidad: " + this.state.fq + ".";
+    if (withColor && p.corr) m += " Versión: " + this.state.fv.toLowerCase() + ".";
+    if (c) m += c === "Otro" && !this.state.vCustom ? " Me gustaría en otro color, te cuento." : " Color: " + this.colorText(c, this.state.vCustom) + ".";
+    return wa(m + " ¿Me pasan el precio de hoy?");
+  }
+
+  renderVals() {
+    const s = this.state;
+    const frase = FRASES.indexOf(this.props.frase) >= 0 ? this.props.frase : FRASES[0];
+    const cur = s.slide, hp = PIEZAS[HERO[cur]];
+    const L = this.filtered(), n = L.length, shown = Math.min(s.shown, n);
+    const inC = {}; s.cart.forEach((it) => { inC[it.code] = (inC[it.code] || 0) + it.qty; });
+    const cartCount = s.cart.reduce((a, it) => a + it.qty, 0);
+
+    const sbFor = (k, day) => [0, 1, 2, 3, 4, 5].map((j) => ({ lit: j <= k ? "1" : "0", gl: (day ? "0 0 0 1px rgba(23,20,26,.14), " : "") + LIT,
+      bg: day ? "rgba(23,20,26,.07)" : "rgba(242,236,228,.08)", sh: day ? "inset 0 0 0 1px rgba(23,20,26,.22)" : "inset 0 0 0 1px rgba(242,236,228,.22)" }));
+
+    const acc = (key, cnt) => {
+      const o = {};
+      for (let i = 0; i < cnt; i++) {
+        const on = s[key] === i;
+        o["t" + i] = () => this.setState((st) => ({ [key]: st[key] === i ? -1 : i }));
+        o["r" + i] = on ? "1fr" : "0fr"; o["x" + i] = on ? "45deg" : "0deg"; o["e" + i] = on ? "true" : "false";
+      }
+      return o;
+    };
+
+    const G = GUSTOS[s.gusto], gp = PIEZAS[iOf(G.code)], gNight = G.night;
+    const gustos = GUSTOS.map((g, i) => {
+      const on = i === s.gusto, p = PIEZAS[iOf(g.code)];
+      const ring = gNight ? "0 0 0 1px rgba(242,236,228,.45)" : "0 0 0 1px rgba(23,20,26,.22)";
+      return { label: g.label, on: on ? "true" : "false", pick: () => this.pickGusto(i), fw: on ? 560 : 200, op2: on ? 1 : .5, sw: g.sw,
+        ring: on ? ring + ", 0 0 22px 6px " + g.sw : ring, src: p.front, alt: p.name, op: on ? 1 : 0 };
+    });
+
+    let v = {};
+    if (s.viewer != null) {
+      const p = PIEZAS[s.viewer];
+      const same = PIEZAS.map((_, i) => i).filter((i) => PIEZAS[i].k === p.k), at = same.indexOf(s.viewer);
+      const rel = [];
+      for (let j = 1; j < same.length && rel.length < 4; j++) rel.push(same[(at + j) % same.length]);
+      DEST.forEach((i) => { if (rel.length < 4 && i !== s.viewer && rel.indexOf(i) < 0) rel.push(i); });
+      v = {
+        name: p.name, code: p.code, cat: p.cat, pos: s.mobile ? pad(at + 1) + " / " + pad(same.length) : p.cat + " · " + pad(at + 1) + " de " + pad(same.length),
+        img: s.gi ? p.side : p.front, imgAlt: p.name + (s.gi ? ", vista lateral" : ", vista frontal"),
+        gpos: (s.gi + 1) + " / 2 · " + (s.gi ? "Lateral" : "Frontal"),
+        thumbs: [[p.front, "Frontal"], [p.side, "Lateral"]].map((t, g) => { const on = g === s.gi; return { src: t[0], label: t[1], on: on ? "true" : "false", pick: () => this.setState({ gi: g }),
+          ol: on ? "1.5px solid #17141A" : "1.5px solid rgba(23,20,26,0)", op: on ? 1 : .62 }; }),
+        feats: p.feats.map((t) => ({ t })),
+        palOpen: s.pal === "v", ...this.palFor(s.vCustom, (cc) => this.setState({ vCustom: cc, color: "Otro", pal: null })),
+        colors: COLORES.map((c) => { const on = s.color === c.label, oc = c.label === "Otro"; return { label: oc && s.vCustom ? s.vCustom.n : c.label, sw: oc && s.vCustom ? s.vCustom.hex : c.sw, on: on ? "true" : "false",
+          pick: () => oc ? this.setState((st) => ({ color: "Otro", pal: st.pal === "v" ? null : "v" })) : this.setState((st) => ({ color: st.color === c.label ? null : c.label, pal: null })),
+          bg: on ? "#FFFFFF" : "rgba(255,255,255,0)", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
+        wa: this.waPieza(p, true),
+        related: rel.map((i) => { const q = PIEZAS[i]; return { src: q.front, name: q.name, cat: q.cat, code: q.code, open: () => this.goViewer(i) }; }),
+        hasCorr: p.corr, qty: String(s.fq),
+        corrOpts: VERS.map((label) => { const on = s.fv === label; return { label, on: on ? "true" : "false", pick: () => this.setState({ fv: label }), bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.2)" }; }),
+        sticky: s.mobile ? "relative" : "sticky",
+        front: p.front, side: p.side, altF: p.name + ", vista frontal", altS: p.name + ", vista lateral",
+        showPrevImg: !s.mobile && s.gi === 1, showNextImg: !s.mobile && s.gi === 0,
+        d0: s.gi === 0 ? "20px" : "6px", d1: s.gi === 1 ? "20px" : "6px", o0: s.gi === 0 ? 1 : .6, o1: s.gi === 1 ? 1 : .6,
+        align: s.mobile ? "flex-end" : "center", outerPad: s.mobile ? "0" : "clamp(16px,3vw,40px)",
+        panelH: s.mobile ? "94svh" : "min(86vh,840px)", radius: s.mobile ? "20px 20px 0 0" : "16px",
+        barPad: s.mobile ? "18px 14px 10px" : "12px 16px 12px 24px",
+        galPos: s.mobile ? "relative" : "sticky", galPad: s.mobile ? "12px 12px 0" : "24px",
+        galMax: s.tablet ? "min(100%, calc(50svh * .8))" : s.mobile ? "100%" : "calc((min(86vh,840px) - 118px) * .8)", galFlex: s.mobile ? "1 1 100%" : "0 0 calc((min(86vh,840px) - 118px) * .8 + 48px)", infoPad: s.mobile ? "20px 16px 28px" : "26px 30px 36px 6px", mobile: s.mobile, back: s.mobile ? "Tienda" : "Volver a la tienda", va: acc("va", 2)
+      };
+    }
+
+    const st = s.openNow === true ? { label: "Atendiendo ahora", dot: "#2FBF71", ring: "0 0 0 4px rgba(47,191,113,.18)" }
+      : s.openNow === false ? { label: "Fuera de horario · respondemos desde las 8 am", dot: "#A39DA8", ring: "none" }
+      : { label: "WhatsApp de 8 am a 9 pm", dot: "#A39DA8", ring: "none" };
+
+    const catList = [{ key: "all", name: "Todo", count: PIEZAS.length }].concat(CATS.map((c) => ({ key: c[0], name: c[1], count: PIEZAS.filter((p) => p.k === c[0]).length })));
+
+    return {
+      rootRef: this.rootRef, grainRef: this.grainRef, headerRef: this.headerRef, heroRef: this.heroRef, manRef: this.manRef,
+      gridRef: this.gridRef, mapRef: this.mapRef, viewerRef: this.viewerRef, viewerImgRef: this.viewerImgRef,
+      waGeneral: wa("¡Hola, KM! Vengo de la página web y quiero información sobre sus muebles."),
+      waPedido: wa("¡Hola, KM! Quiero hacer un pedido. ¿Cómo empezamos?"),
+      waBusqueda: wa("¡Hola, KM! Estoy buscando " + (s.q.trim() ? "«" + s.q.trim() + "»" : "un mueble") + ". ¿Me ayudan?"),
+      openMenu: this.openMenu, closeMenu: this.closeMenu, menuOpen: s.menu,
+      menuLinks: MENU.map((m, i) => ({ label: m[0], href: "#" + m[1], n: pad(i + 1), go: (e) => this.goTo(m[1], e) })),
+      fr: { a: frase === FRASES[0], b: frase === FRASES[1], c: frase === FRASES[2], d: frase === FRASES[3] },
+      heroMove: this.heroMove, heroMore: s.heroMore, railOn: !s.mobile, heroDim: s.lights ? 1 : .28,
+      heroOpen: (e) => this.openViewer(HERO[this.state.slide], e),
+      h0: { op: cur === 0 ? 1 : 0, sc: cur === 0 ? 1 : 1.07, on: cur === 0 ? "true" : "false" },
+      heroSlides: s.heroMore ? HERO.slice(1).map((pi, k) => { const on = cur === k + 1; return { src: PIEZAS[pi].front, alt: PIEZAS[pi].name, op: on ? 1 : 0, sc: on ? 1 : 1.07, on: on ? "true" : "false" }; }) : [],
+      heroCap: { code: "Ref. " + hp.code, name: hp.name, num: pad(cur + 1) + " / " + pad(HERO.length) },
+      hbTop: Array.from({ length: 9 }, (_, i) => ({ o: String(5 + i) })),
+      hbLeft: Array.from({ length: 5 }, (_, i) => ({ o: String(4 - i) })),
+      hbRight: Array.from({ length: 5 }, (_, i) => ({ o: String(14 + i) })),
+      bulbTap: this.bulbTap, toggleLights: this.toggleLights,
+      lightsPressed: s.lights ? "true" : "false", lightLabel: s.lights ? "Apagar luces" : "Encender luces",
+      lightDot: s.lights ? "#FFFFFF" : "rgba(255,255,255,0)", lightGlow: s.lights ? LIT : "none",
+      q: s.q, onSearch: this.onSearch, clearSearch: this.clearSearch,
+      cats: catList.map((c) => { const on = s.cat === c.key; return { name: c.name, count: String(c.count), pressed: on ? "true" : "false", select: () => this.selectCat(c.key),
+        bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.2)" }; }),
+      countLabel: n + (n === 1 ? " modelo" : " modelos") + (s.q.trim() ? " para «" + s.q.trim() + "»" : s.cat === "all" ? " · destacados primero" : ""),
+      items: L.slice(0, shown).map((i) => { const p = PIEZAS[i]; return { code: p.code, name: p.name, cat: p.cat, src: p.front, src2: p.side, badge: p.badge, hasBadge: !!p.badge,
+        wa: this.waPieza(p, false), aria: "Ver la ficha de " + p.name, open: (e) => this.openViewer(i, e),
+        addLabel: inC[p.code] ? "✓ En tu lista · " + inC[p.code] : "+ Agregar", abg: inC[p.code] ? "#17141A" : "rgba(23,20,26,0)", afg: inC[p.code] ? "#F4EFE8" : "#17141A",
+        add: () => { this.addToCart(p.code, 1, p.corr ? "Sencilla" : null, null); this.showToast("Agregado a tu cotización"); } }; }),
+      cardIn: this.cardIn, cardOut: this.cardOut,
+      empty: n === 0, hasMore: n > shown, seenLabel: "Viendo " + shown + " de " + n, seenPct: (n ? Math.round(shown / n * 100) : 0) + "%",
+      more: () => this.setState((st) => ({ shown: st.shown + PAGE })),
+      sb: { s0: sbFor(0, false), s1: sbFor(1, false), s2: sbFor(2, false), s3: sbFor(3, true), s4: sbFor(4, true), s5: sbFor(5, true) },
+      gustos,
+      gx: {
+        tone: gNight ? "night" : "day", bg: G.bg, desk: !s.mobile,
+        figW: s.mobile ? "min(100%,calc(26svh * .8))" : "min(100%,420px,calc((100svh - 230px) * .8))", fg: gNight ? "#F2ECE4" : "#17141A",
+        muted: gNight ? "rgba(242,236,228,.76)" : "rgba(23,20,26,.72)", eyebrow: gNight ? "#C9B8EE" : "#4E3486",
+        ctaBg: gNight ? "#F2ECE4" : "#17141A", ctaFg: gNight ? "#17141A" : "#F2ECE4",
+        code: "Ref. " + gp.code, name: gp.name, open: (e) => this.openViewer(iOf(G.code), e),
+        cta: G.label === "Con temática" ? "Quiero el mío con temática" : "Quiero el mío en " + G.label.toLowerCase(),
+        wa: wa(G.label === "Con temática" ? "¡Hola, KM! Quiero un mueble con temática. ¿Me ayudan a armarlo?" : "¡Hola, KM! Quiero un mueble en color " + G.label.toLowerCase() + ". ¿Me ayudan a elegir?")
+      },
+      fq: acc("faq", 7), st, mapPending: !s.mapReady,
+      garland: Array.from({ length: 11 }, (_, i) => ({ h: String(Math.round(8 + 30 * Math.sin(Math.PI * i / 10))), d: String(i * 80) })),
+      viewerOpen: s.viewer != null, v,
+      vInc: () => this.setState((st) => ({ fq: Math.min(20, st.fq + 1) })), vDec: () => this.setState((st) => ({ fq: Math.max(1, st.fq - 1) })),
+      vAdd: () => { const p = PIEZAS[this.state.viewer]; if (!p) return; this.addToCart(p.code, this.state.fq, this.state.fv, this.state.color, this.state.vCustom); this.setState({ pal: null }); this.openCart(); },
+      cartRef: this.cartRef, openCart: this.openCart, closeCart: this.closeCart, cartOpen: s.cartOpen,
+      hasCart: s.cart.length > 0, cartEmpty: s.cart.length === 0, cartCount: String(cartCount),
+      cartCountLabel: cartCount + (cartCount === 1 ? " mueble" : " muebles"), cartAria: "Abrir mi cotización (" + cartCount + ")",
+      showPill: s.cart.length > 0 && s.viewer == null && !s.cartOpen && !s.toast && !s.menu,
+      cartItems: s.cart.map((it, i) => { const p = PIEZAS[iOf(it.code)], col = COLORES.find((c) => c.label === it.color);
+        return { code: p.code, name: p.name, cat: p.cat, src: p.front, qty: String(it.qty), hasColor: !!it.color, color: it.color || "", sw: col ? col.sw : "transparent", hasVer: !!it.ver,
+          colorLabel: it.color === "Otro" && it.custom ? it.custom.n : it.color || "elige uno",
+          cols: COLORES.map((c) => { const on = it.color === c.label, oc = c.label === "Otro"; return { label: c.label, sw: oc && it.custom ? it.custom.hex : c.sw, on: on ? "true" : "false", ring: on ? "0 0 0 2px #F4EFE8, 0 0 0 3.5px #17141A" : "inset 0 0 0 1px rgba(23,20,26,.22)",
+            pick: () => { if (oc) { this.setState((st) => ({ pal: st.pal === i ? null : i })); this.editCart(i, (x) => Object.assign(x, { color: "Otro" })); } else { this.setState({ pal: null }); this.editCart(i, (x) => Object.assign(x, { color: x.color === c.label ? null : c.label, custom: null })); } } }; }),
+          palOpen: s.pal === i, ...this.palFor(it.custom, (cc) => { this.editCart(i, (x) => Object.assign(x, { color: "Otro", custom: cc })); this.setState({ pal: null }); }),
+          vers: VERS.map((label) => { const on = it.ver === label; return { label, on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { ver: label })), bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
+          inc: () => this.editCart(i, (x) => Object.assign(x, { qty: Math.min(20, x.qty + 1) })),
+          dec: () => this.editCart(i, (x) => x.qty > 1 ? Object.assign(x, { qty: x.qty - 1 }) : null),
+          remove: () => this.editCart(i, () => null) }; }),
+      nombre: s.nombre, on_nombre: (e) => this.setState({ nombre: e.target.value, nameErr: false }),
+      ciudad: s.ciudad, on_ciudad: (e) => this.setState({ ciudad: e.target.value, nameErr: false }),
+      nameErr: !!s.nameErr, errMsg: s.nameErr === "ciudad" ? "Escribe tu ciudad para enviar la cotización." : "Escribe tu nombre y apellido para enviar la cotización.",
+      nombreBd: s.nameErr === "nombre" ? "#B4325A" : "rgba(23,20,26,.2)", nombreSh: s.nameErr === "nombre" ? "0 0 0 3px rgba(180,50,90,.12)" : "none",
+      ciudadBd: s.nameErr === "ciudad" ? "#B4325A" : "rgba(23,20,26,.2)", ciudadSh: s.nameErr === "ciudad" ? "0 0 0 3px rgba(180,50,90,.12)" : "none",
+      cartMsg: s.cart.length ? (s.msgCustom != null ? s.msgCustom : this.cartMessage()) : "",
+      onMsg: (e) => this.setState({ msgCustom: e.target.value }), msgCustom: s.msgCustom != null, resetMsg: () => this.setState({ msgCustom: null }), sendCart: this.sendCart,
+      cartToShop: () => { this.closeCart(); setTimeout(() => this.goTo("tienda"), 340); },
+      hasToast: !!s.toast, toast: s.toast, toastCart: s.toastCart,
+      goTienda: (e) => this.goTo("tienda", e),
+      vrA: VR_A, vrB: VR_B,
+      app: { show: !this.standalone && !s.appDone && (!!s.appEv || !!s.appIOS), go: this.installApp, sheet: s.appSheet,
+        close: () => this.setState({ appSheet: false }), stop: (e) => e.stopPropagation(),
+        steps: [{ n: "1", t: "Toca el botón Compartir de Safari (el cuadrito con la flecha hacia arriba)." }, { n: "2", t: "Elige «Agregar a inicio»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu pantalla de inicio." }] },
+      downloadCatalog: this.downloadCatalog, dlIn: this.dlIn, dlOut: this.dlOut, dlSub: s.dl ? "No cierres la página" : s.dlReady ? "En Archivos o envíalo por WhatsApp" : "72 modelos · funciona sin internet", dlLabel: s.dl || (s.dlReady ? "Guardar en el iPhone" : "Descargar catálogo"),
+      vPrev: () => this.stepViewer(-1), vNext: () => this.stepViewer(1), vDown: this.vDown, vUp: this.vUp,
+      gPrev: () => this.goImg(0), gNext: () => this.goImg(1), onTrack: this.onTrack, trackRef: this.trackRef, vScrollRef: this.vScrollRef, sheetDown: this.sheetDown,
+      closeViewer: this.closeViewer, share: this.share, shareLabel: s.share || "Compartir este modelo ↗"
+    };
+  }
+}
+</script>
+</body>
+</html>
