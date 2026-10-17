@@ -685,7 +685,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             <p style="font-size:14px;font-weight:700">Correderas</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <sc-for list="{{ v.corrOpts2 }}" as="o" hint-placeholder-count="2">
-                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;margin-left:-13px;object-fit:contain;border-radius:50%;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(23,20,26,.08)"></sc-if>{{ o.label }}</button>
               </sc-for>
             </div>
           </div>
@@ -695,7 +695,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             <p style="font-size:14px;font-weight:700">Manillas <span style="font-weight:400;color:rgba(23,20,26,.6)">{{ v.manNote }}</span></p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <sc-for list="{{ v.manOpts }}" as="o" hint-placeholder-count="3">
-                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 16px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 16px 0 5px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;object-fit:contain;border-radius:50%;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(23,20,26,.08)">{{ o.label }}</button>
               </sc-for>
             </div>
           </div>
@@ -1093,6 +1093,7 @@ const FICHA_BASE = {
   tiempo: "10 a 15 días hábiles, sujeto a demanda",
   noIncluye: "Artículos decorativos, sillas o accesorios que aparecen en las fotos."
 };
+const MAN_IMG = { "Estándar": "adicionales/manilla-estandar.webp", "Metal": "adicionales/manilla-metal.webp", "Cristal": "adicionales/manilla-cristal.webp" };
 const MANILLAS = [["Estándar", null], ["Metal", "manillaMetal"], ["Cristal", "manillaCristal"]];
 const usd = (n) => "$" + Number(n).toLocaleString("en-US");
 const fx = (n) => n == null ? "por confirmar" : usd(n);
@@ -1798,9 +1799,9 @@ class Component extends DCLogic {
       plabel: "Precio de contado", price: r.t == null ? "Por WhatsApp" : usd(r.t), psize: r.t == null ? "26px" : "clamp(40px,4vw,54px)", unit: r.t == null ? "" : "USD" + (s.fq > 1 ? " c/u" : ""),
       abono: r.t == null ? "Resérvalo con el 50 % de abono" : "Resérvalo hoy con " + usd(Math.ceil(r.t * s.fq / 2)) + " (50 %)" + (s.fq > 1 ? " · " + s.fq + " uds." : ""),
       hasPend: r.pend.length > 0, pend: "Por confirmar: " + r.pend.join(", ") + ". Te lo decimos por WhatsApp.",
-      corrOpts2: VERS.map((l) => Object.assign({ label: l === "Telescópicas" ? "Telescópicas (+ " + fx(EXTRAS.telescopicas) + ")" : "Sencillas (incluidas)", pick: () => this.setState({ fv: l }) }, pill(s.fv === l))),
+      corrOpts2: VERS.map((l) => Object.assign({ img: l === "Telescópicas" ? "adicionales/corredera-telescopica.webp" : "", hasImg: l === "Telescópicas", label: l === "Telescópicas" ? "Telescópicas (+ " + fx(EXTRAS.telescopicas) + ")" : "Sencillas (incluidas)", pick: () => this.setState({ fv: l }) }, pill(s.fv === l))),
       hasMan: !!p.manillas, manNote: "· " + p.manillas + " piezas",
-      manOpts: MANILLAS.map((m) => Object.assign({ label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
+      manOpts: MANILLAS.map((m) => Object.assign({ img: MAN_IMG[m[0]], hasImg: true, label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
       hasVid: p.vid,
       vidOpts: [Object.assign({ label: "Espejo esmerilado (+ " + fx(EXTRAS.esmerilado) + ")", pick: () => this.setState((st) => ({ fe: !st.fe })) }, pill(s.fe)),
         Object.assign({ label: "Nombre en el vidrio (+ " + fx(EXTRAS.nombreVidrio) + ")", pick: () => this.setState((st) => ({ fn: !st.fn })) }, pill(s.fn))],
