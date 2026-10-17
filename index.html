@@ -692,10 +692,10 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </sc-if>
         <sc-if value="{{ v.hasMan }}" hint-placeholder-val="{{ false }}">
           <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
-            <p style="font-size:14px;font-weight:700">Manillas <span style="font-weight:400;color:rgba(23,20,26,.6)">{{ v.manNote }}</span></p>
+            <p style="font-size:14px;font-weight:700">Manillas o push open <span style="font-weight:400;color:rgba(23,20,26,.6)">{{ v.manNote }}</span></p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <sc-for list="{{ v.manOpts }}" as="o" hint-placeholder-count="3">
-                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 16px 0 5px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;object-fit:contain">{{ o.label }}</button>
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 16px 0 5px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;object-fit:contain"></sc-if>{{ o.label }}</button>
               </sc-for>
             </div>
           </div>
@@ -1085,7 +1085,7 @@ const FICHAS = {
   E02: { precio: 85, manillas: 0, ancho: "", alto: "", fondo: "" }, // Repisa blanca de curvas
 };
 // Adicionales (USD). null = "precio por confirmar".
-const EXTRAS = { telescopicas: null, esmerilado: 15, nombreVidrio: null, manillaMetal: 1, manillaCristal: 3 };
+const EXTRAS = { telescopicas: null, esmerilado: 15, nombreVidrio: null, manillaMetal: 1, manillaCristal: 3, pushOpen: 2 };
 const FICHA_BASE = {
   material: "MDF de alta densidad",
   acabado: "Pintura satinada, hecha a mano",
@@ -1094,12 +1094,14 @@ const FICHA_BASE = {
   noIncluye: "Artículos decorativos, sillas o accesorios que aparecen en las fotos."
 };
 const MAN_IMG = { "Estándar": "adicionales/manilla-estandar.webp", "Metal": "adicionales/manilla-metal.webp", "Cristal": "adicionales/manilla-cristal.webp" };
-const MANILLAS = [["Estándar", null], ["Metal", "manillaMetal"], ["Cristal", "manillaCristal"]];
+const GAV_MAN = { T01: [12, 12], T02: [12, 12], T03: [4, 0], T04: [9, 9], T05: [4, 0], T06: [4, 4], T07: [5, 0], T08: [1, 2], T09: [4, 4], T10: [4, 4], T11: [3, 3], T12: [9, 9], T13: [9, 9], T14: [5, 0], T15: [4, 4], T16: [5, 5], T17: [5, 0], T18: [9, 9], T19: [9, 9], T20: [5, 5], T21: [5, 5], T22: [9, 9], T23: [9, 9], T24: [9, 9], T25: [6, 6], T26: [9, 9], T27: [9, 9], T28: [6, 8], T29: [9, 9], T30: [9, 9], T31: [12, 0], C01: [6, 8], C02: [6, 8], C03: [6, 8], C04: [6, 8], C05: [6, 8], C06: [6, 8], C07: [6, 8], C08: [6, 6], C09: [6, 0], C10: [6, 8], A01: [4, 7], A02: [4, 7], A03: [3, 7], A04: [3, 7], A05: [3, 7], A06: [3, 3], A07: [0, 0], A08: [3, 3], A09: [4, 5], A10: [0, 1], A11: [3, 7], A12: [4, 6], A13: [3, 3], B01: [0, 0], B02: [0, 0], B03: [0, 0], B04: [0, 0], B05: [0, 0], B06: [0, 0], B07: [0, 0], B08: [0, 0], B09: [4, 4], B10: [0, 0], B11: [0, 0], B12: [0, 0], M01: [5, 5], M02: [5, 5], D01: [2, 2], D02: [6, 0], E01: [0, 0], E02: [0, 0] }; // [drawers, handles] counted from the photos
+const MANILLAS = [["Estándar", null], ["Metal", "manillaMetal"], ["Cristal", "manillaCristal"], ["Push open", "pushOpen"]];
 const usd = (n) => "$" + Number(n).toLocaleString("en-US");
 const fx = (n) => n == null ? "por confirmar" : usd(n);
 PIEZAS.forEach((p) => { const f = FICHAS[p.code] || {}; p.precio = f.precio == null ? null : f.precio; p.manillas = f.manillas || 0; p.med = { ancho: f.ancho || "", alto: f.alto || "", fondo: f.fondo || "" };
   p.vid = /espejo|led|bombillo|luz|luces|gatita/.test(p.s); p.luz = /led|bombillo|luz|luces/.test(p.s); p.banq = /banquito|banco/.test(p.s);
-  p.gratis = p.banq ? ["banquito"] : []; });
+  p.gratis = p.banq ? ["banquito"] : [];
+  if (GAV_MAN[p.code]) { p.gav = GAV_MAN[p.code][0]; p.manillas = GAV_MAN[p.code][1]; } else p.gav = 0; });
 const DEST = ["T04", "C07", "T09", "T22", "A13", "B01", "T29", "C01", "T19", "A10", "B02", "T21"].map(iOf);
 const HERO = ["T04", "C07", "T09", "T22"].map(iOf);
 const PAGE = 12;
@@ -1763,14 +1765,16 @@ class Component extends DCLogic {
     if (p.precio == null || o.medida) return { t: null, pend, medida: !!o.medida };
     let t = p.precio;
     if (o.ver === "Telescópicas") { if (EXTRAS.telescopicas == null) pend.push("correderas telescópicas"); else t += EXTRAS.telescopicas; }
-    if (o.man && o.man !== "Estándar") { const u = EXTRAS[o.man === "Metal" ? "manillaMetal" : "manillaCristal"]; if (u == null || !p.manillas) pend.push("manillas"); else t += u * p.manillas; }
+    if (o.man === "Push open") { if (EXTRAS.pushOpen == null || !p.gav) pend.push("push open"); else t += EXTRAS.pushOpen * p.gav; }
+    else if (o.man && o.man !== "Estándar") { const u = EXTRAS[o.man === "Metal" ? "manillaMetal" : "manillaCristal"]; if (u == null || !p.manillas) pend.push("manillas"); else t += u * p.manillas; }
     if (o.esm) { if (EXTRAS.esmerilado == null) pend.push("espejo esmerilado"); else t += EXTRAS.esmerilado; }
     if (o.nom) { if (EXTRAS.nombreVidrio == null) pend.push("vidrio personalizado"); else t += EXTRAS.nombreVidrio; }
     return { t, pend };
   }
   extraTxt(it) {
     const o = [];
-    if (it.man && it.man !== "Estándar") o.push("Manillas de " + it.man.toLowerCase());
+    if (it.man === "Push open") o.push("Push open en las " + ((PIEZAS[iOf(it.code)] || {}).gav || "") + " gavetas");
+    else if (it.man && it.man !== "Estándar") o.push("Manillas de " + it.man.toLowerCase());
     if (it.esm) o.push("Espejo esmerilado");
     if (it.nom) o.push("Vidrio personalizado" + (it.nomTxt ? ": «" + it.nomTxt + "»" : ""));
     return o;
@@ -1800,8 +1804,8 @@ class Component extends DCLogic {
       abono: r.t == null ? "Resérvalo con el 50 % de abono" : "Resérvalo hoy con " + usd(Math.ceil(r.t * s.fq / 2)) + " (50 %)" + (s.fq > 1 ? " · " + s.fq + " uds." : ""),
       hasPend: r.pend.length > 0, pend: "Por confirmar: " + r.pend.join(", ") + ". Te lo decimos por WhatsApp.",
       corrOpts2: VERS.map((l) => Object.assign({ img: l === "Telescópicas" ? "adicionales/corredera-telescopica.webp" : "", hasImg: l === "Telescópicas", label: l === "Telescópicas" ? "Telescópicas (+ " + fx(EXTRAS.telescopicas) + ")" : "Sencillas (incluidas)", pick: () => this.setState({ fv: l }) }, pill(s.fv === l))),
-      hasMan: !!p.manillas, manNote: "· " + p.manillas + " piezas",
-      manOpts: MANILLAS.map((m) => Object.assign({ img: MAN_IMG[m[0]], hasImg: true, label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
+      hasMan: !!(p.manillas || p.gav), manNote: s.fm === "Push open" ? "· " + p.gav + " gavetas" : "· " + p.manillas + " piezas",
+      manOpts: MANILLAS.map((m) => Object.assign({ img: MAN_IMG[m[0]] || "", hasImg: !!MAN_IMG[m[0]], label: m[0] === "Push open" ? "Push open (+ " + fx(EXTRAS.pushOpen) + " por gaveta)" : m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
       hasVid: p.vid,
       vidOpts: [Object.assign({ label: "Espejo esmerilado (+ " + fx(EXTRAS.esmerilado) + ")", pick: () => this.setState((st) => ({ fe: !st.fe })) }, pill(s.fe)),
         Object.assign({ label: "Nombre o frase en el vidrio (+ " + fx(EXTRAS.nombreVidrio) + ")", pick: () => this.setState((st) => ({ fn: !st.fn })) }, pill(s.fn))],
@@ -2009,10 +2013,10 @@ class Component extends DCLogic {
           medBg: it.medida ? "#4E3486" : "#F1EBF8", medFg: it.medida ? "#FFFFFF" : "#4E3486", medTxt: it.medida ? "✓ A mi medida / personalizado" : "✎ Lo quiero a mi medida o personalizado",
           medToggle: () => this.editCart(i, (x) => Object.assign(x, { medida: !x.medida })),
           onMedNota: (e) => { const val = e.target.value; this.editCart(i, (x) => Object.assign(x, { medNota: val })); },
-          hasMan: !!p.manillas, manLabel: "Manillas · " + p.manillas + " piezas",
-          mans: MANILLAS.map((m) => { const on = (it.man || "Estándar") === m[0]; return { label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar", on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { man: m[0] })),
+          hasMan: !!(p.manillas || p.gav), manLabel: it.man === "Push open" ? "Push open · " + p.gav + " gavetas" : "Manillas · " + p.manillas + " piezas",
+          mans: MANILLAS.map((m) => { const on = (it.man || "Estándar") === m[0]; return { label: m[0] === "Push open" ? "Push open (+ " + fx(EXTRAS.pushOpen) + " por gaveta)" : m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar", on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { man: m[0] })),
             bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
-          hasExtra: this.extraTxt(it).filter((x) => x.indexOf("Manillas") !== 0).length > 0, extra: this.extraTxt(it).filter((x) => x.indexOf("Manillas") !== 0).join(" · "),
+          hasExtra: this.extraTxt(it).filter((x) => !/^(Manillas|Push open)/.test(x)).length > 0, extra: this.extraTxt(it).filter((x) => !/^(Manillas|Push open)/.test(x)).join(" · "),
           ...(() => { const r = this.precioDe(p, it); return { unitTxt: r.t == null ? (r.medida ? "A tu medida · precio por WhatsApp" : "Precio por confirmar") : it.qty + " × " + usd(r.t), sub: r.t == null ? "—" : usd(r.t * it.qty) }; })(),
           remove: () => this.editCart(i, () => null) }; }),
       tot: (() => { const T = this.cartTotals(); return { show: T.ok > 0, total: usd(T.t) + " USD", abono: usd(Math.ceil(T.t / 2)), hasPend: T.pend.length > 0, pend: "Por WhatsApp: " + T.pend.join(", ") + "." }; })(),
