@@ -685,7 +685,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             <p style="font-size:14px;font-weight:700">Correderas</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <sc-for list="{{ v.corrOpts2 }}" as="o" hint-placeholder-count="2">
-                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" width="72" height="30" loading="lazy" decoding="async" style="flex:none;width:72px;height:30px;margin-left:-6px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(23,20,26,.28))"></sc-if>{{ o.label }}</button>
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease"><sc-if value="{{ o.hasImg }}" hint-placeholder-val="{{ false }}"><img src="{{ o.img }}" alt="" width="72" height="30" loading="lazy" decoding="async" style="flex:none;width:72px;height:30px;margin-left:-6px;object-fit:contain"></sc-if>{{ o.label }}</button>
               </sc-for>
             </div>
           </div>
@@ -695,7 +695,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             <p style="font-size:14px;font-weight:700">Manillas <span style="font-weight:400;color:rgba(23,20,26,.6)">{{ v.manNote }}</span></p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
               <sc-for list="{{ v.manOpts }}" as="o" hint-placeholder-count="3">
-                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 16px 0 5px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(23,20,26,.28))">{{ o.label }}</button>
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 16px 0 5px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease"><img src="{{ o.img }}" alt="" width="40" height="40" loading="lazy" decoding="async" style="flex:none;width:40px;height:40px;object-fit:contain">{{ o.label }}</button>
               </sc-for>
             </div>
           </div>
