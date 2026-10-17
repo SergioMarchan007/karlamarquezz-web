@@ -215,7 +215,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </h2>
       </div>
       <div data-reveal="up" style="flex:0 1 420px;display:flex;flex-direction:column;gap:16px">
-        <p style="font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Todos hechos a mano y a pedido, del color que quieras. Toca uno para ver su ficha.</p>
+        <p style="font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Todos hechos a mano y a pedido, en negro, lila, blanco, rosado, fucsia y gris. Toca uno para ver su ficha.</p>
         <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}">
           <button type="button" onClick="{{ app.go }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px 0 8px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:15px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)">
             <img src="marca/icon-192.png" alt="" width="36" height="36" style="display:block;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px rgba(242,236,228,.18)">
@@ -239,19 +239,28 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </div>
     <div ref="{{ gridRef }}" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,21vw,300px),1fr));gap:clamp(30px,3vw,48px) clamp(12px,1.6vw,24px)">
       <sc-for list="{{ items }}" as="p" hint-placeholder-count="8">
-        <article data-pcard="" style="display:flex;flex-direction:column;gap:12px;min-width:0">
-          <button type="button" data-flip="" onClick="{{ p.open }}" onMouseEnter="{{ cardIn }}" onMouseLeave="{{ cardOut }}" aria-label="{{ p.aria }}" style="position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#E8DFD3;cursor:pointer">
+        <article data-pcard="" style="display:flex;flex-direction:column;gap:10px;min-width:0;padding:clamp(7px,.8vw,10px);border-radius:14px;background:#FFFFFF;border:1px solid rgba(23,20,26,.08);transition:box-shadow .35s ease,transform .35s cubic-bezier(.16,1,.3,1)" style-hover="box-shadow:0 24px 48px -28px rgba(23,20,26,.4);transform:translateY(-2px)">
+          <button type="button" data-flip="" onClick="{{ p.open }}" onMouseEnter="{{ cardIn }}" onMouseLeave="{{ cardOut }}" aria-label="{{ p.aria }}" style="position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:9px;overflow:hidden;background:#E8DFD3;cursor:pointer">
             <img data-a="" src="{{ p.src }}" alt="{{ p.name }}" loading="lazy" decoding="async" width="800" height="1000" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform 1.1s cubic-bezier(.16,1,.3,1)">
             <img data-b="" data-src="{{ p.src2 }}" alt="" aria-hidden="true" decoding="async" width="800" height="1000" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease">
             <sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}">
-              <span style="position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.88);white-space:nowrap;font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#17141A"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 8px 2px rgba(201,184,238,.9)"></span>{{ p.badge }}</span>
+              <span style="position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:rgba(255,255,255,.9);white-space:nowrap;font-family:'DM Mono',ui-monospace,monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#17141A"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 8px 2px rgba(201,184,238,.9)"></span>{{ p.badge }}</span>
             </sc-if>
           </button>
-          <div style="display:flex;flex-direction:column;gap:5px;padding:0 2px;flex:1">
-            <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(23,20,26,.58)">{{ p.cat }} · {{ p.code }}</p>
-            <button type="button" onClick="{{ p.open }}" style="font-size:clamp(15px,1.15vw,16.5px);font-weight:600;line-height:1.3;color:#17141A;text-wrap:pretty">{{ p.name }}</button>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:2px 2px 0">
+            <button type="button" onClick="{{ p.open }}" style="font-size:clamp(14.5px,1.1vw,16px);font-weight:700;line-height:1.25;color:#17141A;text-wrap:pretty">{{ p.name }}</button>
+            <p style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(23,20,26,.6)"><span>Ref. {{ p.code }} · {{ p.cat }}</span><button type="button" onClick="{{ p.open }}" style="font-family:'Karla',system-ui,sans-serif;font-size:12.5px;letter-spacing:0;text-transform:none;color:#4E3486;text-decoration:underline;text-underline-offset:3px">ver detalles</button></p>
           </div>
-          <button type="button" onClick="{{ p.add }}" style="display:flex;align-items:center;justify-content:center;gap:8px;height:42px;border-radius:999px;border:1px solid rgba(23,20,26,.85);background:{{ p.abg }};color:{{ p.afg }};font-size:14px;font-weight:700;transition:background-color .25s ease,color .25s ease">{{ p.addLabel }}</button>
+          <p style="padding:7px 10px;border-radius:8px;background:rgba(23,20,26,.04);font-size:12.5px;line-height:1.35;color:#5A5360;text-wrap:pretty">{{ p.ter }}</p>
+          <sc-if value="{{ p.hasFree }}" hint-placeholder-val="{{ false }}"><p style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;line-height:1.3;color:#2E7D57"><span style="flex:none;display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#DCF2E5;font-size:10px">✓</span>{{ p.free }}</p></sc-if>
+          <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:10px;border-radius:10px;background:#F1EBF8;border:1px solid rgba(78,52,134,.12)">
+            <div style="flex:1 1 112px;min-width:0;display:flex;flex-direction:column;gap:3px">
+              <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,20,26,.6)">{{ p.plabel }}</span>
+              <span style="font-size:{{ p.psize }};font-weight:800;line-height:1.05;letter-spacing:-.01em;color:#17141A">{{ p.price }}</span>
+              <span style="font-size:11.5px;font-weight:600;line-height:1.3;color:#2E7D57">{{ p.abono }}</span>
+            </div>
+            <button type="button" onClick="{{ p.add }}" style="flex:1 1 96px;display:flex;align-items:center;justify-content:center;gap:6px;height:42px;padding:0 12px;border-radius:999px;background:{{ p.abg }};color:{{ p.afg }};font-size:13.5px;font-weight:700;white-space:nowrap;box-shadow:0 8px 18px -10px rgba(23,20,26,.6);transition:background-color .25s ease,color .25s ease,transform .25s ease" style-hover="transform:translateY(-1px)"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>{{ p.addLabel }}</button>
+          </div>
         </article>
       </sc-for>
     </div>
@@ -449,7 +458,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <li data-reveal="up" data-delay="100" style="display:flex;flex-direction:column;gap:20px">
         <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="300" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
         <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
-        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Sepáralo con el 50 % de abono.</p>
+        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Resérvalo con el 50 % de abono.</p>
       </li>
       <li data-reveal="up" data-delay="200" style="display:flex;flex-direction:column;gap:20px">
         <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="600" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.14),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, rgba(201,184,238,.58))"></span><span style="flex:1;height:1px;background:rgba(23,20,26,.18)"></span></div>
@@ -481,23 +490,23 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     <div data-reveal="up" style="flex:2 1 420px;border-top:1px solid rgba(23,20,26,.16)">
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
         <button type="button" onClick="{{ fq.t0 }}" aria-expanded="{{ fq.e0 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cuánto tarda mi mueble?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x0 }})">+</span></button>
-        <div style="display:grid;grid-template-rows:{{ fq.r0 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Entre 10 y 15 días hábiles desde que lo separas con tu abono.</p></div></div>
+        <div style="display:grid;grid-template-rows:{{ fq.r0 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Entre 10 y 15 días hábiles desde que lo reservas con tu abono.</p></div></div>
       </div>
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
         <button type="button" onClick="{{ fq.t1 }}" aria-expanded="{{ fq.e1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cuánto es el abono?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x1 }})">+</span></button>
-        <div style="display:grid;grid-template-rows:{{ fq.r1 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">El 50 %. Con eso separas tu mueble y empezamos a fabricarlo.</p></div></div>
+        <div style="display:grid;grid-template-rows:{{ fq.r1 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">El 50 %. Con eso reservas tu mueble y empezamos a fabricarlo.</p></div></div>
       </div>
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
         <button type="button" onClick="{{ fq.t2 }}" aria-expanded="{{ fq.e2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Cómo puedo pagar?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x2 }})">+</span></button>
         <div style="display:grid;grid-template-rows:{{ fq.r2 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">En dólares en efectivo, Zelle o USDT. También en bolívares, a tasa BCV.</p></div></div>
       </div>
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
-        <button type="button" onClick="{{ fq.t3 }}" aria-expanded="{{ fq.e3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Por qué no hay precios en la página?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x3 }})">+</span></button>
-        <div style="display:grid;grid-template-rows:{{ fq.r3 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Porque cambian con la tasa del día. Escríbenos y te damos el precio de hoy.</p></div></div>
+        <button type="button" onClick="{{ fq.t3 }}" aria-expanded="{{ fq.e3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Los precios son en dólares?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x3 }})">+</span></button>
+        <div style="display:grid;grid-template-rows:{{ fq.r3 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Sí, son precios al contado en dólares. Puedes pagar en dólares en efectivo, Zelle o USDT, o en bolívares a tasa BCV.</p></div></div>
       </div>
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
         <button type="button" onClick="{{ fq.t4 }}" aria-expanded="{{ fq.e4 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿Puedo pedirlo en otro color?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x4 }})">+</span></button>
-        <div style="display:grid;grid-template-rows:{{ fq.r4 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Sí. Lo hacemos a tu gusto: blanco, lila, morado, negro y hasta con temática. Cuéntanos tu idea.</p></div></div>
+        <div style="display:grid;grid-template-rows:{{ fq.r4 }};transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 26px;max-width:54ch;font-size:17px;line-height:1.55;color:#4F4954">Sí. Trabajamos con nuestra paleta: negro, lila, blanco, rosado, fucsia y gris, y también con temática. Cuéntanos tu idea.</p></div></div>
       </div>
       <div style="border-bottom:1px solid rgba(23,20,26,.16)">
         <button type="button" onClick="{{ fq.t5 }}" aria-expanded="{{ fq.e5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(21px,2.1vw,28px);line-height:1.2">¿En qué horario atienden?<span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(23,20,26,.25);display:grid;place-items:center;font-family:'Karla',sans-serif;font-size:20px;font-weight:300;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:rotate({{ fq.x5 }})">+</span></button>
@@ -638,18 +647,21 @@ h1,h2,h3,p,ol,figure,address{margin:0}
           <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:400;font-size:clamp(28px,2.7vw,40px);line-height:1.06;letter-spacing:-.02em;text-wrap:balance">{{ v.name }}</h2>
           <p style="font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:rgba(23,20,26,.6)">Ref. {{ v.code }} · Hecho a pedido</p>
         </div>
-        <div data-vin="" style="display:flex;flex-direction:column;gap:4px;padding:16px 18px;border-radius:8px;background:#FFFFFF;border:1px solid rgba(23,20,26,.08)">
-          <p style="font-size:17px;font-weight:700">Precio del día por WhatsApp</p>
-          <p style="font-size:14px;line-height:1.45;color:#5A5360">Cambia con la tasa, así que te lo damos al momento. Lo separas con el 50 %.</p>
+        <div data-vin="" style="display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:12px;background:#F1EBF8;border:1px solid rgba(78,52,134,.14)">
+          <span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,26,.62)">{{ v.plabel }}</span>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px"><span style="font-size:{{ v.psize }};font-weight:800;line-height:1;letter-spacing:-.02em;color:#17141A">{{ v.price }}</span><span style="font-size:14px;font-weight:600;color:rgba(23,20,26,.6)">{{ v.unit }}</span></div>
+          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:6px 14px;border-radius:999px;background:#FFFFFF;font-size:14px;font-weight:700;color:#2E7D57"><span style="width:7px;height:7px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.2)"></span>{{ v.abono }}</span>
+          <sc-if value="{{ v.hasPend }}" hint-placeholder-val="{{ false }}"><p style="font-size:13px;line-height:1.4;color:#4E3486">{{ v.pend }}</p></sc-if>
+          <p style="font-size:13px;line-height:1.45;color:#5A5360">Pago al contado: dólares en efectivo, Zelle o USDT, o bolívares a tasa BCV.</p>
         </div>
-        <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
-          <p style="font-size:14px;font-weight:700">Detalles</p>
-          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px">
-            <sc-for list="{{ v.feats }}" as="f" hint-placeholder-count="3">
-              <li style="display:flex;align-items:center;gap:8px;min-height:34px;padding:6px 12px;border-radius:999px;background:rgba(23,20,26,.055);font-size:14px;line-height:1.3"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 8px 2px rgba(201,184,238,.9)"></span>{{ f.t }}</li>
+        <sc-if value="{{ v.hasFree }}" hint-placeholder-val="{{ false }}">
+          <div data-vin="" style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ v.free }}" as="f" hint-placeholder-count="2">
+              <span style="display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:6px 14px 6px 8px;border-radius:999px;background:#DCF2E5;color:#1F6B45;font-size:14px;font-weight:700"><span style="display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2FBF71;color:#FFFFFF;font-size:12px">✓</span>{{ f.t }}</span>
             </sc-for>
-          </ul>
-        </div>
+          </div>
+        </sc-if>
+        
         <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
           <p style="font-size:14px;font-weight:700">¿De qué color lo sueñas?</p>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
@@ -670,12 +682,35 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </div>
         <sc-if value="{{ v.hasCorr }}" hint-placeholder-val="{{ false }}">
           <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
-            <p style="font-size:14px;font-weight:700">Versión</p>
+            <p style="font-size:14px;font-weight:700">Correderas</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <sc-for list="{{ v.corrOpts }}" as="o" hint-placeholder-count="2">
+              <sc-for list="{{ v.corrOpts2 }}" as="o" hint-placeholder-count="2">
                 <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 18px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14.5px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
               </sc-for>
             </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ v.hasMan }}" hint-placeholder-val="{{ false }}">
+          <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+            <p style="font-size:14px;font-weight:700">Manillas <span style="font-weight:400;color:rgba(23,20,26,.6)">{{ v.manNote }}</span></p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ v.manOpts }}" as="o" hint-placeholder-count="3">
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 16px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ v.hasVid }}" hint-placeholder-val="{{ false }}">
+          <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
+            <p style="font-size:14px;font-weight:700">Detalles en el espejo <span style="font-weight:400;color:rgba(23,20,26,.6)">(opcionales)</span></p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ v.vidOpts }}" as="o" hint-placeholder-count="2">
+                <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:42px;padding:0 16px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:600;transition:background-color .25s ease,color .25s ease">{{ o.label }}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ v.nomOn }}" hint-placeholder-val="{{ false }}">
+              <input type="text" value="{{ v.nomTxt }}" onChange="{{ v.onNom }}" maxlength="24" placeholder="Escribe el nombre, ej. Valentina" aria-label="Nombre para el vidrio" style="height:46px;padding:0 16px;border-radius:12px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
+            </sc-if>
           </div>
         </sc-if>
         <div data-vin="" style="display:flex;flex-direction:column;gap:10px">
@@ -685,10 +720,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
               <span style="min-width:24px;text-align:center;font-size:16px;font-weight:700">{{ v.qty }}</span>
               <button type="button" onClick="{{ vInc }}" aria-label="Más" style="width:46px;height:100%;display:grid;place-items:center;font-size:20px;color:#17141A">+</button>
             </div>
-            <button type="button" onClick="{{ vAdd }}" style="flex:1;height:58px;padding:0 16px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:16px;font-weight:700;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 40px -16px rgba(23,20,26,.6)">Agregar a mi cotización</button>
+            <button type="button" onClick="{{ vAdd }}" style="flex:1;height:58px;padding:0 16px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:16px;font-weight:700;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 40px -16px rgba(23,20,26,.6)"><span style="display:inline-flex;align-items:center;justify-content:center;gap:10px"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>Agregar a mi cotización</span></button>
           </div>
           <a href="{{ v.wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;height:50px;border-radius:999px;border:1px solid rgba(23,20,26,.25);color:#17141A;font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Cotizar solo este por WhatsApp</a>
           <p style="font-size:13.5px;text-align:center;color:rgba(23,20,26,.64)">Arma tu lista con varios modelos y cotiza todo en un solo mensaje.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;padding:14px;border-radius:14px;background:#F1EBF8;border:1px solid rgba(78,52,134,.16)">
+            <a href="{{ v.waMedida }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 18px;border-radius:999px;background:#4E3486;color:#FFFFFF;font-size:15px;font-weight:700;box-shadow:0 12px 26px -14px rgba(78,52,134,.8);transition:transform .3s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)"><span aria-hidden="true" style="font-size:17px">✎</span>Lo quiero a mi medida o personalizado</a>
+            <p style="font-size:13px;line-height:1.45;text-align:center;color:#4F4954">Cuéntanos tu idea: lo evaluamos contigo y te damos el precio por WhatsApp.</p>
+          </div>
         </div>
         <div data-vin="" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:18px 0;border-top:1px solid rgba(23,20,26,.12);border-bottom:1px solid rgba(23,20,26,.12)">
           <p style="display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.35"><span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px rgba(23,20,26,.2),0 0 10px 3px rgba(201,184,238,.9)"></span>Hecho a mano en Barquisimeto</p>
@@ -697,8 +736,16 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </div>
         <div data-vin="">
           <div style="border-bottom:1px solid rgba(23,20,26,.12)">
+            <button type="button" onClick="{{ v.va.t2 }}" aria-expanded="{{ v.va.e2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Ficha técnica y medidas<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x2 }})">+</span></button>
+            <div style="display:grid;grid-template-rows:{{ v.va.r2 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><dl style="margin:0 0 18px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr)"><sc-for list="{{ v.specs }}" as="r" hint-placeholder-count="10"><dt style="padding:10px 12px 10px 0;border-top:1px solid rgba(23,20,26,.08);font-size:13.5px;color:rgba(23,20,26,.62)">{{ r.k }}</dt><dd style="margin:0;padding:10px 0;border-top:1px solid rgba(23,20,26,.08);font-size:14px;font-weight:600;line-height:1.4;color:{{ r.c }}">{{ r.v }}</dd></sc-for></dl></div></div>
+          </div>
+          <div style="border-bottom:1px solid rgba(23,20,26,.12)">
+            <button type="button" onClick="{{ v.va.t3 }}" aria-expanded="{{ v.va.e3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Qué incluye y qué no<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x3 }})">+</span></button>
+            <div style="display:grid;grid-template-rows:{{ v.va.r3 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><div style="display:flex;flex-direction:column;gap:14px;padding:0 0 18px"><div style="display:flex;flex-direction:column;gap:8px"><p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D57">Incluye</p><ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px"><sc-for list="{{ v.incl }}" as="f" hint-placeholder-count="3"><li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4"><span style="flex:none;color:#2E7D57;font-weight:800">✓</span>{{ f.t }}</li></sc-for></ul></div><div style="display:flex;flex-direction:column;gap:8px"><p style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8A3B4E">No incluye</p><p style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;color:#4F4954"><span style="flex:none;font-weight:800">–</span>{{ v.noInc }}</p></div></div></div></div>
+          </div>
+          <div style="border-bottom:1px solid rgba(23,20,26,.12)">
             <button type="button" onClick="{{ v.va.t0 }}" aria-expanded="{{ v.va.e0 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Cómo pedir<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x0 }})">+</span></button>
-            <div style="display:grid;grid-template-rows:{{ v.va.r0 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 18px;font-size:15px;line-height:1.55;color:#4F4954">Escríbenos por WhatsApp y elige tu modelo. Lo separas con el 50 % de abono, lo fabricamos en 10 a 15 días hábiles y te llega listo y embalado.</p></div></div>
+            <div style="display:grid;grid-template-rows:{{ v.va.r0 }};transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)"><div style="overflow:hidden"><p style="padding:0 0 18px;font-size:15px;line-height:1.55;color:#4F4954">Escríbenos por WhatsApp y elige tu modelo. Lo reservas con el 50 % de abono, lo fabricamos en 10 a 15 días hábiles y te llega listo y embalado.</p></div></div>
           </div>
           <div style="border-bottom:1px solid rgba(23,20,26,.12)">
             <button type="button" onClick="{{ v.va.t1 }}" aria-expanded="{{ v.va.e1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-size:16px;font-weight:700;color:#17141A">Formas de pago<span aria-hidden="true" style="font-size:20px;font-weight:300;transition:transform .4s cubic-bezier(.16,1,.3,1);transform:rotate({{ v.va.x1 }})">+</span></button>
@@ -797,6 +844,19 @@ h1,h2,h3,p,ol,figure,address{margin:0}
                   </sc-for>
                 </div>
               </sc-if>
+              <sc-if value="{{ it.hasMan }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <p style="font-size:12.5px;color:rgba(23,20,26,.66)">{{ it.manLabel }}</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ it.mans }}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="flex:none;white-space:nowrap;height:32px;padding:0 12px;border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:12.5px;font-weight:600">{{ o.label }}</button></sc-for></div>
+                </div>
+              </sc-if>
+              <button type="button" onClick="{{ it.medToggle }}" aria-pressed="{{ it.medPress }}" style="align-self:flex-start;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(78,52,134,.35);background:{{ it.medBg }};color:{{ it.medFg }};font-size:12.5px;font-weight:700;transition:background-color .25s ease,color .25s ease">{{ it.medTxt }}</button>
+              <sc-if value="{{ it.medOn }}" hint-placeholder-val="{{ false }}">
+                <textarea value="{{ it.medNota }}" onChange="{{ it.onMedNota }}" rows="2" placeholder="¿Qué te gustaría? Medidas, cambios, diseño…" aria-label="Detalles de tu personalización" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(78,52,134,.3);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;line-height:1.4;color:#17141A;resize:vertical;outline:none"></textarea>
+                <p style="font-size:12px;line-height:1.4;color:#4E3486">Este lo evaluamos contigo: el precio te lo damos por WhatsApp.</p>
+              </sc-if>
+              <sc-if value="{{ it.hasExtra }}" hint-placeholder-val="{{ false }}"><p style="font-size:12.5px;line-height:1.4;color:rgba(23,20,26,.7)">{{ it.extra }}</p></sc-if>
+              <p style="display:flex;justify-content:space-between;gap:10px;font-size:13px;color:rgba(23,20,26,.66)"><span>{{ it.unitTxt }}</span><b style="font-size:15px;font-weight:800;color:#17141A">{{ it.sub }}</b></p>
               <div style="align-self:flex-start;display:flex;align-items:center;height:40px;border-radius:999px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF">
                 <button type="button" onClick="{{ it.dec }}" aria-label="Menos" style="width:38px;height:100%;display:grid;place-items:center;font-size:17px;color:#17141A">−</button>
                 <span style="min-width:22px;text-align:center;font-size:15px;font-weight:700">{{ it.qty }}</span>
@@ -830,8 +890,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       </div>
       <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
         <div style="padding:14px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid rgba(23,20,26,.1);display:flex;flex-direction:column;gap:8px">
+          <sc-if value="{{ tot.show }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:12px;background:#F1EBF8;border:1px solid rgba(78,52,134,.14)">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span style="font-size:14px;font-weight:700">Total de contado</span><span style="font-size:24px;font-weight:800;letter-spacing:-.01em">{{ tot.total }}</span></div>
+              <div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:700;color:#2E7D57"><span>Para reservar hoy (50 %)</span><span>{{ tot.abono }}</span></div>
+              <sc-if value="{{ tot.hasPend }}" hint-placeholder-val="{{ false }}"><p style="font-size:12.5px;line-height:1.4;color:#4E3486">{{ tot.pend }}</p></sc-if>
+            </div>
+          </sc-if>
           <button type="button" onClick="{{ sendCart }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:999px;background:#17141A;color:#F4EFE8;font-size:16px;font-weight:700"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.25)"></span>Cotizar por WhatsApp</button>
-          <p style="font-size:13px;text-align:center;line-height:1.45;color:rgba(23,20,26,.64)">Sin precios aquí: te respondemos con el precio del día, de 8 am a 9 pm.</p>
+          <p style="font-size:13px;text-align:center;line-height:1.45;color:rgba(23,20,26,.64)">Precios de contado en USD · pagos en divisas o bolívares a tasa BCV. Respondemos de 8 am a 9 pm.</p>
         </div>
       </sc-if>
     </aside>
@@ -843,7 +910,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 /* © 2026 KM · Karla Marquez Vanity Home. Todos los derechos reservados.
    Diseño, código, textos y fotografías protegidos por derecho de autor. Prohibida su copia o reproducción sin autorización. */
 const WHATSAPP = "584245949602"; // ← Número de WhatsApp de KM: código de país + número, sin "+" ni espacios
-const MAPA = { lat: 10.062477, lng: -69.383933, zoom: 16 }; // Punto exacto del taller (Google Maps de Sergio, 15-oct-2026: maps.app.goo.gl/iMkkXCv3fQVNeXQo7).
+const MAPA = { lat: 10.062477, lng: -69.383933, zoom: 16 }; // Punto exacto del taller (Google Maps de Sergio, 15-oct-2026).
 
 const FRASES = ["Enciende tu rincón.", "La luz que te ve primero.", "Cada mañana merece un camerino.", "Hecho a mano para tu mejor reflejo."];
 const LUCES = {
@@ -938,6 +1005,100 @@ const PIEZAS = RAW.map((r) => {
     corr: CORR.indexOf(k) >= 0 && SIN_CORREDERAS.indexOf(code) < 0, front: "fotos/" + base + "_01_frontal.webp", side: "fotos/" + base + "_02_lateral.webp", s: norm(r[1] + " " + CAT[k] + " " + code + " " + r[2]) };
 });
 const iOf = (c) => PIEZAS.findIndex((p) => p.code === c);
+
+// ================== PRECIOS Y MEDIDAS · editar aquí con el equipo ==================
+// precio: USD al contado (null = "Precio por WhatsApp"). Los actuales son DE EJEMPLO.
+// manillas: cuántas piezas lleva el modelo (para calcular metal $1 / cristal $3 por pieza).
+// ancho / alto / fondo: texto, ej. "1,20 m". Vacío = "Por confirmar".
+const FICHAS = {
+  T01: { precio: 300, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora amplia LED con vitrina lateral
+  T02: { precio: 315, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED con módulo abierto
+  T03: { precio: 210, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta sin tiradores
+  T04: { precio: 240, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora de 9 gavetas con bombillos
+  T05: { precio: 285, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta sin tiradores
+  T06: { precio: 300, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora negra compacta LED
+  T07: { precio: 200, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta LED con banquito
+  T08: { precio: 390, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora blanca con repisa y gabinete
+  T09: { precio: 320, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora Hello Kitty
+  T10: { precio: 280, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora bicolor blanco y gris
+  T11: { precio: 250, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora blanca con repisa rosa
+  T12: { precio: 370, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora con espejo ancho y tope organizador
+  T13: { precio: 340, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora amplia LED con dos repisas
+  T14: { precio: 200, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta sin tiradores
+  T15: { precio: 300, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta con luz cálida
+  T16: { precio: 235, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta con bombillos
+  T17: { precio: 340, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta LED personalizada
+  T18: { precio: 220, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora de 9 gavetas con bombillos
+  T19: { precio: 315, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED de 9 gavetas con tiradores curvos
+  T20: { precio: 295, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora de 3 luces
+  T21: { precio: 220, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora lila con bombillos y banquito
+  T22: { precio: 190, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora lila ancha con bombillos
+  T23: { precio: 405, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora amplia LED con tiradores finos
+  T24: { precio: 415, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED de 9 gavetas con repisa
+  T25: { precio: 210, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora compacta LED de 6 gavetas
+  T26: { precio: 285, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED de 9 gavetas
+  T27: { precio: 410, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora con espejo horizontal
+  T28: { precio: 225, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED con banquito de gavetas
+  T29: { precio: 280, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora rosa y blanca LED
+  T30: { precio: 310, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora LED de 9 gavetas con pomos
+  T31: { precio: 340, manillas: 6, ancho: "", alto: "", fondo: "" }, // Peinadora de frentes lisos con espejo LED
+  C01: { precio: 320, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con doble espejo LED y banquito
+  C02: { precio: 295, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con espejo de cuerpo entero
+  C03: { precio: 475, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con bombillos y banquito rosa
+  C04: { precio: 360, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set blanco con bombillos
+  C05: { precio: 310, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con doble espejo de luz cálida
+  C06: { precio: 380, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con bombillos y banquito
+  C07: { precio: 335, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set negro LED con espejo de cuerpo entero
+  C08: { precio: 295, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set con doble espejo LED
+  C09: { precio: 430, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set personalizado de luz cálida
+  C10: { precio: 335, manillas: 6, ancho: "", alto: "", fondo: "" }, // Set blanco con bombillos
+  A01: { precio: 325, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset blanco con espejo
+  A02: { precio: 245, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset blanco con repisas y 4 gavetas
+  A03: { precio: 500, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset de 4 puertas con espejo central
+  A04: { precio: 290, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset negro ancho con luces
+  A05: { precio: 485, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset negro con espejo y gavetas
+  A06: { precio: 360, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset abierto con barras
+  A07: { precio: 290, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset abierto con barra y repisas
+  A08: { precio: 400, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset abierto con maletero
+  A09: { precio: 340, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset blanco con espejo LED
+  A10: { precio: 450, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset con gran puerta espejo LED
+  A11: { precio: 415, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset de puertas lisas
+  A12: { precio: 260, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset negro con espejo LED
+  A13: { precio: 285, manillas: 4, ancho: "", alto: "", fondo: "" }, // Clóset abierto fucsia
+  B01: { precio: 300, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama capitoné con marco metálico
+  B02: { precio: 220, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama fucsia geométrica
+  B03: { precio: 210, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama capitoné de base baja
+  B04: { precio: 290, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama rosa
+  B05: { precio: 350, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama negra con cabecera geométrica
+  B06: { precio: 340, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama beige acolchada
+  B07: { precio: 410, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama capitoné oscura
+  B08: { precio: 270, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama gris de paneles verticales
+  B09: { precio: 295, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama gris con mesas de noche
+  B10: { precio: 310, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama geométrica con franjas metálicas
+  B11: { precio: 295, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama fucsia de paneles verticales
+  B12: { precio: 385, manillas: 0, ancho: "", alto: "", fondo: "" }, // Cama gris capitoné
+  M01: { precio: 120, manillas: 5, ancho: "", alto: "", fondo: "" }, // Gavetero alto de 5 gavetas
+  M02: { precio: 120, manillas: 5, ancho: "", alto: "", fondo: "" }, // Gavetero alto de 5 gavetas
+  D01: { precio: 170, manillas: 2, ancho: "", alto: "", fondo: "" }, // Escritorio oscuro con biblioteca
+  D02: { precio: 170, manillas: 2, ancho: "", alto: "", fondo: "" }, // Escritorio blanco con biblioteca
+  E01: { precio: 150, manillas: 0, ancho: "", alto: "", fondo: "" }, // Espejo de cuerpo entero con bombillos
+  E02: { precio: 85, manillas: 0, ancho: "", alto: "", fondo: "" }, // Repisa blanca de curvas
+};
+// Adicionales (USD). null = "precio por confirmar".
+const EXTRAS = { telescopicas: null, esmerilado: 15, nombreVidrio: 20, manillaMetal: 1, manillaCristal: 3 };
+const FICHA_BASE = {
+  material: "MDF de alta densidad",
+  acabado: "Pintura satinada, hecha a mano",
+  personalizable: "Color a elegir. A tu medida o con cambios: lo evaluamos contigo por WhatsApp",
+  tiempo: "10 a 15 días hábiles, sujeto a demanda",
+  noIncluye: "Artículos decorativos, sillas o accesorios que aparecen en las fotos."
+};
+const MANILLAS = [["Estándar", null], ["Metal", "manillaMetal"], ["Cristal", "manillaCristal"]];
+const usd = (n) => "$" + Number(n).toLocaleString("en-US");
+const fx = (n) => n == null ? "por confirmar" : usd(n);
+PIEZAS.forEach((p) => { const f = FICHAS[p.code] || {}; p.precio = f.precio == null ? null : f.precio; p.manillas = f.manillas || 0; p.med = { ancho: f.ancho || "", alto: f.alto || "", fondo: f.fondo || "" };
+  p.vid = /espejo|led|bombillo|luz|luces|gatita/.test(p.s); p.luz = /led|bombillo|luz|luces/.test(p.s); p.banq = /banquito|banco/.test(p.s);
+  p.gratis = p.banq ? ["banquito"] : []; });
 const DEST = ["T04", "C07", "T09", "T22", "A13", "B01", "T29", "C01", "T19", "A10", "B02", "T21"].map(iOf);
 const HERO = ["T04", "C07", "T09", "T22"].map(iOf);
 const PAGE = 12;
@@ -950,17 +1111,18 @@ const vrList = (k) => { const L = VR[k].map((r) => ({ src: "fotos/vida-real/" + 
 const VR_A = vrList("A"), VR_B = vrList("B");
 const PALETA = [["Rojo", "#D8343F", 1], ["Coral", "#F27E6B", 0], ["Amarillo", "#F4D35E", 0], ["Menta", "#A8E0C5", 0], ["Verde", "#4E9F76", 1], ["Turquesa", "#3DB8C0", 0], ["Celeste", "#9CCBEF", 0], ["Azul", "#3A63B8", 1], ["Lavanda", "#B9A6E8", 0], ["Fucsia", "#E0338C", 1], ["Gris", "#A3A1A8", 0], ["Beige", "#E3D3BC", 0]];
 const palPos = PALETA.map((c, k) => { const a = -Math.PI / 2 + k * 2 * Math.PI / PALETA.length; return { x: Math.round(104 + 80 * Math.cos(a) - 17), y: Math.round(104 + 80 * Math.sin(a) - 17) }; });
-const VERS = ["Sencilla", "Con correderas"];
+const VERS = ["Sencillas", "Telescópicas"];
 const CART_KEY = "km-cotizacion";
-const loadCart = () => { try { const c = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); return Array.isArray(c) ? c.filter((i) => i && PIEZAS.some((p) => p.code === i.code)) : []; } catch (e) { return []; } };
+const loadCart = () => { try { const c = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); return Array.isArray(c) ? c.filter((i) => i && PIEZAS.some((p) => p.code === i.code)).map((i) => Object.assign(i, { ver: i.ver ? (i.ver === "Telescópicas" ? i.ver : "Sencillas") : null })) : []; } catch (e) { return []; } };
 const COLORES = [
-  { label: "Blanco", sw: "#F8F5F0" }, { label: "Lila", sw: "#C7B3EA" }, { label: "Morado", sw: "#5B3A93" }, { label: "Rosa", sw: "#EBA3C4" }, { label: "Negro", sw: "#1B181E" },
-  { label: "Otro", sw: "conic-gradient(#F8F5F0, #C7B3EA, #EBA3C4, #5B3A93, #1B181E, #F8F5F0)" }
+  { label: "Blanco", sw: "#F8F5F0" }, { label: "Lila", sw: "#C7B3EA" }, { label: "Rosado", sw: "#F2B6CF" }, { label: "Fucsia", sw: "#D6337F" }, { label: "Gris", sw: "#9C99A0" }, { label: "Negro", sw: "#1B181E" }
 ];
 const GUSTOS = [
   { label: "Blanco", bg: "#F1ECE5", night: false, sw: "#FFFFFF", code: "T13" },
   { label: "Lila", bg: "#DED3F1", night: false, sw: "#BBA4E6", code: "T21" },
-  { label: "Rosa", bg: "#F3D5E2", night: false, sw: "#E98DB7", code: "T29" },
+  { label: "Rosado", bg: "#F3D5E2", night: false, sw: "#E98DB7", code: "T29" },
+  { label: "Fucsia", bg: "#F6D0E2", night: false, sw: "#D6337F", code: "A13" },
+  { label: "Gris", bg: "#E3E1E6", night: false, sw: "#9C99A0", code: "B12" },
   { label: "Negro", bg: "#131116", night: true, sw: "#2A262F", code: "T06" },
   { label: "Con temática", bg: "#F5E6D2", night: false, sw: "#F3C98B", code: "T09" }
 ];
@@ -971,7 +1133,7 @@ const LIT = "0 0 8px 2px rgba(255,250,244,.9), 0 0 22px 6px var(--halo, rgba(201
 const EASE = "cubic-bezier(.16,1,.3,1)";
 
 class Component extends DCLogic {
-  state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencilla", cat: "all", q: "", shown: PAGE, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
+  state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", cat: "all", q: "", shown: PAGE, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
   rootRef = React.createRef(); headerRef = React.createRef(); heroRef = React.createRef(); manRef = React.createRef(); gridRef = React.createRef();
   mapRef = React.createRef(); viewerRef = React.createRef(); viewerImgRef = React.createRef(); grainRef = React.createRef(); cartRef = React.createRef(); trackRef = React.createRef(); vScrollRef = React.createRef();
 
@@ -1492,10 +1654,10 @@ class Component extends DCLogic {
     this._focus = document.activeElement;
     this._dir = 0;
     document.body.style.overflow = "hidden";
-    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" });
+    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", pal: null, share: "" });
     this.setHash(i);
   }
-  goViewer(i) { this._dir = 0; this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" }); this.setHash(i); }
+  goViewer(i) { this._dir = 0; this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", pal: null, share: "" }); this.setHash(i); }
   viewerIn() {
     const ov = this.viewerRef.current; if (!ov) return;
     const c = ov.querySelector("[data-vclose]"); if (c) try { c.focus({ preventScroll: true }); } catch (err) {}
@@ -1543,7 +1705,7 @@ class Component extends DCLogic {
     const L = L0.indexOf(cur) >= 0 ? L0 : PIEZAS.map((_, i) => i);
     const i = L[(L.indexOf(cur) + d + L.length) % L.length];
     this._dir = d;
-    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencilla", pal: null, share: "" });
+    this.setState({ viewer: i, gi: 0, va: -1, fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", pal: null, share: "" });
     this.setHash(i);
   }
   vDown = (e) => { this._sx = e.clientX; this._sy = e.clientY; };
@@ -1568,13 +1730,14 @@ class Component extends DCLogic {
     this.setState({ toast: m, toastCart: withCart !== false });
     this._toT = setTimeout(() => { if (!this._unm) this.setState({ toast: "" }); }, 2600);
   }
-  addToCart(code, qty, ver, color, custom) {
+  addToCart(code, qty, ver, color, custom, x) {
+    x = x || {}; const xk = JSON.stringify([x.man || null, !!x.esm, !!x.nom, x.nomTxt || ""]);
     custom = color === "Otro" ? custom || null : null;
     const p = PIEZAS[iOf(code)]; if (!p) return;
     if (!p.corr) ver = null;
     this.setState((s) => {
-      const c = s.cart.slice(), i = c.findIndex((x) => x.code === code && x.ver === ver && x.color === color && (x.custom ? x.custom.n : "") === (custom ? custom.n : ""));
-      if (i >= 0) c[i] = Object.assign({}, c[i], { qty: Math.min(20, c[i].qty + qty) }); else c.push({ code, qty, ver, color, custom });
+      const c = s.cart.slice(), i = c.findIndex((x) => x.code === code && x.ver === ver && x.color === color && (x.custom ? x.custom.n : "") === (custom ? custom.n : "") && JSON.stringify([x.man || null, !!x.esm, !!x.nom, x.nomTxt || ""]) === xk);
+      if (i >= 0) c[i] = Object.assign({}, c[i], { qty: Math.min(20, c[i].qty + qty) }); else c.push({ code, qty, ver, color, custom, man: x.man || null, esm: !!x.esm, nom: !!x.nom, nomTxt: x.nomTxt || "" });
       return { cart: c };
     });
   }
@@ -1594,15 +1757,71 @@ class Component extends DCLogic {
     };
   }
   colorText(color, custom) { return color === "Otro" ? (custom ? custom.n.toLowerCase() : "otro (te cuento)") : color.toLowerCase(); }
+  precioDe(p, o) {
+    o = o || {}; const pend = [];
+    if (p.precio == null || o.medida) return { t: null, pend, medida: !!o.medida };
+    let t = p.precio;
+    if (o.ver === "Telescópicas") { if (EXTRAS.telescopicas == null) pend.push("correderas telescópicas"); else t += EXTRAS.telescopicas; }
+    if (o.man && o.man !== "Estándar") { const u = EXTRAS[o.man === "Metal" ? "manillaMetal" : "manillaCristal"]; if (u == null || !p.manillas) pend.push("manillas"); else t += u * p.manillas; }
+    if (o.esm) { if (EXTRAS.esmerilado == null) pend.push("espejo esmerilado"); else t += EXTRAS.esmerilado; }
+    if (o.nom) { if (EXTRAS.nombreVidrio == null) pend.push("nombre en el vidrio"); else t += EXTRAS.nombreVidrio; }
+    return { t, pend };
+  }
+  extraTxt(it) {
+    const o = [];
+    if (it.man && it.man !== "Estándar") o.push("Manillas de " + it.man.toLowerCase());
+    if (it.esm) o.push("Espejo esmerilado");
+    if (it.nom) o.push("Nombre en el vidrio" + (it.nomTxt ? ": «" + it.nomTxt + "»" : ""));
+    return o;
+  }
+  cartTotals() {
+    let t = 0, ok = 0; const pend = [];
+    this.state.cart.forEach((it) => { const p = PIEZAS[iOf(it.code)], r = this.precioDe(p, it); if (r.t == null) pend.push(p.code + (r.medida ? " a tu medida" : "")); else { t += r.t * it.qty; ok++; } r.pend.forEach((x) => { if (pend.indexOf(x) < 0) pend.push(x); }); });
+    return { t, ok, pend };
+  }
+  cardPrice(p) {
+    const r = this.precioDe(p, {}), med = p.med.ancho && p.med.fondo ? p.med.ancho + " × " + p.med.fondo : p.med.ancho;
+    return { hasFree: p.gratis.length > 0, free: p.gratis.length ? "Banquito incluido gratis" : "",
+      ter: [med].concat(p.feats.filter((f) => !/banquito|banco/i.test(f)).slice(0, 2)).filter(Boolean).join(" · "), plabel: "Precio de contado",
+      price: r.t == null ? "Por WhatsApp" : usd(r.t), psize: r.t == null ? "16px" : "clamp(20px,1.7vw,24px)",
+      abono: r.t == null ? "Resérvalo con el 50 %" : "✓ Resérvalo con " + usd(Math.ceil(r.t / 2)) + " (50 %)" };
+  }
+  vExtra(p) {
+    const s = this.state, o = { ver: p.corr ? s.fv : null, man: p.manillas ? s.fm : null, esm: p.vid && s.fe, nom: p.vid && s.fn }, r = this.precioDe(p, o);
+    const pill = (on) => ({ on: on ? "true" : "false", bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" });
+    const q = (x) => x ? x : "Por confirmar";
+    const specs = [["Marca", "KM Vanity Home"], ["Modelo", p.name], ["Referencia", p.code], ["Tipo", p.cat], ["Ancho total", q(p.med.ancho)], ["Altura total", q(p.med.alto)], ["Profundidad", q(p.med.fondo)],
+      ["Material", FICHA_BASE.material], ["Acabado", FICHA_BASE.acabado], ["Personalizable", FICHA_BASE.personalizable], ["Fabricación", FICHA_BASE.tiempo]]
+      .map((x) => ({ k: x[0], v: x[1], c: x[1] === "Por confirmar" ? "rgba(23,20,26,.45)" : "#17141A" }));
+    const incl = ["Mueble completo, armado y embalado"].concat(p.feats, p.luz ? ["Instalación eléctrica lista para enchufar"] : []).map((t) => ({ t }));
+    return {
+      plabel: "Precio de contado", price: r.t == null ? "Por WhatsApp" : usd(r.t), psize: r.t == null ? "26px" : "clamp(40px,4vw,54px)", unit: r.t == null ? "" : "USD" + (s.fq > 1 ? " c/u" : ""),
+      abono: r.t == null ? "Resérvalo con el 50 % de abono" : "Resérvalo hoy con " + usd(Math.ceil(r.t * s.fq / 2)) + " (50 %)" + (s.fq > 1 ? " · " + s.fq + " uds." : ""),
+      hasPend: r.pend.length > 0, pend: "Por confirmar: " + r.pend.join(", ") + ". Te lo decimos por WhatsApp.",
+      corrOpts2: VERS.map((l) => Object.assign({ label: l === "Telescópicas" ? "Telescópicas (+ " + fx(EXTRAS.telescopicas) + ")" : "Sencillas (incluidas)", pick: () => this.setState({ fv: l }) }, pill(s.fv === l))),
+      hasMan: !!p.manillas, manNote: "· " + p.manillas + " piezas",
+      manOpts: MANILLAS.map((m) => Object.assign({ label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
+      hasVid: p.vid,
+      vidOpts: [Object.assign({ label: "Espejo esmerilado (+ " + fx(EXTRAS.esmerilado) + ")", pick: () => this.setState((st) => ({ fe: !st.fe })) }, pill(s.fe)),
+        Object.assign({ label: "Nombre en el vidrio (+ " + fx(EXTRAS.nombreVidrio) + ")", pick: () => this.setState((st) => ({ fn: !st.fn })) }, pill(s.fn))],
+      nomOn: p.vid && s.fn, nomTxt: s.fnt, onNom: (e) => this.setState({ fnt: e.target.value }),
+      specs, incl, noInc: FICHA_BASE.noIncluye,
+      hasFree: p.gratis.length > 0, free: p.banq ? [{ t: "Banquito incluido · gratis" }] : [],
+      waMedida: wa("¡Hola, KM! Me gusta " + (p.fem ? "la " : "el ") + p.name + " (Ref. " + p.code + "), pero lo quiero a mi medida / con cambios. ¿Podemos conversarlo?")
+    };
+  }
   cartMessage() {
     const s = this.state, nm = s.nombre.trim(), cd = s.ciudad.trim();
     const lines = s.cart.map((it, k) => {
       const p = PIEZAS[iOf(it.code)], o = ["Cantidad: " + it.qty];
       if (it.ver) o.push("Versión: " + it.ver.toLowerCase());
       if (it.color) o.push("Color: " + this.colorText(it.color, it.custom));
-      return (k + 1) + ". " + p.name + " (Ref. " + p.code + ")\n   " + o.join(" · ");
+      this.extraTxt(it).forEach((x) => o.push(x));
+      if (it.medida) o.push("A mi medida / personalizado" + (it.medNota && it.medNota.trim() ? ": " + it.medNota.trim() : ""));
+      const r = this.precioDe(p, it);
+      return (k + 1) + ". " + p.name + " (Ref. " + p.code + ")\n   " + o.join(" · ") + "\n   " + (r.t == null ? (r.medida ? "Precio: lo conversamos (a mi medida)" : "Precio: por confirmar") : usd(r.t) + " c/u · Subtotal " + usd(r.t * it.qty));
     });
-    return "¡Hola, KM! " + (nm ? "Soy " + nm + (cd ? ", de " + cd : "") + ". " : cd ? "Te escribo desde " + cd + ". " : "") + "Quiero cotizar " + (s.cart.length === 1 ? "este modelo" : "estos modelos") + ":\n\n" + lines.join("\n") + "\n\n¿Me pasan el precio de hoy? ¡Gracias!";
+    return "¡Hola, KM! " + (nm ? "Soy " + nm + (cd ? ", de " + cd : "") + ". " : cd ? "Te escribo desde " + cd + ". " : "") + "Quiero cotizar " + (s.cart.length === 1 ? "este modelo" : "estos modelos") + ":\n\n" + lines.join("\n") + (() => { const T = this.cartTotals(); return T.ok ? "\n\nTotal de contado: " + usd(T.t) + " USD\nPara reservar (50 %): " + usd(Math.ceil(T.t / 2)) + (T.pend.length ? "\nPor confirmar: " + T.pend.join(", ") : "") : ""; })() + "\n\n¿Me confirman para reservarlo? ¡Gracias!";
   }
   sendCart = () => {
     const miss = !this.state.nombre.trim() ? "nombre" : !this.state.ciudad.trim() ? "ciudad" : "";
@@ -1652,7 +1871,8 @@ class Component extends DCLogic {
     if (withColor && this.state.fq > 1) m += " Cantidad: " + this.state.fq + ".";
     if (withColor && p.corr) m += " Versión: " + this.state.fv.toLowerCase() + ".";
     if (c) m += c === "Otro" && !this.state.vCustom ? " Me gustaría en otro color, te cuento." : " Color: " + this.colorText(c, this.state.vCustom) + ".";
-    return wa(m + " ¿Me pasan el precio de hoy?");
+    const r = this.precioDe(p, withColor ? { ver: p.corr ? this.state.fv : null, man: p.manillas ? this.state.fm : null, esm: p.vid && this.state.fe, nom: p.vid && this.state.fn } : {});
+    return wa(m + (r.t == null ? " ¿Me pasan el precio?" : " Precio de contado: " + usd(r.t) + " USD.") + " ¿Cómo lo reservo?");
   }
 
   renderVals() {
@@ -1714,7 +1934,7 @@ class Component extends DCLogic {
         panelH: s.mobile ? "94svh" : "min(86vh,840px)", radius: s.mobile ? "20px 20px 0 0" : "16px",
         barPad: s.mobile ? "18px 14px 10px" : "12px 16px 12px 24px",
         galPos: s.mobile ? "relative" : "sticky", galPad: s.mobile ? "12px 12px 0" : "24px",
-        galMax: s.tablet ? "min(100%, calc(50svh * .8))" : s.mobile ? "100%" : "calc((min(86vh,840px) - 118px) * .8)", galFlex: s.mobile ? "1 1 100%" : "0 0 calc((min(86vh,840px) - 118px) * .8 + 48px)", infoPad: s.mobile ? "20px 16px 28px" : "26px 30px 36px 6px", mobile: s.mobile, back: s.mobile ? "Tienda" : "Volver a la tienda", va: acc("va", 2)
+        galMax: s.tablet ? "min(100%, calc(50svh * .8))" : s.mobile ? "100%" : "calc((min(86vh,840px) - 118px) * .8)", galFlex: s.mobile ? "1 1 100%" : "0 0 calc((min(86vh,840px) - 118px) * .8 + 48px)", infoPad: s.mobile ? "20px 16px 28px" : "26px 30px 36px 6px", mobile: s.mobile, back: s.mobile ? "Tienda" : "Volver a la tienda", va: acc("va", 4), ...this.vExtra(p)
       };
     }
 
@@ -1748,10 +1968,10 @@ class Component extends DCLogic {
       cats: catList.map((c) => { const on = s.cat === c.key; return { name: c.name, count: String(c.count), pressed: on ? "true" : "false", select: () => this.selectCat(c.key),
         bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.2)" }; }),
       countLabel: n + (n === 1 ? " modelo" : " modelos") + (s.q.trim() ? " para «" + s.q.trim() + "»" : s.cat === "all" ? " · destacados primero" : ""),
-      items: L.slice(0, shown).map((i) => { const p = PIEZAS[i]; return { code: p.code, name: p.name, cat: p.cat, src: p.front, src2: p.side, badge: p.badge, hasBadge: !!p.badge,
+      items: L.slice(0, shown).map((i) => { const p = PIEZAS[i]; return { code: p.code, name: p.name, cat: p.cat, src: p.front, src2: p.side, badge: p.badge, hasBadge: !!p.badge, ...this.cardPrice(p),
         wa: this.waPieza(p, false), aria: "Ver la ficha de " + p.name, open: (e) => this.openViewer(i, e),
-        addLabel: inC[p.code] ? "✓ En tu lista · " + inC[p.code] : "+ Agregar", abg: inC[p.code] ? "#17141A" : "rgba(23,20,26,0)", afg: inC[p.code] ? "#F4EFE8" : "#17141A",
-        add: () => { this.addToCart(p.code, 1, p.corr ? "Sencilla" : null, null); this.showToast("Agregado a tu cotización"); } }; }),
+        addLabel: inC[p.code] ? "En tu lista · " + inC[p.code] : "Agregar", abg: inC[p.code] ? "#C9B8EE" : "#17141A", afg: inC[p.code] ? "#17141A" : "#F4EFE8",
+        add: () => { this.addToCart(p.code, 1, p.corr ? "Sencillas" : null, null, null, { man: p.manillas ? "Estándar" : null }); this.showToast("Agregado a tu cotización"); } }; }),
       cardIn: this.cardIn, cardOut: this.cardOut,
       empty: n === 0, hasMore: n > shown, seenLabel: "Viendo " + shown + " de " + n, seenPct: (n ? Math.round(shown / n * 100) : 0) + "%",
       more: () => this.setState((st) => ({ shown: st.shown + PAGE })),
@@ -1770,7 +1990,7 @@ class Component extends DCLogic {
       garland: Array.from({ length: 11 }, (_, i) => ({ h: String(Math.round(8 + 30 * Math.sin(Math.PI * i / 10))), d: String(i * 80) })),
       viewerOpen: s.viewer != null, v,
       vInc: () => this.setState((st) => ({ fq: Math.min(20, st.fq + 1) })), vDec: () => this.setState((st) => ({ fq: Math.max(1, st.fq - 1) })),
-      vAdd: () => { const p = PIEZAS[this.state.viewer]; if (!p) return; this.addToCart(p.code, this.state.fq, this.state.fv, this.state.color, this.state.vCustom); this.setState({ pal: null }); this.openCart(); },
+      vAdd: () => { const p = PIEZAS[this.state.viewer]; if (!p) return; this.addToCart(p.code, this.state.fq, this.state.fv, this.state.color, this.state.vCustom, { man: p.manillas ? this.state.fm : null, esm: p.vid && this.state.fe, nom: p.vid && this.state.fn, nomTxt: p.vid && this.state.fn ? this.state.fnt.trim() : "" }); this.setState({ pal: null }); this.openCart(); },
       cartRef: this.cartRef, openCart: this.openCart, closeCart: this.closeCart, cartOpen: s.cartOpen,
       hasCart: s.cart.length > 0, cartEmpty: s.cart.length === 0, cartCount: String(cartCount),
       cartCountLabel: cartCount + (cartCount === 1 ? " mueble" : " muebles"), cartAria: "Abrir mi cotización (" + cartCount + ")",
@@ -1781,10 +2001,20 @@ class Component extends DCLogic {
           cols: COLORES.map((c) => { const on = it.color === c.label, oc = c.label === "Otro"; return { label: c.label, sw: oc && it.custom ? it.custom.hex : c.sw, on: on ? "true" : "false", ring: on ? "0 0 0 2px #F4EFE8, 0 0 0 3.5px #17141A" : "inset 0 0 0 1px rgba(23,20,26,.22)",
             pick: () => { if (oc) { this.setState((st) => ({ pal: st.pal === i ? null : i })); this.editCart(i, (x) => Object.assign(x, { color: "Otro" })); } else { this.setState({ pal: null }); this.editCart(i, (x) => Object.assign(x, { color: x.color === c.label ? null : c.label, custom: null })); } } }; }),
           palOpen: s.pal === i, ...this.palFor(it.custom, (cc) => { this.editCart(i, (x) => Object.assign(x, { color: "Otro", custom: cc })); this.setState({ pal: null }); }),
-          vers: VERS.map((label) => { const on = it.ver === label; return { label, on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { ver: label })), bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
+          vers: VERS.map((label) => { const on = it.ver === label; return { label: label === "Telescópicas" ? "Telescópicas (+ " + fx(EXTRAS.telescopicas) + ")" : "Correderas sencillas", on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { ver: label })), bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
           inc: () => this.editCart(i, (x) => Object.assign(x, { qty: Math.min(20, x.qty + 1) })),
           dec: () => this.editCart(i, (x) => x.qty > 1 ? Object.assign(x, { qty: x.qty - 1 }) : null),
+          medOn: !!it.medida, medNota: it.medNota || "", medPress: it.medida ? "true" : "false",
+          medBg: it.medida ? "#4E3486" : "#F1EBF8", medFg: it.medida ? "#FFFFFF" : "#4E3486", medTxt: it.medida ? "✓ A mi medida / personalizado" : "✎ Lo quiero a mi medida o personalizado",
+          medToggle: () => this.editCart(i, (x) => Object.assign(x, { medida: !x.medida })),
+          onMedNota: (e) => { const val = e.target.value; this.editCart(i, (x) => Object.assign(x, { medNota: val })); },
+          hasMan: !!p.manillas, manLabel: "Manillas · " + p.manillas + " piezas",
+          mans: MANILLAS.map((m) => { const on = (it.man || "Estándar") === m[0]; return { label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar", on: on ? "true" : "false", pick: () => this.editCart(i, (x) => Object.assign(x, { man: m[0] })),
+            bg: on ? "#17141A" : "rgba(23,20,26,0)", fg: on ? "#F4EFE8" : "#17141A", bd: on ? "#17141A" : "rgba(23,20,26,.18)" }; }),
+          hasExtra: this.extraTxt(it).filter((x) => x.indexOf("Manillas") !== 0).length > 0, extra: this.extraTxt(it).filter((x) => x.indexOf("Manillas") !== 0).join(" · "),
+          ...(() => { const r = this.precioDe(p, it); return { unitTxt: r.t == null ? (r.medida ? "A tu medida · precio por WhatsApp" : "Precio por confirmar") : it.qty + " × " + usd(r.t), sub: r.t == null ? "—" : usd(r.t * it.qty) }; })(),
           remove: () => this.editCart(i, () => null) }; }),
+      tot: (() => { const T = this.cartTotals(); return { show: T.ok > 0, total: usd(T.t) + " USD", abono: usd(Math.ceil(T.t / 2)), hasPend: T.pend.length > 0, pend: "Por WhatsApp: " + T.pend.join(", ") + "." }; })(),
       nombre: s.nombre, on_nombre: (e) => this.setState({ nombre: e.target.value, nameErr: false }),
       ciudad: s.ciudad, on_ciudad: (e) => this.setState({ ciudad: e.target.value, nameErr: false }),
       nameErr: !!s.nameErr, errMsg: s.nameErr === "ciudad" ? "Escribe tu ciudad para enviar la cotización." : "Escribe tu nombre y apellido para enviar la cotización.",
