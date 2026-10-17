@@ -709,7 +709,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
               </sc-for>
             </div>
             <sc-if value="{{ v.nomOn }}" hint-placeholder-val="{{ false }}">
-              <input type="text" value="{{ v.nomTxt }}" onChange="{{ v.onNom }}" maxlength="24" placeholder="Escribe el nombre, ej. Valentina" aria-label="Nombre para el vidrio" style="height:46px;padding:0 16px;border-radius:12px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
+              <input type="text" value="{{ v.nomTxt }}" onChange="{{ v.onNom }}" maxlength="40" placeholder="Escribe el nombre o la frase, ej. Valentina" aria-label="Nombre o frase para el vidrio" style="height:46px;padding:0 16px;border-radius:12px;border:1px solid rgba(23,20,26,.2);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:#17141A;outline:none">
             </sc-if>
           </div>
         </sc-if>
@@ -1085,7 +1085,7 @@ const FICHAS = {
   E02: { precio: 85, manillas: 0, ancho: "", alto: "", fondo: "" }, // Repisa blanca de curvas
 };
 // Adicionales (USD). null = "precio por confirmar".
-const EXTRAS = { telescopicas: null, esmerilado: 15, nombreVidrio: 20, manillaMetal: 1, manillaCristal: 3 };
+const EXTRAS = { telescopicas: null, esmerilado: 15, nombreVidrio: null, manillaMetal: 1, manillaCristal: 3 };
 const FICHA_BASE = {
   material: "MDF de alta densidad",
   acabado: "Pintura satinada, hecha a mano",
@@ -1765,14 +1765,14 @@ class Component extends DCLogic {
     if (o.ver === "Telescópicas") { if (EXTRAS.telescopicas == null) pend.push("correderas telescópicas"); else t += EXTRAS.telescopicas; }
     if (o.man && o.man !== "Estándar") { const u = EXTRAS[o.man === "Metal" ? "manillaMetal" : "manillaCristal"]; if (u == null || !p.manillas) pend.push("manillas"); else t += u * p.manillas; }
     if (o.esm) { if (EXTRAS.esmerilado == null) pend.push("espejo esmerilado"); else t += EXTRAS.esmerilado; }
-    if (o.nom) { if (EXTRAS.nombreVidrio == null) pend.push("nombre en el vidrio"); else t += EXTRAS.nombreVidrio; }
+    if (o.nom) { if (EXTRAS.nombreVidrio == null) pend.push("vidrio personalizado"); else t += EXTRAS.nombreVidrio; }
     return { t, pend };
   }
   extraTxt(it) {
     const o = [];
     if (it.man && it.man !== "Estándar") o.push("Manillas de " + it.man.toLowerCase());
     if (it.esm) o.push("Espejo esmerilado");
-    if (it.nom) o.push("Nombre en el vidrio" + (it.nomTxt ? ": «" + it.nomTxt + "»" : ""));
+    if (it.nom) o.push("Vidrio personalizado" + (it.nomTxt ? ": «" + it.nomTxt + "»" : ""));
     return o;
   }
   cartTotals() {
@@ -1804,7 +1804,7 @@ class Component extends DCLogic {
       manOpts: MANILLAS.map((m) => Object.assign({ img: MAN_IMG[m[0]], hasImg: true, label: m[1] ? m[0] + " (+ " + fx(EXTRAS[m[1]]) + " c/u)" : "Estándar (incluidas)", pick: () => this.setState({ fm: m[0] }) }, pill(s.fm === m[0]))),
       hasVid: p.vid,
       vidOpts: [Object.assign({ label: "Espejo esmerilado (+ " + fx(EXTRAS.esmerilado) + ")", pick: () => this.setState((st) => ({ fe: !st.fe })) }, pill(s.fe)),
-        Object.assign({ label: "Nombre en el vidrio (+ " + fx(EXTRAS.nombreVidrio) + ")", pick: () => this.setState((st) => ({ fn: !st.fn })) }, pill(s.fn))],
+        Object.assign({ label: "Nombre o frase en el vidrio (+ " + fx(EXTRAS.nombreVidrio) + ")", pick: () => this.setState((st) => ({ fn: !st.fn })) }, pill(s.fn))],
       nomOn: p.vid && s.fn, nomTxt: s.fnt, onNom: (e) => this.setState({ fnt: e.target.value }),
       specs, incl, noInc: FICHA_BASE.noIncluye,
       hasFree: p.gratis.length > 0, free: p.banq ? [{ t: "Banquito incluido · gratis" }] : [],
