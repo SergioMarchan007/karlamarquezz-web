@@ -1094,6 +1094,7 @@ const FICHA_BASE = {
   noIncluye: "Artículos decorativos, sillas o accesorios que aparecen en las fotos."
 };
 const MAN_IMG = { "Estándar": "adicionales/manilla-estandar.webp", "Metal": "adicionales/manilla-metal.webp", "Cristal": "adicionales/manilla-cristal.webp" };
+const BANQ = ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T10", "T12", "T13", "T14", "T15", "T16", "T18", "T19", "T20", "T21", "T22", "T23", "T24", "T25", "T26", "T27", "T28", "T29", "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C09", "C10"]; // pieces whose photo shows the stool: it goes free
 const GAV_MAN = { T01: [12, 12], T02: [12, 12], T03: [4, 0], T04: [9, 9], T05: [4, 0], T06: [4, 4], T07: [5, 0], T08: [1, 2], T09: [4, 4], T10: [4, 4], T11: [3, 3], T12: [9, 9], T13: [9, 9], T14: [5, 0], T15: [4, 4], T16: [5, 5], T17: [5, 0], T18: [9, 9], T19: [9, 9], T20: [5, 5], T21: [5, 5], T22: [9, 9], T23: [9, 9], T24: [9, 9], T25: [6, 6], T26: [9, 9], T27: [9, 9], T28: [6, 8], T29: [9, 9], T30: [9, 9], T31: [12, 0], C01: [6, 8], C02: [6, 8], C03: [6, 8], C04: [6, 8], C05: [6, 8], C06: [6, 8], C07: [6, 8], C08: [6, 6], C09: [6, 0], C10: [6, 8], A01: [4, 7], A02: [4, 7], A03: [3, 7], A04: [3, 7], A05: [3, 7], A06: [3, 3], A07: [0, 0], A08: [3, 3], A09: [4, 5], A10: [0, 1], A11: [3, 7], A12: [4, 6], A13: [3, 3], B01: [0, 0], B02: [0, 0], B03: [0, 0], B04: [0, 0], B05: [0, 0], B06: [0, 0], B07: [0, 0], B08: [0, 0], B09: [4, 4], B10: [0, 0], B11: [0, 0], B12: [0, 0], M01: [5, 5], M02: [5, 5], D01: [2, 2], D02: [6, 0], E01: [0, 0], E02: [0, 0] }; // [drawers, handles] counted from the photos
 const MANILLAS = [["Estándar", null], ["Metal", "manillaMetal"], ["Cristal", "manillaCristal"], ["Push open", "pushOpen"]];
 const usd = (n) => "$" + Number(n).toLocaleString("en-US");
@@ -1101,6 +1102,7 @@ const fx = (n) => n == null ? "por confirmar" : usd(n);
 PIEZAS.forEach((p) => { const f = FICHAS[p.code] || {}; p.precio = f.precio == null ? null : f.precio; p.manillas = f.manillas || 0; p.med = { ancho: f.ancho || "", alto: f.alto || "", fondo: f.fondo || "" };
   p.vid = /espejo|led|bombillo|luz|luces|gatita/.test(p.s); p.luz = /led|bombillo|luz|luces/.test(p.s); p.banq = /banquito|banco/.test(p.s);
   p.gratis = p.banq ? ["banquito"] : [];
+  if (BANQ.includes(p.code)) { p.banq = true; p.gratis = ["banquito"]; }
   if (GAV_MAN[p.code]) { p.gav = GAV_MAN[p.code][0]; p.manillas = GAV_MAN[p.code][1]; } else p.gav = 0; });
 const DEST = ["T04", "C07", "T09", "T22", "A13", "B01", "T29", "C01", "T19", "A10", "B02", "T21"].map(iOf);
 const HERO = ["T04", "C07", "T09", "T22"].map(iOf);
