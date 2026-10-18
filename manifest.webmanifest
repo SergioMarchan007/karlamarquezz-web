@@ -1,9 +1,9 @@
 {
   "name": "KM · Karla Marquez Vanity Home",
-  "short_name": "KM Vanity",
+  "short_name": "KM Catálogo",
   "description": "Peinadoras con luces, vanitys y clósets hechos a mano en Barquisimeto.",
   "lang": "es",
-  "start_url": "./index.html",
+  "start_url": "./catalogo/",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

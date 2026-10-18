@@ -1,6 +1,6 @@
 // KM Vanity Home · service worker: guarda la web y las fotos para abrirla rápido y sin internet.
-const V = "km-v1";
-const CORE = ["./", "./index.html", "./manifest.webmanifest", "./marca/horizontal-blanco.svg", "./marca/horizontal-tinta.svg", "./marca/km-blanco.svg", "./marca/km-tinta.svg", "./marca/icon-192.png"];
+const V = "km-v3";
+const CORE = ["./", "./index.html", "./catalogo/", "./manifest.webmanifest", "./marca/horizontal-blanco.svg", "./marca/horizontal-tinta.svg", "./marca/km-blanco.svg", "./marca/km-tinta.svg", "./marca/icon-192.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(CORE).catch(() => {})).then(() => self.skipWaiting())); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", (e) => {

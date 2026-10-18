@@ -10,7 +10,8 @@
 
 ## Páginas
 - [Inicio y tienda](https://karlamarquezz.com/)
-- [Catálogo con precios](https://karlamarquezz.com/catalogo.html)
+- [Catálogo para elegir y cotizar](https://karlamarquezz.com/catalogo/)
+- [Lista de precios](https://karlamarquezz.com/lista-de-precios.html)
 
 ## Catálogo y precios (USD)
 - T02 · Peinadora LED con módulo abierto (Peinadoras): $335 (en bolívares $420) · correderas telescópicas incluidas
