@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# AI assistants are welcome to read the catalog
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://karlamarquezz.com/sitemap.xml
