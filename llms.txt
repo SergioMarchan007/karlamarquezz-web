@@ -13,10 +13,7 @@
 - [Catálogo con precios](https://karlamarquezz.com/catalogo.html)
 
 ## Catálogo y precios (USD)
-- T01 · Peinadora amplia LED con vitrina lateral (Peinadoras): $335 (en bolívares $420) · correderas telescópicas incluidas
 - T02 · Peinadora LED con módulo abierto (Peinadoras): $335 (en bolívares $420) · correderas telescópicas incluidas
-- T03 · Peinadora compacta sin tiradores (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas · incluye push open
-- T04 · Peinadora de 9 gavetas con bombillos (Peinadoras): Sencilla $150 (en bolívares $190) · con telescópicas $215 (en bolívares $270)
 - T05 · Peinadora compacta sin tiradores (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas · incluye push open
 - T06 · Peinadora negra compacta LED (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas
 - T07 · Peinadora compacta LED con banquito (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas
@@ -25,7 +22,6 @@
 - T10 · Peinadora bicolor blanco y gris (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas
 - T11 · Peinadora blanca con repisa rosa (Peinadoras): Se cotiza por WhatsApp
 - T12 · Peinadora con espejo ancho y tope organizador (Peinadoras): Sencilla $265 (en bolívares $335) · con telescópicas $330 (en bolívares $415)
-- T13 · Peinadora amplia LED con dos repisas (Peinadoras): Sencilla $200 (en bolívares $250) · con telescópicas $265 (en bolívares $335) · medidas 1.25 × 1.59
 - T14 · Peinadora compacta sin tiradores (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas · incluye push open
 - T15 · Peinadora compacta con luz cálida (Peinadoras): $210 (en bolívares $265) · correderas telescópicas incluidas
 - T16 · Peinadora compacta con bombillos (Peinadoras): Sencilla $125 (en bolívares $160) · con telescópicas $165 (en bolívares $210) · medidas 0.90 × 1.60
@@ -39,7 +35,6 @@
 - T24 · Peinadora LED de 9 gavetas con repisa (Peinadoras): Sencilla $265 (en bolívares $335) · con telescópicas $330 (en bolívares $415)
 - T25 · Peinadora compacta LED de 6 gavetas (Peinadoras): $200 (en bolívares $250) · correderas telescópicas incluidas
 - T26 · Peinadora LED de 9 gavetas (Peinadoras): Sencilla $200 (en bolívares $250) · con telescópicas $265 (en bolívares $335)
-- T27 · Peinadora con espejo horizontal (Peinadoras): Sencilla $265 (en bolívares $335) · con telescópicas $330 (en bolívares $415) · medidas 1.25 × 1.59
 - T28 · Peinadora LED con banquito de gavetas (Peinadoras): Se cotiza por WhatsApp
 - T29 · Peinadora rosa y blanca LED (Peinadoras): Sencilla $200 (en bolívares $250) · con telescópicas $265 (en bolívares $335)
 - T30 · Peinadora LED de 9 gavetas con pomos (Peinadoras): Sencilla $200 (en bolívares $250) · con telescópicas $265 (en bolívares $335)
@@ -57,7 +52,6 @@
 - A01 · Clóset blanco con espejo (Clósets): Sencilla $280 (en bolívares $350) · con telescópicas $310 (en bolívares $390) · medidas 1.80 × 1.70 × 0.45
 - A02 · Clóset blanco con repisas y 4 gavetas (Clósets): Sencilla $260 (en bolívares $325) · con telescópicas $290 (en bolívares $365) · medidas 1.80 × 1.70 × 0.45
 - A03 · Clóset de 4 puertas con espejo central (Clósets): $380 (en bolívares $475) · correderas telescópicas incluidas
-- A04 · Clóset negro ancho con luces (Clósets): $380 (en bolívares $475) · correderas telescópicas incluidas · medidas 1.90 × 2 × 0.45
 - A05 · Clóset negro con espejo y gavetas (Clósets): $380 (en bolívares $475) · correderas telescópicas incluidas
 - A06 · Clóset abierto con barras (Clósets): Sencilla $180 (en bolívares $225) · con telescópicas $205 (en bolívares $260)
 - A07 · Clóset abierto con barra y repisas (Clósets): $180 (en bolívares $225)
@@ -79,7 +73,6 @@
 - B10 · Cama geométrica con franjas metálicas (Camas): Se cotiza por WhatsApp
 - B11 · Cama fucsia de paneles verticales (Camas): Se cotiza por WhatsApp
 - B12 · Cama gris capitoné (Camas): Se cotiza por WhatsApp
-- M01 · Gavetero alto de 5 gavetas (Gaveteros): Sencilla $90 (en bolívares $115) · con telescópicas $130 (en bolívares $165) · medidas 1.20 × 0.80 × 0.35
 - M02 · Gavetero alto de 5 gavetas (Gaveteros): Sencilla $90 (en bolívares $115) · con telescópicas $130 (en bolívares $165) · medidas 1.20 × 0.80 × 0.35
 - D01 · Escritorio oscuro con biblioteca (Escritorios): Se cotiza por WhatsApp
 - D02 · Escritorio blanco con biblioteca (Escritorios): Se cotiza por WhatsApp
