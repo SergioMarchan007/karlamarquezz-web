@@ -37,13 +37,6 @@
 - T28 · Peinadora Aldita con espejo LED y banquito (Peinadoras): $280 (en bolívares $350) · correderas telescópicas incluidas
 - T29 · Peinadora grande LED con espejo personalizado (Peinadoras): Sencilla $220 (en bolívares $275) · con telescópicas $285 (en bolívares $360)
 - T31 · Peinadora grande espejo LED 1.25 con push open (Peinadoras): $475 (en bolívares $595) · correderas telescópicas incluidas · incluye push open
-- C01 · Vanity doble lujo (Sets): Sencilla $385 (en bolívares $485) · con telescópicas $445 (en bolívares $560) · medidas 1.70 x 1.50
-- C02 · Vanity doble lujo (Sets): Sencilla $385 (en bolívares $485) · con telescópicas $430 (en bolívares $540) · medidas 1.70 x 1.50
-- C03 · Vanity de lujo (Sets): Sencilla $280 (en bolívares $350) · con telescópicas $340 (en bolívares $425) · medidas 1.70 x 1.50
-- C04 · Vanity de lujo (Sets): Sencilla $280 (en bolívares $350) · con telescópicas $340 (en bolívares $425) · medidas 1.70 x 1.50
-- C05 · Vanity doble lujo con vidrio (Sets): Sencilla $385 (en bolívares $485) · con telescópicas $430 (en bolívares $540)
-- C08 · Vanity doble lujo (Sets): Sencilla $385 (en bolívares $485) · con telescópicas $445 (en bolívares $560) · medidas 1.70 x 1.50
-- C09 · Vanity doble lujo con nombre personalizado (Sets): Sencilla $400 (en bolívares $500) · con telescópicas $450 (en bolívares $565)
 - A02 · Clóset normal (Clósets): Sencilla $260 (en bolívares $325) · con telescópicas $290 (en bolívares $365) · medidas 1.80 x 1.70 x 0.45
 - A03 · Clóset grande (Clósets): $380 (en bolívares $475) · correderas telescópicas incluidas · medidas 1.90 x 2 x 0.45
 - A04 · Clóset grande (Clósets): $380 (en bolívares $475) · correderas telescópicas incluidas · medidas 1.90 x 2 x 0.45
@@ -52,6 +45,13 @@
 - A09 · Clóset de lujo con espejo LED táctil (Clósets): Sencilla $380 (en bolívares $475) · con telescópicas $410 (en bolívares $515) · medidas 1.80 x 1.70 x 0.45
 - A10 · Clóset con gran puerta espejo LED (Clósets): $320 (en bolívares $400) · correderas telescópicas incluidas
 - A12 · Clóset de lujo con espejo LED táctil (Clósets): Sencilla $380 (en bolívares $475) · con telescópicas $410 (en bolívares $515) · medidas 1.80 x 1.70 x 0.45
+- C01 · Vanity doble lujo (Vanitys): Sencilla $385 (en bolívares $485) · con telescópicas $445 (en bolívares $560) · medidas 1.70 x 1.50
+- C02 · Vanity doble lujo (Vanitys): Sencilla $385 (en bolívares $485) · con telescópicas $430 (en bolívares $540) · medidas 1.70 x 1.50
+- C03 · Vanity de lujo (Vanitys): Sencilla $280 (en bolívares $350) · con telescópicas $340 (en bolívares $425) · medidas 1.70 x 1.50
+- C04 · Vanity de lujo (Vanitys): Sencilla $280 (en bolívares $350) · con telescópicas $340 (en bolívares $425) · medidas 1.70 x 1.50
+- C05 · Vanity doble lujo con vidrio (Vanitys): Sencilla $385 (en bolívares $485) · con telescópicas $430 (en bolívares $540)
+- C08 · Vanity doble lujo (Vanitys): Sencilla $385 (en bolívares $485) · con telescópicas $445 (en bolívares $560) · medidas 1.70 x 1.50
+- C09 · Vanity doble lujo con nombre personalizado (Vanitys): Sencilla $400 (en bolívares $500) · con telescópicas $450 (en bolívares $565)
 - B01 · Cama capitoné doble copete con marco de espejos (Camas): $140 (en bolívares $175) · Otras medidas: Individual $130 · Queen $160 · King $200 · En bolívares: Individual $165 · Queen $200 · King $250
 - B02 · Cama fucsia geométrica (Camas): $130 (en bolívares $165) · Otras medidas: Individual $110 · Queen $160 · King $200 · En bolívares: Individual $140 · Queen $200 · King $250
 - B03 · Cama capitoné de un solo copete (Camas): $130 (en bolívares $165) · Otras medidas: Individual $110 · Queen $160 · King $195 · En bolívares: Individual $140 · Queen $200 · King $245
