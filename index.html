@@ -1152,7 +1152,7 @@ PIEZAS.forEach((p) => { const x = PRECIOS_KM[p.code] || {};
 });
 // one card per family, the other versions inside its page (Sergio, 18-oct-2026)
 const FAMILIAS_KM = [["T19", "T29"], ["T05", "T06", "T10", "T15"], ["C03", "C04"], ["T07", "T17"], ["T12", "T24", "T31"], ["C01", "C02", "C05", "C08", "C09"], ["T20", "T16"], ["A09", "A12", "A10"], ["A04", "A03"], ["A06", "A07"], ["T08", "T11"], ["D01", "D02"], ["B01", "B12", "B03", "B07"], ["B04", "B09"], ["B08", "B11"], ["B05", "B10", "B02"]];
-const REEMPLAZO = {"A01": null, "A05": null, "A08": null, "A11": null, "A13": null, "C06": null, "C07": null, "C10": null, "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": null, "T23": null, "T26": null, "T27": null, "T30": null}; // discarded -> shown instead
+const REEMPLAZO = {"A01": null, "A05": "A04", "A08": "A06", "A11": "A04", "A13": "A06", "C06": "C03", "C07": "C03", "C10": "C03", "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": "T19", "T23": "T19", "T26": "T19", "T27": "T12", "T30": "T19"}; // discarded -> shown instead
 FAMILIAS_KM.forEach((F) => { F.forEach((c) => { const q = PIEZAS[iOf(c)]; if (q) { q.fam = F; q.lider = F[0]; } }); const L = PIEZAS[iOf(F[0])]; if (L) L.badge = F.length + " versiones"; });
 PIEZAS.forEach((p) => { p.enGrilla = !p.oculto && (!p.lider || p.lider === p.code); });
 const aVisible = (c, n) => { const i = iOf(c); if (i < 0 || n > 3) return -1; const q = PIEZAS[i]; return q.oculto ? aVisible(REEMPLAZO[c], (n || 0) + 1) : iOf(q.lider || c); };
@@ -1228,7 +1228,7 @@ class Component extends DCLogic {
     const inst = () => this.setState({ appEv: null, appDone: true });
     window.addEventListener("beforeinstallprompt", bip); window.addEventListener("appinstalled", inst);
     this.cleanups.push(() => { window.removeEventListener("beforeinstallprompt", bip); window.removeEventListener("appinstalled", inst); });
-    if (this.isIOS && !this.standalone) this.setState({ appIOS: true });
+    if (this.isIOS && !this.standalone) this.setState({ appIOS: true }); else if (!this.standalone && /Macintosh/.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|Chromium|Edg|Firefox|OPR/.test(navigator.userAgent)) this.setState({ appIOS: true, appMac: true });
     this.fitGusto(); setTimeout(() => this.fitGusto(), 800);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fitGusto());
     const onScroll = () => { if (this._tick) return; this._tick = true; requestAnimationFrame(() => { this._tick = false; this.updateHeader(); this.updateWords(); this.updateStages(); this.updateGusto(); }); };
@@ -2108,7 +2108,7 @@ class Component extends DCLogic {
       pideDatos: !MODO_CAT,
       app: { show: !this.standalone && !s.appDone && (!!s.appEv || !!s.appIOS), go: this.installApp, sheet: s.appSheet,
         close: () => this.setState({ appSheet: false }), stop: (e) => e.stopPropagation(),
-        steps: [{ n: "1", t: "Toca el botón Compartir de Safari (el cuadrito con la flecha hacia arriba)." }, { n: "2", t: "Elige «Agregar a inicio»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu pantalla de inicio." }] },
+        steps: s.appMac ? [{ n: "1", t: "En la barra de arriba de Safari, abre el menú «Archivo»." }, { n: "2", t: "Elige «Agregar al Dock»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu Dock y se abre como una app." }] : [{ n: "1", t: "Toca el botón Compartir de Safari (el cuadrito con la flecha hacia arriba)." }, { n: "2", t: "Elige «Agregar a inicio»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu pantalla de inicio." }] },
       downloadCatalog: this.downloadCatalog, dlIn: this.dlIn, dlOut: this.dlOut, dlSub: s.dl ? "No cierres la página" : s.dlReady ? "En Archivos o envíalo por WhatsApp" : "72 modelos · funciona sin internet", dlLabel: s.dl || (s.dlReady ? "Guardar en el iPhone" : "Descargar catálogo"),
       vPrev: () => this.stepViewer(-1), vNext: () => this.stepViewer(1), vDown: this.vDown, vUp: this.vUp,
       gPrev: () => this.goImg(0), gNext: () => this.goImg(1), onTrack: this.onTrack, trackRef: this.trackRef, vScrollRef: this.vScrollRef, sheetDown: this.sheetDown,

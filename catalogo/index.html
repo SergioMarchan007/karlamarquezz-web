@@ -42,6 +42,8 @@ a[href$="#taller"], a[href$="#a-tu-gusto"], a[href$="#como-pedir"], a[href$="#pr
 @keyframes km-brillo { 0% { left: -70% } 55%, 100% { left: 135% } }
 @media (prefers-reduced-motion: reduce) { .km-brillo::after { animation: none; opacity: 0 } }
 </style>
+<style>[data-screen-label="Manifiesto"] { display: none !important }
+</style>
 </head>
 <body>
 <x-dc>
@@ -152,11 +154,11 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   </div>
 
   <div style="position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(18px,2.8vh,30px)">
-    <p data-hin="" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9B8EE"><span style="width:7px;height:7px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 6px 1px rgba(255,250,244,.9),0 0 16px 4px var(--halo, rgba(201,184,238,.58))"></span>Taller familiar · Barquisimeto, Venezuela</p>
+    <p data-hin="" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9B8EE"><span style="width:7px;height:7px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 6px 1px rgba(255,250,244,.9),0 0 16px 4px var(--halo, rgba(201,184,238,.58))"></span>KM · Karla Marquez Vanity Home</p>
     <sc-if value="{{ fr.a }}" hint-placeholder-val="{{ true }}">
       <h1 data-hw="" style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:420;font-size:min(15.5vw,15vh,176px);line-height:.9;letter-spacing:-.035em;color:#F7F2EA;text-shadow:0 2px 40px rgba(16,14,19,.6)">
-        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">Enciende</span></span>
-        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">tu rincón.</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">Nuestro</span></span>
+        <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">catálogo.</span></span>
       </h1>
     </sc-if>
     <sc-if value="{{ fr.b }}" hint-placeholder-val="{{ false }}">
@@ -180,48 +182,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <span style="display:block;overflow:hidden;padding:0 .06em .1em 0;margin-bottom:-.1em"><span data-hl="" style="display:block">reflejo.</span></span>
       </h1>
     </sc-if>
-    <p data-hin="" style="max-width:32ch;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:rgba(242,236,228,.8);text-wrap:pretty">Peinadoras con luces, vanitys y clósets. Hechos a mano y a pedido en Barquisimeto.</p>
+    <p data-hin="" style="max-width:32ch;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:rgba(242,236,228,.8);text-wrap:pretty">28 modelos · 6 colores · listos en 10 a 15 días hábiles. Peinadoras, clósets, vanitys y más, hechos a mano en Barquisimeto.</p>
     <div data-hin="" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px">
-      <a href="/catalogo/#tienda" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:16px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px -12px rgba(201,184,238,.75)">Ver el catálogo <span aria-hidden="true">↓</span></a>
-      <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;height:44px;color:#F2ECE4;font-size:16px;border-bottom:1px solid rgba(242,236,228,.35)"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>WhatsApp</a>
+      <a href="/catalogo/#tienda" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:16px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px -12px rgba(201,184,238,.75)">Ver los modelos <span aria-hidden="true">↓</span></a>
+      <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ app.go }}" style="display:inline-flex;align-items:center;gap:9px;height:44px;color:#F2ECE4;font-size:16px;border-bottom:1px solid rgba(242,236,228,.35)"><span aria-hidden="true" style="font-size:15px">⬇</span>Instalar el catálogo</button></sc-if>
     </div>
   </div>
 </section>
 
-<section id="vida-real" data-tone="day" data-screen-label="Vida real" style="position:relative;z-index:2;margin-top:-28px;border-radius:28px 28px 0 0;background:#F4EFE8;color:#17141A;padding:clamp(64px,10vh,112px) 0 clamp(16px,3vh,32px)">
-  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(14px,4vw,56px) clamp(28px,4.5vh,48px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 56px">
-    <div style="display:flex;flex-direction:column;gap:20px">
-      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>En casa de nuestros clientes</p>
-      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(44px,6.6vw,104px);line-height:.95;letter-spacing:-.035em">
-        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Ya somos parte</span></span>
-        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">de miles de hogares</span></span>
-      </h2>
-    </div>
-    <p data-reveal="up" style="max-width:30ch;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Diseños que acompañan tus espacios.</p>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:clamp(12px,1.4vw,20px)">
-    <div data-vr-row="A" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 1. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
-      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
-        <sc-for list="{{ vrA }}" as="c" hint-placeholder-count="6">
-          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
-            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
-          </figure>
-        </sc-for>
-      </div>
-    </div>
-    <div data-vr-row="B" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 2. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
-      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
-        <sc-for list="{{ vrB }}" as="c" hint-placeholder-count="6">
-          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
-            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
-          </figure>
-        </sc-for>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:#F4EFE8;color:#17141A"><div style="max-width:1280px;margin:0 auto;padding:28px clamp(20px,5vw,64px) 4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px"><p style="margin:0;max-width:52ch;font-size:16px;line-height:1.5;color:#4F4954">Este es el <b style="color:#17141A">catálogo KM</b>: elige tus muebles, agrégalos a tu cotización y envíanosla por WhatsApp.</p><a class="km-brillo" href="/">Ver la web completa <span aria-hidden="true">→</span></a></div>
+<section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:#F4EFE8;color:#17141A">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,10vh,112px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
     <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px 56px;padding:0 2px">
       <div style="display:flex;flex-direction:column;gap:20px">
@@ -566,6 +535,39 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   </div>
 </section>
 
+<section id="vida-real" data-tone="day" data-screen-label="Vida real" style="position:relative;z-index:2;margin-top:-28px;border-radius:28px 28px 0 0;background:#F4EFE8;color:#17141A;padding:clamp(64px,10vh,112px) 0 clamp(16px,3vh,32px)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(14px,4vw,56px) clamp(28px,4.5vh,48px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 56px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4E3486"><span style="width:7px;height:7px;border-radius:50%;background:#C9B8EE;box-shadow:0 0 0 3px rgba(201,184,238,.3)"></span>En casa de nuestros clientes</p>
+      <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(44px,6.6vw,104px);line-height:.95;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Ya somos parte</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">de miles de hogares</span></span>
+      </h2>
+    </div>
+    <p data-reveal="up" style="max-width:30ch;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:rgba(23,20,26,.72);text-wrap:pretty">Diseños que acompañan tus espacios.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:clamp(12px,1.4vw,20px)">
+    <div data-vr-row="A" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 1. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
+      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
+        <sc-for list="{{ vrA }}" as="c" hint-placeholder-count="6">
+          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+    <div data-vr-row="B" tabindex="0" role="region" aria-label="Fotos de muebles KM, fila 2. Arrastra o usa las flechas del teclado." style="position:relative;overflow:hidden;touch-action:pan-y;cursor:grab;outline:none;-webkit-user-select:none;user-select:none" style-focus="box-shadow:inset 0 0 0 2px #4E3486">
+      <div data-vr-track="" style="display:flex;width:max-content;gap:clamp(12px,1.4vw,20px);padding:0 0 0 clamp(12px,1.4vw,20px);will-change:transform">
+        <sc-for list="{{ vrB }}" as="c" hint-placeholder-count="6">
+          <figure aria-hidden="{{ c.hid }}" style="flex:none;margin:0;width:clamp(260px,26vw,400px);aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#E8DFD3">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" width="1200" height="900" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;height:100%;object-fit:contain;pointer-events:none">
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section data-tone="night" data-screen-label="Cierre" style="position:relative;background:#100E13;color:#F2ECE4;overflow:hidden">
   <div aria-hidden="true" style="position:relative;height:96px;margin:0 clamp(12px,3vw,40px)">
     <div style="position:absolute;left:0;right:0;top:20px;height:1px;background:rgba(242,236,228,.16)"></div>
@@ -577,14 +579,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   </div>
   <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,11vh,130px) clamp(20px,5vw,64px) clamp(88px,13vh,150px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:30px">
     <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(52px,9.4vw,150px);line-height:.92;letter-spacing:-.035em">
-      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">¿Ya sabes</span></span>
-      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">cuál es el tuyo?</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">¿Ya elegiste</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">el tuyo?</span></span>
     </h2>
-    <p data-reveal="up" style="max-width:36ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:rgba(242,236,228,.74)">Escríbenos y te ayudamos a elegir. Respondemos todos los días, de 8 am a 9 pm.</p>
-    <a data-reveal="up" href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 32px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:18px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(201,184,238,.8)"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Escribir por WhatsApp</a>
+    <p data-reveal="up" style="max-width:36ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:rgba(242,236,228,.74)">Mándanos tu cotización por WhatsApp y lo empezamos a hacer para ti. Te respondemos todos los días, de 8 am a 9 pm.</p>
+    <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}"><button type="button" data-reveal="up" onClick="{{ openCart }}" style="display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 32px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:18px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(201,184,238,.8)"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Enviar mi cotización por WhatsApp</button></sc-if><sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}"><a data-reveal="up" href="{{ waGeneral }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 32px;border-radius:999px;background:#C9B8EE;color:#100E13;font-size:18px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(201,184,238,.8)"><span style="width:9px;height:9px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>Escríbenos por WhatsApp</a></sc-if><sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ app.go }}" data-reveal="up" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;border:1px solid rgba(242,236,228,.35);color:#F2ECE4;font-size:16px;font-weight:600"><span aria-hidden="true">⬇</span>Instalar el catálogo</button><p style="margin:-6px 0 0;font-size:13.5px;color:rgba(242,236,228,.6)">Gratis, en tu teléfono o en tu computadora.</p></sc-if><div data-reveal="up" style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:22px;padding-top:30px;border-top:1px solid rgba(242,236,228,.14);width:min(100%,520px)"><p style="margin:0;font-size:15px;color:rgba(242,236,228,.75)">¿Quieres conocernos más? El taller, las preguntas frecuentes y dónde estamos.</p><a class="km-brillo" href="/">Ver la web completa <span aria-hidden="true">→</span></a></div>
     
   </div>
-  <footer style="border-top:1px solid rgba(242,236,228,.1);padding:28px clamp(20px,5vw,64px) calc(28px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 32px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.6)"><div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 30px;text-align:center"><p style="margin:0;font-size:15px;color:rgba(242,236,228,.75)">¿Quieres conocer el taller, las preguntas frecuentes y dónde estamos?</p><a class="km-brillo" href="/">Ver la web completa <span aria-hidden="true">→</span></a></div>
+  <footer style="border-top:1px solid rgba(242,236,228,.1);padding:28px clamp(20px,5vw,64px) calc(28px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 32px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,228,.6)">
     <img src="marca/horizontal-blanco.svg" alt="KM · Karla Marquez Vanity Home" width="1080" height="250" loading="lazy" decoding="async" style="display:block;flex:none;height:40px;width:auto;aspect-ratio:1080/250">
     <span>Hecho a mano en Barquisimeto, Venezuela</span>
     <a href="https://www.instagram.com/repisaskm/" target="_blank" rel="noopener" style="color:#C9B8EE">Instagram @repisaskm</a>
@@ -1165,7 +1167,7 @@ PIEZAS.forEach((p) => { const x = PRECIOS_KM[p.code] || {};
 });
 // one card per family, the other versions inside its page (Sergio, 18-oct-2026)
 const FAMILIAS_KM = [["T19", "T29"], ["T05", "T06", "T10", "T15"], ["C03", "C04"], ["T07", "T17"], ["T12", "T24", "T31"], ["C01", "C02", "C05", "C08", "C09"], ["T20", "T16"], ["A09", "A12", "A10"], ["A04", "A03"], ["A06", "A07"], ["T08", "T11"], ["D01", "D02"], ["B01", "B12", "B03", "B07"], ["B04", "B09"], ["B08", "B11"], ["B05", "B10", "B02"]];
-const REEMPLAZO = {"A01": null, "A05": null, "A08": null, "A11": null, "A13": null, "C06": null, "C07": null, "C10": null, "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": null, "T23": null, "T26": null, "T27": null, "T30": null}; // discarded -> shown instead
+const REEMPLAZO = {"A01": null, "A05": "A04", "A08": "A06", "A11": "A04", "A13": "A06", "C06": "C03", "C07": "C03", "C10": "C03", "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": "T19", "T23": "T19", "T26": "T19", "T27": "T12", "T30": "T19"}; // discarded -> shown instead
 FAMILIAS_KM.forEach((F) => { F.forEach((c) => { const q = PIEZAS[iOf(c)]; if (q) { q.fam = F; q.lider = F[0]; } }); const L = PIEZAS[iOf(F[0])]; if (L) L.badge = F.length + " versiones"; });
 PIEZAS.forEach((p) => { p.enGrilla = !p.oculto && (!p.lider || p.lider === p.code); });
 const aVisible = (c, n) => { const i = iOf(c); if (i < 0 || n > 3) return -1; const q = PIEZAS[i]; return q.oculto ? aVisible(REEMPLAZO[c], (n || 0) + 1) : iOf(q.lider || c); };
@@ -1241,7 +1243,7 @@ class Component extends DCLogic {
     const inst = () => this.setState({ appEv: null, appDone: true });
     window.addEventListener("beforeinstallprompt", bip); window.addEventListener("appinstalled", inst);
     this.cleanups.push(() => { window.removeEventListener("beforeinstallprompt", bip); window.removeEventListener("appinstalled", inst); });
-    if (this.isIOS && !this.standalone) this.setState({ appIOS: true });
+    if (this.isIOS && !this.standalone) this.setState({ appIOS: true }); else if (!this.standalone && /Macintosh/.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|Chromium|Edg|Firefox|OPR/.test(navigator.userAgent)) this.setState({ appIOS: true, appMac: true });
     this.fitGusto(); setTimeout(() => this.fitGusto(), 800);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fitGusto());
     const onScroll = () => { if (this._tick) return; this._tick = true; requestAnimationFrame(() => { this._tick = false; this.updateHeader(); this.updateWords(); this.updateStages(); this.updateGusto(); }); };
@@ -2121,7 +2123,7 @@ class Component extends DCLogic {
       pideDatos: !MODO_CAT,
       app: { show: !this.standalone && !s.appDone && (!!s.appEv || !!s.appIOS), go: this.installApp, sheet: s.appSheet,
         close: () => this.setState({ appSheet: false }), stop: (e) => e.stopPropagation(),
-        steps: [{ n: "1", t: "Toca el botón Compartir de Safari (el cuadrito con la flecha hacia arriba)." }, { n: "2", t: "Elige «Agregar a inicio»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu pantalla de inicio." }] },
+        steps: s.appMac ? [{ n: "1", t: "En la barra de arriba de Safari, abre el menú «Archivo»." }, { n: "2", t: "Elige «Agregar al Dock»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu Dock y se abre como una app." }] : [{ n: "1", t: "Toca el botón Compartir de Safari (el cuadrito con la flecha hacia arriba)." }, { n: "2", t: "Elige «Agregar a inicio»." }, { n: "3", t: "Toca «Agregar». Listo: KM queda en tu pantalla de inicio." }] },
       downloadCatalog: this.downloadCatalog, dlIn: this.dlIn, dlOut: this.dlOut, dlSub: s.dl ? "No cierres la página" : s.dlReady ? "En Archivos o envíalo por WhatsApp" : "72 modelos · funciona sin internet", dlLabel: s.dl || (s.dlReady ? "Guardar en el iPhone" : "Descargar catálogo"),
       vPrev: () => this.stepViewer(-1), vNext: () => this.stepViewer(1), vDown: this.vDown, vUp: this.vUp,
       gPrev: () => this.goImg(0), gNext: () => this.goImg(1), onTrack: this.onTrack, trackRef: this.trackRef, vScrollRef: this.vScrollRef, sheetDown: this.sheetDown,
