@@ -353,7 +353,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 
 
 
-<!-- Catálogo simple (26-oct-2026): entrada, «Los más vendidos» y puertas. Solo en /catalogo/ (catalogo_simple.py) -->
+<!-- Catálogo simple (26 y 27-oct-2026): entrada (solo /catalogo/), «Los más vendidos» y puertas (catalogo_simple.py) -->
 <sc-if value="{{ modoCat }}" hint-placeholder-val="{{ false }}">
 <section id="entrada" data-tone="day" data-screen-label="Entrada del catálogo" aria-labelledby="entrada-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(74px,9vh,92px) clamp(14px,4vw,56px) 0">
@@ -367,8 +367,9 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </div>
   </div>
 </section>
-<section id="mas-vendidos" data-tone="day" data-screen-label="Los más vendidos" aria-labelledby="mas-vendidos-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(26px,4vh,44px) clamp(14px,4vw,56px) 0">
+</sc-if>
+<section id="mas-vendidos" data-tone="day" data-screen-label="Los más vendidos" aria-labelledby="mas-vendidos-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);{{ mvTope }}">
+  <div style="max-width:1440px;margin:0 auto;padding:{{ mvPad }} clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><h2 id="mas-vendidos-t">Los más vendidos</h2><span data-cat-linea="" aria-hidden="true"></span><p data-cat-nota="">Pedidos reales del taller</p></div>
     <div data-mv-grid="">
       <sc-for list="{{ masVendidos }}" as="p" hint-placeholder-count="4">
@@ -384,7 +385,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </div>
   </div>
 </section>
-<section id="puertas" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
+<section id="puertas" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:{{ ptFin }}">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vh,80px) clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><h2 id="puertas-t">¿Qué mueble buscas?</h2><span data-cat-linea="" aria-hidden="true"></span><p data-cat-nota="">Toca uno y te mostramos sus modelos</p></div>
     <div data-puertas="" data-reveal="up">
@@ -397,7 +398,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </div>
   </div>
 </section>
-</sc-if>
 
 <section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
@@ -584,15 +584,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
           <p data-reveal="up" data-delay="80" style="font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:30ch;color:color-mix(in srgb,var(--km-tinta) 78%,transparent)">Lo protegemos bien para que llegue perfecto a tu casa. Así salen del taller:</p>
           <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:clamp(8px,1.4vw,18px);margin-top:4px">
             <figure data-reveal="up" style="display:flex;flex-direction:column;gap:8px">
-              <img src="fotos-km/KM-P-0110.webp" alt="Peinadora lila de 5 luces, embalada" loading="lazy" decoding="async" width="800" height="1000" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
+              <img src="fotos-km/embalaje/KM-P-0110-alto.webp" alt="Peinadora lila de 5 luces, embalada" loading="lazy" decoding="async" width="640" height="1067" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
               <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:color-mix(in srgb,var(--km-tinta) 62%,transparent)">Ref. T21</figcaption>
             </figure>
             <figure data-reveal="up" data-delay="90" style="display:flex;flex-direction:column;gap:8px">
-              <img src="fotos-km/KM-P-0121.webp" alt="Gavetero de 5 gavetas, embalado" loading="lazy" decoding="async" width="800" height="1000" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
+              <img src="fotos-km/embalaje/KM-P-0121-alto.webp" alt="Gavetero de 5 gavetas, embalado" loading="lazy" decoding="async" width="640" height="1067" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
               <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:color-mix(in srgb,var(--km-tinta) 62%,transparent)">Ref. M02</figcaption>
             </figure>
             <figure data-reveal="up" data-delay="180" style="display:flex;flex-direction:column;gap:8px">
-              <img src="fotos-km/KM-P-0114.webp" alt="Zapatera giratoria, embalada" loading="lazy" decoding="async" width="800" height="1000" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
+              <img src="fotos-km/embalaje/KM-P-0114-alto.webp" alt="Zapatera giratoria, embalada" loading="lazy" decoding="async" width="640" height="1440" style="width:100%;height:auto;border-radius:4px;filter:saturate(.9) contrast(1.04);box-shadow:0 24px 50px -28px color-mix(in srgb,var(--km-tinta) 55%,transparent)">
               <figcaption style="font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;color:color-mix(in srgb,var(--km-tinta) 62%,transparent)">Ref. E02</figcaption>
             </figure>
           </div>
@@ -2532,10 +2532,15 @@ class Component extends DCLogic {
       hasToast: !!s.toast, toast: s.toast, toastCart: s.toastCart,
       goTienda: (e) => this.goTo("tienda", e),
       vrA: VR_A, vrB: VR_B,
-      // catálogo simple (26-oct-2026): los bloques de arriba solo se pintan en /catalogo/; tiendaN = modelos que muestra «Todo»
+      // catálogo simple (26 y 27-oct-2026): la entrada solo en /catalogo/; los más vendidos y las puertas en las dos páginas.
+      // tiendaN = modelos que muestra «Todo»
       modoCat: MODO_CAT, tiendaN: String(PIEZAS.filter((p) => p.enGrilla).length), goEntrada: (e) => this.goTo("entrada", e),
-      masVendidos: MODO_CAT ? MV.map((i, k) => this.tarjetaVendida(i, k, inC)) : [],
-      puertasCat: MODO_CAT ? PUERTAS_KM.map((d) => this.puertaDe(d)) : [],
+      masVendidos: MV.map((i, k) => this.tarjetaVendida(i, k, inC)),
+      puertasCat: PUERTAS_KM.map((d) => this.puertaDe(d)),
+      // en la página de inicio los más vendidos se montan sobre la portada (esquinas redondas, con más aire arriba) y las
+      // puertas dejan aire abajo, porque las casas de clientes se montan 28 px encima; en /catalogo/ van pegados
+      mvTope: MODO_CAT ? "" : "margin-top:-28px;border-radius:28px 28px 0 0", mvPad: MODO_CAT ? "clamp(26px,4vh,44px)" : "clamp(52px,7.5vh,88px)",
+      ptFin: MODO_CAT ? "0px" : "clamp(44px,5.5vh,64px)",
       pideDatos: !MODO_CAT,
       app: { show: !this.standalone && !s.appDone && (!!s.appEv || !!s.appIOS), go: this.installApp, sheet: s.appSheet,
         close: () => this.setState({ appSheet: false }), stop: (e) => e.stopPropagation(),
