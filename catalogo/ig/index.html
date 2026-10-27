@@ -108,11 +108,8 @@
    punto lila («Pedidos reales del taller») y abajo el título grande en Kalnia --- */
 [data-cat-titulo] { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: 0 0 clamp(18px,2.4vw,30px) }
 [data-cat-ceja] { display: flex; align-items: center; gap: 10px; font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--km-violeta) }
-[data-cat-ceja] > span { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--km-lila-f); box-shadow: 0 0 0 3px color-mix(in srgb,var(--km-halo) 30%,transparent) }
+[data-cat-ceja] > span[aria-hidden="true"] { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--km-lila-f); box-shadow: 0 0 0 3px color-mix(in srgb,var(--km-halo) 30%,transparent) }
 [data-cat-titulo] > h2 { font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 300; font-size: clamp(36px,5vw,72px); line-height: .98; letter-spacing: -.035em; text-wrap: balance }
-/* etiqueta de la propuesta (solo mientras Sergio escoge el estilo de las puertas, ver ESTILOS_PUERTAS) */
-[data-puertas-op] { display: inline-flex; align-items: center; height: 30px; margin: 0 0 18px; padding: 0 12px; border-radius: 999px; background: var(--km-tinta); color: var(--km-dia);
-  font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase }
 
 /* --- «Los más vendidos»: 2 columnas en el teléfono y las 4 en fila desde 760 px --- */
 [data-mv-grid] { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px }
@@ -141,103 +138,91 @@
   font-size: 14px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 18px -10px color-mix(in srgb,var(--km-tinta) 60%,transparent); transition: background-color .25s ease, color .25s ease, transform .14s ease }
 [data-mv-add]:active { transform: scale(.97) }
 
-/* --- puertas (27-oct-2026): banners anchos como las categorías de la web de referencia. Toda la puerta es el botón.
-   Adentro: la foto real a la derecha y, a la izquierda, el nombre entre dos rayitas con estrellita y el botón
-   «Ver N modelos». Teléfono y tableta: una debajo de otra; computadora (900 px o más): 2 por fila y «Más muebles»
-   ancha abajo con sus 3 fotos. Las partes comunes van aquí; cada estilo (a, b, c) cambia colores, foto y letra. --- */
+/* --- puertas (27-oct-2026, el estilo «A» que escogió Sergio): banners anchos como las categorías de la web de
+   referencia. Toda la puerta es el botón. Fondo lila muy claro con un marco fino por dentro; la foto real a la derecha,
+   que se funde hacia el texto; del lado claro, el nombre en mayúsculas entre dos rayitas con estrellita y el botón
+   «Ver N modelos», todo en violeta. Teléfono y tableta: una debajo de otra; computadora (900 px o más): 2 por fila y
+   «Más muebles» ancha abajo con sus 3 fotos. --- */
 [data-puertas] { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px }
-[data-puerta] { position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; overflow: hidden;
-  text-align: center; cursor: pointer; transition: transform .14s ease-out }
-/* «Más muebles» lleva una frase que explica qué hay adentro: en el teléfono necesita un poco más de alto */
-[data-puerta][data-ancho="1"] { aspect-ratio: 4 / 3 }
+[data-puerta] { position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; overflow: hidden; border-radius: 6px;
+  background: var(--km-lila-suave); color: var(--km-violeta); text-align: center; cursor: pointer; transition: transform .14s ease-out }
 [data-puerta]:active { transform: scale(.985) }
 [data-puerta]:focus-visible { outline: 2px solid var(--km-violeta); outline-offset: 3px }
-[data-puerta-fotos] { position: absolute; z-index: -1; display: flex; gap: 2px }
-[data-puerta-fotos] img { flex: 1 1 0; min-width: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1) }
-/* una sola foto por puerta, menos en la computadora: ahí «Más muebles» muestra sus 3 */
-[data-puerta-fotos] img:not(:first-child) { display: none }
-[data-puerta-txt] { position: absolute; top: 0; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 16px 8px 16px 16px }
-[data-puerta-t] { max-width: 100%; font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 400; line-height: 1.04; text-wrap: balance }
-[data-puerta-f] { max-width: 24ch; font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; line-height: 1.45; letter-spacing: .04em; text-transform: uppercase; text-wrap: balance }
+/* el marco fino por dentro (como en la referencia) */
+[data-puerta]::after { content: ""; position: absolute; inset: 7px; border: 1px solid color-mix(in srgb,var(--km-violeta) 24%,transparent); border-radius: 3px; pointer-events: none }
+/* la foto va a la derecha y su borde izquierdo se funde con el fondo lila (la máscara la vuelve transparente) */
+[data-puerta-fotos] { position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; width: 56%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24%); mask-image: linear-gradient(to right, transparent, #000 24%) }
+[data-puerta-fotos] img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1) }
+[data-puerta-txt] { position: absolute; top: 0; bottom: 0; left: 0; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 16px 8px 16px 16px }
+[data-puerta-t] { max-width: 100%; font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 400; font-size: clamp(18px,5.3vw,26px); line-height: 1.04; letter-spacing: .05em;
+  text-transform: uppercase; text-wrap: balance }
 /* el «botón» de adentro es solo el dibujo: el toque lo recibe toda la puerta (mide 200 px o más de alto) */
-[data-puerta-btn] { display: inline-flex; align-items: center; justify-content: center; height: 34px; padding: 0 14px; font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px;
-  letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transition: background-color .25s ease, color .25s ease }
+[data-puerta-btn] { display: inline-flex; align-items: center; justify-content: center; height: 34px; padding: 0 14px; border-radius: 3px; background: var(--km-violeta); color: #FFFFFF;
+  font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transition: background-color .25s ease }
 /* las rayitas con la estrellita, arriba y abajo del nombre (como en la referencia) */
 [data-puerta-orn] { display: flex; align-items: center; gap: 7px; width: min(100%, 150px) }
 [data-puerta-orn]::before, [data-puerta-orn]::after { content: ""; flex: 1 1 0; height: 1px; background: currentColor; opacity: .45 }
 [data-puerta-orn] svg { flex: none; width: 9px; height: 9px; fill: currentColor; opacity: .85 }
 
-/* A · como la web de referencia: fondo lila muy claro, la foto se funde hacia la izquierda, marco fino por dentro,
-   nombre en mayúsculas en violeta y botón violeta */
-[data-estilo="a"] [data-puerta] { border-radius: 6px; background: var(--km-lila-suave); color: var(--km-violeta) }
-[data-estilo="a"] [data-puerta]::after { content: ""; position: absolute; inset: 7px; border: 1px solid color-mix(in srgb,var(--km-violeta) 24%,transparent); border-radius: 3px; pointer-events: none }
-[data-estilo="a"] [data-puerta-fotos] { top: 0; right: 0; bottom: 0; width: 56%;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 24%); mask-image: linear-gradient(to right, transparent, #000 24%) }
-[data-estilo="a"] [data-puerta-txt] { width: 50% }
-[data-estilo="a"] [data-puerta-t] { font-size: clamp(18px,5.3vw,26px); letter-spacing: .05em; text-transform: uppercase }
-[data-estilo="a"] [data-puerta-f] { color: color-mix(in srgb,var(--km-tinta) 72%,transparent) }
-[data-estilo="a"] [data-puerta-btn] { border-radius: 3px; background: var(--km-violeta); color: #FFFFFF }
+/* --- «Más muebles»: los tipos con pocos modelos, en cuadritos con su foto (mismo lila, marco fino y letra que los
+   banners). 2 por fila en el teléfono y los 4 en fila desde 760 px. El título va entre dos rayitas --- */
+[data-puertas-mas] { margin-top: clamp(30px,4.5vw,52px) }
+[data-puertas-mas-t] { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 16px; font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 400;
+  font-size: clamp(20px,5vw,30px); line-height: 1.1; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; color: var(--km-violeta) }
+[data-puertas-mas-t]::before, [data-puertas-mas-t]::after { content: ""; flex: 0 1 60px; height: 1px; background: currentColor; opacity: .45 }
+[data-puertas-chicas] { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px }
+[data-puerta-chica] { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 9px 9px 15px; border-radius: 6px;
+  background: var(--km-lila-suave); color: var(--km-violeta); text-align: center; cursor: pointer; transition: transform .14s ease-out }
+[data-puerta-chica]::after { content: ""; position: absolute; inset: 5px; border: 1px solid color-mix(in srgb,var(--km-violeta) 24%,transparent); border-radius: 3px; pointer-events: none }
+[data-puerta-chica]:active { transform: scale(.98) }
+[data-puerta-chica]:focus-visible { outline: 2px solid var(--km-violeta); outline-offset: 3px }
+[data-puerta-chica-foto] { display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 3px; overflow: hidden; background: var(--km-dia3) }
+[data-puerta-chica-foto] img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1) }
+[data-puerta-chica-t] { margin-top: 6px; font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 400; font-size: clamp(16px,4.4vw,24px); line-height: 1.08;
+  letter-spacing: .05em; text-transform: uppercase; text-wrap: balance }
+[data-puerta-chica-n] { font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb,var(--km-tinta) 72%,transparent) }
+/* «O mira los 29 modelos juntos»: un enlace subrayado, centrado debajo de las categorías */
+[data-ver-todos-fila] { display: flex; justify-content: center; margin-top: clamp(20px,3vw,30px) }
+[data-ver-todos] { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-size: 16px; font-weight: 700; color: var(--km-violeta);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px }
 
-/* B · mitad y mitad: tarjeta blanca redondeada, el nombre grande a la izquierda y la foto entera a la derecha */
-[data-estilo="b"] [data-puerta] { border-radius: 18px; background: #FFFFFF; color: var(--km-tinta); box-shadow: 0 0 0 1px color-mix(in srgb,var(--km-tinta) 8%,transparent) }
-[data-estilo="b"] [data-puerta-fotos] { top: 0; right: 0; bottom: 0; width: 50% }
-[data-estilo="b"] [data-puerta-txt] { width: 50% }
-[data-estilo="b"] [data-puerta-orn] { color: var(--km-violeta) }
-[data-estilo="b"] [data-puerta-t] { font-size: clamp(24px,6.6vw,34px); font-weight: 360; letter-spacing: -.02em }
-[data-estilo="b"] [data-puerta-f] { color: color-mix(in srgb,var(--km-tinta) 72%,transparent) }
-[data-estilo="b"] [data-puerta-btn] { border-radius: 999px; box-shadow: inset 0 0 0 1px var(--km-tinta) }
-
-/* C · foto en arco, como un espejo: fondo nude, la foto dentro de un arco con un filete fino alrededor */
-[data-estilo="c"] [data-puerta] { border-radius: 18px; background: var(--km-dia3); color: var(--km-tinta) }
-[data-estilo="c"] [data-puerta-fotos] { right: 5%; bottom: 0; height: 82%; gap: 14px }
-/* en el teléfono, «Más muebles» es más alta: su arco va más bajito para no pisar la frase */
-[data-estilo="c"] [data-puerta][data-ancho="1"] [data-puerta-fotos] { height: 74% }
-[data-estilo="c"] [data-puerta-fotos] img { flex: none; width: auto; aspect-ratio: 4 / 5; border-radius: 999px 999px 0 0; outline: 1px solid color-mix(in srgb,var(--km-violeta) 40%,transparent); outline-offset: 5px }
-[data-estilo="c"] [data-puerta-txt] { width: 50% }
-[data-estilo="c"] [data-puerta-orn] { color: var(--km-violeta) }
-[data-estilo="c"] [data-puerta-t] { font-size: clamp(17px,4.9vw,26px); letter-spacing: .05em; text-transform: uppercase }
-[data-estilo="c"] [data-puerta-f] { color: color-mix(in srgb,var(--km-tinta) 72%,transparent) }
-[data-estilo="c"] [data-puerta-btn] { border-radius: 3px; background: var(--km-tinta); color: var(--km-dia) }
+/* --- los modelos de la categoría elegida (la tienda, que solo aparece al tocar una): arriba su nombre y, pegadas
+   arriba al bajar, las categorías chiquitas con foto para cambiar sin volver a subir --- */
+[data-cat-cabeza] { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 40px }
+[data-cat-cabeza] [data-cat-titulo] { margin: 0 }
+/* cada pestaña con su foto redonda (las del teléfono medían 34 px: con foto van de 44) */
+[data-pbarra] [role=tab][data-chip] { height: 44px !important; gap: 8px !important }
+[data-pbarra] [role=tab][data-chip][data-foto="1"] { padding-left: 5px !important }
+[data-chip] img { flex: none; display: block; width: 34px; height: 34px; border-radius: 50%; object-fit: cover }
 
 @media (hover: hover) and (pointer: fine) {
-  [data-mv-abrir]:hover [data-mv-foto] img, [data-puerta]:hover [data-puerta-fotos] img { transform: scale(1.04) }
-  [data-estilo="a"] [data-puerta]:hover [data-puerta-btn] { background: var(--km-tinta) }
-  [data-estilo="b"] [data-puerta]:hover [data-puerta-btn] { background: var(--km-tinta); color: var(--km-dia) }
-  [data-estilo="c"] [data-puerta]:hover [data-puerta-fotos] img { transform: translateY(-4px) }
-  [data-estilo="c"] [data-puerta]:hover [data-puerta-btn] { background: var(--km-violeta); color: #FFFFFF }
+  [data-mv-abrir]:hover [data-mv-foto] img, [data-puerta]:hover [data-puerta-fotos] img, [data-puerta-chica]:hover [data-puerta-chica-foto] img { transform: scale(1.04) }
+  [data-puerta]:hover [data-puerta-btn] { background: var(--km-tinta) }
 }
-/* tableta (640 a 899 px): las puertas siguen una debajo de otra, más anchas */
+/* tableta (640 a 899 px): las puertas siguen una debajo de otra, más anchas; la foto deja más lugar al nombre */
 @media (min-width: 640px) {
   [data-mv-grid] { gap: 24px clamp(12px,1.6vw,24px) }
   [data-puertas] { gap: 16px }
-  [data-puerta], [data-puerta][data-ancho="1"] { aspect-ratio: 2 / 1 }
-  [data-puerta-txt] { gap: 11px; padding: 22px 12px 22px 24px }
+  [data-puerta] { aspect-ratio: 2 / 1 }
+  [data-puerta-fotos] { width: 46% }
+  [data-puerta-txt] { width: 56%; gap: 11px; padding: 22px 12px 22px 24px }
+  [data-puerta-t] { font-size: clamp(26px,4.2vw,36px) }
   [data-puerta-btn] { height: 38px; padding: 0 18px }
   [data-puerta-orn] { width: min(100%, 190px) }
-  [data-estilo="a"] [data-puerta-fotos] { width: 46% }
-  [data-estilo="a"] [data-puerta-txt] { width: 56% }
-  [data-estilo="a"] [data-puerta-t], [data-estilo="c"] [data-puerta-t] { font-size: clamp(26px,4.2vw,36px) }
-  [data-estilo="b"] [data-puerta-t] { font-size: clamp(34px,5.4vw,46px) }
-  [data-estilo="c"] [data-puerta][data-ancho="1"] [data-puerta-fotos] { height: 82% }
 }
 @media (min-width: 760px) {
   [data-mv-grid] { grid-template-columns: repeat(4,minmax(0,1fr)) }
+  [data-puertas-chicas] { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px }
   [data-mv-card] { padding: 10px }
 }
-/* computadora: la guirnalda más alta; las puertas 2 por fila, como en la referencia, y «Más muebles» ancha abajo */
+/* computadora: la guirnalda más alta y las 4 puertas grandes en 2 filas de 2, como en la referencia */
 @media (min-width: 900px) {
   [data-cs-guirnalda] { height: 56px }
   [data-cs-foco] > i { width: 12px; height: 12px }
   [data-puertas] { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px }
   [data-puerta] { aspect-ratio: 2 / 1 }
-  [data-puerta][data-ancho="1"] { grid-column: 1 / -1; aspect-ratio: 4 / 1 }
-  [data-puerta][data-ancho="1"] [data-puerta-fotos] img { display: block }
-  [data-estilo="a"] [data-puerta-t], [data-estilo="c"] [data-puerta-t] { font-size: clamp(22px,2.4vw,38px) }
-  [data-estilo="b"] [data-puerta-t] { font-size: clamp(30px,3.3vw,50px) }
-  [data-estilo="a"] [data-puerta][data-ancho="1"] [data-puerta-fotos], [data-estilo="b"] [data-puerta][data-ancho="1"] [data-puerta-fotos] { width: 62% }
-  [data-estilo="a"] [data-puerta][data-ancho="1"] [data-puerta-txt], [data-estilo="b"] [data-puerta][data-ancho="1"] [data-puerta-txt],
-  [data-estilo="c"] [data-puerta][data-ancho="1"] [data-puerta-txt] { width: 38% }
-  [data-estilo="c"] [data-puerta][data-ancho="1"] [data-puerta-fotos] { right: 4%; height: 86% }
+  [data-puerta-t] { font-size: clamp(22px,2.4vw,38px) }
 }
 </style>
 <style data-km-marcas="">
@@ -390,7 +375,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </span>
   </a>
   <nav aria-label="Secciones" style="display:flex;gap:clamp(18px,2vw,30px);font-size:14.5px;max-width:max(0px, calc((100vw - 1120px) * 999));overflow:hidden;white-space:nowrap">
-    <a href="/catalogo/#tienda" onClick="{{ goTienda }}" style="color:inherit">Tienda</a>
+    <a href="/catalogo/#puertas" onClick="{{ goTienda }}" style="color:inherit">Tienda</a>
     <a href="/catalogo/#taller" style="color:inherit">El taller</a>
     <a href="/catalogo/#a-tu-gusto" style="color:inherit">A tu gusto</a>
     <a href="/catalogo/#como-pedir" style="color:inherit">Cómo pedir</a>
@@ -443,81 +428,44 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </div>
   </div>
 </section>
-<section id="puertas" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:0px">
+<section id="puertas" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:{{ ptFin }}">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vh,80px) clamp(14px,4vw,56px) 0">
-    <p data-puertas-op="">Opción A · como la web de referencia</p>
     <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Toca uno y mira sus modelos</p><h2 id="puertas-t">¿Qué mueble buscas?</h2></div>
-    <div data-puertas="" data-estilo="a" data-reveal="up">
-      <sc-for list="{{ puertasCat }}" as="d" hint-placeholder-count="5">
-        <button type="button" data-puerta="" data-ancho="{{ d.ancho }}" onClick="{{ d.pick }}" aria-label="{{ d.aria }}">
-          <span data-puerta-fotos="" aria-hidden="true"><img src="{{ d.img }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><sc-if value="{{ d.hasMas }}" hint-placeholder-val="{{ false }}"><img src="{{ d.f2 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><img src="{{ d.f3 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></sc-if></span>
-          <span data-puerta-txt=""><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span><span data-puerta-t="">{{ d.t }}</span><sc-if value="{{ d.hasFrase }}" hint-placeholder-val="{{ false }}"><span data-puerta-f="">{{ d.frase }}</span></sc-if><span data-puerta-btn="">{{ d.ver }}</span><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span></span>
+    <div data-puertas="" data-reveal="up">
+      <sc-for list="{{ puertasCat }}" as="d" hint-placeholder-count="4">
+        <button type="button" data-puerta="" onClick="{{ d.pick }}" aria-label="{{ d.aria }}">
+          <span data-puerta-fotos="" aria-hidden="true"><img src="{{ d.img }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></span>
+          <span data-puerta-txt=""><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span><span data-puerta-t="">{{ d.t }}</span><span data-puerta-btn="">{{ d.ver }}</span><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span></span>
         </button>
       </sc-for>
     </div>
-  </div>
-</section>
-<section id="puertas-b" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-b-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:0px">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vh,80px) clamp(14px,4vw,56px) 0">
-    <p data-puertas-op="">Opción B · mitad foto y mitad texto</p>
-    <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Toca uno y mira sus modelos</p><h2 id="puertas-b-t">¿Qué mueble buscas?</h2></div>
-    <div data-puertas="" data-estilo="b" data-reveal="up">
-      <sc-for list="{{ puertasCat }}" as="d" hint-placeholder-count="5">
-        <button type="button" data-puerta="" data-ancho="{{ d.ancho }}" onClick="{{ d.pick }}" aria-label="{{ d.aria }}">
-          <span data-puerta-fotos="" aria-hidden="true"><img src="{{ d.img }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><sc-if value="{{ d.hasMas }}" hint-placeholder-val="{{ false }}"><img src="{{ d.f2 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><img src="{{ d.f3 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></sc-if></span>
-          <span data-puerta-txt=""><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span><span data-puerta-t="">{{ d.t }}</span><sc-if value="{{ d.hasFrase }}" hint-placeholder-val="{{ false }}"><span data-puerta-f="">{{ d.frase }}</span></sc-if><span data-puerta-btn="">{{ d.ver }}</span><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span></span>
-        </button>
-      </sc-for>
+    <div data-puertas-mas="" data-reveal="up">
+      <h3 data-puertas-mas-t="">Más muebles</h3>
+      <div data-puertas-chicas="">
+        <sc-for list="{{ puertasChicas }}" as="d" hint-placeholder-count="4">
+          <button type="button" data-puerta-chica="" onClick="{{ d.pick }}" aria-label="{{ d.aria }}">
+            <span data-puerta-chica-foto="" aria-hidden="true"><img src="{{ d.img }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></span>
+            <span data-puerta-chica-t="">{{ d.t }}</span><span data-puerta-chica-n="">{{ d.ver }}</span>
+          </button>
+        </sc-for>
+      </div>
     </div>
-  </div>
-</section>
-<section id="puertas-c" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-c-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:{{ ptFin }}">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vh,80px) clamp(14px,4vw,56px) 0">
-    <p data-puertas-op="">Opción C · foto en arco, como un espejo</p>
-    <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Toca uno y mira sus modelos</p><h2 id="puertas-c-t">¿Qué mueble buscas?</h2></div>
-    <div data-puertas="" data-estilo="c" data-reveal="up">
-      <sc-for list="{{ puertasCat }}" as="d" hint-placeholder-count="5">
-        <button type="button" data-puerta="" data-ancho="{{ d.ancho }}" onClick="{{ d.pick }}" aria-label="{{ d.aria }}">
-          <span data-puerta-fotos="" aria-hidden="true"><img src="{{ d.img }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><sc-if value="{{ d.hasMas }}" hint-placeholder-val="{{ false }}"><img src="{{ d.f2 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"><img src="{{ d.f3 }}" alt="" width="800" height="1000" loading="lazy" decoding="async" draggable="false"></sc-if></span>
-          <span data-puerta-txt=""><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span><span data-puerta-t="">{{ d.t }}</span><sc-if value="{{ d.hasFrase }}" hint-placeholder-val="{{ false }}"><span data-puerta-f="">{{ d.frase }}</span></sc-if><span data-puerta-btn="">{{ d.ver }}</span><span data-puerta-orn="" aria-hidden="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 6.1 3.9 10 5 6.1 6.1 5 10 3.9 6.1 0 5 3.9 3.9Z"></path></svg></span></span>
-        </button>
-      </sc-for>
-    </div>
+    <p data-ver-todos-fila=""><button type="button" data-ver-todos="" onClick="{{ verTodos }}" aria-label="{{ verTodosAria }}">{{ verTodosTxt }}</button></p>
   </div>
 </section>
 
 <section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
-    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px 56px;padding:0 2px">
-      <div style="display:flex;flex-direction:column;gap:20px">
-        <p data-reveal="fade" style="display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--km-violeta)"><span style="width:7px;height:7px;border-radius:50%;background:var(--km-lila-f);box-shadow:0 0 0 3px color-mix(in srgb,var(--km-halo) 30%,transparent)"></span>La tienda · {{ tiendaN }} modelos</p>
-        <h2 style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(52px,8.4vw,128px);line-height:.92;letter-spacing:-.035em">
-          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Elige</span></span>
-          <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">el tuyo.</span></span>
-        </h2>
-      </div>
-      <div data-reveal="up" style="flex:0 1 420px;display:flex;flex-direction:column;gap:16px">
-        <p style="font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:color-mix(in srgb,var(--km-tinta) 72%,transparent);text-wrap:pretty">Todos hechos a mano y a pedido, en negro, lila, blanco, rosado, fucsia y gris. Toca uno para ver su ficha.</p>
-        <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}">
-          <button type="button" onClick="{{ app.go }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px 0 8px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)">
-            <img src="marca/icon-192.png" alt="" width="36" height="36" style="display:block;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-marfil) 18%,transparent)">
-            <span style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.1;text-align:left"><span>Instala la app de KM</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--km-lila-t)">Gratis · un toque desde tu inicio</span></span>
-          </button>
-        </sc-if>
-        <label style="position:relative;display:flex;align-items:center">
-          <span aria-hidden="true" style="position:absolute;left:18px;width:13px;height:13px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--km-tinta) 55%,transparent)"></span>
-          <input type="search" value="{{ q }}" onChange="{{ onSearch }}" placeholder="Busca: led, lila, 9 gavetas, cama…" aria-label="Buscar modelo" style="width:100%;height:50px;padding:0 18px 0 44px;border-radius:999px;border:1px solid color-mix(in srgb,var(--km-tinta) 18%,transparent);background:#FFFFFF;font-family:'Karla',system-ui,sans-serif;font-size:16px;color:var(--km-tinta);outline:none">
-        </label>
-        
-      </div>
+  <sc-if value="{{ catElegida }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1440px;margin:0 auto;padding:clamp(36px,5vh,56px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(16px,2.4vh,26px)">
+    <div data-cat-cabeza="">
+      <div data-cat-titulo=""><p data-cat-ceja="" role="status"><span aria-hidden="true"></span>{{ catCuenta }}</p><h2 id="tienda-t">{{ catNombre }}</h2></div>
     </div>
     <div data-pbarra="" style="display:flex;flex-direction:column;gap:14px;position:sticky;top:68px;z-index:5;margin:0 -14px;padding:10px 14px;background:color-mix(in srgb,var(--km-dia) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
       <div role="tablist" aria-label="Categorías" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
         <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
-          <button type="button" role="tab" aria-selected="{{ c.pressed }}" onClick="{{ c.select }}" style="flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;transition:background-color .3s ease,color .3s ease,border-color .3s ease">{{ c.name }}<span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;font-weight:400;opacity:.62">{{ c.count }}</span></button>
+          <button type="button" role="tab" data-chip="" data-foto="{{ c.foto }}" aria-selected="{{ c.pressed }}" onClick="{{ c.select }}" style="flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;transition:background-color .3s ease,color .3s ease,border-color .3s ease"><sc-if value="{{ c.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ c.img }}" alt="" width="34" height="34" loading="lazy" decoding="async" draggable="false"></sc-if>{{ c.name }}<span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;font-weight:400;opacity:.62">{{ c.count }}</span></button>
         </sc-for>
       </div>
-      <p data-pcuenta="" data-busca="{{ countBusca }}" role="status" style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--km-tinta) 60%,transparent)">{{ countLabel }}</p>
     </div>
     <div ref="{{ gridRef }}" data-pgrid="" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,21vw,300px),1fr));gap:clamp(30px,3vw,48px) clamp(12px,1.6vw,24px)">
       <sc-for list="{{ items }}" as="p" hint-placeholder-count="8">
@@ -565,8 +513,21 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <button type="button" onClick="{{ more }}" style="height:52px;padding:0 28px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15.5px;font-weight:700">Ver más modelos</button>
       </div>
     </sc-if>
+    <div style="display:flex;justify-content:center;padding-top:6px">
+        <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ app.go }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px 0 8px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)">
+            <img src="marca/icon-192.png" alt="" width="36" height="36" style="display:block;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-marfil) 18%,transparent)">
+            <span style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.1;text-align:left"><span>Instala la app de KM</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--km-lila-t)">Gratis · un toque desde tu inicio</span></span>
+          </button>
+        </sc-if>
+    </div>
   </div>
+  </sc-if>
 </section>
+
+
+
+
 
 <section data-tone="night" data-screen-label="Manifiesto" style="position:relative;z-index:3;margin-top:-28px;border-radius:28px 28px 0 0;background:var(--km-noche);padding:clamp(110px,18vh,200px) clamp(22px,6vw,96px)">
   <p ref="{{ manRef }}" style="max-width:1180px;margin:0 auto;font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:clamp(31px,5.2vw,78px);line-height:1.1;letter-spacing:-.022em;text-wrap:balance"><span data-w="" style="transition:opacity .5s ease">Es </span><span data-w="" style="transition:opacity .5s ease">lo </span><span data-w="" style="transition:opacity .5s ease">primero </span><span data-w="" style="transition:opacity .5s ease">que </span><span data-w="" style="transition:opacity .5s ease">te </span><span data-w="" style="transition:opacity .5s ease">ve </span><span data-w="" style="transition:opacity .5s ease">cada </span><span data-w="" style="transition:opacity .5s ease">mañana. </span><span data-w="" style="transition:opacity .5s ease">Por </span><span data-w="" style="transition:opacity .5s ease">eso </span><span data-w="" style="transition:opacity .5s ease">lo </span><span data-w="" style="transition:opacity .5s ease">hacemos </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">a </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">mano, </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">a </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">pedido </span><span data-w="" style="transition:opacity .5s ease">y </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">en </span><span data-w="" style="transition:opacity .5s ease;color:var(--km-lila-t)">familia, </span><span data-w="" style="transition:opacity .5s ease">en </span><span data-w="" style="transition:opacity .5s ease">nuestro </span><span data-w="" style="transition:opacity .5s ease">taller </span><span data-w="" style="transition:opacity .5s ease">de </span><span data-w="" style="transition:opacity .5s ease">Barquisimeto.</span></p>
@@ -897,7 +858,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     </sc-if>
     <p data-reveal="up" style="max-width:32ch;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:color-mix(in srgb,var(--km-marfil) 80%,transparent);text-wrap:pretty">Peinadoras con luces, vanitys y clósets. Hechos a mano y a pedido en Barquisimeto.</p>
     <div data-reveal="up" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px">
-      <button type="button" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;background:var(--km-lila-f);color:var(--km-noche-t);font-size:16px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px -12px color-mix(in srgb,var(--km-halo) 75%,transparent)">Volver a los modelos <span aria-hidden="true">↑</span></button>
+      <button type="button" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;background:var(--km-lila-f);color:var(--km-noche-t);font-size:16px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 16px 44px -12px color-mix(in srgb,var(--km-halo) 75%,transparent)">Volver al catálogo <span aria-hidden="true">↑</span></button>
       <!-- instalar el catálogo: va en la tienda y en el cierre (catalogo_simple.py) -->
     </div>
   </div>
@@ -1573,16 +1534,20 @@ const MAS_VENDIDOS = ["T19", "T18", "T05", "A02"];
 // los que se muestran: un código escondido pasa al modelo que se muestra en su lugar, y ninguno se repite
 const MV = [];
 MAS_VENDIDOS.forEach((c) => { const i = aVisible(c); if (i >= 0 && MV.indexOf(i) < 0) MV.push(i); });
-// las puertas, en orden, que también son las pestañas de la tienda: [clave, título, fotos reales, frase]
-const PUERTAS_KM = [["T", "Peinadoras", ["fotos-km/KM-P-0102.webp"], ""], ["A", "Clósets", ["fotos-km/KM-P-0117.webp"], ""], ["C", "Vanitys", ["fotos-km/KM-P-0104.webp"], ""], ["B", "Camas", ["fotos-km/B08.webp"], ""], ["X", "Más muebles", ["fotos-km/D02-F129.webp", "fotos-km/KM-P-0129.webp", "fotos-km/KM-P-0114.webp"], "Gaveteros, zapateras, escritorios y mesas de uñas"]];
-// la puerta de cada modelo: la de la letra de su código (T, A, C o B); lo demás va a «Más muebles» (X).
-// GRUPO_DE corrige los que no siguen su letra (la mesa de uñas tiene la T, pero no es una peinadora).
-const GRUPO_DE = {"T08": "X", "T11": "X"};
-PIEZAS.forEach((p) => { p.puerta = GRUPO_DE[p.code] || ("TACB".indexOf(p.k) >= 0 ? p.k : "X"); });
-// «Todo» va en el orden de las puertas y, dentro de cada una, como antes (por tipo y primero los destacados)
+// las categorías, en orden: primero las grandes (banners) y después las chicas («Más muebles»). También son las
+// pestañas con foto que van arriba de los modelos: [letra, nombre, foto real]
+const PUERTAS_KM = [["T", "Peinadoras", "fotos-km/KM-P-0102.webp"], ["A", "Clósets", "fotos-km/KM-P-0117.webp"], ["C", "Vanitys", "fotos-km/KM-P-0104.webp"], ["B", "Camas", "fotos-km/B08.webp"], ["D", "Escritorios", "fotos-km/D02-F129.webp"], ["M", "Gaveteros", "fotos-km/KM-P-0121.webp"], ["E", "Zapateras", "fotos-km/KM-P-0114.webp"], ["U", "Mesas de uñas", "fotos-km/KM-P-0129.webp"]];
+const N_GRANDES = 4;
+// la categoría de cada modelo: la de la letra de su código. GRUPO_DE corrige los que no siguen su letra (las mesas
+// de uñas tienen la T, pero no son peinadoras)
+const GRUPO_DE = {"T08": "U", "T11": "U"};
+PIEZAS.forEach((p) => { p.puerta = GRUPO_DE[p.code] || p.k; });
+// «Todo» va en el orden de las categorías y, dentro de cada una, como antes (por tipo y primero los destacados)
 const PUERTA_ORDEN = PUERTAS_KM.map((d) => d[0]).join("");
 const kmTodoPuertas = (a, b) => (PUERTA_ORDEN.indexOf(PIEZAS[a].puerta) - PUERTA_ORDEN.indexOf(PIEZAS[b].puerta)) || kmTodo(a, b);
 const kmPuertaNombre = (p) => { const d = PUERTAS_KM.find((x) => x[0] === p.puerta); return d ? d[1] : p.cat; };
+// el nombre de una categoría por su letra («all» = todos los modelos juntos)
+const kmCatNombre = (k) => { const d = PUERTAS_KM.find((x) => x[0] === k); return d ? d[1] : "Todos los modelos"; };
 const CART_KEY = "km-cotizacion";
 // cotizaciones guardadas en el teléfono (también las viejas, con color, versión o manillas): quedan solo modelo y
 // cantidad, el mismo modelo repetido se suma en una línea (tope 20) y los modelos descartados se quitan (26-oct-2026)
@@ -1605,8 +1570,8 @@ const GUSTOS = [
 // card price sizes (tarjeta_precios.py): px first for old browsers, then relative to the price box width (cqi)
 const KMT = { p2: "26px;font-size:clamp(22px,15cqi,36px)", p1: "30px;font-size:clamp(26px,13cqi,40px)", q: "17px;font-size:clamp(15px,7cqi,20px)",
   b2: "13px;font-size:clamp(12px,5.6cqi,14.5px)", b1: "14px;font-size:clamp(12.5px,5cqi,15.5px)", sep: "border-left:1px solid color-mix(in srgb,var(--km-violeta) 20%,transparent)" };
-const MENU = [["Tienda", "tienda"], ["El taller", "taller"], ["A tu gusto", "a-tu-gusto"], ["Cómo pedir", "como-pedir"], ["Preguntas", "preguntas"], ["Dónde estamos", "donde"]];
-if (MODO_CAT) MENU.splice(0, MENU.length, ["Más vendidos", "mas-vendidos"], ["Tipos de mueble", "puertas"], ["Catálogo", "tienda"], ["En casa de clientes", "vida-real"]); // catálogo simple (26-oct-2026)
+const MENU = [["Tienda", "puertas"], ["El taller", "taller"], ["A tu gusto", "a-tu-gusto"], ["Cómo pedir", "como-pedir"], ["Preguntas", "preguntas"], ["Dónde estamos", "donde"]];
+if (MODO_CAT) MENU.splice(0, MENU.length, ["Más vendidos", "mas-vendidos"], ["Catálogo", "puertas"], ["En casa de clientes", "vida-real"]); // catálogo simple (26 y 27-oct-2026)
 const pad = (n) => String(n).padStart(2, "0");
 const wa = (m) => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m);
 const KM_CAT = {"T19":["KM-P-0101-S","KM-P-0101-C"],"T18":["KM-P-0102-S","KM-P-0102-C"],"T05":["KM-P-0103-T",null],"C03":["KM-P-0104-S","KM-P-0104-C"],"T14":["KM-P-0105-PT",null],"T07":["KM-P-0106-T",null],"T09":["KM-P-0107-S","KM-P-0107-C"],"T12":["KM-P-0108-S","KM-P-0108-C"],"C01":["KM-P-0109-S","KM-P-0109-C"],"T21":["KM-P-0110-U","KM-P-0110-C"],"T20":["KM-P-0111-U","KM-P-0111-C"],"T22":["KM-P-0112-U","KM-P-0112-C"],"T02":["KM-P-0113-R",null],"E02":["KM-P-0114-U",null],"A02":["KM-P-0115-U","KM-P-0115-C"],"A01":["KM-P-0116-U","KM-P-0116-C"],"A04":["KM-P-0118-C",null],"A06":["KM-P-0119-U","KM-P-0119-C"],"M02":["KM-P-0121-S","KM-P-0121-C"],"T29":["KM-P-0122-S","KM-P-0122-C"],"T24":["KM-P-0123-S","KM-P-0123-C"],"T31":["KM-P-0124-PT",null],"T17":["KM-P-0125-T",null],"T25":["KM-P-0126-S","KM-P-0126-C"],"T28":["KM-P-0127-T",null],"T08":["KM-P-0128-S","KM-P-0128-C"],"T11":["KM-P-0129-S","KM-P-0129-C"],"C05":["KM-P-0130-S","KM-P-0130-C"],"C09":["KM-P-0131-S","KM-P-0131-C"],"A10":["KM-P-0132-C",null],"A07":["KM-P-0133-U",null],"D01":["KM-P-0134-S","KM-P-0134-C"],"B01":["KM-P-0135-U",null],"B03":["KM-P-0136-U",null],"B07":["KM-P-0137-U",null],"B12":["KM-P-0138-U",null],"B04":["KM-P-0139-U",null],"B09":["KM-P-0140-U",null],"B08":["KM-P-0141-U",null],"B11":["KM-P-0142-U",null],"B02":["KM-P-0143-U",null],"B05":["KM-P-0144-U",null],"B10":["KM-P-0145-U",null],"B06":["KM-P-0146-U",null],"A09":["KM-P-0147-U","KM-P-0147-C"],"T06":["KM-P-0103-T",null],"T10":["KM-P-0103-T",null],"T15":["KM-P-0103-T",null],"C04":["KM-P-0104-S","KM-P-0104-C"],"C02":["KM-P-0109-S","KM-P-0109-C"],"C08":["KM-P-0109-S","KM-P-0109-C"],"T16":["KM-P-0111-U","KM-P-0111-C"],"A12":["KM-P-0147-U","KM-P-0147-C"],"A03":["KM-P-0118-C",null],"D02":["KM-P-0134-S","KM-P-0134-C"]}; // web piece -> WhatsApp catalog ids [base, con correderas]
@@ -1618,7 +1583,7 @@ const LIT = "0 0 8px 2px rgba(255,250,244,.9), 0 0 22px 6px var(--halo, color-mi
 const EASE = "cubic-bezier(.16,1,.3,1)";
 
 class Component extends DCLogic {
-  state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", cat: "all", q: "", shown: PAGE, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
+  state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", cat: "all", q: "", shown: PAGE, elegida: false, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
   rootRef = React.createRef(); headerRef = React.createRef(); heroRef = React.createRef(); manRef = React.createRef(); gridRef = React.createRef();
   mapRef = React.createRef(); viewerRef = React.createRef(); viewerImgRef = React.createRef(); grainRef = React.createRef(); cartRef = React.createRef(); trackRef = React.createRef(); vScrollRef = React.createRef();
 
@@ -2087,32 +2052,27 @@ class Component extends DCLogic {
       abg: n ? "var(--km-en-carrito)" : "var(--km-tinta)", afg: n ? "var(--km-sobre-carrito)" : "var(--km-dia)",
       add: () => { this.addToCart(p.code, 1, null, null, null, {}); this.showToast("Agregado a tu cotización"); } };
   }
-  // Una puerta: título, fotos, cuántos modelos tiene y qué pasa al tocarla.
+  // Una categoría: nombre, foto, cuántos modelos tiene y qué pasa al tocarla.
   puertaDe(d) {
-    const n = PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length, m = n + (n === 1 ? " modelo" : " modelos"), f = d[2];
-    // ver = el texto del botón de adentro («Ver 13 modelos»), armado aquí: en la plantilla se perdía el espacio
-    return { t: d[1], n: m, ver: "Ver " + m, img: f[0] || "", f2: f[1] || "", f3: f[2] || "", hasMas: f.length > 2, ancho: f.length > 2 ? "1" : "0",
-      frase: d[3], hasFrase: !!d[3], aria: d[1] + ": ver " + m, pick: () => this.abrirCategoria(d[0]) };
+    const n = PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length, m = n + (n === 1 ? " modelo" : " modelos");
+    // ver = el texto de su botón («Ver 13 modelos»), armado aquí: en la plantilla se perdía el espacio
+    return { t: d[1], ver: "Ver " + m, img: d[2], aria: d[1] + ": ver " + m, pick: () => this.abrirCategoria(d[0]) };
   }
-  // Al tocar una puerta: marca la misma pestaña de la tienda, borra la búsqueda, muestra TODOS los modelos de esa
-  // puerta (la puerta dice «N modelos» y salen los N, sin «Ver más») y baja suave hasta ellos, dejando a la vista el
-  // encabezado fijo (68 px) y la barra de pestañas, que se queda pegada arriba.
+  // Al tocar una categoría (o «O mira los N modelos juntos», k = "all"): sus modelos aparecen justo debajo de las
+  // categorías, TODOS (dice «N modelos» y salen los N, sin «Ver más»), y la página baja suave hasta su nombre, dejando
+  // a la vista el encabezado fijo (68 px). Las pestañas con foto se corren para dejar la elegida en el centro.
   abrirCategoria(k) {
-    const n = PIEZAS.filter((p) => p.puerta === k && p.enGrilla).length;
-    this.setState({ cat: k, q: "", shown: Math.max(PAGE, n) }, () => {
-      const g = this.gridRef.current; if (!g) return;
-      const barra = document.querySelector("[data-pbarra]"), arriba = 68 + (barra ? barra.offsetHeight : 60) + 12;
-      window.scrollTo({ top: Math.max(0, g.getBoundingClientRect().top + window.scrollY - arriba), behavior: this.reduce ? "auto" : "smooth" });
-      // en el teléfono las pestañas no caben: la fila se corre para dejar la elegida en el centro
-      const fila = barra && barra.querySelector("[role=tablist]"), t = fila && fila.querySelector("[aria-selected=true]");
+    const n = PIEZAS.filter((p) => (k === "all" || p.puerta === k) && p.enGrilla).length;
+    this.setState({ cat: k, q: "", shown: Math.max(PAGE, n), elegida: true }, () => {
+      const cab = document.querySelector("#tienda [data-cat-cabeza]"); if (!cab) return;
+      window.scrollTo({ top: Math.max(0, cab.getBoundingClientRect().top + window.scrollY - 68 - 16), behavior: this.reduce ? "auto" : "smooth" });
+      const fila = document.querySelector("#tienda [role=tablist]"), t = fila && fila.querySelector("[aria-selected=true]");
       if (t) fila.scrollTo({ left: Math.max(0, fila.scrollLeft + t.getBoundingClientRect().left - fila.getBoundingClientRect().left - (fila.clientWidth - t.offsetWidth) / 2), behavior: this.reduce ? "auto" : "smooth" });
     });
   }
   selectCat(k) {
     if (k === this.state.cat) return;
-    this.setState({ cat: k, shown: PAGE });
-    const t = document.getElementById("tienda"), g = this.gridRef.current;
-    if (t && g && g.getBoundingClientRect().top < 0) window.scrollTo({ top: g.getBoundingClientRect().top + window.scrollY - 190, behavior: this.reduce ? "auto" : "smooth" });
+    this.abrirCategoria(k); // como las categorías de arriba: todos sus modelos y baja hasta su nombre (27-oct-2026)
   }
   onSearch = (e) => this.setState({ q: e.target.value, shown: PAGE });
   clearSearch = () => this.setState({ q: "", cat: "all", shown: PAGE });
@@ -2538,8 +2498,8 @@ class Component extends DCLogic {
       : s.openNow === false ? { label: "Fuera de horario · respondemos desde las 8 am", dot: "#A39DA8", ring: "none" }
       : { label: "WhatsApp de 8 am a 9 pm", dot: "#A39DA8", ring: "none" };
 
-    // pestañas de la tienda = puertas del catálogo: Todo · Peinadoras · Clósets · Vanitys · Camas · Más muebles (26-oct-2026)
-    const catList = [{ key: "all", name: "Todo", count: PIEZAS.filter((p) => p.enGrilla).length }].concat(PUERTAS_KM.map((d) => ({ key: d[0], name: d[1], count: PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length })));
+    // pestañas de la tienda = las categorías, cada una con su foto (26 y 27-oct-2026): Todo · Peinadoras · … · Mesas de uñas
+    const catList = [{ key: "all", name: "Todo", count: PIEZAS.filter((p) => p.enGrilla).length }].concat(PUERTAS_KM.map((d) => ({ key: d[0], name: d[1], img: d[2], count: PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length })));
 
     return {
       rootRef: this.rootRef, grainRef: this.grainRef, headerRef: this.headerRef, heroRef: this.heroRef, manRef: this.manRef,
@@ -2562,7 +2522,7 @@ class Component extends DCLogic {
       lightsPressed: s.lights ? "true" : "false", lightLabel: s.lights ? "Apagar luces" : "Encender luces",
       lightDot: s.lights ? "#FFFFFF" : "rgba(255,255,255,0)", lightGlow: s.lights ? LIT : "none",
       q: s.q, onSearch: this.onSearch, clearSearch: this.clearSearch,
-      cats: catList.map((c) => { const on = s.cat === c.key; return { name: c.name, count: String(c.count), pressed: on ? "true" : "false", select: () => this.selectCat(c.key),
+      cats: catList.map((c) => { const on = s.cat === c.key; return { name: c.name, count: String(c.count), pressed: on ? "true" : "false", select: () => this.selectCat(c.key), img: c.img || "", hasImg: !!c.img, foto: c.img ? "1" : "0",
         bg: on ? "var(--km-tinta)" : "color-mix(in srgb,var(--km-tinta) 0%,transparent)", fg: on ? "var(--km-dia)" : "var(--km-tinta)", bd: on ? "var(--km-tinta)" : "color-mix(in srgb,var(--km-tinta) 20%,transparent)" }; }),
       countBusca: s.q.trim() ? "1" : "0", // en teléfonos el contador solo sale con búsqueda (Sergio, 23-oct-2026)
       countLabel: n + (n === 1 ? " modelo" : " modelos") + (s.q.trim() ? " para «" + s.q.trim() + "»" : s.cat === "all" ? " · destacados primero" : ""),
@@ -2621,15 +2581,20 @@ class Component extends DCLogic {
       ciudadBd: s.nameErr === "ciudad" ? "#B4325A" : "color-mix(in srgb,var(--km-tinta) 20%,transparent)", ciudadSh: s.nameErr === "ciudad" ? "0 0 0 3px rgba(180,50,90,.12)" : "none",
       cartMsg: s.cart.length ? (s.msgCustom != null ? s.msgCustom : this.cartMessage()) : "",
       onMsg: (e) => this.setState({ msgCustom: e.target.value }), msgCustom: s.msgCustom != null, resetMsg: () => this.setState({ msgCustom: null }), sendCart: this.sendCart,
-      cartToShop: () => { this.closeCart(); setTimeout(() => this.goTo("tienda"), 340); },
+      cartToShop: () => { this.closeCart(); setTimeout(() => this.goTo(this.state.elegida ? "tienda" : "puertas"), 340); },
       hasToast: !!s.toast, toast: s.toast, toastCart: s.toastCart,
-      goTienda: (e) => this.goTo("tienda", e),
+      goTienda: (e) => this.goTo("puertas", e), // a las categorías (27-oct-2026)
       vrA: VR_A, vrB: VR_B,
       // catálogo simple (26 y 27-oct-2026): la entrada solo en /catalogo/; los más vendidos y las puertas en las dos páginas.
       // tiendaN = modelos que muestra «Todo»
       modoCat: MODO_CAT, tiendaN: String(PIEZAS.filter((p) => p.enGrilla).length), goEntrada: (e) => this.goTo("entrada", e),
       masVendidos: MV.map((i, k) => this.tarjetaVendida(i, k, inC)),
-      puertasCat: PUERTAS_KM.map((d) => this.puertaDe(d)),
+      // las categorías grandes (banners), las chicas («Más muebles») y el enlace para ver todos los modelos juntos
+      puertasCat: PUERTAS_KM.slice(0, N_GRANDES).map((d) => this.puertaDe(d)), puertasChicas: PUERTAS_KM.slice(N_GRANDES).map((d) => this.puertaDe(d)),
+      verTodos: () => this.abrirCategoria("all"), verTodosTxt: "O mira los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos →",
+      verTodosAria: "Ver los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos",
+      // los modelos solo aparecen al tocar una categoría (27-oct-2026); arriba de ellos van su nombre y cuántos son
+      catElegida: !!s.elegida, catNombre: kmCatNombre(s.cat), catCuenta: n + (n === 1 ? " modelo" : " modelos") + " · toca uno para ver su ficha",
       // en la página de inicio los más vendidos se montan sobre la portada (esquinas redondas, con más aire arriba) y las
       // puertas dejan aire abajo, porque las casas de clientes se montan 28 px encima; en /catalogo/ van pegados
       mvTope: MODO_CAT ? "" : "margin-top:-28px;border-radius:28px 28px 0 0", mvPad: MODO_CAT ? "clamp(26px,4vh,44px)" : "clamp(52px,7.5vh,88px)",
