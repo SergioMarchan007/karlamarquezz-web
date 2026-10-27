@@ -141,8 +141,8 @@
 /* --- puertas (27-oct-2026, el estilo «A» que escogió Sergio): banners anchos como las categorías de la web de
    referencia. Toda la puerta es el botón. Fondo lila muy claro con un marco fino por dentro; la foto real a la derecha,
    que se funde hacia el texto; del lado claro, el nombre en mayúsculas entre dos rayitas con estrellita y el botón
-   «Ver N modelos», todo en violeta. Teléfono y tableta: una debajo de otra; computadora (900 px o más): 2 por fila y
-   «Más muebles» ancha abajo con sus 3 fotos. --- */
+   «Ver N modelos», todo en violeta. Teléfono y tableta: una debajo de otra; computadora (900 px o más): 2 por fila.
+   «Más muebles» va aparte, en cuadritos (más abajo). --- */
 [data-puertas] { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px }
 [data-puerta] { position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; overflow: hidden; border-radius: 6px;
   background: var(--km-lila-suave); color: var(--km-violeta); text-align: center; cursor: pointer; transition: transform .14s ease-out }
@@ -195,10 +195,36 @@
 [data-pbarra] [role=tab][data-chip] { height: 44px !important; gap: 8px !important }
 [data-pbarra] [role=tab][data-chip][data-foto="1"] { padding-left: 5px !important }
 [data-chip] img { flex: none; display: block; width: 34px; height: 34px; border-radius: 50%; object-fit: cover }
+/* el número de modelos de cada pestaña: 12 px como las demás etiquetas (la tienda compacta lo dejaba en 11) y con más
+   contraste en la marca E */
+[data-pbarra] [role=tab][data-chip] > span { font-size: 12px !important; opacity: .7 !important }
+/* en el teléfono, aire entre las pestañas y la primera fila de modelos (la tienda compacta las pegaba a 2 px) */
+@media (max-width: 600px) { #tienda [data-pbarra] { margin-bottom: -12px !important } }
+/* computadora con mouse (desde 900 px): la fila de pestañas no tiene barra y con la rueda del mouse no se corre, así que
+   las que no caben bajan a una segunda fila. Van un poco más juntas para que las 9 quepan en una sola fila desde 1440 px.
+   En el teléfono se siguen deslizando con el dedo (y las vistas de teléfono de NAVEON Mobile, que usan el mouse de la PC,
+   quedan como en un teléfono de verdad gracias al «desde 900 px») */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  #tienda [role=tablist] { flex-wrap: wrap !important; overflow-x: visible !important; gap: 6px !important }
+  [data-pbarra] [role=tab][data-chip] { padding-right: 12px !important }
+}
+/* la cejita de los modelos no deja una palabra sola en la 2.ª línea; y al abrir una categoría con el teclado, el foco va al
+   nombre de la categoría (sin marco: no es un botón) */
+#tienda [data-cat-ceja] { text-wrap: balance }
+#tienda-t:focus { outline: none }
 
 @media (hover: hover) and (pointer: fine) {
   [data-mv-abrir]:hover [data-mv-foto] img, [data-puerta]:hover [data-puerta-fotos] img, [data-puerta-chica]:hover [data-puerta-chica-foto] img { transform: scale(1.04) }
   [data-puerta]:hover [data-puerta-btn] { background: var(--km-tinta) }
+}
+/* teléfono (menos de 640 px): el nombre y el botón ya no tocan el mueble (en la referencia hay aire entre el texto y la
+   foto). La foto ocupa un poco menos y se funde más suave; el botón y las rayitas, más cortos */
+@media (max-width: 639px) {
+  [data-puerta-fotos] { width: 52%; -webkit-mask-image: linear-gradient(to right, transparent, #000 32%); mask-image: linear-gradient(to right, transparent, #000 32%) }
+  [data-puerta-txt] { padding: 16px 6px 16px 12px }
+  [data-puerta-t] { letter-spacing: .03em }
+  [data-puerta-btn] { height: 32px; padding: 0 10px; letter-spacing: .08em }
+  [data-puerta-orn] { width: min(100%, 128px) }
 }
 /* tableta (640 a 899 px): las puertas siguen una debajo de otra, más anchas; la foto deja más lugar al nombre */
 @media (min-width: 640px) {
@@ -215,6 +241,9 @@
   [data-mv-grid] { grid-template-columns: repeat(4,minmax(0,1fr)) }
   [data-puertas-chicas] { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px }
   [data-mv-card] { padding: 10px }
+  /* con 4 por fila el cuadrito mide 163 a 195 px en la tableta: el nombre crece con la pantalla (24 px desde 1090 px).
+     A 24 px fijos «ESCRITORIOS» se salía de su cuadrito */
+  [data-puerta-chica-t] { font-size: clamp(16px,2.2vw,24px) }
 }
 /* computadora: la guirnalda más alta y las 4 puertas grandes en 2 filas de 2, como en la referencia */
 @media (min-width: 900px) {
@@ -456,14 +485,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 
 <section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <sc-if value="{{ catElegida }}" hint-placeholder-val="{{ false }}">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(36px,5vh,56px) clamp(14px,4vw,56px) clamp(96px,14vh,150px);display:flex;flex-direction:column;gap:clamp(16px,2.4vh,26px)">
+  <div style="max-width:1440px;margin:0 auto;padding:clamp(36px,5vh,56px) clamp(14px,4vw,56px) {{ tiFin }};display:flex;flex-direction:column;gap:clamp(16px,2.4vh,26px)">
     <div data-cat-cabeza="">
       <div data-cat-titulo=""><p data-cat-ceja="" role="status"><span aria-hidden="true"></span>{{ catCuenta }}</p><h2 id="tienda-t">{{ catNombre }}</h2></div>
     </div>
     <div data-pbarra="" style="display:flex;flex-direction:column;gap:14px;position:sticky;top:68px;z-index:5;margin:0 -14px;padding:10px 14px;background:color-mix(in srgb,var(--km-dia) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
       <div role="tablist" aria-label="Categorías" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
         <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
-          <button type="button" role="tab" data-chip="" data-foto="{{ c.foto }}" aria-selected="{{ c.pressed }}" onClick="{{ c.select }}" style="flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;transition:background-color .3s ease,color .3s ease,border-color .3s ease"><sc-if value="{{ c.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ c.img }}" alt="" width="34" height="34" loading="lazy" decoding="async" draggable="false"></sc-if>{{ c.name }}<span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;font-weight:400;opacity:.62">{{ c.count }}</span></button>
+          <button type="button" role="tab" data-chip="" data-foto="{{ c.foto }}" aria-selected="{{ c.pressed }}" onClick="{{ c.select }}" style="flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;transition:background-color .3s ease,color .3s ease,border-color .3s ease"><sc-if value="{{ c.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ c.img }}" alt="" width="34" height="34" loading="lazy" decoding="async" draggable="false"></sc-if><b style="font-weight:inherit">{{ c.name }}</b><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;font-weight:400;opacity:.62">{{ c.count }}</span></button>
         </sc-for>
       </div>
     </div>
@@ -517,7 +546,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <sc-if value="{{ app.show }}" hint-placeholder-val="{{ false }}">
           <button type="button" onClick="{{ app.go }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px 0 8px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15px;font-weight:700;transition:transform .35s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-2px)">
             <img src="marca/icon-192.png" alt="" width="36" height="36" style="display:block;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-marfil) 18%,transparent)">
-            <span style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.1;text-align:left"><span>Instala la app de KM</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--km-lila-t)">Gratis · un toque desde tu inicio</span></span>
+            <span style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.1;text-align:left"><span>Instala la app de KM</span><span style="font-family:'DM Mono',ui-monospace,monospace;font-size:9.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--km-halo)">Gratis · un toque desde tu inicio</span></span>
           </button>
         </sc-if>
     </div>
@@ -1536,15 +1565,19 @@ const MV = [];
 MAS_VENDIDOS.forEach((c) => { const i = aVisible(c); if (i >= 0 && MV.indexOf(i) < 0) MV.push(i); });
 // las categorías, en orden: primero las grandes (banners) y después las chicas («Más muebles»). También son las
 // pestañas con foto que van arriba de los modelos: [letra, nombre, foto real]
-const PUERTAS_KM = [["T", "Peinadoras", "fotos-km/KM-P-0102.webp"], ["A", "Clósets", "fotos-km/KM-P-0117.webp"], ["C", "Vanitys", "fotos-km/KM-P-0104.webp"], ["B", "Camas", "fotos-km/B08.webp"], ["D", "Escritorios", "fotos-km/D02-F129.webp"], ["M", "Gaveteros", "fotos-km/KM-P-0121.webp"], ["E", "Zapateras", "fotos-km/KM-P-0114.webp"], ["U", "Mesas de uñas", "fotos-km/KM-P-0129.webp"]];
+const PUERTAS_KM = [["T", "Peinadoras", "fotos-km/KM-P-0102.webp"], ["A", "Clósets", "fotos-km/KM-P-0117.webp"], ["C", "Vanitys", "fotos-km/KM-P-0104.webp"], ["B", "Camas", "fotos-km/B08.webp"], ["D", "Escritorios", "fotos-km/D01-F093.webp"], ["M", "Gaveteros", "fotos-km/KM-P-0121.webp"], ["E", "Zapateras", "fotos-km/KM-P-0114.webp"], ["U", "Mesas de uñas", "fotos-km/KM-P-0129.webp"]];
 const N_GRANDES = 4;
 // la categoría de cada modelo: la de la letra de su código. GRUPO_DE corrige los que no siguen su letra (las mesas
 // de uñas tienen la T, pero no son peinadoras)
 const GRUPO_DE = {"T08": "U", "T11": "U"};
 PIEZAS.forEach((p) => { p.puerta = GRUPO_DE[p.code] || p.k; });
-// «Todo» va en el orden de las categorías y, dentro de cada una, como antes (por tipo y primero los destacados)
+// «Todo» va en el orden de las categorías y, dentro de cada una, como antes (por tipo y primero los destacados).
+// Un mueble con una letra sin categoría va al final
 const PUERTA_ORDEN = PUERTAS_KM.map((d) => d[0]).join("");
-const kmTodoPuertas = (a, b) => (PUERTA_ORDEN.indexOf(PIEZAS[a].puerta) - PUERTA_ORDEN.indexOf(PIEZAS[b].puerta)) || kmTodo(a, b);
+const kmLugarCat = (p) => { const i = PUERTA_ORDEN.indexOf(p.puerta); return i < 0 ? 99 : i; };
+const kmTodoPuertas = (a, b) => (kmLugarCat(PIEZAS[a]) - kmLugarCat(PIEZAS[b])) || kmTodo(a, b);
+// una categoría solo sale si tiene algún modelo a la vista (si Karla esconde el único gavetero, «Gaveteros» no sale)
+const kmConModelos = (d) => PIEZAS.some((p) => p.puerta === d[0] && p.enGrilla);
 const kmPuertaNombre = (p) => { const d = PUERTAS_KM.find((x) => x[0] === p.puerta); return d ? d[1] : p.cat; };
 // el nombre de una categoría por su letra («all» = todos los modelos juntos)
 const kmCatNombre = (k) => { const d = PUERTAS_KM.find((x) => x[0] === k); return d ? d[1] : "Todos los modelos"; };
@@ -2056,16 +2089,20 @@ class Component extends DCLogic {
   puertaDe(d) {
     const n = PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length, m = n + (n === 1 ? " modelo" : " modelos");
     // ver = el texto de su botón («Ver 13 modelos»), armado aquí: en la plantilla se perdía el espacio
-    return { t: d[1], ver: "Ver " + m, img: d[2], aria: d[1] + ": ver " + m, pick: () => this.abrirCategoria(d[0]) };
+    return { t: d[1], ver: "Ver " + m, img: d[2], aria: d[1] + ": ver " + m, pick: () => this.abrirCategoria(d[0], true) };
   }
   // Al tocar una categoría (o «O mira los N modelos juntos», k = "all"): sus modelos aparecen justo debajo de las
   // categorías, TODOS (dice «N modelos» y salen los N, sin «Ver más»), y la página baja suave hasta su nombre, dejando
   // a la vista el encabezado fijo (68 px). Las pestañas con foto se corren para dejar la elegida en el centro.
-  abrirCategoria(k) {
+  // foco = true cuando se abre desde las categorías de arriba: quien usa el teclado sigue desde el nombre de la
+  // categoría y no desde el banner, que quedó muy arriba (las pestañas no mueven el foco)
+  abrirCategoria(k, foco) {
     const n = PIEZAS.filter((p) => (k === "all" || p.puerta === k) && p.enGrilla).length;
     this.setState({ cat: k, q: "", shown: Math.max(PAGE, n), elegida: true }, () => {
       const cab = document.querySelector("#tienda [data-cat-cabeza]"); if (!cab) return;
       window.scrollTo({ top: Math.max(0, cab.getBoundingClientRect().top + window.scrollY - 68 - 16), behavior: this.reduce ? "auto" : "smooth" });
+      const nombre = document.getElementById("tienda-t");
+      if (foco && nombre) { nombre.setAttribute("tabindex", "-1"); nombre.focus({ preventScroll: true }); }
       const fila = document.querySelector("#tienda [role=tablist]"), t = fila && fila.querySelector("[aria-selected=true]");
       if (t) fila.scrollTo({ left: Math.max(0, fila.scrollLeft + t.getBoundingClientRect().left - fila.getBoundingClientRect().left - (fila.clientWidth - t.offsetWidth) / 2), behavior: this.reduce ? "auto" : "smooth" });
     });
@@ -2499,7 +2536,7 @@ class Component extends DCLogic {
       : { label: "WhatsApp de 8 am a 9 pm", dot: "#A39DA8", ring: "none" };
 
     // pestañas de la tienda = las categorías, cada una con su foto (26 y 27-oct-2026): Todo · Peinadoras · … · Mesas de uñas
-    const catList = [{ key: "all", name: "Todo", count: PIEZAS.filter((p) => p.enGrilla).length }].concat(PUERTAS_KM.map((d) => ({ key: d[0], name: d[1], img: d[2], count: PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length })));
+    const catList = [{ key: "all", name: "Todo", count: PIEZAS.filter((p) => p.enGrilla).length }].concat(PUERTAS_KM.filter(kmConModelos).map((d) => ({ key: d[0], name: d[1], img: d[2], count: PIEZAS.filter((p) => p.puerta === d[0] && p.enGrilla).length })));
 
     return {
       rootRef: this.rootRef, grainRef: this.grainRef, headerRef: this.headerRef, heroRef: this.heroRef, manRef: this.manRef,
@@ -2590,15 +2627,20 @@ class Component extends DCLogic {
       modoCat: MODO_CAT, tiendaN: String(PIEZAS.filter((p) => p.enGrilla).length), goEntrada: (e) => this.goTo("entrada", e),
       masVendidos: MV.map((i, k) => this.tarjetaVendida(i, k, inC)),
       // las categorías grandes (banners), las chicas («Más muebles») y el enlace para ver todos los modelos juntos
-      puertasCat: PUERTAS_KM.slice(0, N_GRANDES).map((d) => this.puertaDe(d)), puertasChicas: PUERTAS_KM.slice(N_GRANDES).map((d) => this.puertaDe(d)),
-      verTodos: () => this.abrirCategoria("all"), verTodosTxt: "O mira los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos →",
+      puertasCat: PUERTAS_KM.slice(0, N_GRANDES).filter(kmConModelos).map((d) => this.puertaDe(d)),
+      puertasChicas: PUERTAS_KM.slice(N_GRANDES).filter(kmConModelos).map((d) => this.puertaDe(d)),
+      verTodos: () => this.abrirCategoria("all", true), verTodosTxt: "O mira los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos →",
       verTodosAria: "Ver los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos",
       // los modelos solo aparecen al tocar una categoría (27-oct-2026); arriba de ellos van su nombre y cuántos son
       catElegida: !!s.elegida, catNombre: kmCatNombre(s.cat), catCuenta: n + (n === 1 ? " modelo" : " modelos") + " · toca uno para ver su ficha",
-      // en la página de inicio los más vendidos se montan sobre la portada (esquinas redondas, con más aire arriba) y las
-      // puertas dejan aire abajo, porque las casas de clientes se montan 28 px encima; en /catalogo/ van pegados
+      // en la página de inicio los más vendidos se montan sobre la portada (esquinas redondas, con más aire arriba); en
+      // /catalogo/ van pegados a la entrada. Las puertas dejan aire abajo, porque lo que viene después se monta 28 px encima
       mvTope: MODO_CAT ? "" : "margin-top:-28px;border-radius:28px 28px 0 0", mvPad: MODO_CAT ? "clamp(26px,4vh,44px)" : "clamp(52px,7.5vh,88px)",
-      ptFin: MODO_CAT ? "0px" : "clamp(44px,5.5vh,64px)",
+      // en /catalogo/ las puertas van pegadas a los modelos solo con la tienda abierta: cerrada, lo que sigue es la portada
+      // «Enciende tu rincón», que se monta 28 px y tapaba «O mira los N modelos juntos»; por eso ahí dejan aire
+      ptFin: MODO_CAT ? (s.elegida ? "0px" : "clamp(64px,8vh,88px)") : "clamp(44px,5.5vh,64px)",
+      // aire debajo de los modelos: en el inicio, lo justo antes de las casas de clientes (que se montan 28 px encima)
+      tiFin: MODO_CAT ? "clamp(96px,14vh,150px)" : "clamp(44px,5.5vh,64px)",
       pideDatos: !MODO_CAT,
       app: { show: !this.standalone && !s.appDone && (!!s.appEv || !!s.appIOS), go: this.installApp, sheet: s.appSheet,
         close: () => this.setState({ appSheet: false }), stop: (e) => e.stopPropagation(),
