@@ -190,6 +190,14 @@
    arriba al bajar, las categorías chiquitas con foto para cambiar sin volver a subir --- */
 [data-cat-cabeza] { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 40px }
 [data-cat-cabeza] [data-cat-titulo] { margin: 0 }
+/* una categoría abierta es como entrar a otra página (Sergio, 28-oct-2026): solo se ven sus modelos (la tienda), el
+   encabezado y el pie; lo demás vuelve al tocar «← Todas las categorías» o el «atrás» del teléfono */
+html[data-cat-abierta] section:not(#tienda) { display: none !important }
+/* arriba de todo queda debajo del encabezado fijo (68 px): se le da ese aire para que no lo tape */
+html[data-cat-abierta] #tienda { padding-top: 68px }
+[data-cat-volver] { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px 0 14px;
+  border-radius: 999px; background: #FFFFFF; box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--km-tinta) 16%,transparent); font-size: 16px; font-weight: 700; color: var(--km-tinta) }
+[data-cat-volver]:focus-visible { outline: 2px solid var(--km-violeta); outline-offset: 3px }
 /* cada pestaña con su foto redonda (las del teléfono medían 34 px: con foto van de 44) */
 [data-pbarra] [role=tab][data-chip] { height: 44px !important; gap: 8px !important }
 [data-pbarra] [role=tab][data-chip][data-foto="1"] { padding-left: 5px !important }
@@ -1260,6 +1268,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <section id="tienda" data-tone="day" data-screen-label="Tienda" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <sc-if value="{{ catElegida }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(36px,5vh,56px) clamp(14px,4vw,56px) {{ tiFin }};display:flex;flex-direction:column;gap:clamp(16px,2.4vh,26px)">
+    <button type="button" data-cat-volver="" onClick="{{ volverCats }}"><span aria-hidden="true">←</span> Todas las categorías</button>
     <div data-cat-cabeza="">
       <div data-cat-titulo=""><p data-cat-ceja="" role="status"><span aria-hidden="true"></span>{{ catCuenta }}</p><h2 id="tienda-t">{{ catNombre }}</h2></div>
     </div>
@@ -2962,15 +2971,29 @@ class Component extends DCLogic {
   // a la vista el encabezado fijo (68 px). Las pestañas con foto se corren para dejar la elegida en el centro.
   // foco = true cuando se abre desde las categorías de arriba: quien usa el teclado sigue desde el nombre de la
   // categoría y no desde el banner, que quedó muy arriba (las pestañas no mueven el foco)
+  // Sergio (28-oct-2026): «le da clic allí y entra y ve los modelos dentro de lo que elige», como entrar a otra página.
+  // Por eso al abrir una categoría se esconde todo lo demás (html[data-cat-abierta], ver CSS) y la vista empieza arriba;
+  // se guarda un paso en el historial, así el botón «atrás» del teléfono vuelve a las categorías.
   abrirCategoria(k, foco) {
     const n = PIEZAS.filter((p) => (k === "all" || p.puerta === k) && p.enGrilla).length;
+    if (!this._kmPop) { this._kmPop = () => { if (this.state.elegida) this.cerrarCategoria(true); }; window.addEventListener("popstate", this._kmPop); }
+    if (!(history.state && history.state.kmCat)) { try { history.pushState({ kmCat: 1 }, ""); } catch (err) {} }
     this.setState({ cat: k, q: "", shown: Math.max(PAGE, n), elegida: true }, () => {
-      const cab = document.querySelector("#tienda [data-cat-cabeza]"); if (!cab) return;
-      window.scrollTo({ top: Math.max(0, cab.getBoundingClientRect().top + window.scrollY - 68 - 16), behavior: this.reduce ? "auto" : "smooth" });
+      document.documentElement.setAttribute("data-cat-abierta", "");
+      window.scrollTo({ top: 0, behavior: "auto" });
       const nombre = document.getElementById("tienda-t");
       if (foco && nombre) { nombre.setAttribute("tabindex", "-1"); nombre.focus({ preventScroll: true }); }
       const fila = document.querySelector("#tienda [role=tablist]"), t = fila && fila.querySelector("[aria-selected=true]");
       if (t) fila.scrollTo({ left: Math.max(0, fila.scrollLeft + t.getBoundingClientRect().left - fila.getBoundingClientRect().left - (fila.clientWidth - t.offsetWidth) / 2), behavior: this.reduce ? "auto" : "smooth" });
+    });
+  }
+  // «← Todas las categorías» (o el «atrás» del teléfono): se cierra la categoría y la página vuelve a las categorías
+  cerrarCategoria(desdeAtras) {
+    if (!desdeAtras && history.state && history.state.kmCat) { history.back(); return; }  // el popstate la cierra
+    document.documentElement.removeAttribute("data-cat-abierta");
+    this.setState({ elegida: false, cat: "all" }, () => {
+      const pu = document.getElementById("puertas");
+      if (pu) window.scrollTo({ top: Math.max(0, pu.getBoundingClientRect().top + window.scrollY - 68), behavior: "auto" });
     });
   }
   selectCat(k) {
@@ -3498,6 +3521,7 @@ class Component extends DCLogic {
       verTodos: () => this.abrirCategoria("all", true), verTodosTxt: "O mira los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos →",
       verTodosAria: "Ver los " + PIEZAS.filter((p) => p.enGrilla).length + " modelos juntos",
       // los modelos solo aparecen al tocar una categoría (27-oct-2026); arriba de ellos van su nombre y cuántos son
+      volverCats: () => this.cerrarCategoria(),
       catElegida: !!s.elegida, catNombre: kmCatNombre(s.cat), catCuenta: n + (n === 1 ? " modelo" : " modelos") + " · toca uno para ver su ficha",
       // en la página de inicio los más vendidos se montan sobre la portada (esquinas redondas, con más aire arriba); en
       // /catalogo/ van pegados a la entrada. Las puertas dejan aire abajo, porque lo que viene después se monta 28 px encima
