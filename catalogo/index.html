@@ -285,6 +285,10 @@ html[data-pasos="a"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
 html[data-pasos="b"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="b"]),
 html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="c"]) { display: none !important }
 
+/* orden de cada paso (Sergio, 28-oct-2026): número, texto y DEBAJO el dibujo. En la computadora los 4 pasos van en fila
+   y un texto puede tener una línea más: el dibujo se va al fondo del paso, así los 4 dibujos quedan a la misma altura */
+[data-pasos-lista] > li > [data-escena] { margin-top: auto }
+
 /* ===== Opción A · Trazo fino («Cómo pedir», 28-oct-2026) =====
    Dibujos de línea fina violeta que se arman solos sobre tarjetas blancas, con los bombillitos de KM encendidos.
    - Los estilos normales son el ÚLTIMO cuadro de cada historia: así se ve quien pidió «menos movimiento».
@@ -1271,7 +1275,9 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   <!-- Paso 1 · WhatsApp: eliges el modelo (sale el check), escribes «Quiero este modelo», lo envías y KM ya te está escribiendo -->
   <li data-reveal="up" style="display:flex;flex-direction:column;gap:20px">
     <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">1</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Escríbenos por WhatsApp y elige tu modelo.</p>
+      <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
       <defs>
         <!-- el brillo lila de los bombillos (lo usan los 4 dibujos) -->
         <radialGradient id="pa-g"><stop offset="0" class="pa-g0"/><stop offset=".45" class="pa-g1"/><stop offset="1" class="pa-g2"/></radialGradient>
@@ -1313,14 +1319,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <path class="pa-k pa-l pa-cr" style="animation-name:pa1r" d="M77 177.5v12"/>
       <g class="pa-k pa-o" style="animation-name:pa1s"><circle class="pa-wa" cx="203" cy="183.5" r="10.5"/><path class="pa-wf" d="m198.4 178.4 10.6 5.1-10.6 5.1 1.9-5.1z"/></g>
     </svg></div>
-    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">1</span>
-    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Escríbenos por WhatsApp y elige tu modelo.</p>
   </li>
 
   <!-- Paso 2 · Abono: un aro de bombillos se enciende hasta la mitad mientras el número cuenta hasta 50 %, y sale «Reservado» -->
   <li data-reveal="up" data-delay="100" style="display:flex;flex-direction:column;gap:20px">
     <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="300" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Resérvalo con el 50 % de abono.</p>
+      <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
       <defs>
         <!-- el brillo de los bombillos se destapa siguiendo la línea violeta (misma animación) -->
         <mask id="pa-m2"><path class="pa-k pa-mk" style="animation-name:pa2a" pathLength="1" d="M140 36a52 52 0 0 1 0 104"/></mask>
@@ -1348,14 +1354,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <text class="pa-t pa-tb pa-tv" x="120.5" y="174.6">Reservado</text>
       </g>
     </svg></div>
-    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
-    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Resérvalo con el 50 % de abono.</p>
   </li>
 
   <!-- Paso 3 · Taller: del plano punteado a la peinadora dibujada, pintada, con luces y envuelta en plástico, mientras el reloj corre -->
   <li data-reveal="up" data-delay="200" style="display:flex;flex-direction:column;gap:20px">
     <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="600" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">3</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+      <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
       <defs>
         <!-- por dónde pasa la pintura: tablero, cajón, marco del espejo y banquito -->
         <clipPath id="pa-c3"><path clip-rule="evenodd" d="M146 124h100v6H146zM150 130h92v38h-92zM166 124V50a4 4 0 0 1 4-4h52a4 4 0 0 1 4 4v74zM173 118h46V54h-46zM118 146h28v6h-28z"/></clipPath>
@@ -1383,14 +1389,14 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <path class="pa-k pa-wo pa-d" style="animation-name:pa3o" pathLength="1" d="M152 40C176 34 216 34 240 40C250 90 251 140 248 174H144C141 140 142 90 152 40Z"/>
       <path class="pa-k pa-sh" style="animation-name:pa3s" d="M158 72l16-16M158 90l28-28M226 160l16-16"/>
     </svg></div>
-    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">3</span>
-    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
   </li>
 
   <!-- Paso 4 · Retiro o envío: el taller abre su santamaría, tú llegas a buscar tu peinadora, «o» el camión (de un transporte aliado, sin logo) sale cargado -->
   <li data-reveal="up" data-delay="300" style="display:flex;flex-direction:column;gap:20px">
     <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="900" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">4</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+      <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
       <defs>
         <!-- la peinadora envuelta en plástico va dibujada dos veces (en la puerta y en el camión): dentro de un <use> perdía sus colores -->
         
@@ -1427,8 +1433,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <!-- la calle: sus rayas corren mientras el camión arranca -->
       <path class="pa-k pa-rd" style="animation-name:pa4r" d="M150 182H280"/>
     </svg></div>
-    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">4</span>
-    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
   </li>
 </ol>
 <!-- ===== Opción B · «Pantallitas» (pedido de Sergio, 28-oct-2026) =====
@@ -1438,7 +1442,9 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <!-- 1 · Chat de WhatsApp: elige el modelo, escribe, envía, KM lo lee y responde -->
 <li data-reveal="up">
 <div class="pbl"><span data-reveal="bulb"></span><span></span></div>
-<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<span class="pbn">1</span>
+<p>Escríbenos por WhatsApp y elige tu modelo.</p>
+      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <defs>
 <!-- la peinadora (se dibuja una vez y se repite con <use>): espejo con bombillos, tope, gavetas y patas -->
 <symbol id="pbP" viewBox="0 0 60 72">
@@ -1500,13 +1506,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <path class="pbk pbck2 pb1r" d="M22 184v13"/>
 <g class="pb1s"><circle class="pbwa" cx="236" cy="190" r="13"/><path class="pbw" d="M230.5 184.5l12 5.5-12 5.5 2.4-5.5z"/></g>
 </svg></div>
-<span class="pbn">1</span>
-<p>Escríbenos por WhatsApp y elige tu modelo.</p>
 </li>
 <!-- 2 · Abono: el 50 % se llena, se ven las formas de pago y cae el sello «Reservado» -->
 <li data-reveal="up" data-delay="100">
 <div class="pbl"><span data-reveal="bulb" data-delay="300"></span><span></span></div>
-<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<span class="pbn">2</span>
+<p>Resérvalo con el 50 % de abono.</p>
+      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <rect class="pbi" x="17" y="14.5" width="16" height="11.5" rx="2"/><path class="pbi" d="M17 18.5h16M20 22.5h4"/>
 <text class="pbb" x="46" y="18">Tu reserva</text>
@@ -1538,13 +1544,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <text class="pbm pbv pbsl" x="97" y="184.5">RESERVADO</text>
 </g>
 </svg></div>
-<span class="pbn">2</span>
-<p>Resérvalo con el 50 % de abono.</p>
 </li>
 <!-- 3 · Taller: pasan los días (reloj y contador), se encienden las etapas y sale embalado en plástico -->
 <li data-reveal="up" data-delay="200">
 <div class="pbl"><span data-reveal="bulb" data-delay="600"></span><span></span></div>
-<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<span class="pbn">3</span>
+<p>Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <circle class="pbw pbi" cx="25" cy="20" r="8"/><path class="pbi" d="M25 20l3.2 2.2"/><path class="pbi pb3m" d="M25 20v-5.6"/>
 <text class="pbb" x="46" y="18">En el taller</text>
@@ -1573,13 +1579,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <use class="pb3f" href="/catalogo/#pbF" width="60" height="72"/>
 </g>
 </svg></div>
-<span class="pbn">3</span>
-<p>Lo fabricamos a mano en 10 a 15 días hábiles.</p>
 </li>
 <!-- 4 · Entrega: dos opciones; la marca violeta pasa de «Retiro» a «Envío», tú llegas al taller o sale el camión -->
 <li data-reveal="up" data-delay="300">
 <div class="pbl"><span data-reveal="bulb" data-delay="900"></span><span></span></div>
-<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<span class="pbn">4</span>
+<p>Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <path class="pbi" d="M25 28.5s-6-5.6-6-10a6 6 0 0 1 12 0c0 4.4-6 10-6 10z"/><circle class="pbi" cx="25" cy="18.5" r="2"/>
 <text class="pbb" x="46" y="18">Entrega</text>
@@ -1616,8 +1622,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <!-- la marca violeta de la opción elegida (pasa de una a otra) -->
 <g class="pb4s"><rect class="pbsel" x="12" y="48" width="236" height="72" rx="12"/><circle class="pbv" cx="236" cy="62" r="3.4"/></g>
 </svg></div>
-<span class="pbn">4</span>
-<p>Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
 </li>
 </ol>
 <!-- ===== Opción C · «Escenas» (pasos animados de «Cómo pedir», pedido de Sergio, 28-oct-2026) =====
@@ -1631,7 +1635,10 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   <!-- PASO 1 · WhatsApp: la persona escribe, el mensaje sale con su doble check, KM le manda 3 modelos y la
        peinadora lila «salta», se marca y le sale un corazón. -->
   <li data-reveal="up">
-    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+    <div class="pc-f"><span data-reveal="bulb" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">1</span>
+    <p class="pc-p">Escríbenos por WhatsApp y elige tu modelo.</p>
+      <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
       <defs>
         <!-- LA PEINADORA: se dibuja una vez aquí y los 4 pasos la reusan con <use>.
              Quien la usa le da el color: fill = el mueble y color = sus sombras (clases vl, vw y vd del CSS). -->
@@ -1702,15 +1709,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </g>
       </g>
     </svg></div>
-    <div class="pc-f"><span data-reveal="bulb" class="pc-b"></span><span class="pc-r"></span></div>
-    <span class="pc-n">1</span>
-    <p class="pc-p">Escríbenos por WhatsApp y elige tu modelo.</p>
   </li>
 
   <!-- PASO 2 · Abono: un billete y 5 monedas caen en el frasco hasta la marca del 50 %; la marca se completa,
        a la peinadora le cuelgan la etiqueta «Reservado» y se le encienden los bombillos. -->
   <li data-reveal="up" data-delay="100">
-    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+    <div class="pc-f"><span data-reveal="bulb" data-delay="300" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">2</span>
+    <p class="pc-p">Resérvalo con el 50 % de abono.</p>
+      <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
       <rect class="d" y="150" width="320" height="50"/>
       <circle class="ls" cx="268" cy="110" r="60"/>
       <ellipse class="sh" cx="268" cy="172" rx="40" ry="4"/><ellipse class="sh" cx="88" cy="172" rx="48" ry="4"/>
@@ -1744,15 +1751,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </g>
       </g>
     </svg></div>
-    <div class="pc-f"><span data-reveal="bulb" data-delay="300" class="pc-b"></span><span class="pc-r"></span></div>
-    <span class="pc-n">2</span>
-    <p class="pc-p">Resérvalo con el 50 % de abono.</p>
   </li>
 
   <!-- PASO 3 · Taller: mientras el reloj da vueltas (pasan los días), la peinadora se arma pieza por pieza
        (cuerpo, gavetas, espejo y banquito) con el martillo, se encienden sus bombillos y la envuelven en plástico. -->
   <li data-reveal="up" data-delay="200">
-    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+    <div class="pc-f"><span data-reveal="bulb" data-delay="600" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">3</span>
+    <p class="pc-p">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+      <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
       <rect class="d" y="150" width="320" height="50"/>
       <circle class="ls" cx="226" cy="104" r="66"/>
       <!-- el reloj de pared: las agujas dan vueltas y terminan donde empezaron -->
@@ -1786,15 +1793,15 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <!-- listo: un check violeta -->
       <g class="R"><g style="animation-name:pc3Ok;transform-box:fill-box;transform-origin:center"><circle class="v" cx="266" cy="80" r="11"/><path d="M261 80l3.5 3.5 6.5-7" style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/></g></g>
     </svg></div>
-    <div class="pc-f"><span data-reveal="bulb" data-delay="600" class="pc-b"></span><span class="pc-r"></span></div>
-    <span class="pc-n">3</span>
-    <p class="pc-p">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
   </li>
 
   <!-- PASO 4 · Entrega, dos caminos: una persona sale del taller con su peinadora embalada en un carrito (retiro)
        y un camión ya cargado (sin logo: es un transporte aliado) sale hacia una casita (envío). -->
   <li data-reveal="up" data-delay="300">
-    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200" class="pc-9">
+    <div class="pc-f"><span data-reveal="bulb" data-delay="900" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">4</span>
+    <p class="pc-p">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+      <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200" class="pc-9">
       <rect class="d" y="170" width="320" height="30"/>
       <circle class="ls" cx="298" cy="146" r="40"/>
       <!-- la casita (su ventana redonda se enciende al final) -->
@@ -1833,9 +1840,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <!-- las dos opciones, escritas abajo -->
       <g class="R"><text class="mo v" x="45" y="189" style="text-anchor:middle;animation-name:pc4L1">RETIRO</text><text class="mo v" x="239" y="189" style="text-anchor:middle;animation-name:pc4Wi">ENVÍO</text></g>
     </svg></div>
-    <div class="pc-f"><span data-reveal="bulb" data-delay="900" class="pc-b"></span><span class="pc-r"></span></div>
-    <span class="pc-n">4</span>
-    <p class="pc-p">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
   </li>
 </ol>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
