@@ -902,6 +902,8 @@ a[href$="#taller"], a[href$="#a-tu-gusto"], a[href$="#como-pedir"], a[href$="#pr
 /* catálogo simple (26-oct-2026): el título de la portada ahora es un h2 (el h1 es «Nuestro catálogo.»): espacio para
    las letras de Kalnia que bajan de la línea */
 #inicio h2[data-hw] > span { padding-bottom: .32em !important; margin-bottom: -.32em !important }
+/* Sergio (28-oct-2026): «Enciende tu rincón» es de la página web completa, no del catálogo */
+#inicio { display: none !important }
 </style>
 <style>[data-screen-label="Manifiesto"] { display: none !important }
 #inicio h1[data-hw] > span { padding-bottom: .32em !important; margin-bottom: -.32em !important }
@@ -1711,7 +1713,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   </div>
 </section>
 
-<section id="inicio" hidden="" data-tone="night" data-screen-label="Portada" ref="{{ heroRef }}" onPointerMove="{{ heroMove }}" style="position:relative;z-index:2;margin-top:-28px;border-radius:28px 28px 0 0;background:var(--km-noche);color:var(--km-marfil);min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px clamp(26px,5.6vw,88px) clamp(28px,6vh,64px);overflow:hidden;isolation:isolate">
+<section id="inicio" data-tone="night" data-screen-label="Portada" ref="{{ heroRef }}" onPointerMove="{{ heroMove }}" style="position:relative;z-index:2;margin-top:-28px;border-radius:28px 28px 0 0;background:var(--km-noche);color:var(--km-marfil);min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px clamp(26px,5.6vw,88px) clamp(28px,6vh,64px);overflow:hidden;isolation:isolate">
   <div data-hlight="" aria-hidden="true" style="position:absolute;left:0;top:0;width:720px;height:720px;margin:-360px 0 0 -360px;border-radius:50%;background:radial-gradient(circle,var(--halo2, color-mix(in srgb,var(--km-halo) 20%,transparent)) 0%,color-mix(in srgb,var(--km-noche) 0%,transparent) 62%);pointer-events:none;z-index:-2;opacity:0;transition:opacity .8s ease"></div>
   <div data-flip="" style="position:absolute;z-index:-1;top:clamp(78px,10vh,104px);right:clamp(0px,calc(9vw - 30px),150px);height:min(76vh,125vw);aspect-ratio:4/5;max-width:100%">
     <div data-hintro="" style="position:absolute;inset:0">
