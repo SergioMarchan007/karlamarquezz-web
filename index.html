@@ -257,11 +257,12 @@
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
    pausa en el primer cuadro; cuando entra, escenas.js le pone data-visible y arrancan. Así no gastan batería fuera de
-   pantalla y la persona ve la historia desde el principio. */
+   pantalla y la persona ve la historia desde el principio. Va con !important porque las reglas de cada dibujo
+   (con «animation: …») son más fuertes y si no, le ganaban a esta pausa. */
 [data-escena] *, [data-escena] *::before, [data-escena] *::after,
-[data-escena]::before, [data-escena]::after { animation-play-state: paused }
+[data-escena]::before, [data-escena]::after { animation-play-state: paused !important }
 [data-escena][data-visible] *, [data-escena][data-visible] *::before, [data-escena][data-visible] *::after,
-[data-escena][data-visible]::before, [data-escena][data-visible]::after { animation-play-state: running }
+[data-escena][data-visible]::before, [data-escena][data-visible]::after { animation-play-state: running !important }
 
 /* Quien pidió «menos movimiento» en su teléfono ve el dibujo quieto y terminado: por eso los estilos normales de cada
    pieza son el último cuadro de la historia, y las animaciones solo cuentan cómo se llega ahí. */
@@ -727,7 +728,87 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
   [data-guia="1"] .g1-frases>li,[data-guia="1"] .g1-foco::after{animation:none !important}
 }
 
+
+/* ===== «Tutorial · Cómo cotizar» (28-oct-2026; ver guia_catalogo.py) ===== */
+/* entrada con presentación: al llegar bajando, sube el título, después el botón de la voz y al final el teléfono */
+#tutorial [data-cat-titulo] { animation: gtSube .9s cubic-bezier(.16,1,.3,1) both }
+#tutorial [data-tut-voz] { animation: gtSube .9s .3s cubic-bezier(.16,1,.3,1) both }
+#tutorial [data-guia] { animation: gtTel 1.2s .45s cubic-bezier(.16,1,.3,1) both }
+@keyframes gtSube { from { opacity: 0; transform: translateY(26px) } }
+@keyframes gtTel { from { opacity: 0; transform: translateY(48px) scale(.95) } }
+/* el botón de la voz: grande y claro, para que cualquiera lo vea y lo toque */
+[data-tut-voz] { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0 0 6px }
+[data-tut-play] { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px 0 18px; border-radius: 999px;
+  background: var(--km-tinta); color: var(--km-dia); font-size: 17px; font-weight: 700; box-shadow: 0 8px 22px color-mix(in srgb,var(--km-tinta) 18%,transparent) }
+[data-tut-play]:focus-visible { outline: 2px solid var(--km-violeta); outline-offset: 3px }
+[data-tut-play][data-estado="sonando"] { background: var(--km-violeta) }
+[data-tut-nota] { font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--km-gris) }
+/* los subtítulos: solo aparecen mientras suena la voz */
+[data-tut-sub] { max-width: 30ch; margin: 18px 0 0; font-size: 19px; font-weight: 700; line-height: 1.4; text-wrap: balance; color: var(--km-tinta) }
+[data-tut-sub]:empty { display: none }
+
 </style>
+<script data-km-guia="">
+// «Tutorial · Cómo cotizar» con voz (28-oct-2026; ver guia_catalogo.py). El audio solo se baja si tocan «Escúchalo».
+// Mientras suena, la animación del teléfono se mueve al ritmo de la voz (MAPA) y abajo salen los subtítulos (FRASES).
+(function () {
+  var SRC = "audio/tutorial-cotizar-v1.mp3", MAPA = [[0, 0], [3.0, 2.5], [4.6, 3.6], [5.9, 6.6], [6.56, 7.5], [8.88, 10.0], [10.32, 11.2], [12.37, 13.3], [13.68, 14.0], [14.32, 15.0], [15.7, 16.0]], FRASES = [[0.08, 0.92, "Mira qué fácil."], [1.04, 2.28, "¿Te gustó una peinadora?"], [2.4, 3.44, "Tócale Agregar…"], [3.52, 5.36, "y se guarda aquí, en la bolsita."], [5.52, 6.44, "¿Viste un clóset?"], [6.56, 7.56, "Agregar también."], [7.68, 10.08, "Cuando termines, le das a Cotizar por WhatsApp…"], [10.16, 13.0, "y el mensaje se escribe solito, con lo que elegiste."], [13.12, 14.2, "Tú solo lo envías."], [14.32, 15.68, "¡Así de fácil!"]], FIN = 16.0;
+  var audio = null;
+  // el segundo de la animación que toca para un segundo de la voz (entre dos puntos del MAPA, en línea recta)
+  function aAnim(s) {
+    for (var i = 0; i < MAPA.length - 1; i++) {
+      var a = MAPA[i], b = MAPA[i + 1];
+      if (s <= b[0]) return a[1] + (b[1] - a[1]) * (s - a[0]) / (b[0] - a[0]);
+    }
+    return MAPA[MAPA.length - 1][1];
+  }
+  // las animaciones del teléfono y sus frases (las del tutorial empiezan con «g1»; la entrada no se toca)
+  function piezas() {
+    var b = document.querySelector("#tutorial [data-guia]");
+    if (!b || !b.getAnimations) return [];
+    return b.getAnimations({ subtree: true }).filter(function (a) { return (a.animationName || "").indexOf("g1") === 0; });
+  }
+  function el(sel) { return document.querySelector(sel); }
+  function estado(e, texto) {
+    var b = el("#tutorial [data-tut-play]"), t = el("#tutorial [data-tut-txt]");
+    if (b) b.setAttribute("data-estado", e);
+    if (t) t.textContent = texto;
+  }
+  function subtitulo(s) {
+    var p = el("#tutorial [data-tut-sub]"); if (!p) return;
+    var txt = "";
+    for (var i = 0; i < FRASES.length; i++) if (s >= FRASES[i][0] - 0.15 && s <= FRASES[i][1] + 0.35) txt = FRASES[i][2];
+    if (p.textContent !== txt) p.textContent = txt;
+  }
+  function cuadro() {
+    if (!audio) return;
+    var t = aAnim(audio.currentTime) * 1000;
+    piezas().forEach(function (a) { a.pause(); a.currentTime = t; });
+    subtitulo(audio.currentTime);
+    if (!audio.paused && !audio.ended) requestAnimationFrame(cuadro);
+  }
+  function terminar() {
+    // la animación sigue sola desde el final de la historia y el subtítulo se borra un momento después
+    piezas().forEach(function (a) { a.currentTime = FIN * 1000; a.play(); });
+    estado("listo", "Escuchar otra vez");
+    setTimeout(function () { if (audio && audio.paused) subtitulo(-9); }, 1600);
+  }
+  document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest("[data-tut-play]") : null;
+    if (!b) return;
+    if (!audio) { audio = new Audio(SRC); audio.addEventListener("ended", terminar); }
+    if (audio.paused) {
+      if (audio.ended) audio.currentTime = 0;
+      var p = audio.play();
+      estado("sonando", "Pausar");
+      if (p && p.then) p.then(cuadro, function () { estado("listo", "Escúchalo"); }); else cuadro();
+    } else {
+      audio.pause();
+      estado("pausa", "Seguir escuchando");
+    }
+  });
+})();
+</script>
 <style data-km-marcas="">
 /* ===== Marcas de prueba C y E (Karla, 24-oct-2026; ver marcas_km.py) ===== */
 /* Sin data-marca la web se ve como hoy. Cada variable --km-* reemplaza un color que antes iba escrito a mano. */
@@ -984,8 +1065,9 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 </section>
 <sc-if value="{{ modoCat }}" hint-placeholder-val="{{ false }}">
 <section id="tutorial" data-tone="day" data-screen-label="Tutorial" aria-labelledby="tutorial-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
-  <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) 0">
+  <div data-escena="" style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Tutorial</p><h2 id="tutorial-t">Cómo cotizar</h2></div>
+    <div data-tut-voz=""><button type="button" data-tut-play="" aria-label="Escuchar cómo cotizar"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.5a8 8 0 0 1 0 11"></path></svg><span data-tut-txt="">Escúchalo</span></button><span data-tut-nota="">Con voz · 16 segundos</span></div>
 <!-- ===== Opción 1 · «Teléfono» (pedido de Sergio, 28-oct-2026) =====
   Va en la entrada de /catalogo/, debajo de «Nuestro catálogo.». Enseña en un vistazo cómo se usa el catálogo:
   agregas lo que te gusta, se guarda en la bolsita de tu cotización y un botón abre WhatsApp con el mensaje ya armado.
@@ -1144,6 +1226,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 </ol>
 </div>
 </div>
+    <p data-tut-sub="" aria-live="off"></p>
   </div>
 </section>
 </sc-if>
