@@ -516,6 +516,448 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
 })();
 
 </script>
+<style data-km-guia="">
+/* ===== Opción 1 · «Teléfono» · entrada de /catalogo/ (pedido de Sergio, 28-oct-2026) =====
+   Un teléfono cuenta, solo y en bucle de 18 s, cómo se usa el catálogo. Ritmo pausado (pensado también para
+   personas mayores): cada tiempo dura al menos 2,5 s y lo que se va a tocar se resalta mientras lo demás se aclara.
+     0 s     se ve la tienda
+     2,5 s   toca «Agregar» en la peinadora; la bolsita marca 1 (3,5 s)
+     5 s     desliza hacia arriba y aparece el clóset
+     7,5 s   toca «Agregar» en el clóset; la bolsita marca 2 (8,5 s)
+     10 s    toca «Cotizar por WhatsApp» y se abre el chat de KM
+     11 s    el mensaje se arma solo, línea por línea (listo a los 13 s)
+     14 s    toca enviar: el mensaje sube, sale enviado (15 s) y leído (15,7 s)
+     15,7 s  pausa con todo terminado; a los 17,5 s se desvanece y vuelve a empezar
+   Los estilos normales de cada pieza son el CUADRO FINAL (así lo ve quien pidió «menos movimiento»); los @keyframes
+   cuentan cómo se llega ahí. Solo se mueven transform, opacity y stroke-dashoffset (lo más liviano para el teléfono).
+   Los colores van aquí y no en el SVG, así cambian solos con las marcas C y E. */
+
+/* --- el bloque: teléfono a la izquierda y las frases a la derecha (en el teléfono también, para que quede bajito) --- */
+[data-guia="1"]{margin-top:20px;display:flex;align-items:center;gap:18px}
+[data-guia="1"] .g1-tel{flex:none;width:172px;border-radius:30px;box-shadow:0 1px 2px color-mix(in srgb,var(--km-tinta) 8%,transparent),0 26px 44px -26px color-mix(in srgb,var(--km-violeta) 55%,transparent)}
+[data-guia="1"] .g1-tel>svg{display:block;width:100%;height:auto;aspect-ratio:172/320;overflow:visible}
+[data-guia="1"] .g1-lado{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
+[data-guia="1"] .g1-ceja{font-family:'DM Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--km-violeta)}
+[data-guia="1"] .g1-frases{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px}
+[data-guia="1"] .g1-frases>li{display:flex;align-items:flex-start;gap:11px;font-size:17px;line-height:1.3;font-weight:500;color:var(--km-tinta);text-wrap:pretty}
+/* el bombillo de cada frase: apagado (nude) y, encima, su luz (blanca con brillo lila) que se prende */
+[data-guia="1"] .g1-foco{position:relative;flex:none;width:12px;height:12px;margin-top:5px;border-radius:50%;background:var(--km-dia3);box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent)}
+[data-guia="1"] .g1-foco::after{content:"";position:absolute;inset:0;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 3px color-mix(in srgb,var(--km-halo) 80%,transparent),0 0 24px 7px color-mix(in srgb,var(--km-halo) 50%,transparent)}
+
+/* en la computadora: el teléfono más grande y las frases más grandes, todo junto a la izquierda */
+@media (min-width:760px){
+  [data-guia="1"]{margin-top:36px;gap:44px}
+  [data-guia="1"] .g1-tel{width:214px;border-radius:37px}
+  [data-guia="1"] .g1-lado{flex:0 1 440px;gap:20px}
+  [data-guia="1"] .g1-ceja{font-size:13px}
+  [data-guia="1"] .g1-frases{gap:22px}
+  [data-guia="1"] .g1-frases>li{font-size:22px;gap:14px}
+  [data-guia="1"] .g1-foco{width:14px;height:14px;margin-top:7px}
+}
+
+/* ---------- el dibujo: letras ---------- */
+[data-guia="1"] svg text{font-family:'Karla',system-ui,sans-serif;font-size:11px;fill:var(--km-tinta)}
+[data-guia="1"] svg .g1b{font-weight:700;font-size:12.5px}
+[data-guia="1"] svg .g1bn{font-size:11.5px}
+[data-guia="1"] svg .g1bm{font-size:11px}
+[data-guia="1"] svg .g1bt{font-weight:700;font-size:11.5px}
+[data-guia="1"] svg .g1bp{font-size:12px}
+[data-guia="1"] svg .g1g{fill:var(--km-gris)}
+[data-guia="1"] svg .g1q{font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:18px;letter-spacing:-.01em}
+[data-guia="1"] svg .g1qs{font-size:11px;font-weight:400}
+[data-guia="1"] svg .g1mo{font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;fill:var(--km-gris)}
+[data-guia="1"] svg .g1c{text-anchor:middle}
+[data-guia="1"] svg .g1cl{fill:var(--km-dia)}
+[data-guia="1"] svg .g1vt{fill:var(--km-violeta)}
+[data-guia="1"] svg .g1wt{fill:#FFFFFF}
+
+/* ---------- el dibujo: trazos ---------- */
+[data-guia="1"] svg .g1k,[data-guia="1"] svg .g1i,[data-guia="1"] svg .g1ck{fill:none;stroke:var(--km-tinta);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+[data-guia="1"] svg .g1kb{stroke-width:1.5}
+[data-guia="1"] svg .g1i{stroke:var(--km-violeta);stroke-width:1.8}
+[data-guia="1"] svg .g1ck{stroke:color-mix(in srgb,var(--km-tinta) 35%,transparent);stroke-width:1.4}
+[data-guia="1"] svg .g1ck2{stroke:var(--km-violeta2)}
+[data-guia="1"] svg .g1m{fill:#FFFFFF;stroke:var(--km-tinta);stroke-width:1.3;stroke-linejoin:round}
+[data-guia="1"] svg .g1br{fill:none;stroke:#FFFFFF;stroke-width:1.6;stroke-linecap:round}
+[data-guia="1"] svg .g1pn{fill:none;stroke:color-mix(in srgb,var(--km-tinta) 25%,transparent);stroke-width:1}
+[data-guia="1"] svg .g1ln{stroke:color-mix(in srgb,var(--km-tinta) 8%,transparent);stroke-width:1}
+[data-guia="1"] svg .g1ln2{stroke:color-mix(in srgb,var(--km-tinta) 16%,transparent);stroke-width:1}
+[data-guia="1"] svg .g1h{fill:none;stroke:color-mix(in srgb,var(--km-tinta) 8%,transparent);stroke-width:1}
+[data-guia="1"] svg .g1sb{stroke:var(--km-lila-borde);stroke-width:1}
+[data-guia="1"] svg .g1rw{stroke:#FFFFFF;stroke-width:2}
+/* los bombillos del espejo: puntitos redondos (trazo punteado) con brillo lila y centro blanco */
+[data-guia="1"] svg .g1fo{fill:none;stroke:color-mix(in srgb,var(--km-halo) 95%,transparent);stroke-width:6.5;stroke-dasharray:0 7.15;stroke-linecap:round}
+[data-guia="1"] svg .g1fo2{stroke:color-mix(in srgb,var(--km-tinta) 40%,transparent);stroke-width:3.8}
+[data-guia="1"] svg .g1fo3{stroke:#FFFFFF;stroke-width:2.6}
+[data-guia="1"] svg .g1gl{fill:none;stroke:var(--km-halo);stroke-width:2.4;stroke-linecap:round}
+/* los velos de foco y su aro */
+[data-guia="1"] svg .g1velo{fill:color-mix(in srgb,var(--km-dia) 70%,transparent);fill-rule:evenodd}
+[data-guia="1"] svg .g1aro{fill:none;stroke:var(--km-violeta2);stroke-width:2}
+/* el dedito: yema violeta translúcida con borde blanco (se ve sobre lo claro y sobre lo oscuro) y su onda */
+[data-guia="1"] svg .g1y1{fill:color-mix(in srgb,var(--km-violeta) 34%,transparent);stroke:#FFFFFF;stroke-width:2.5}
+[data-guia="1"] svg .g1y2{fill:#FFFFFF}
+[data-guia="1"] svg .g1-onda{fill:none;stroke:var(--km-violeta2);stroke-width:2}
+
+/* ---------- el dibujo: rellenos (van después de los trazos para ganarles) ---------- */
+[data-guia="1"] svg .g1fr{fill:var(--km-tinta)}
+[data-guia="1"] svg .g1fl{fill:none;stroke:var(--km-gris);stroke-width:1}
+[data-guia="1"] svg .g1ho{opacity:.3}
+[data-guia="1"] svg .g1w{fill:#FFFFFF}
+[data-guia="1"] svg .g1d{fill:var(--km-dia)}
+[data-guia="1"] svg .g1z{fill:var(--km-dia3)}
+[data-guia="1"] svg .g1s{fill:var(--km-lila-suave)}
+[data-guia="1"] svg .g1t{fill:var(--km-tinta)}
+[data-guia="1"] svg .g1v{fill:var(--km-violeta)}
+[data-guia="1"] svg .g1wa{fill:#25D366}
+[data-guia="1"] svg .g1wa2{fill:#2FBF71;opacity:.28}
+[data-guia="1"] svg .g1sh{fill:color-mix(in srgb,var(--km-tinta) 8%,transparent)}
+[data-guia="1"] svg .g1hoy{fill:color-mix(in srgb,var(--km-dia) 85%,transparent)}
+
+/* ---------- lo que se mueve: 18 s en bucle, curva suave de la web (cada pieza dice cuál @keyframes usa) ---------- */
+[data-guia="1"] svg *{transform-box:fill-box;transform-origin:center;animation-duration:18s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+
+/* el dedito: va a cada botón (con calma), se hunde al tocar y suelta una onda; mientras el mensaje se arma, se va */
+[data-guia="1"] .g1-dedo{opacity:0;transform:translate(141px,277px);animation-name:g1dedo;animation-timing-function:cubic-bezier(.45,0,.25,1)}
+@keyframes g1dedo{0%,5.56%{opacity:0;transform:translate(124px,250px)}8.33%{opacity:1}12.22%,16.11%{transform:translate(116px,177px)}19.44%,26.67%{transform:translate(128px,212px)}29.44%,30.56%{transform:translate(80px,246px)}36.67%{transform:translate(80px,110px)}40%,43.89%{transform:translate(116px,177px)}47.22%,51.11%{transform:translate(128px,212px)}54.44%,57.78%{opacity:1;transform:translate(144px,285px)}60.56%,72.22%{opacity:0;transform:translate(118px,300px)}74.44%{opacity:1}76.67%,81.11%{opacity:1;transform:translate(141px,277px)}84.44%,100%{opacity:0;transform:translate(141px,277px)}}
+[data-guia="1"] .g1-yema{animation-name:g1yema}
+@keyframes g1yema{0%,13.06%,15.28%,29.72%,37.5%,40.83%,43.06%,54.72%,56.94%,76.94%,79.17%,100%{transform:none}13.89%,30.56%,36.67%,41.67%,55.56%,77.78%{transform:scale(.8)}}
+[data-guia="1"] .g1-onda{opacity:0;animation-name:g1onda;animation-timing-function:ease-out}
+@keyframes g1onda{0%,13.89%,17.78%,30.56%,34.44%,41.67%,45.56%,55.56%,59.44%,77.78%,81.67%,100%{opacity:0;transform:scale(2.3)}14%,30.67%,41.78%,55.67%,77.89%{opacity:0;transform:scale(.7)}14.44%,31.11%,42.22%,56.11%,78.33%{opacity:.9;transform:scale(.9)}}
+
+/* los velos de foco: aparecen un poco antes de cada toque y se van después */
+[data-guia="1"] .g1-vA,[data-guia="1"] .g1-vB,[data-guia="1"] .g1-vC,[data-guia="1"] .g1-vD,[data-guia="1"] .g1-vE{opacity:0;transform-box:view-box;transform-origin:0 0;animation-timing-function:ease-in-out}
+[data-guia="1"] .g1-vA{animation-name:g1vA}
+@keyframes g1vA{0%,8.89%,18.89%,37.78%,46.67%,100%{opacity:0}11.11%,16.67%,40%,44.44%{opacity:1}}
+[data-guia="1"] .g1-vB{animation-name:g1vB}
+@keyframes g1vB{0%,16.67%,27.78%,44.44%,53.33%,100%{opacity:0}18.89%,25.56%,46.67%,51.11%{opacity:1}}
+[data-guia="1"] .g1-vC{animation-name:g1vC}
+@keyframes g1vC{0%,51.11%,58.89%,100%{opacity:0}53.33%,57.22%{opacity:1}}
+[data-guia="1"] .g1-vD{animation-name:g1vD}
+@keyframes g1vD{0%,61.11%,74.44%,100%{opacity:0}63.33%,72.22%{opacity:1}}
+[data-guia="1"] .g1-vE{animation-name:g1vE}
+@keyframes g1vE{0%,72.22%,81.67%,100%{opacity:0}74.44%,79.44%{opacity:1}}
+
+/* la lista sube (como al deslizar el dedo) y vuelve a su lugar escondida detrás del chat */
+[data-guia="1"] .g1-lista{transform:translateY(-136px);animation-name:g1lista;animation-timing-function:cubic-bezier(.45,0,.25,1)}
+@keyframes g1lista{0%,30.56%{transform:none}36.67%,95.56%{transform:translateY(-136px)}96.11%,100%{transform:none}}
+
+/* los botones «Agregar»: se hunden un poquito al tocarlos y pasan a «En tu cotización» */
+[data-guia="1"] .g1-p1{animation-name:g1p1}
+@keyframes g1p1{0%,13.33%,16.11%,100%{transform:none}14.17%{transform:scale(.95)}}
+[data-guia="1"] .g1-a1{animation-name:g1a1}
+@keyframes g1a1{0%,14.44%{opacity:0}16.11%,95.56%{opacity:1}96.11%,100%{opacity:0}}
+[data-guia="1"] .g1-p2{animation-name:g1p2}
+@keyframes g1p2{0%,41.11%,43.89%,100%{transform:none}41.94%{transform:scale(.95)}}
+[data-guia="1"] .g1-a2{animation-name:g1a2}
+@keyframes g1a2{0%,42.22%{opacity:0}43.89%,95.56%{opacity:1}96.11%,100%{opacity:0}}
+
+/* el puntito vuela del botón a la bolsita: un grupo lo corre de lado y el otro lo sube rápido (así hace curva) */
+[data-guia="1"] .g1-vx{opacity:0;transform:translateX(58px);transform-box:view-box;animation-name:g1vx;animation-timing-function:cubic-bezier(.5,0,.75,1)}
+@keyframes g1vx{0%,15%{opacity:0;transform:none}15.56%,18.61%{opacity:1}19.17%{opacity:0;transform:translateX(58px)}20%,42.78%{opacity:0;transform:none}43.33%,46.39%{opacity:1}46.94%,100%{opacity:0;transform:translateX(58px)}}
+[data-guia="1"] .g1-vy{transform:translateY(-135px) scale(.5);animation-name:g1vy;animation-timing-function:cubic-bezier(.2,.7,.4,1)}
+@keyframes g1vy{0%,15%{transform:none}19.17%{transform:translateY(-135px) scale(.5)}20%,42.78%{transform:none}46.94%,100%{transform:translateY(-135px) scale(.5)}}
+
+/* la bolsita: el numerito sale con un saltito (1 y después 2) y la bolsita se mece */
+[data-guia="1"] .g1-bd{animation-name:g1bd}
+@keyframes g1bd{0%,18.61%{transform:scale(0)}20%{transform:scale(1.3)}21.94%,46.67%{transform:none}48.06%{transform:scale(1.3)}50%,95.56%{transform:none}96.11%,100%{transform:scale(0)}}
+[data-guia="1"] .g1-n1{opacity:0;animation-name:g1n1}
+@keyframes g1n1{0%,46.94%{opacity:1}47.22%,100%{opacity:0}}
+[data-guia="1"] .g1-n2{animation-name:g1n2}
+@keyframes g1n2{0%,46.94%{opacity:0}47.22%,100%{opacity:1}}
+[data-guia="1"] .g1-bolsa{transform-origin:50% 25%;animation-name:g1bolsa;animation-timing-function:ease-in-out}
+@keyframes g1bolsa{0%,18.89%,23.89%,46.67%,51.67%,100%{transform:none}20%,47.78%{transform:rotate(-12deg)}21.39%,49.17%{transform:rotate(8deg)}22.5%,50.28%{transform:rotate(-3deg)}}
+
+/* abajo, el botón «Cotizar por WhatsApp» sube con el primer mueble y se hunde al tocarlo */
+[data-guia="1"] .g1-dock{animation-name:g1dock}
+@keyframes g1dock{0%,22.22%{transform:translateY(56px)}26.11%,95.56%{transform:none}96.11%,100%{transform:translateY(56px)}}
+[data-guia="1"] .g1-pill{animation-name:g1pill}
+@keyframes g1pill{0%,55%,57.78%,100%{transform:none}55.83%{transform:scale(.95)}}
+
+/* cambio de pantalla: la tienda se corre a la izquierda y el chat entra desde la derecha (al final se desvanece) */
+[data-guia="1"] .g1-tienda{transform:translateX(-48px);transform-box:view-box;animation-name:g1tienda;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes g1tienda{0%,57.22%{transform:none}61.11%,95.56%{transform:translateX(-48px)}96.11%,100%{transform:none}}
+[data-guia="1"] .g1-chat{transform-box:view-box;animation-name:g1chat;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes g1chat{0%,57.22%{transform:translateX(160px);opacity:1}61.11%,97.22%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+
+/* el mensaje se arma solo: cada línea aparece suave, una tras otra */
+[data-guia="1"] .g1-l1{animation-name:g1l1}
+@keyframes g1l1{0%,62.78%{opacity:0;transform:translateY(3px)}64.72%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1-l2{animation-name:g1l2}
+@keyframes g1l2{0%,65%{opacity:0;transform:translateY(3px)}66.94%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1-l3{animation-name:g1l3}
+@keyframes g1l3{0%,67.22%{opacity:0;transform:translateY(3px)}69.17%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1-l4{animation-name:g1l4}
+@keyframes g1l4{0%,69.44%{opacity:0;transform:translateY(3px)}71.39%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1-l5{animation-name:g1l5}
+@keyframes g1l5{0%,71.67%{opacity:0;transform:translateY(3px)}73.61%,100%{opacity:1;transform:none}}
+
+/* al enviar: el mensaje sube de la caja de escribir (blanca) a su burbuja (lila) y salen sus dos checks */
+[data-guia="1"] .g1-msg{transform-box:view-box;animation-name:g1msg;animation-timing-function:cubic-bezier(.45,0,.25,1)}
+@keyframes g1msg{0%,78.33%{transform:translate(-26px,40px)}82.22%,100%{transform:none}}
+[data-guia="1"] .g1-mi{opacity:0;animation-name:g1mi}
+@keyframes g1mi{0%,78.33%{opacity:1}80.28%,100%{opacity:0}}
+[data-guia="1"] .g1-mb{animation-name:g1mb}
+@keyframes g1mb{0%,78.33%{opacity:0}80.28%,100%{opacity:1}}
+[data-guia="1"] .g1-env{animation-name:g1env}
+@keyframes g1env{0%,77.22%,80%,100%{transform:none}78.06%{transform:scale(.85)}}
+[data-guia="1"] .g1-k1{animation-name:g1k1}
+@keyframes g1k1{0%,83.33%{opacity:0}84.44%,100%{opacity:1}}
+[data-guia="1"] .g1-k2{animation-name:g1k2}
+@keyframes g1k2{0%,87.22%{opacity:0}88.33%,100%{opacity:1}}
+
+/* ---------- las frases: se encienden con su parte de la historia (la que va pasando, más fuerte) ---------- */
+/* van fuera del dibujo, así que siguen la pausa del dibujo con :has (si el navegador no lo entiende, quedan quietas y encendidas) */
+@supports selector(:has(*)){
+  [data-guia="1"] .g1-frases>li,[data-guia="1"] .g1-foco::after{animation-duration:18s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:ease-in-out;animation-play-state:paused}
+  [data-guia="1"]:has([data-escena][data-visible]) .g1-frases>li,[data-guia="1"]:has([data-escena][data-visible]) .g1-foco::after{animation-play-state:running}
+  [data-guia="1"] .g1-f1{animation-name:g1f1}
+  [data-guia="1"] .g1-f1 .g1-foco::after{animation-name:g1h1}
+  [data-guia="1"] .g1-f2{animation-name:g1f2}
+  [data-guia="1"] .g1-f2 .g1-foco::after{animation-name:g1h2}
+  [data-guia="1"] .g1-f3{animation-name:g1f3}
+  [data-guia="1"] .g1-f3 .g1-foco::after{animation-name:g1h3}
+}
+@keyframes g1f1{0%,6.67%{opacity:.38}9.44%,18.89%{opacity:1}21.67%,85.56%{opacity:.6}88.33%,97.22%{opacity:1}100%{opacity:.38}}
+@keyframes g1h1{0%,6.67%{opacity:0}9.44%,18.89%{opacity:1}21.67%,85.56%{opacity:.35}88.33%,97.22%{opacity:1}100%{opacity:0}}
+@keyframes g1f2{0%,18.89%{opacity:.38}21.67%,60.56%{opacity:1}63.33%,85.56%{opacity:.6}88.33%,97.22%{opacity:1}100%{opacity:.38}}
+@keyframes g1h2{0%,18.89%{opacity:0}21.67%,60.56%{opacity:1}63.33%,85.56%{opacity:.35}88.33%,97.22%{opacity:1}100%{opacity:0}}
+@keyframes g1f3{0%,60.56%{opacity:.38}63.33%,97.22%{opacity:1}100%{opacity:.38}}
+@keyframes g1h3{0%,60.56%{opacity:0}63.33%,97.22%{opacity:1}100%{opacity:0}}
+/* «menos movimiento»: las frases quedan quietas y encendidas (el dibujo ya lo detiene escenas.css) */
+@media (prefers-reduced-motion:reduce){
+  [data-guia="1"] .g1-frases>li,[data-guia="1"] .g1-foco::after{animation:none !important}
+}
+
+/* ===== Opción 2 · «Tres pasos en fila» para la entrada de /catalogo/ (pedido de Sergio, 28-oct-2026) =====
+   Tres pantallitas en fila (catálogo, tu cotización y el chat de KM) unidas por flechitas. Se encienden una a la
+   vez (la activa se ve fuerte y las otras bajan de intensidad) para que la persona siga UN solo foco.
+   Los colores van aquí y no en el SVG, así cambian solos con las marcas C y E. Solo se mueven transform, opacity
+   (y nada de filtros), lo más liviano para el teléfono.
+   Los estilos normales son el CUADRO FINAL (elegido, bolsita con 2, mensaje enviado y leído): así lo ve quien pidió
+   «menos movimiento». Los @keyframes cuentan cómo se llega ahí, en un bucle de 18 s:
+     0 s    «Elige»: toca «Agregar» en la peinadora (1,8 s)
+     3 s    «Se guarda»: la bolsita marca 1 y la peinadora queda en la lista
+     5,6 s  sigue mirando: pasa al clóset y toca «Agregar» (7,6 s)
+     8,2 s  la bolsita marca 2; toca «Cotizar por WhatsApp» (10,4 s)
+     11 s   «Sale solo a WhatsApp»: el mensaje se escribe solo (12 a 14,3 s), se envía (14,6 s) y lo leen (15,6 s)
+     15,6 s todo queda quieto y encendido unos 2 s; de 17,6 a 18 s vuelve suave al inicio. */
+
+/* --- la tira: 3 pantallitas y 2 flechitas en una grilla; abajo, las etiquetas --- */
+[data-guia="2"]{margin-top:clamp(18px,2.6vw,36px);padding-bottom:clamp(4px,1.2vw,16px)}
+/* --g = el espacio de cada flechita: 14 px en el teléfono, hasta 104 px en la computadora */
+[data-guia="2"] .g2e{--g:clamp(14px,calc(10vw - 25px),104px);display:grid;grid-template-columns:minmax(0,96fr) var(--g) minmax(0,96fr) var(--g) minmax(0,156fr);row-gap:10px;max-width:calc(560px + 2 * var(--g))}
+
+/* --- cada pantallita: tarjeta blanca como las de la web (la del chat es más ancha porque lleva el mensaje) --- */
+[data-guia="2"] .g2p{position:relative}
+[data-guia="2"] .g2sc{border-radius:14px;background:#FFFFFF;border:1px solid color-mix(in srgb,var(--km-tinta) 8%,transparent);box-shadow:0 1px 2px color-mix(in srgb,var(--km-tinta) 4%,transparent),0 18px 34px -24px color-mix(in srgb,var(--km-violeta) 50%,transparent);overflow:hidden}
+[data-guia="2"] .g2p svg{display:block;width:100%;height:auto;aspect-ratio:96/160}
+[data-guia="2"] .g2p3 svg{aspect-ratio:156/160}
+/* la capa del dedito va encima de la tarjeta y puede salirse por debajo (sin tapar los clics: es solo dibujo) */
+[data-guia="2"] .g2p>.g2fx{position:absolute;left:1px;top:1px;width:calc(100% - 2px);overflow:visible;pointer-events:none;z-index:2}
+
+/* --- las flechitas entre pantallitas: línea punteada, línea violeta que se recorre, puntito y botoncito con la flecha --- */
+[data-guia="2"] .g2a{position:relative;align-self:center;height:26px;z-index:1}
+[data-guia="2"] .g2at{position:absolute;left:0;right:0;top:50%;margin-top:-1px;border-top:1.5px dashed var(--km-lila-borde)}
+[data-guia="2"] .g2af{position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:1px;background:var(--km-violeta);transform-origin:0 50%}
+[data-guia="2"] .g2ad{position:absolute;left:0;right:0;top:50%;height:0}
+[data-guia="2"] .g2ad>b{position:absolute;right:0;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--km-violeta)}
+[data-guia="2"] .g2a2 .g2ad>b{background:#25D366}
+[data-guia="2"] .g2ab{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 12%,transparent),0 6px 14px -8px color-mix(in srgb,var(--km-violeta) 60%,transparent)}
+[data-guia="2"] .g2ab svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--km-violeta);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+[data-guia="2"] .g2ab>i{position:absolute;inset:0;border-radius:50%;background:var(--km-violeta)}
+[data-guia="2"] .g2a2 .g2ab>i{background:#25D366}
+[data-guia="2"] .g2ab>i svg{stroke:#FFFFFF}
+
+/* --- etiquetas de abajo: número en un circulito y una palabra grande, con buen contraste --- */
+[data-guia="2"] .g2l{display:flex;align-items:center;gap:6px;margin:0;font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:clamp(13px,3.7vw,14px);line-height:1.2;color:var(--km-tinta);text-wrap:balance;padding-right:4px}
+[data-guia="2"] .g2l1{grid-column:1/3}
+[data-guia="2"] .g2l2{grid-column:3/5}
+[data-guia="2"] .g2l3{grid-column:5}
+[data-guia="2"] .g2nb{position:relative;flex:none;width:21px;height:21px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--km-violeta);color:var(--km-violeta);font-family:'DM Mono',ui-monospace,monospace;font-size:12px;font-weight:500;display:grid;place-items:center}
+[data-guia="2"] .g2nb>i{position:absolute;inset:0;border-radius:50%;background:var(--km-violeta);color:#FFFFFF;font-style:normal;display:grid;place-items:center}
+
+/* en la computadora: todo más grande y con más aire (las pantallitas crecen hasta 1,6 veces) */
+@media (min-width:900px){
+  [data-guia="2"] .g2e{row-gap:16px}
+  [data-guia="2"] .g2sc{border-radius:18px}
+  [data-guia="2"] .g2ab{width:32px;height:32px;margin:-16px 0 0 -16px}
+  [data-guia="2"] .g2l{font-size:18px;gap:10px}
+  [data-guia="2"] .g2nb{width:28px;height:28px;font-size:14px}
+}
+
+/* --- letras dentro del dibujo: Karla como la web, DM Mono en «CATÁLOGO» y Kalnia en el «KM» del chat --- */
+[data-guia="2"] .g2e text{font-family:'Karla',system-ui,sans-serif;font-size:13px;fill:var(--km-tinta)}
+[data-guia="2"] .g2e .g2b{font-weight:700}
+[data-guia="2"] .g2e .g2c{text-anchor:middle}
+[data-guia="2"] .g2e .g2wt{fill:#FFFFFF}
+[data-guia="2"] .g2e .g2g{fill:var(--km-gris)}
+[data-guia="2"] .g2e .g2m{font-family:'DM Mono',ui-monospace,monospace;letter-spacing:.02em;fill:var(--km-gris)}
+[data-guia="2"] .g2e .g2q{font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;fill:var(--km-violeta)}
+
+/* --- trazos y rellenos del dibujo --- */
+[data-guia="2"] .g2e .g2hr{fill:none;stroke:color-mix(in srgb,var(--km-tinta) 8%,transparent)}
+[data-guia="2"] .g2e .g2u{fill:#FFFFFF;stroke:var(--km-tinta);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+[data-guia="2"] .g2e .g2uu{stroke-width:3.6}
+[data-guia="2"] .g2e .g2h{fill:#FFFFFF;stroke:var(--km-tinta);stroke-width:1.3;stroke-linejoin:round}
+[data-guia="2"] .g2e .g2r{fill:color-mix(in srgb,var(--km-violeta) 16%,transparent);stroke:var(--km-violeta);stroke-width:1.5}
+[data-guia="2"] .g2e .g2ck{fill:none;stroke:#FFFFFF;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+[data-guia="2"] .g2e .g2bag{fill:none;stroke:var(--km-tinta);stroke-width:1.7;stroke-linejoin:round}
+[data-guia="2"] .g2e .g2sl{fill:none;stroke:var(--km-lila-borde);stroke-dasharray:3 3}
+[data-guia="2"] .g2e .g2k1{fill:none;stroke:color-mix(in srgb,var(--km-tinta) 32%,transparent);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+[data-guia="2"] .g2e .g2k2{stroke:var(--km-violeta2)}
+[data-guia="2"] .g2e .g2ink{fill:var(--km-tinta)}
+[data-guia="2"] .g2e .g2v{fill:var(--km-violeta)}
+[data-guia="2"] .g2e .g2d{fill:var(--km-dia)}
+[data-guia="2"] .g2e .g2w{fill:#FFFFFF}
+[data-guia="2"] .g2e .g2s{fill:var(--km-lila-suave)}
+[data-guia="2"] .g2e .g2z{fill:var(--km-dia3)}
+[data-guia="2"] .g2e .g2gr{fill:#2FBF71}
+[data-guia="2"] .g2e .g2wa{fill:#25D366}
+
+/* ================= lo que se mueve (bucle de 18 s, curva suave de la web) =================
+   Cada pieza dice qué @keyframes usa. Ojo: aquí van las propiedades sueltas (no el atajo «animation»), para no
+   pisar la pausa de escenas.css fuera de pantalla. */
+[data-guia="2"] .g2e *{animation-duration:18s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+[data-guia="2"] .g2e svg *{transform-box:fill-box}
+
+/* --- un solo foco: la pantallita activa se ve fuerte y sube un poquito; las otras bajan de intensidad --- */
+[data-guia="2"] .g2p1{animation-name:g2f1}
+@keyframes g2f1{0%,16.67%{opacity:1;transform:translateY(-3px)}19.44%,31.11%{opacity:.38;transform:none}33.33%,45.56%{opacity:1;transform:translateY(-3px)}47.78%,86.67%{opacity:.38;transform:none}88.89%,97.78%{opacity:1;transform:none}100%{opacity:1;transform:translateY(-3px)}}
+[data-guia="2"] .g2p2{animation-name:g2f2}
+@keyframes g2f2{0%,16.67%{opacity:.38;transform:none}19.44%,31.11%{opacity:1;transform:translateY(-3px)}33.33%,45.56%{opacity:.38;transform:none}47.78%,61.11%{opacity:1;transform:translateY(-3px)}63.33%,86.67%{opacity:.38;transform:none}88.89%,97.78%{opacity:1;transform:none}100%{opacity:.38;transform:none}}
+[data-guia="2"] .g2p3{animation-name:g2f3}
+@keyframes g2f3{0%,61.11%{opacity:.38;transform:none}63.33%,86.67%{opacity:1;transform:translateY(-3px)}88.89%,97.78%{opacity:1;transform:none}100%{opacity:.38;transform:none}}
+/* las etiquetas siguen el mismo foco, pero sin bajar tanto (siempre se leen) */
+[data-guia="2"] .g2l1{animation-name:g2e1}
+@keyframes g2e1{0%,16.67%{opacity:1}19.44%,31.11%{opacity:.5}33.33%,45.56%{opacity:1}47.78%,86.67%{opacity:.5}88.89%,100%{opacity:1}}
+[data-guia="2"] .g2l2{animation-name:g2e2}
+@keyframes g2e2{0%,16.67%{opacity:.5}19.44%,31.11%{opacity:1}33.33%,45.56%{opacity:.5}47.78%,61.11%{opacity:1}63.33%,86.67%{opacity:.5}88.89%,97.78%{opacity:1}100%{opacity:.5}}
+[data-guia="2"] .g2l3{animation-name:g2e3}
+@keyframes g2e3{0%,61.11%{opacity:.5}63.33%,97.78%{opacity:1}100%{opacity:.5}}
+/* el circulito del número se rellena cuando llega su paso (el 1 ya empieza relleno) */
+[data-guia="2"] .g2l2 .g2nb>i{animation-name:g2o2}
+@keyframes g2o2{0%,16.67%{opacity:0}18.89%,97.78%{opacity:1}100%{opacity:0}}
+[data-guia="2"] .g2l3 .g2nb>i{animation-name:g2o3}
+@keyframes g2o3{0%,61.11%{opacity:0}63.33%,97.78%{opacity:1}100%{opacity:0}}
+
+/* ---------- 1 · catálogo ---------- */
+/* el dedito llega, toca «Agregar» (se hunde un poquito) y se va; dos veces: peinadora y clóset */
+[data-guia="2"] .g2h1{opacity:0;transform-origin:30% 5%;animation-name:g2h1}
+@keyframes g2h1{0%,4.44%{opacity:0;transform:translate(9px,12px)}7.22%,9.17%{opacity:1;transform:none}10%{opacity:1;transform:scale(.86)}11.11%,13.33%{opacity:1;transform:none}15.56%,38.33%{opacity:0;transform:translate(7px,9px)}40.56%,41.39%{opacity:1;transform:none}42.22%{opacity:1;transform:scale(.86)}43.33%,43.89%{opacity:1;transform:none}46.11%,100%{opacity:0;transform:translate(7px,9px)}}
+/* el aro del toque se abre y se apaga */
+[data-guia="2"] .g2r{opacity:0;transform-origin:center}
+[data-guia="2"] .g2r1{animation-name:g2r1}
+@keyframes g2r1{0%,9.94%{opacity:0;transform:scale(.6)}10%{opacity:.95;transform:scale(.6)}14.44%,42.17%{opacity:0;transform:scale(2.6)}42.22%{opacity:.95;transform:scale(.6)}46.67%,100%{opacity:0;transform:scale(2.6)}}
+/* el botón se hunde al tocarlo y queda «Agregado» en violeta */
+[data-guia="2"] .g2bt,[data-guia="2"] .g2ok{transform-origin:center}
+[data-guia="2"] .g2bt1{animation-name:g2b1}
+@keyframes g2b1{0%,9.44%,11.11%,100%{transform:none}10.11%{transform:scale(.94)}}
+[data-guia="2"] .g2ok1{animation-name:g2a1}
+@keyframes g2a1{0%,10.11%{opacity:0;transform:scale(.94)}11.67%,97.78%{opacity:1;transform:none}99.17%,100%{opacity:0;transform:none}}
+[data-guia="2"] .g2bt2{animation-name:g2b2}
+@keyframes g2b2{0%,41.67%,43.33%,100%{transform:none}42.33%{transform:scale(.94)}}
+[data-guia="2"] .g2ok2{animation-name:g2a2}
+@keyframes g2a2{0%,42.33%{opacity:0;transform:scale(.94)}43.89%,97.78%{opacity:1;transform:none}99.17%,100%{opacity:0;transform:none}}
+/* las tarjetas se deslizan de la peinadora al clóset (sigues mirando); al final del bucle vuelven sin verse */
+[data-guia="2"] .g2k{transform:translateX(-96px);animation-name:g2k;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes g2k{0%,33.33%{opacity:1;transform:none}38.33%,97.78%{opacity:1;transform:translateX(-96px)}98.89%{opacity:0;transform:translateX(-96px)}98.94%{opacity:0;transform:none}100%{opacity:1;transform:none}}
+
+/* ---------- flechitas ---------- */
+/* la línea violeta se recorre (en la computadora se nota más; en el teléfono manda el botoncito) */
+[data-guia="2"] .g2a1 .g2af{animation-name:g2l1}
+@keyframes g2l1{0%,16.67%{opacity:1;transform:scaleX(0)}20%,97.78%{opacity:1;transform:none}99.44%{opacity:0;transform:none}99.5%{opacity:0;transform:scaleX(0)}100%{opacity:1;transform:scaleX(0)}}
+[data-guia="2"] .g2a2 .g2af{animation-name:g2l2}
+@keyframes g2l2{0%,61.11%{opacity:1;transform:scaleX(0)}64.44%,97.78%{opacity:1;transform:none}99.44%{opacity:0;transform:none}99.5%{opacity:0;transform:scaleX(0)}100%{opacity:1;transform:scaleX(0)}}
+/* el puntito viaja de una pantallita a la otra (en la flechita 1 pasa dos veces: peinadora y clóset) */
+[data-guia="2"] .g2ad{opacity:0;transform:none}
+[data-guia="2"] .g2a1 .g2ad{animation-name:g2d1;animation-timing-function:cubic-bezier(.45,0,.4,1)}
+@keyframes g2d1{0%,16.67%{opacity:0;transform:translateX(-100%)}16.94%{opacity:1;transform:translateX(-100%)}20%{opacity:1;transform:none}20.83%{opacity:0;transform:none}20.89%,45.56%{opacity:0;transform:translateX(-100%)}45.83%{opacity:1;transform:translateX(-100%)}48.89%{opacity:1;transform:none}49.72%,100%{opacity:0;transform:none}}
+[data-guia="2"] .g2a2 .g2ad{animation-name:g2d2;animation-timing-function:cubic-bezier(.45,0,.4,1)}
+@keyframes g2d2{0%,61.11%{opacity:0;transform:translateX(-100%)}61.39%{opacity:1;transform:translateX(-100%)}64.44%{opacity:1;transform:none}65.28%,100%{opacity:0;transform:none}}
+/* el botoncito de la flecha salta y se rellena cuando pasa algo */
+[data-guia="2"] .g2a1 .g2ab{animation-name:g2p1}
+@keyframes g2p1{0%,17.78%,20.83%,46.67%,49.72%,100%{transform:none}19.17%,48.06%{transform:scale(1.18)}}
+[data-guia="2"] .g2a1 .g2ab>i{animation-name:g2i1}
+@keyframes g2i1{0%,17.78%{opacity:0}19.44%,97.78%{opacity:1}99.44%,100%{opacity:0}}
+[data-guia="2"] .g2a2 .g2ab{animation-name:g2p2}
+@keyframes g2p2{0%,62.22%,65.28%,100%{transform:none}63.61%{transform:scale(1.18)}}
+[data-guia="2"] .g2a2 .g2ab>i{animation-name:g2i2}
+@keyframes g2i2{0%,62.22%{opacity:0}63.89%,97.78%{opacity:1}99.44%,100%{opacity:0}}
+
+/* ---------- 2 · tu cotización ---------- */
+/* el número de la bolsita aparece con un saltico (1) y después sube a 2 con otro saltico */
+[data-guia="2"] .g2n2{transform-origin:center;animation-name:g2n2}
+@keyframes g2n2{0%,20%{opacity:1;transform:scale(0)}21.67%{opacity:1;transform:scale(1.2)}23.06%,48.89%{opacity:1;transform:none}50.28%{opacity:1;transform:scale(1.2)}51.67%,97.78%{opacity:1;transform:none}99.17%{opacity:0;transform:none}99.22%,100%{opacity:1;transform:scale(0)}}
+[data-guia="2"] .g2cn{transform:translateY(-18px);animation-name:g2cn}
+@keyframes g2cn{0%,48.89%{transform:none}50.83%,99.22%{transform:translateY(-18px)}99.28%,100%{transform:none}}
+/* lo agregado llena su lugar en la lista: peinadora y después clóset */
+[data-guia="2"] .g2row1{animation-name:g2w1}
+@keyframes g2w1{0%,20%{opacity:0;transform:translateY(6px)}22.78%,97.78%{opacity:1;transform:none}99.17%,100%{opacity:0;transform:translateY(6px)}}
+[data-guia="2"] .g2row2{animation-name:g2w2}
+@keyframes g2w2{0%,48.89%{opacity:0;transform:translateY(6px)}51.67%,97.78%{opacity:1;transform:none}99.17%,100%{opacity:0;transform:translateY(6px)}}
+/* «Cotizar por WhatsApp» se enciende cuando ya hay algo guardado y se hunde al tocarlo */
+[data-guia="2"] .g2cz{transform-origin:center;animation-name:g2cz}
+@keyframes g2cz{0%,21.67%{opacity:.35;transform:none}23.89%,57.22%{opacity:1;transform:none}57.89%{opacity:1;transform:scale(.95)}59.17%,97.78%{opacity:1;transform:none}100%{opacity:.35;transform:none}}
+[data-guia="2"] .g2h2{opacity:0;transform-origin:30% 5%;animation-name:g2h2}
+@keyframes g2h2{0%,52.78%{opacity:0;transform:translate(9px,12px)}55.56%,56.94%{opacity:1;transform:none}57.78%{opacity:1;transform:scale(.86)}58.89%,59.44%{opacity:1;transform:none}61.67%,100%{opacity:0;transform:translate(7px,9px)}}
+[data-guia="2"] .g2r2{animation-name:g2r2}
+@keyframes g2r2{0%,57.72%{opacity:0;transform:scale(.6)}57.78%{opacity:.95;transform:scale(.6)}62.22%,100%{opacity:0;transform:scale(2.6)}}
+
+/* ---------- 3 · chat de KM ---------- */
+/* la cajita «Mensaje» se va y en su lugar crece la caja con el mensaje que se arma solo */
+[data-guia="2"] .g2in{animation-name:g2in}
+@keyframes g2in{0%,63.89%{opacity:1}65.56%,81.67%{opacity:0}83.89%,100%{opacity:1}}
+[data-guia="2"] .g2dr{opacity:0;transform-origin:50% 100%;animation-name:g2dr}
+@keyframes g2dr{0%,63.89%{opacity:0;transform:scaleY(.22)}66.11%,81.67%{opacity:1;transform:none}83.89%{opacity:0;transform:translateY(-10px)}83.94%,100%{opacity:0;transform:scaleY(.22)}}
+/* las tapas blancas se encogen de a una letra (steps): parece que alguien escribe, línea por línea */
+[data-guia="2"] .g2t{transform:scaleX(0);transform-origin:100% 50%}
+[data-guia="2"] .g2t1{animation-name:g2t1}
+@keyframes g2t1{0%,66.67%{transform:none;animation-timing-function:steps(10,end)}69.44%,84.44%{transform:scaleX(0)}84.5%,100%{transform:none}}
+[data-guia="2"] .g2t2{animation-name:g2t2}
+@keyframes g2t2{0%,69.72%{transform:none;animation-timing-function:steps(15,end)}73.06%,84.44%{transform:scaleX(0)}84.5%,100%{transform:none}}
+[data-guia="2"] .g2t3{animation-name:g2t3}
+@keyframes g2t3{0%,73.33%{transform:none;animation-timing-function:steps(15,end)}76.67%,84.44%{transform:scaleX(0)}84.5%,100%{transform:none}}
+[data-guia="2"] .g2t4{animation-name:g2t4}
+@keyframes g2t4{0%,76.94%{transform:none;animation-timing-function:steps(12,end)}79.44%,84.44%{transform:scaleX(0)}84.5%,100%{transform:none}}
+/* el dedito toca el botón verde de enviar */
+[data-guia="2"] .g2h3{opacity:0;transform-origin:30% 5%;animation-name:g2h3}
+@keyframes g2h3{0%,77.22%{opacity:0;transform:translate(9px,12px)}79.72%,80.28%{opacity:1;transform:none}81.11%{opacity:1;transform:scale(.86)}82.22%,82.78%{opacity:1;transform:none}85%,100%{opacity:0;transform:translate(7px,9px)}}
+[data-guia="2"] .g2r3{animation-name:g2r3}
+@keyframes g2r3{0%,81.06%{opacity:0;transform:scale(.6)}81.11%{opacity:.95;transform:scale(.6)}85.56%,100%{opacity:0;transform:scale(2.6)}}
+[data-guia="2"] .g2sd{transform-origin:center;animation-name:g2sd}
+@keyframes g2sd{0%,80.56%,82.22%,100%{transform:none}81.22%{transform:scale(.86)}}
+/* el mensaje enviado sube a su lugar; primero dos checks grises y luego violeta (leído) */
+[data-guia="2"] .g2ms{transform-origin:100% 100%;animation-name:g2ms}
+@keyframes g2ms{0%,81.67%{opacity:0;transform:translateY(12px) scale(.96)}83.89%,97.78%{opacity:1;transform:none}99.17%,100%{opacity:0;transform:none}}
+[data-guia="2"] .g2k1{animation-name:g2c1}
+@keyframes g2c1{0%,83.89%{opacity:0}85%,100%{opacity:1}}
+[data-guia="2"] .g2e .g2k2{animation-name:g2c2}
+@keyframes g2c2{0%,86.11%{opacity:0}87.22%,100%{opacity:1}}
+
+
+/* --- botones 1 · 2 para escoger la animación de la entrada (solo mientras Sergio escoge; ver guia_catalogo.py) --- */
+[data-guia-ops] { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px }
+[data-guia-op] { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 999px; background: #FFFFFF;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--km-tinta) 18%,transparent); font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--km-tinta) }
+html:not([data-guia-ver]) [data-guia-op="1"], html[data-guia-ver="1"] [data-guia-op="1"], html[data-guia-ver="2"] [data-guia-op="2"] { background: var(--km-tinta); color: var(--km-dia) }
+html:not([data-guia-ver]) [data-guia-ops] ~ [data-guia]:not([data-guia="1"]),
+html[data-guia-ver="1"] [data-guia-ops] ~ [data-guia]:not([data-guia="1"]),
+html[data-guia-ver="2"] [data-guia-ops] ~ [data-guia]:not([data-guia="2"]) { display: none !important }
+
+</style>
+<script data-km-guia="">
+// botones 1 · 2 de la animación de la entrada (solo mientras Sergio escoge; ver guia_catalogo.py)
+(function () {
+  function poner(op) { if (op === "1" || op === "2") { document.documentElement.setAttribute("data-guia-ver", op); try { localStorage.setItem("km-guia", op); } catch (e) {} } }
+  var ini = null;
+  try { ini = new URLSearchParams(location.search).get("guia") || localStorage.getItem("km-guia"); } catch (e) {}
+  poner(ini);
+  document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest("[data-guia-op]") : null;
+    if (b) poner(b.getAttribute("data-guia-op"));
+  });
+})();
+</script>
 <style data-km-marcas="">
 /* ===== Marcas de prueba C y E (Karla, 24-oct-2026; ver marcas_km.py) ===== */
 /* Sin data-marca la web se ve como hoy. Cada variable --km-* reemplaza un color que antes iba escrito a mano. */
@@ -699,6 +1141,292 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       </div>
       <p style="flex:0 1 430px;font-size:clamp(16px,1.25vw,18px);line-height:1.5;color:color-mix(in srgb,var(--km-tinta) 74%,transparent);text-wrap:pretty">{{ tiendaN }} modelos hechos a mano en Barquisimeto. Elige, agrega a tu cotización y envíala por WhatsApp.</p>
     </div>
+    <div data-guia-ops="" role="group" aria-label="Opciones de la animación"><button type="button" data-guia-op="1">1 · Teléfono</button><button type="button" data-guia-op="2">2 · Tres pasos</button></div>
+<!-- ===== Opción 1 · «Teléfono» (pedido de Sergio, 28-oct-2026) =====
+  Va en la entrada de /catalogo/, debajo de «Nuestro catálogo.». Enseña en un vistazo cómo se usa el catálogo:
+  agregas lo que te gusta, se guarda en la bolsita de tu cotización y un botón abre WhatsApp con el mensaje ya armado.
+  Dos partes: a la izquierda un teléfono dibujado con SVG (decorativo, se mueve solo con opcion-1.css) y a la derecha
+  tres frases cortas que se van encendiendo al ritmo de la historia (son texto de verdad, las lee el lector de pantalla).
+  Los colores van en el CSS, no aquí, así cambian solos con las marcas C y E. -->
+<div data-guia="1">
+<div class="g1-tel" data-escena="" aria-hidden="true"><svg viewBox="0 0 172 320">
+<defs>
+<!-- la forma de la pantalla: lo que se sale de ella no se ve (así la lista sube por debajo y el chat entra de lado) -->
+<clipPath id="g1Clip"><rect width="160" height="308" rx="24"/></clipPath>
+</defs>
+<!-- el cuerpo del teléfono: tinta con un filo un poquito más claro -->
+<rect class="g1fr" width="172" height="320" rx="30"/>
+<rect class="g1fl" x="1" y="1" width="170" height="318" rx="29"/>
+<g clip-path="url(#g1Clip)" transform="translate(6 6)">
+
+<!-- ========== PANTALLA 1 · la tienda (se corre un poquito a la izquierda cuando entra el chat) ========== -->
+<g class="g1-tienda">
+<rect class="g1d" width="160" height="308"/>
+<!-- la lista de muebles: sube (como al deslizar el dedo) para ver el siguiente -->
+<g class="g1-lista">
+<!-- tarjeta 1 · peinadora con espejo de bombillos -->
+<rect class="g1w g1ln" x="8" y="62" width="144" height="128" rx="12"/>
+<rect class="g1z" x="14" y="68" width="132" height="70" rx="8"/>
+<ellipse class="g1sh" cx="80" cy="133" rx="30" ry="2.5"/>
+<rect class="g1m" x="63" y="75" width="34" height="31" rx="4"/>
+<rect class="g1s" x="67" y="79" width="26" height="23" rx="2"/>
+<path class="g1br" d="M72 98l8-13M77 100l6-10"/>
+<rect class="g1fo" x="65" y="77" width="30" height="27" rx="3"/>
+<rect class="g1fo g1fo2" x="65" y="77" width="30" height="27" rx="3"/>
+<rect class="g1fo g1fo3" x="65" y="77" width="30" height="27" rx="3"/>
+<path class="g1m" d="M52 106h56v3.5H52zM55 109.5h50v18H55z"/>
+<path class="g1k" d="M80 109.5v18M55 118.5h50M65 114h5M90 114h5M65 123h5M90 123h5M59 127.5v5M101 127.5v5"/>
+<text class="g1b" x="16" y="155">Peinadora LED</text>
+<!-- su botón: «Agregar» (oscuro, como en la web) y, al tocarlo, «En tu cotización» -->
+<g class="g1-p1">
+<rect class="g1t" x="14" y="163" width="132" height="22" rx="11"/>
+<text class="g1bt g1c g1cl" x="80" y="178">Agregar</text>
+<g class="g1-a1">
+<rect class="g1s g1sb" x="14" y="163" width="132" height="22" rx="11"/>
+<path class="g1i" d="M30 174l2.6 2.6 5-5.4"/>
+<text class="g1bt g1vt" x="42" y="178">En tu cotización</text>
+</g>
+</g>
+<!-- tarjeta 2 · clóset con una puerta de espejo -->
+<rect class="g1w g1ln" x="8" y="198" width="144" height="128" rx="12"/>
+<rect class="g1z" x="14" y="204" width="132" height="70" rx="8"/>
+<ellipse class="g1sh" cx="80" cy="269" rx="28" ry="2.5"/>
+<path class="g1m" d="M56 207h48v3H56zM58 210h44v56H58z"/>
+<rect class="g1s" x="61.5" y="213.5" width="15" height="45" rx="1.5"/>
+<path class="g1br" d="M64 236l9-14M66 248l8-12"/>
+<rect class="g1pn" x="83.5" y="213.5" width="15" height="45" rx="1.5"/>
+<path class="g1k" d="M80 210v52M77.5 233v7M82.5 233v7M58 262h44M61.5 266v3M98.5 266v3"/>
+<text class="g1b" x="16" y="291">Clóset grande</text>
+<g class="g1-p2">
+<rect class="g1t" x="14" y="299" width="132" height="22" rx="11"/>
+<text class="g1bt g1c g1cl" x="80" y="314">Agregar</text>
+<g class="g1-a2">
+<rect class="g1s g1sb" x="14" y="299" width="132" height="22" rx="11"/>
+<path class="g1i" d="M30 310l2.6 2.6 5-5.4"/>
+<text class="g1bt g1vt" x="42" y="314">En tu cotización</text>
+</g>
+</g>
+<!-- tarjeta 3 · vanity (solo asoma: invita a seguir mirando) -->
+<rect class="g1w g1ln" x="8" y="334" width="144" height="128" rx="12"/>
+<rect class="g1z" x="14" y="340" width="132" height="70" rx="8"/>
+<path class="g1m" d="M62 376v-16a18 14 0 0 1 36 0v16z"/>
+<path class="g1s" d="M66 374v-13.5a14 10.5 0 0 1 28 0V374z"/>
+<path class="g1gl" d="M63.8 375v-15a16.2 12.4 0 0 1 32.4 0v15"/>
+<path class="g1m" d="M46 376h68v3.5H46zM48 379.5h18v20H48zM94 379.5h18v20H94z"/>
+<path class="g1k" d="M48 389.5h18M94 389.5h18M55 384.5h4M101 384.5h4M55 394.5h4M101 394.5h4M50 399.5v4M110 399.5v4"/>
+</g>
+<!-- arriba, fijo: «Catálogo» y la bolsita de la cotización con su numerito -->
+<rect class="g1d" width="160" height="56"/>
+<path class="g1h" d="M0 56.5h160"/>
+<text class="g1q" x="12" y="45">Catálogo</text>
+<g class="g1-bolsa">
+<circle class="g1w g1ln2" cx="138" cy="39" r="13"/>
+<path class="g1k g1kb" d="M132.5 36.5h11l-.8 9.5h-9.4zM135.3 36.5v-1.6a2.7 2.7 0 0 1 5.4 0v1.6"/>
+</g>
+<g class="g1-bd">
+<circle class="g1v g1rw" cx="149" cy="28" r="8"/>
+<text class="g1bt g1c g1wt g1-n1" x="149" y="32">1</text>
+<text class="g1bt g1c g1wt g1-n2" x="149" y="32">2</text>
+</g>
+<!-- el puntito violeta que «vuela» del botón a la bolsita (dos grupos: uno lo lleva de lado y otro hacia arriba, así hace curva) -->
+<g class="g1-vx"><circle class="g1v g1-vy" cx="80" cy="174" r="5.5"/></g>
+<!-- abajo: aparece con el primer mueble y se queda. Es el botón que manda todo a WhatsApp -->
+<g class="g1-dock">
+<rect class="g1d" y="254" width="160" height="54"/>
+<path class="g1h" d="M0 254.5h160"/>
+<g class="g1-pill">
+<rect class="g1t" x="6" y="262" width="148" height="30" rx="15"/>
+<circle class="g1wa2" cx="17" cy="277" r="6.5"/>
+<circle class="g1wa" cx="17" cy="277" r="3.5"/>
+<text class="g1bt g1cl" x="27" y="281">Cotizar por WhatsApp</text>
+</g>
+</g>
+<!-- los velos de foco: aclaran todo menos lo que se va a tocar (un hueco con su aro violeta), así se mira una sola cosa -->
+<g class="g1-vA"><path class="g1velo" d="M0 0h160v308H0zM25 159h110a15 15 0 0 1 0 30H25a15 15 0 0 1 0-30z"/><rect class="g1aro" x="10" y="159" width="140" height="30" rx="15"/></g>
+<g class="g1-vB"><path class="g1velo" d="M0 0h160v308H0zM121 35a21 21 0 1 0 42 0a21 21 0 1 0-42 0z"/><circle class="g1aro" cx="142" cy="35" r="21"/></g>
+<g class="g1-vC"><path class="g1velo" d="M0 0h160v308H0zM21 259h118a18 18 0 0 1 0 36H21a18 18 0 0 1 0-36z"/><rect class="g1aro" x="3" y="259" width="154" height="36" rx="18"/></g>
+</g>
+
+<!-- ========== PANTALLA 2 · el chat de WhatsApp con KM (entra desde la derecha) ========== -->
+<g class="g1-chat">
+<rect class="g1z" width="160" height="308"/>
+<rect class="g1w" width="160" height="58"/>
+<path class="g1h" d="M0 58.5h160"/>
+<path class="g1i" d="M13 33l-5 5 5 5"/>
+<circle class="g1s" cx="31" cy="38" r="12"/>
+<text class="g1q g1qs g1c g1vt" x="31" y="42">KM</text>
+<text class="g1b g1bn" x="49" y="35">KM · Karla Marquez</text>
+<text class="g1g" x="49" y="49">en línea</text>
+<rect class="g1hoy" x="63" y="68" width="34" height="17" rx="8.5"/>
+<text class="g1mo g1c" x="80" y="80">HOY</text>
+<!-- la caja de escribir vacía (queda a la vista cuando el mensaje se va) y el botón verde de enviar -->
+<rect class="g1w" x="6" y="264" width="118" height="26" rx="13"/>
+<text class="g1g" x="17" y="281">Mensaje</text>
+<g class="g1-env">
+<circle class="g1wa" cx="141" cy="277" r="12"/>
+<path class="g1w" d="M135.5 271.5l12 5.5-12 5.5 2.4-5.5z"/>
+</g>
+<!-- el mensaje: primero está en la caja de escribir (blanca) y se arma solo, línea por línea;
+     al enviarlo sube a su lugar en el chat (burbuja lila) y salen sus dos checks -->
+<g class="g1-msg">
+<rect class="g1w g1-mi" x="32" y="150" width="118" height="99" rx="14"/>
+<g class="g1-mb"><rect class="g1s" x="32" y="150" width="118" height="99" rx="10"/><path class="g1s" d="M142 150h12l-9 8.5z"/></g>
+<text class="g1-l1" x="40" y="167">¡Hola, KM! Vengo del</text>
+<text class="g1-l2" x="40" y="181">catálogo y quiero</text>
+<text class="g1-l3" x="40" y="195">cotizar:</text>
+<text class="g1b g1bm g1-l4" x="40" y="211">• 1 × Peinadora LED</text>
+<text class="g1b g1bm g1-l5" x="40" y="225">• 1 × Clóset grande</text>
+<path class="g1ck g1-k1" d="M127 238.5l2.5 2.5 5.5-6M132 241l5.5-6"/>
+<path class="g1ck g1ck2 g1-k2" d="M127 238.5l2.5 2.5 5.5-6M132 241l5.5-6"/>
+</g>
+<!-- velos de foco del chat: primero el mensaje que se arma solo, después el botón verde de enviar -->
+<g class="g1-vD"><path class="g1velo" d="M0 0h160v308H0zM19 186h92a17 17 0 0 1 17 17v74a17 17 0 0 1-17 17H19a17 17 0 0 1-17-17v-74a17 17 0 0 1 17-17z"/><rect class="g1aro" x="2" y="186" width="126" height="108" rx="17"/></g>
+<g class="g1-vE"><path class="g1velo" d="M0 0h160v308H0zM124 277a17 17 0 1 0 34 0a17 17 0 1 0-34 0z"/><circle class="g1aro" cx="141" cy="277" r="17"/></g>
+</g>
+
+<!-- el dedito: un círculo que va a cada botón, se hunde al tocar y suelta una onda -->
+<g class="g1-dedo"><circle class="g1-onda" r="13"/><g class="g1-yema"><circle class="g1y1" r="13"/><circle class="g1y2" r="4.5"/></g></g>
+</g>
+<!-- encima de todo: la isla de la cámara y la rayita de abajo del teléfono -->
+<rect class="g1fr" x="69" y="15" width="34" height="10" rx="5"/>
+<rect class="g1fr g1ho" x="66" y="307" width="40" height="3" rx="1.5"/>
+</svg></div>
+<!-- las tres frases: se encienden (bombillo y texto) cuando la historia llega a cada parte -->
+<div class="g1-lado">
+<p class="g1-ceja">Así de fácil</p>
+<ol class="g1-frases">
+<li class="g1-f1"><span class="g1-foco" aria-hidden="true"></span>Elige lo que te gusta.</li>
+<li class="g1-f2"><span class="g1-foco" aria-hidden="true"></span>Se guarda en tu cotización.</li>
+<li class="g1-f3"><span class="g1-foco" aria-hidden="true"></span>Tu mensaje a WhatsApp se arma solo.</li>
+</ol>
+</div>
+</div>
+<!-- ===== Opción 2 · «Tres pasos en fila» (pedido de Sergio, 28-oct-2026) =====
+  Va en la entrada de /catalogo/, debajo de «Nuestro catálogo.» y su texto. Tres pantallitas en fila, unidas por
+  flechitas, que se encienden una a la vez: 1 eliges y tocas «Agregar», 2 se guarda en tu cotización (la bolsita
+  suma 1, 2…) y 3 el mensaje se escribe solo en el chat de KM y se envía. Se mueve solo con opcion-2.css.
+  Todo el dibujo va dentro de UN data-escena (se pausa fuera de pantalla). Las etiquetas «Elige»… van dentro y por
+  eso quedan ocultas al lector de pantalla: el texto de arriba ya dice lo mismo. -->
+<div data-guia="2" class="g2">
+<div class="g2e" data-escena="" aria-hidden="true">
+
+<!-- ---------- Pantallita 1 · el catálogo: tarjeta con el mueble y el botón «Agregar» ---------- -->
+<div class="g2p g2p1"><div class="g2sc"><svg viewBox="0 0 96 160">
+<defs>
+<!-- la peinadora: espejo con bombillos, tope, gavetas y patas (se repite con <use>; el color va en cada <use>) -->
+<symbol id="g2P" viewBox="0 0 60 72">
+<rect x="12" y="2" width="36" height="36" rx="5"/>
+<rect x="17" y="7" width="26" height="26" rx="2" style="fill:var(--km-lila-suave);stroke:none"/>
+<path d="M22 27l9-15M27 30l7-12" style="stroke:#FFFFFF;stroke-width:1.6"/>
+<rect x="14.5" y="4.5" width="31" height="31" rx="3.5" style="fill:none;stroke:color-mix(in srgb,var(--km-halo) 85%,transparent);stroke-width:5.6;stroke-dasharray:0 7.87"/>
+<rect x="14.5" y="4.5" width="31" height="31" rx="3.5" style="fill:none;stroke:#FFFFFF;stroke-width:3;stroke-dasharray:0 7.87"/>
+<path d="M3 38h54v4H3zM5 42h50v19H5z"/>
+<path d="M30 42v19M5 51.5h50M15 46.5h5M40 46.5h5M15 56h5M40 56h5M9 61v8M51 61v8" style="fill:none"/>
+</symbol>
+<!-- el clóset: tres puertas, la del medio con espejo, y sus patas -->
+<symbol id="g2C" viewBox="0 0 60 72">
+<path d="M6 2h48v62H6z"/>
+<path d="M4 2h52"/>
+<rect x="24.5" y="8" width="11" height="50" rx="1.5" style="fill:var(--km-lila-suave);stroke:none"/>
+<path d="M27 22l6-9M27 30l6-9" style="stroke:#FFFFFF;stroke-width:1.6"/>
+<path d="M22 2v62M38 2v62M18.5 30v7M41.5 30v7M9 64v5M51 64v5" style="fill:none"/>
+</symbol>
+<!-- el dedito que toca (la punta queda en 6,1.5) -->
+<symbol id="g2H" viewBox="0 0 19 29">
+<path d="M6 1.5c1.4 0 2.5 1.1 2.5 2.5v8l1-.2c1.2-.2 2.3.5 2.6 1.6l.1.4.8-.1c1.2-.1 2.2.6 2.5 1.7l.1.3.5-.1c1.3-.1 2.4.9 2.4 2.2V21c0 3.6-2.9 6.5-6.5 6.5h-2.3c-2.3 0-4.4-1.2-5.6-3.1L1.1 19.6c-.7-1.1-.4-2.5.6-3.2.9-.6 2.2-.5 2.9.3l.9 1V4c0-1.4 1.1-2.5 2.5-2.5z"/>
+</symbol>
+</defs>
+<text class="g2m" x="9" y="21">CATÁLOGO</text>
+<path class="g2hr" d="M0 31.5h96"/>
+<!-- ventanita: las tarjetas se deslizan de lado, como cuando bajas por el catálogo -->
+<svg x="0" y="33" width="96" height="127"><g class="g2k">
+<!-- tarjeta A: peinadora -->
+<rect class="g2d" x="8" y="6" width="76" height="62" rx="9"/>
+<use class="g2u" href="/catalogo/#g2P" x="24" y="10" width="44" height="53"/>
+<text class="g2b" x="9" y="84">Peinadora</text>
+<g class="g2bt g2bt1"><rect class="g2ink" x="8" y="93" width="76" height="26" rx="13"/><text class="g2b g2wt g2c" x="46" y="110.5">Agregar</text></g>
+<g class="g2ok g2ok1"><rect class="g2v" x="8" y="93" width="76" height="26" rx="13"/><path class="g2ck" d="M11 106l3 3 5.5-6"/><text class="g2b g2wt" x="23" y="110.5">Agregado</text></g>
+<!-- tarjeta B: clóset -->
+<rect class="g2d" x="104" y="6" width="76" height="62" rx="9"/>
+<use class="g2u" href="/catalogo/#g2C" x="120" y="10" width="44" height="53"/>
+<text class="g2b" x="105" y="84">Clóset</text>
+<g class="g2bt g2bt2"><rect class="g2ink" x="104" y="93" width="76" height="26" rx="13"/><text class="g2b g2wt g2c" x="142" y="110.5">Agregar</text></g>
+<g class="g2ok g2ok2"><rect class="g2v" x="104" y="93" width="76" height="26" rx="13"/><path class="g2ck" d="M107 106l3 3 5.5-6"/><text class="g2b g2wt" x="119" y="110.5">Agregado</text></g>
+</g></svg>
+<!-- el toque: aro que se abre y el dedito -->
+</svg></div>
+<!-- capa del dedito: puede salirse un poco por debajo de la pantallita, como una mano de verdad -->
+<svg class="g2fx" viewBox="0 0 96 160"><circle class="g2r g2r1" cx="72" cy="141" r="7"/>
+<g transform="translate(64.4 139.1)"><use class="g2h g2h1" href="/catalogo/#g2H" width="24" height="36.6"/></g></svg></div>
+
+<!-- flechita 1 (de «Elige» a «Se guarda»): la línea se recorre y el puntito lleva lo elegido -->
+<div class="g2a g2a1"><i class="g2at"></i><i class="g2af"></i><i class="g2ad"><b></b></i><span class="g2ab"><svg viewBox="0 0 24 24"><path d="M9.5 7l5 5-5 5"/></svg><i><svg viewBox="0 0 24 24"><path d="M9.5 7l5 5-5 5"/></svg></i></span></div>
+
+<!-- ---------- Pantallita 2 · tu cotización: la bolsita con su número y lo que vas guardando ---------- -->
+<div class="g2p g2p2"><div class="g2sc"><svg viewBox="0 0 96 160">
+<!-- la bolsita (como la de arriba a la derecha de la web) y su número, que sube de 1 a 2 -->
+<rect class="g2bag" x="37" y="16" width="22" height="19" rx="4"/>
+<path class="g2bag" d="M42.5 16v-2.5a5.5 5.5 0 0 1 11 0V16"/>
+<g class="g2n2">
+<circle class="g2v" cx="60" cy="14" r="8.5"/>
+<svg x="52" y="5" width="16" height="18"><g class="g2cn"><text class="g2b g2wt g2c" x="8" y="13.4">1</text><text class="g2b g2wt g2c" x="8" y="31.4">2</text></g></svg>
+</g>
+<text class="g2b g2c" x="48" y="54">Tu cotización</text>
+<!-- dos lugares punteados que se llenan con lo que agregas -->
+<rect class="g2sl" x="6.5" y="62.5" width="83" height="23" rx="8"/>
+<rect class="g2sl" x="6.5" y="90.5" width="83" height="23" rx="8"/>
+<g class="g2row g2row1"><rect class="g2d" x="5" y="62" width="86" height="24" rx="8"/><rect class="g2w" x="9" y="66" width="16" height="16" rx="4"/><use class="g2u g2uu" href="/catalogo/#g2P" x="10" y="67" width="14" height="14"/><text x="29" y="78.5">Peinadora</text></g>
+<g class="g2row g2row2"><rect class="g2d" x="5" y="90" width="86" height="24" rx="8"/><rect class="g2w" x="9" y="94" width="16" height="16" rx="4"/><use class="g2u g2uu" href="/catalogo/#g2C" x="10" y="95" width="14" height="14"/><text x="29" y="106.5">Clóset</text></g>
+<!-- el botón de la web: «Cotizar por WhatsApp», oscuro con su puntito verde (aquí en dos líneas) -->
+<g class="g2cz"><rect class="g2ink" x="5" y="120" width="86" height="34" rx="12"/><circle class="g2gr" cx="12.5" cy="129.5" r="3.2"/>
+<text class="g2b g2wt" x="19" y="133.8">Cotizar por</text><text class="g2b g2wt" x="19" y="147.8">WhatsApp</text></g>
+</svg></div>
+<!-- capa del dedito: puede salirse un poco por debajo de la pantallita, como una mano de verdad -->
+<svg class="g2fx" viewBox="0 0 96 160"><circle class="g2r g2r2" cx="82" cy="145" r="7"/>
+<g transform="translate(74.4 143.1)"><use class="g2h g2h2" href="/catalogo/#g2H" width="24" height="36.6"/></g></svg></div>
+
+<!-- flechita 2 (de «Se guarda» a WhatsApp): el puntito verde lleva la cotización al chat -->
+<div class="g2a g2a2"><i class="g2at"></i><i class="g2af"></i><i class="g2ad"><b></b></i><span class="g2ab"><svg viewBox="0 0 24 24"><path d="M9.5 7l5 5-5 5"/></svg><i><svg viewBox="0 0 24 24"><path d="M9.5 7l5 5-5 5"/></svg></i></span></div>
+
+<!-- ---------- Pantallita 3 · el chat de KM: el mensaje se escribe solo y se envía ---------- -->
+<div class="g2p g2p3"><div class="g2sc"><svg viewBox="0 0 156 160">
+<circle class="g2s" cx="17" cy="18" r="11"/>
+<text class="g2q g2c" x="17" y="22.3">KM</text>
+<text class="g2b" x="34" y="16">KM · Karla Marquez</text>
+<text class="g2g" x="34" y="30.5">en línea</text>
+<path class="g2hr" d="M0 37h156"/>
+<rect class="g2z" y="37.5" width="156" height="122.5"/>
+<!-- el mensaje enviado (burbuja lila) con sus dos checks: primero grises y luego violeta (leído) -->
+<g class="g2ms">
+<rect class="g2s" x="20" y="46" width="124" height="78" rx="10"/><path class="g2s" d="M134 46h14l-8 8z"/>
+<text x="29" y="62">¡Hola, KM!</text><text x="29" y="76.5">Quiero cotizar:</text><text x="29" y="91">• 1 × Peinadora</text><text x="29" y="105.5">• 1 × Clóset</text>
+<path class="g2k1" d="M121 115.5l2.5 2.5 5.5-6M126 118l5.5-6"/>
+<path class="g2k1 g2k2" d="M121 115.5l2.5 2.5 5.5-6M126 118l5.5-6"/>
+</g>
+<!-- la caja de escribir: chiquita con «Mensaje»; mientras se arma el mensaje crece y las líneas aparecen solas -->
+<g class="g2in"><rect class="g2w" x="8" y="132" width="116" height="22" rx="11"/><text class="g2g" x="18" y="147.3">Mensaje</text></g>
+<g class="g2dr">
+<rect class="g2w" x="8" y="56" width="116" height="98" rx="12"/>
+<text x="17" y="74">¡Hola, KM!</text><text x="17" y="88.5">Quiero cotizar:</text><text x="17" y="103">• 1 × Peinadora</text><text x="17" y="117.5">• 1 × Clóset</text>
+<!-- tapas blancas que se encogen letra por letra: así parece que se escribe solo -->
+<rect class="g2w g2t g2t1" x="16" y="63" width="61" height="15"/>
+<rect class="g2w g2t g2t2" x="16" y="77.5" width="88" height="15"/>
+<rect class="g2w g2t g2t3" x="16" y="92" width="86" height="15"/>
+<rect class="g2w g2t g2t4" x="16" y="106.5" width="64" height="15"/>
+</g>
+<!-- el botón verde de enviar -->
+<g class="g2sd"><circle class="g2wa" cx="138" cy="143" r="11"/><path class="g2w" d="M132.5 137.5l12 5.5-12 5.5 2.4-5.5z"/></g>
+</svg></div>
+<!-- capa del dedito: puede salirse un poco por debajo de la pantallita, como una mano de verdad -->
+<svg class="g2fx" viewBox="0 0 156 160"><circle class="g2r g2r3" cx="139" cy="145" r="7"/>
+<g transform="translate(131.4 143.1)"><use class="g2h g2h3" href="/catalogo/#g2H" width="24" height="36.6"/></g></svg></div>
+
+<!-- etiquetas cortas debajo de cada pantallita (el número se rellena cuando le toca) -->
+<p class="g2l g2l1"><span class="g2nb">1<i>1</i></span>Elige</p>
+<p class="g2l g2l2"><span class="g2nb">2<i>2</i></span>Se guarda</p>
+<p class="g2l g2l3"><span class="g2nb">3<i>3</i></span>Sale solo a WhatsApp</p>
+</div>
+</div>
   </div>
 </section>
 </sc-if>
