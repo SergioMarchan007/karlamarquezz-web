@@ -253,6 +253,543 @@
   [data-puerta-t] { font-size: clamp(22px,2.4vw,38px) }
 }
 </style>
+<style data-km-pasos="">
+/* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
+/* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
+   pausa en el primer cuadro; cuando entra, escenas.js le pone data-visible y arrancan. Así no gastan batería fuera de
+   pantalla y la persona ve la historia desde el principio. */
+[data-escena] *, [data-escena] *::before, [data-escena] *::after,
+[data-escena]::before, [data-escena]::after { animation-play-state: paused }
+[data-escena][data-visible] *, [data-escena][data-visible] *::before, [data-escena][data-visible] *::after,
+[data-escena][data-visible]::before, [data-escena][data-visible]::after { animation-play-state: running }
+
+/* Quien pidió «menos movimiento» en su teléfono ve el dibujo quieto y terminado: por eso los estilos normales de cada
+   pieza son el último cuadro de la historia, y las animaciones solo cuentan cómo se llega ahí. */
+@media (prefers-reduced-motion: reduce) {
+  [data-escena] *, [data-escena] *::before, [data-escena] *::after,
+  [data-escena]::before, [data-escena]::after { animation: none !important; transition: none !important }
+}
+
+/* --- botones A · B · C para escoger la opción (solo mientras Sergio escoge; ver OPCIONES en pasos_animados.py) --- */
+[data-pasos-ops] { display: flex; flex-wrap: wrap; align-items: center; gap: 8px }
+[data-pasos-ops] > span { margin-right: 4px; font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--km-gris) }
+[data-pasos-op] { display: inline-flex; align-items: center; height: 38px; padding: 0 15px; border-radius: 999px; background: #FFFFFF;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--km-tinta) 18%,transparent); font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--km-tinta) }
+/* el botón de la opción que se está viendo va relleno (sin elegir, la A) */
+html:not([data-pasos]) [data-pasos-op="a"], html[data-pasos="a"] [data-pasos-op="a"],
+html[data-pasos="b"] [data-pasos-op="b"], html[data-pasos="c"] [data-pasos-op="c"] { background: var(--km-tinta); color: var(--km-dia) }
+/* con los botones puestos, solo se ve la lista de la opción elegida (si hay una sola opción, sin botones, no se esconde nada) */
+html:not([data-pasos]) [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="a"]),
+html[data-pasos="a"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="a"]),
+html[data-pasos="b"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="b"]),
+html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista="c"]) { display: none !important }
+
+/* ===== Opción A · Trazo fino («Cómo pedir», 28-oct-2026) =====
+   Dibujos de línea fina violeta que se arman solos sobre tarjetas blancas, con los bombillitos de KM encendidos.
+   - Los estilos normales son el ÚLTIMO cuadro de cada historia: así se ve quien pidió «menos movimiento».
+   - Cada animación dura 8 s y se repite; en el HTML cada pieza dice cuál usa (animation-name).
+   - Solo se anima transform, opacity y stroke-dashoffset: lo más liviano para el teléfono.
+   - No se usa el atajo «animation:» porque pisaría la pausa de escenas.css (la que espera a que el dibujo se vea). */
+
+/* ---------- la tarjeta ---------- */
+[data-pasos-lista="a"] .pa-c { background: #FFFFFF; border: 1px solid color-mix(in srgb,var(--km-tinta) 8%,transparent); border-radius: 16px; overflow: hidden }
+[data-pasos-lista="a"] .pa-c svg { display: block; width: 100%; height: auto; aspect-ratio: 280 / 200 }
+
+/* ---------- trazos y rellenos de todos los dibujos ---------- */
+/* línea violeta principal (1,6 en el dibujo = de 1,5 a 2 px en pantalla) */
+[data-pasos-lista="a"] .pa-l { fill: none; stroke: var(--km-violeta); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round }
+/* pieza blanca con borde violeta */
+[data-pasos-lista="a"] .pa-f { fill: #FFFFFF; stroke: var(--km-violeta); stroke-width: 1.6; stroke-linejoin: round }
+/* línea más fina, para lo chiquito */
+[data-pasos-lista="a"] .pa-th { stroke-width: 1.2 }
+/* línea gris suave: piso, bordes y separadores */
+[data-pasos-lista="a"] .pa-s { fill: none; stroke: color-mix(in srgb,var(--km-tinta) 16%,transparent); stroke-width: 1.2; stroke-linecap: round }
+/* relleno violeta (los checks) y la raya blanca que va encima */
+[data-pasos-lista="a"] .pa-vf { fill: var(--km-violeta) }
+[data-pasos-lista="a"] .pa-wl { fill: none; stroke: #FFFFFF; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round }
+/* lo que se dibuja solo: la línea mide «1» (pathLength) y la animación la va destapando */
+[data-pasos-lista="a"] .pa-d { stroke-dasharray: 1 2 }
+/* letras: Karla para el chat, DM Mono para las etiquetas, Kalnia para los números */
+[data-pasos-lista="a"] .pa-t { font: 500 10.5px Karla, system-ui, sans-serif; fill: var(--km-tinta) }
+[data-pasos-lista="a"] .pa-tb { font-weight: 700 }
+[data-pasos-lista="a"] .pa-m { font: 500 9.6px 'DM Mono', ui-monospace, monospace; letter-spacing: .16em; fill: var(--km-violeta); text-anchor: middle }
+[data-pasos-lista="a"] .pa-n { font-family: Kalnia, 'Bodoni 72', Didot, serif; font-weight: 300; fill: var(--km-tinta) }
+
+/* ---------- los bombillos de KM: punto blanco con borde y halo lila ---------- */
+[data-pasos-lista="a"] .pa-g0 { stop-color: var(--km-halo); stop-opacity: .9 }
+[data-pasos-lista="a"] .pa-g1 { stop-color: var(--km-halo); stop-opacity: .38 }
+[data-pasos-lista="a"] .pa-g2 { stop-color: var(--km-halo); stop-opacity: 0 }
+[data-pasos-lista="a"] .pa-h { fill: url(#pa-g) }
+[data-pasos-lista="a"] .pa-b { fill: #FFFFFF; stroke: color-mix(in srgb,var(--km-tinta) 20%,transparent); stroke-width: .8 }
+/* una fila de bombillos hecha con una sola línea de puntitos: primero el borde gris y encima el punto blanco */
+[data-pasos-lista="a"] .pa-pk { fill: none; stroke-linecap: round; stroke-dasharray: 0 6.5 }
+[data-pasos-lista="a"] .pa-pk1 { stroke: color-mix(in srgb,var(--km-tinta) 28%,transparent); stroke-width: 4.2 }
+[data-pasos-lista="a"] .pa-pk2 { stroke: #FFFFFF; stroke-width: 2.8 }
+[data-pasos-lista="a"] .pa-pg { stroke-dasharray: 0 18 }
+[data-pasos-lista="a"] .pa-pg.pa-pk1 { stroke-width: 7 }
+[data-pasos-lista="a"] .pa-pg.pa-pk2 { stroke-width: 5.4 }
+
+/* ---------- paso 1 · WhatsApp ---------- */
+[data-pasos-lista="a"] .pa-wa { fill: #25D366; stroke: #FFFFFF; stroke-width: 1 }
+[data-pasos-lista="a"] .pa-wf { fill: #FFFFFF }
+[data-pasos-lista="a"] .pa-bu { fill: var(--km-lila-suave); stroke: color-mix(in srgb,var(--km-violeta) 16%,transparent); stroke-width: 1 }
+[data-pasos-lista="a"] .pa-cd { fill: #FFFFFF; stroke: color-mix(in srgb,var(--km-violeta) 22%,transparent); stroke-width: 1 }
+[data-pasos-lista="a"] .pa-cd2 { stroke: color-mix(in srgb,var(--km-tinta) 14%,transparent) }
+[data-pasos-lista="a"] .pa-dt { opacity: .6 }
+[data-pasos-lista="a"] .pa-in { fill: #FFFFFF; stroke: color-mix(in srgb,var(--km-tinta) 18%,transparent); stroke-width: 1 }
+/* lo escrito en la barra ya se envió: queda vacía */
+[data-pasos-lista="a"] .pa-iy { opacity: 0 }
+/* la tapa blanca que esconde las letras y se encoge hacia la derecha (así «se escriben») */
+[data-pasos-lista="a"] .pa-cv { fill: #FFFFFF; transform-box: fill-box; transform-origin: 100% 50%; transform: scaleX(0) }
+[data-pasos-lista="a"] .pa-cr { stroke-width: 1.2 }
+
+/* ---------- paso 2 · abono ---------- */
+/* la línea gruesa blanca dentro de la máscara: por donde pasa, se ve el brillo */
+[data-pasos-lista="a"] .pa-mk { fill: none; stroke: #FFFFFF; stroke-width: 28; stroke-dasharray: 1 2 }
+[data-pasos-lista="a"] .pa-ar { stroke-width: 2 }
+/* los 16 bombillos del aro: puntitos de una línea circular (pathLength 16 = uno cada 1/16 de vuelta) */
+[data-pasos-lista="a"] .pa-rg { fill: none; stroke-linecap: round; stroke-dasharray: 0 1; stroke-dashoffset: .5 }
+[data-pasos-lista="a"] .pa-rg1 { stroke: color-mix(in srgb,var(--km-tinta) 26%,transparent); stroke-width: 7.4 }
+[data-pasos-lista="a"] .pa-rg2 { stroke: #FFFFFF; stroke-width: 5.8 }
+[data-pasos-lista="a"] .pa-nb { font-size: 30px; text-anchor: end }
+/* la fila de números queda subida en el 50 */
+[data-pasos-lista="a"] .pa-ct { transform: translateY(-180px) }
+[data-pasos-lista="a"] .pa-pc { font-size: 17px }
+[data-pasos-lista="a"] .pa-pl { fill: var(--km-lila-suave); stroke: color-mix(in srgb,var(--km-violeta) 28%,transparent); stroke-width: 1 }
+[data-pasos-lista="a"] .pa-tv { fill: var(--km-violeta); font-size: 11.5px }
+
+/* ---------- paso 3 · taller ---------- */
+/* las 12 marquitas de las horas: una línea circular cortada en 12 pedacitos */
+[data-pasos-lista="a"] .pa-tk { fill: none; stroke: color-mix(in srgb,var(--km-tinta) 32%,transparent); stroke-width: 3; stroke-dasharray: .07 .93; stroke-dashoffset: .035 }
+/* agujas: giran desde el centro del reloj y quedan a las 10:10 */
+[data-pasos-lista="a"] .pa-hd { stroke-linecap: round; transform-box: fill-box; transform-origin: 50% 100% }
+[data-pasos-lista="a"] .pa-hh { stroke: var(--km-tinta); stroke-width: 2.2; transform: rotate(305deg) }
+[data-pasos-lista="a"] .pa-mh { stroke: var(--km-violeta); stroke-width: 1.6; transform: rotate(60deg) }
+[data-pasos-lista="a"] .pa-dd { font-size: 21px; text-anchor: middle }
+/* el plano punteado (al final ya no se ve) */
+[data-pasos-lista="a"] .pa-bp { fill: none; stroke: var(--km-lila-borde); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0 }
+/* la pintura lila: crece desde la izquierda */
+[data-pasos-lista="a"] .pa-pt { fill: var(--km-lila-suave); transform-box: fill-box; transform-origin: 0 50% }
+/* el plástico: lila transparente, su borde y sus brillos blancos */
+[data-pasos-lista="a"] .pa-wr { fill: color-mix(in srgb,var(--km-halo) 20%,transparent) }
+[data-pasos-lista="a"] .pa-wo { fill: none; stroke: color-mix(in srgb,var(--km-violeta) 45%,transparent); stroke-width: 1.2 }
+[data-pasos-lista="a"] .pa-sh { fill: none; stroke: #FFFFFF; stroke-width: 2.4; stroke-linecap: round }
+
+/* ---------- paso 4 · retiro o envío ---------- */
+[data-pasos-lista="a"] .pa-wb { stroke: color-mix(in srgb,var(--km-violeta) 45%,transparent); stroke-width: 1 }
+[data-pasos-lista="a"] .pa-sh2 { stroke-width: 1.6 }
+[data-pasos-lista="a"] .pa-ms { letter-spacing: .2em }
+/* la santamaría: una raya blanca muy gruesa (la puerta) con rayitas violetas encima; queda subida */
+[data-pasos-lista="a"] .pa-dr { transform: translateY(-52px) }
+[data-pasos-lista="a"] .pa-dp { stroke: #FFFFFF; stroke-width: 40 }
+[data-pasos-lista="a"] .pa-sl { stroke: color-mix(in srgb,var(--km-violeta) 40%,transparent); stroke-width: 40; stroke-dasharray: 1.2 4.8 }
+[data-pasos-lista="a"] .pa-or { font-size: 24px; fill: var(--km-violeta); text-anchor: middle }
+[data-pasos-lista="a"] .pa-rd { fill: none; stroke: color-mix(in srgb,var(--km-tinta) 20%,transparent); stroke-width: 1.4; stroke-dasharray: 10 8 }
+
+/* ---------- cómo se mueven (8 s cada vuelta; 1 % = 0,08 s) ---------- */
+[data-pasos-lista="a"] .pa-k { animation-duration: 8s; animation-timing-function: cubic-bezier(.16,1,.3,1); animation-iteration-count: infinite; animation-fill-mode: both }
+/* las piezas que giran o crecen lo hacen desde su propio centro */
+[data-pasos-lista="a"] .pa-o { transform-box: fill-box; transform-origin: center }
+
+/* paso 1: check al elegir (0,4 s), se escribe (1 a 2,4 s), se envía y sube (2,6 s), checks de enviado (3,4 s),
+   KM escribiendo (4 s); quieto hasta 7,3 s y vuelve al principio */
+@keyframes pa1o { 0%, 5% { opacity: 0; transform: scale(.3); animation-timing-function: cubic-bezier(.34,1.56,.64,1) } 10%, 91% { opacity: 1; transform: none } 94%, 100% { opacity: 0; transform: scale(.3) } }
+@keyframes pa1g { 0%, 6% { opacity: 0 } 12%, 91% { opacity: 1 } 94%, 100% { opacity: 0 } }
+@keyframes pa1c { 0%, 12.5% { transform: none; animation-timing-function: steps(18, end) } 30%, 98% { transform: scaleX(0) } 99%, 100% { transform: none } }
+@keyframes pa1r { 0%, 12.5% { transform: none; animation-timing-function: steps(18, end) } 30% { transform: translateX(96px) } 32.5%, 100% { transform: none } }
+@keyframes pa1y { 0%, 32.5% { opacity: 1 } 35%, 99% { opacity: 0 } 100% { opacity: 1 } }
+@keyframes pa1s { 0%, 31% { transform: none } 32.5% { transform: scale(.86) } 35%, 100% { transform: none } }
+@keyframes pa1m { 0%, 33% { transform: translateY(38px) } 41%, 91% { transform: none; opacity: 1 } 94%, 96% { transform: none; opacity: 0 } 96.5% { transform: translateY(38px); opacity: 0 } 100% { transform: translateY(38px); opacity: 1 } }
+@keyframes pa1f { 0%, 33% { opacity: 0 } 39%, 91% { opacity: 1 } 94%, 100% { opacity: 0 } }
+@keyframes pa1x { 0%, 34% { opacity: 0 } 40%, 91% { opacity: 1 } 94%, 100% { opacity: 0 } }
+@keyframes pa1v { 0%, 42.5% { opacity: 0 } 46%, 91% { opacity: 1 } 94%, 100% { opacity: 0 } }
+@keyframes pa1d { 0%, 50% { opacity: 0; transform: translateY(6px) } 55%, 91% { opacity: 1; transform: none } 94%, 100% { opacity: 0; transform: none } }
+@keyframes pa1p { 0%, 55% { transform: none } 58.5% { transform: translateY(-2.2px) } 62%, 100% { transform: none } }
+
+/* paso 2: la línea y el brillo avanzan hasta la mitad mientras cuenta 0 a 50 (0,6 a 3,2 s), sale «Reservado» (3,4 s);
+   quieto hasta 7,1 s; al volver, la luz sigue de largo y se apaga */
+@keyframes pa2a { 0%, 7.5% { stroke-dashoffset: 1.02; animation-timing-function: cubic-bezier(.45,0,.2,1) } 40%, 89% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(.5,0,.75,0) } 97%, 100% { stroke-dashoffset: -1.02 } }
+@keyframes pa2n { 0%, 7.5% { transform: none; opacity: 1; animation-timing-function: cubic-bezier(.45,0,.2,1) } 40%, 89% { transform: translateY(-180px); opacity: 1 } 92% { transform: translateY(-180px); opacity: 0 } 93% { transform: none; opacity: 0 } 97%, 100% { transform: none; opacity: 1 } }
+@keyframes pa2r { 0%, 42% { opacity: 0; transform: translateY(8px) } 49%, 89% { opacity: 1; transform: none } 93%, 100% { opacity: 0; transform: none } }
+@keyframes pa2c { 0%, 45% { stroke-dashoffset: 1.02 } 52%, 93% { stroke-dashoffset: 0 } 94%, 100% { stroke-dashoffset: 1.02 } }
+
+/* paso 3: se arma sobre el plano (0,4 a 2,2 s), se pinta (2,3 s), luces (3,1 s), se envuelve (3,8 a 4,8 s);
+   el reloj corre de 0,4 a 4,8 s; quieto hasta 7,1 s */
+@keyframes pa3b { 0%, 5% { opacity: 1 } 25%, 93% { opacity: 0 } 98%, 100% { opacity: 1 } }
+@keyframes pa3l { 0%, 5% { stroke-dashoffset: 1.02; opacity: 1; animation-timing-function: cubic-bezier(.45,0,.3,1) } 27.5%, 90% { stroke-dashoffset: 0; opacity: 1 } 94% { stroke-dashoffset: 0; opacity: 0 } 95%, 100% { stroke-dashoffset: 1.02; opacity: 0 } }
+@keyframes pa3p { 0%, 28.5% { transform: scaleX(0) } 37%, 90% { transform: none; opacity: 1 } 94%, 100% { transform: none; opacity: 0 } }
+@keyframes pa3c { 0%, 38% { opacity: 0 } 41%, 90% { opacity: 1 } 93%, 100% { opacity: 0 } }
+@keyframes pa3g { 0%, 40.5% { opacity: 0 } 45%, 89.5% { opacity: 1 } 92%, 100% { opacity: 0 } }
+@keyframes pa3w { 0%, 50% { opacity: 0 } 58%, 91% { opacity: 1 } 93%, 100% { opacity: 0 } }
+@keyframes pa3o { 0%, 47% { stroke-dashoffset: 1.02; animation-timing-function: cubic-bezier(.45,0,.3,1) } 58%, 91% { stroke-dashoffset: 0; opacity: 1 } 93%, 100% { stroke-dashoffset: 0; opacity: 0 } }
+@keyframes pa3s { 0%, 54% { opacity: 0; transform: translate(-8px, 8px) } 62%, 91% { opacity: 1; transform: none } 93%, 100% { opacity: 0; transform: none } }
+/* minutero: 3 vueltas enteras (empieza y termina en el mismo sitio); horario: de 7:10 a 10:10, y vuelve escondido */
+@keyframes pa3m { 0%, 5% { transform: rotate(-1020deg); animation-timing-function: cubic-bezier(.45,0,.25,1) } 60%, 100% { transform: rotate(60deg) } }
+@keyframes pa3h { 0%, 5% { transform: rotate(215deg); animation-timing-function: cubic-bezier(.45,0,.25,1) } 60%, 89% { transform: rotate(305deg); opacity: 1 } 92%, 95% { transform: rotate(305deg); opacity: 0 } 95.5% { transform: rotate(215deg); opacity: 0 } 100% { transform: rotate(215deg); opacity: 1 } }
+
+/* paso 4: se prende el letrero (0,4 s), sube la santamaría (0,8 a 1,8 s), llegas caminando (1,8 a 3 s), sale la «o» (3 s),
+   el camión prende su luz y arranca (3,4 a 4,9 s); quieto hasta 7,1 s */
+@keyframes pa4g { 0%, 5% { opacity: 0 } 10%, 92% { opacity: 1 } 95%, 100% { opacity: 0 } }
+@keyframes pa4d { 0%, 10% { transform: none; animation-timing-function: cubic-bezier(.45,0,.2,1) } 22.5%, 90% { transform: translateY(-52px) } 97%, 100% { transform: none } }
+@keyframes pa4p { 0%, 22.5% { transform: translate(26px, 0); opacity: 0; animation-timing-function: linear } 25% { transform: translate(21.5px, -1.4px); opacity: 1; animation-timing-function: linear } 28% { transform: translate(15.5px, 0); animation-timing-function: linear } 31% { transform: translate(9.5px, -1.4px); animation-timing-function: linear } 34% { transform: translate(4px, 0) } 37.5%, 89% { transform: none; opacity: 1 } 92%, 100% { transform: none; opacity: 0 } }
+@keyframes pa4o { 0%, 37.5% { opacity: 0; transform: scale(.6) } 42.5%, 89% { opacity: 1; transform: none } 92%, 100% { opacity: 0; transform: none } }
+@keyframes pa4h { 0%, 42.5% { opacity: 0 } 45%, 89% { opacity: 1 } 92%, 100% { opacity: 0 } }
+/* ruedas: 2 vueltas enteras; calle: 2 rayas enteras (así la vuelta empieza igual que termina) */
+@keyframes pa4w { 0%, 44% { transform: none; animation-timing-function: cubic-bezier(.45,0,.25,1) } 61%, 100% { transform: rotate(720deg) } }
+@keyframes pa4r { 0%, 44% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(.45,0,.25,1) } 61%, 100% { stroke-dashoffset: 36 } }
+@keyframes pa4t { 0%, 46% { transform: none; animation-timing-function: ease-in-out } 50% { transform: translateY(-1.2px); animation-timing-function: ease-in-out } 54% { transform: none; animation-timing-function: ease-in-out } 58% { transform: translateY(-1.2px); animation-timing-function: ease-in-out } 62%, 100% { transform: none } }
+
+/* ===== Opción B · «Pantallitas» de «Cómo pedir» (pedido de Sergio, 28-oct-2026) =====
+   Cada paso trae una pantallita tipo app hecha con SVG. Los colores van aquí y no en el SVG, así cambian solos
+   con las marcas C y E. Solo se mueven transform, opacity y stroke-dashoffset (lo más liviano para el teléfono).
+   Los estilos normales de cada pieza son el CUADRO FINAL (así lo ve quien pidió «menos movimiento»); los
+   @keyframes cuentan cómo se llega ahí. Cada historia dura 8 s: unos 5,5 s pasa algo, 2 s se queda quieta y del
+   95 al 100 % todo vuelve suave al inicio. */
+
+/* --- la lista: la misma grilla de hoy (1 columna en el teléfono, 4 en la computadora) --- */
+[data-pasos-lista="b"]{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(36px,3vw,48px) clamp(24px,3vw,40px)}
+[data-pasos-lista="b"]>li{display:flex;flex-direction:column;gap:20px}
+/* bombillo encendido y su rayita (igual que hoy) */
+[data-pasos-lista="b"] .pbl{display:flex;align-items:center;gap:12px}
+[data-pasos-lista="b"] .pbl>span:first-child{flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo,color-mix(in srgb,var(--km-halo) 58%,transparent))}
+[data-pasos-lista="b"] .pbl>span+span{flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)}
+/* número grande y texto (igual que hoy) */
+[data-pasos-lista="b"] .pbn{font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em}
+[data-pasos-lista="b"] li>p{font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty}
+
+/* --- la pantallita: tarjeta blanca como las de la web; el dibujo crece con el ancho (proporción 5:4) --- */
+[data-pasos-lista="b"] .pbc{border-radius:16px;background:#FFFFFF;border:1px solid color-mix(in srgb,var(--km-tinta) 8%,transparent);box-shadow:0 1px 2px color-mix(in srgb,var(--km-tinta) 4%,transparent),0 20px 40px -26px color-mix(in srgb,var(--km-violeta) 40%,transparent);overflow:hidden}
+[data-pasos-lista="b"] .pbc>svg{display:block;width:100%;height:auto;aspect-ratio:5/4}
+
+/* letras: Karla como la web, DM Mono en las etiquetas chiquitas y Kalnia en los números grandes */
+[data-pasos-lista="b"] .pbc text{font-family:'Karla',system-ui,sans-serif;font-size:10px;fill:var(--km-tinta)}
+[data-pasos-lista="b"] .pbc .pbb{font-weight:700;font-size:10.5px}
+[data-pasos-lista="b"] .pbc .pbg{font-size:9.5px;fill:var(--km-gris)}
+[data-pasos-lista="b"] .pbc .pbm{font-family:'DM Mono',ui-monospace,monospace;font-size:9px;letter-spacing:.06em;fill:var(--km-gris)}
+[data-pasos-lista="b"] .pbc .pbq{font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:300;font-size:11px}
+[data-pasos-lista="b"] .pbc .pbbig{font-size:34px;letter-spacing:-.02em}
+[data-pasos-lista="b"] .pbc .pbsm{font-size:9.5px}
+[data-pasos-lista="b"] .pbc .pbsl{font-size:12px;font-weight:500;letter-spacing:.16em}
+[data-pasos-lista="b"] .pbc .pbe{text-anchor:middle}
+
+/* trazos: íconos violeta, líneas tinta, checks, rieles y bordes */
+[data-pasos-lista="b"] .pbc .pbi,[data-pasos-lista="b"] .pbc .pbk{fill:none;stroke:var(--km-violeta);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+[data-pasos-lista="b"] .pbc .pbk{stroke:var(--km-tinta);stroke-width:1.1}
+[data-pasos-lista="b"] .pbc .pbck{stroke:color-mix(in srgb,var(--km-tinta) 32%,transparent);stroke-width:1.3}
+[data-pasos-lista="b"] .pbc .pbck2{stroke:var(--km-violeta2)}
+[data-pasos-lista="b"] .pbc .pbwk{stroke:#FFFFFF;stroke-width:1.6}
+[data-pasos-lista="b"] .pbc .pbh{stroke:color-mix(in srgb,var(--km-tinta) 8%,transparent)}
+[data-pasos-lista="b"] .pbc .pbri{stroke:var(--km-violeta);stroke-width:2}
+[data-pasos-lista="b"] .pbc .pbrr{stroke:var(--km-lila-borde);stroke-width:1.4}
+[data-pasos-lista="b"] .pbc .pbt{stroke:var(--km-lila-borde);stroke-dasharray:2 2}
+[data-pasos-lista="b"] .pbc .pbst{fill:color-mix(in srgb,var(--km-violeta) 6%,transparent);stroke:var(--km-violeta);stroke-width:1.6}
+[data-pasos-lista="b"] .pbc .pbst2{stroke-width:.7;opacity:.55}
+[data-pasos-lista="b"] .pbc .pbst3{stroke-width:2.2}
+[data-pasos-lista="b"] .pbc .pbtk{fill:none;stroke:var(--km-lila-suave);stroke-width:12;stroke-linecap:round}
+[data-pasos-lista="b"] .pbc .pbgl{fill:none;stroke:color-mix(in srgb,var(--km-halo) 85%,transparent);stroke-width:5.6;stroke-dasharray:0 7.87;stroke-linecap:round}
+[data-pasos-lista="b"] .pbc .pbgl2{stroke:#FFFFFF;stroke-width:3}
+[data-pasos-lista="b"] .pbc .pbrd{fill:none;stroke:#FFFFFF;stroke-width:5}
+[data-pasos-lista="b"] .pbc .pbrd2{stroke-width:9}
+[data-pasos-lista="b"] .pbc .pbdt{fill:none;stroke:color-mix(in srgb,var(--km-violeta) 45%,transparent);stroke-width:1.8;stroke-dasharray:0 4.5;stroke-linecap:round}
+[data-pasos-lista="b"] .pbc .pbsel{fill:none;stroke:var(--km-violeta);stroke-width:1.6}
+/* la peinadora (<use>): madera blanca con borde tinta; en miniatura el borde va más grueso para que se vea */
+[data-pasos-lista="b"] .pbc .pbu{fill:#FFFFFF;stroke:var(--km-tinta);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+[data-pasos-lista="b"] .pbc .pbu2,[data-pasos-lista="b"] .pbc .pbu3{stroke-width:3}
+[data-pasos-lista="b"] .pbc .pb3r,[data-pasos-lista="b"] .pbc .pb3t{stroke-width:1}
+/* rellenos (van después de los trazos para ganarles) */
+[data-pasos-lista="b"] .pbc .pbw,[data-pasos-lista="b"] .pbc .pbhs,[data-pasos-lista="b"] .pbc .pbtr{fill:#FFFFFF}
+[data-pasos-lista="b"] .pbc .pbs{fill:var(--km-lila-suave)}
+[data-pasos-lista="b"] .pbc .pbd{fill:var(--km-dia)}
+[data-pasos-lista="b"] .pbc .pbz{fill:var(--km-dia3)}
+[data-pasos-lista="b"] .pbc .pbv{fill:var(--km-violeta)}
+[data-pasos-lista="b"] .pbc .pbwt{fill:#FFFFFF}
+[data-pasos-lista="b"] .pbc .pbwa{fill:#25D366}
+[data-pasos-lista="b"] .pbc .pbwh{fill:var(--km-tinta)}
+[data-pasos-lista="b"] .pbc .pbsh{fill:color-mix(in srgb,var(--km-tinta) 7%,transparent)}
+
+/* --- lo que se mueve: 8 s en bucle con la curva suave de la web (cada pieza dice cuál @keyframes usa) --- */
+[data-pasos-lista="b"] .pbc>svg *{animation-duration:8s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+
+/* ---------- 1 · chat de WhatsApp ---------- */
+/* la tarjeta del modelo elegido sube sobre la caja de texto y se va al enviar */
+[data-pasos-lista="b"] .pb1v{opacity:0;animation-name:pb1v}
+@keyframes pb1v{0%,3%{opacity:0;transform:translateY(8px)}8%,25%{opacity:1;transform:none}28.5%,100%{opacity:0;transform:translateY(-8px)}}
+/* «Mensaje» (la caja vacía) se esconde mientras se escribe */
+[data-pasos-lista="b"] .pb1p{animation-name:pb1p}
+@keyframes pb1p{0%,8.5%{opacity:1}9.5%,27.5%{opacity:0}30%,100%{opacity:1}}
+/* el texto escrito: lo destapa una tapa blanca que se encoge letra por letra (steps) y una rayita que avanza */
+[data-pasos-lista="b"] .pb1t{opacity:0;animation-name:pb1t}
+@keyframes pb1t{0%,9%{opacity:0}9.5%,25.5%{opacity:1}27%,100%{opacity:0}}
+[data-pasos-lista="b"] .pb1c{transform:scaleX(0);transform-box:fill-box;transform-origin:100% 50%;animation-name:pb1c}
+@keyframes pb1c{0%,9.5%{transform:none;animation-timing-function:steps(24,end)}24.5%,100%{transform:scaleX(0)}}
+[data-pasos-lista="b"] .pb1r{opacity:0;animation-name:pb1r}
+@keyframes pb1r{0%,9%{opacity:0;transform:none}9.5%{opacity:1;transform:none;animation-timing-function:steps(24,end)}24.5%,25.5%{opacity:1;transform:translateX(118px)}26.5%,100%{opacity:0;transform:translateX(118px)}}
+/* el botón verde se hunde al enviar */
+[data-pasos-lista="b"] .pb1s{transform-box:fill-box;transform-origin:center;animation-name:pb1s}
+@keyframes pb1s{0%,25%,30%,100%{transform:none}26.5%{transform:scale(.86)}}
+/* el mensaje enviado sube desde la caja; después sus checks se ponen violeta (leído) */
+[data-pasos-lista="b"] .pb1o{transform-box:fill-box;transform-origin:100% 100%;animation-name:pb1o}
+@keyframes pb1o{0%,26%{opacity:0;transform:translateY(16px) scale(.94)}33%,95%{opacity:1;transform:none}99%,100%{opacity:0;transform:none}}
+[data-pasos-lista="b"] .pb1k{animation-name:pb1k}
+@keyframes pb1k{0%,41%{opacity:0}44%,100%{opacity:1}}
+/* arriba: «en línea» cambia a «escribiendo…» mientras KM responde */
+[data-pasos-lista="b"] .pb1l{animation-name:pb1l}
+@keyframes pb1l{0%,48.5%{opacity:1}50.5%,61.5%{opacity:0}63.5%,100%{opacity:1}}
+[data-pasos-lista="b"] .pb1e{opacity:0;animation-name:pb1e}
+@keyframes pb1e{0%,48.5%{opacity:0}50.5%,61.5%{opacity:1}63.5%,100%{opacity:0}}
+/* los tres puntos de «escribiendo» (rebotan suave, cada uno un poquito después) y la respuesta */
+[data-pasos-lista="b"] .pb1y{opacity:0;transform-box:fill-box;transform-origin:0 50%;animation-name:pb1y}
+@keyframes pb1y{0%,48.5%{opacity:0;transform:scale(.8)}51%,61.5%{opacity:1;transform:none}63%,100%{opacity:0;transform:scale(.9)}}
+[data-pasos-lista="b"] .pb1d{fill:color-mix(in srgb,var(--km-tinta) 35%,transparent);animation-name:pb1d;animation-duration:1s;animation-timing-function:ease-in-out}
+[data-pasos-lista="b"] .pb1d+.pb1d{animation-delay:.15s}
+[data-pasos-lista="b"] .pb1d+.pb1d+.pb1d{animation-delay:.3s}
+@keyframes pb1d{0%,60%,100%{transform:none}30%{transform:translateY(-2.4px)}}
+[data-pasos-lista="b"] .pb1m{transform-box:fill-box;transform-origin:0 0;animation-name:pb1m}
+@keyframes pb1m{0%,62.5%{opacity:0;transform:scale(.92)}66.5%,95%{opacity:1;transform:none}99%,100%{opacity:0;transform:none}}
+
+/* ---------- 2 · abono del 50 % ---------- */
+/* el número (contador), la barra y su perilla avanzan juntos hasta la mitad */
+[data-pasos-lista="b"] .pb2o{transform:translateY(-200px);animation-name:pb2o;animation-timing-function:cubic-bezier(.6,0,.2,1)}
+@keyframes pb2o{0%,18%{transform:none;opacity:1}40%,95%{transform:translateY(-200px);opacity:1}96.5%{transform:translateY(-200px);opacity:0}97%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+[data-pasos-lista="b"] .pb2f{transform-box:fill-box;transform-origin:0 50%;animation-name:pb2f;animation-timing-function:cubic-bezier(.6,0,.2,1)}
+@keyframes pb2f{0%,18%{transform:scaleX(0)}40%,95%{transform:none}99%,100%{transform:scaleX(0)}}
+[data-pasos-lista="b"] .pb2h{animation-name:pb2h;animation-timing-function:cubic-bezier(.6,0,.2,1)}
+@keyframes pb2h{0%,18%{transform:translateX(-64px)}40%,95%{transform:none}99%,100%{transform:translateX(-64px)}}
+/* las formas de pago se encienden una tras otra */
+[data-pasos-lista="b"] .pb2c{animation-name:pb2c}
+[data-pasos-lista="b"] .pb2c+.pb2c{animation-delay:.18s}
+[data-pasos-lista="b"] .pb2c+.pb2c+.pb2c{animation-delay:.36s}
+[data-pasos-lista="b"] .pb2c+.pb2c+.pb2c+.pb2c{animation-delay:.54s}
+@keyframes pb2c{0%,3.5%{opacity:.35;transform:none}5.5%{opacity:1;transform:translateY(-2px)}8%,92%{opacity:1;transform:none}96%,100%{opacity:.35;transform:none}}
+/* el sello baja desde grande y se asienta torcidito */
+[data-pasos-lista="b"] .pb2s{transform:rotate(-6deg);transform-box:fill-box;transform-origin:center;animation-name:pb2s}
+@keyframes pb2s{0%,44%{opacity:0;transform:rotate(-16deg) scale(1.6)}50%{opacity:1;transform:rotate(-6deg) scale(.95)}54%,95%{opacity:1;transform:rotate(-6deg)}99%,100%{opacity:0;transform:rotate(-6deg)}}
+
+/* ---------- 3 · en el taller ---------- */
+/* el minutero da dos vueltas mientras pasan las etapas */
+[data-pasos-lista="b"] .pb3m{transform-box:fill-box;transform-origin:50% 100%;animation-name:pb3m;animation-timing-function:cubic-bezier(.45,0,.55,1)}
+@keyframes pb3m{0%,5%{transform:none}58%,100%{transform:rotate(720deg)}}
+/* contador de días (sube de a uno con cada etapa) y al final la pastilla «Listo» lo tapa */
+[data-pasos-lista="b"] .pb3d{animation-name:pb3d}
+@keyframes pb3d{0%,17.5%{transform:none}20%,30%{transform:translateY(-18px)}32.5%,42.5%{transform:translateY(-36px)}45%,55%{transform:translateY(-54px)}57.5%,93%{transform:translateY(-72px)}94%,100%{transform:none}}
+[data-pasos-lista="b"] .pb3k{transform-box:fill-box;transform-origin:center;animation-name:pb3k}
+@keyframes pb3k{0%,65%{opacity:0;transform:scale(.8)}69.5%,95%{opacity:1;transform:none}99%,100%{opacity:0;transform:none}}
+/* la barra violeta baja etapa por etapa (stroke-dashoffset) */
+[data-pasos-lista="b"] .pbc .pb3p{stroke:var(--km-violeta);stroke-dasharray:127 140;animation-name:pb3p}
+@keyframes pb3p{0%,5%{stroke-dashoffset:130}8%,17.5%{stroke-dashoffset:121}20.5%,30%{stroke-dashoffset:91}33%,42.5%{stroke-dashoffset:61}45.5%,55%{stroke-dashoffset:31}58%,95%{stroke-dashoffset:0;opacity:1}97.5%{stroke-dashoffset:0;opacity:0}98%{stroke-dashoffset:130;opacity:0}100%{stroke-dashoffset:130;opacity:1}}
+/* el mueble: plano punteado (fijo), trazo del corte, madera armada, pintura, luces y plástico */
+[data-pasos-lista="b"] .pbc .pb3o{fill:none;stroke:var(--km-lila-borde);stroke-width:.8;stroke-dasharray:2 2}
+[data-pasos-lista="b"] .pbc .pb3b{fill:none;stroke:var(--km-violeta);stroke-width:.9;stroke-dasharray:420;animation-name:pb3b}
+@keyframes pb3b{0%,5%{stroke-dashoffset:420}16%,95%{stroke-dashoffset:0;opacity:1}97.5%{stroke-dashoffset:0;opacity:0}98%{stroke-dashoffset:420;opacity:0}100%{stroke-dashoffset:420;opacity:1}}
+[data-pasos-lista="b"] .pb3r{animation-name:pb3r}
+@keyframes pb3r{0%,17.5%{opacity:0;transform:translateY(4px)}21.5%,95%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+[data-pasos-lista="b"] .pb3t{animation-name:pb3t}
+@keyframes pb3t{0%,30%{opacity:0}34%,95%{opacity:1}98%,100%{opacity:0}}
+[data-pasos-lista="b"] .pb3g{animation-name:pb3g}
+@keyframes pb3g{0%,42.5%{opacity:0}46.5%,95%{opacity:1}98%,100%{opacity:0}}
+[data-pasos-lista="b"] .pb3f{transform-box:fill-box;transform-origin:center;animation-name:pb3f}
+@keyframes pb3f{0%,55%{opacity:0;transform:scale(1.14)}61%,95%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+
+/* ---------- 4 · entrega ---------- */
+/* tú (el puntito con la personita) caminas hasta el taller; el pin salta y suelta un aro */
+[data-pasos-lista="b"] .pb4m{transform:translateX(34px);animation-name:pb4m;animation-timing-function:cubic-bezier(.45,0,.4,1)}
+@keyframes pb4m{0%,5%{transform:none;opacity:1}29%,94%{transform:translateX(34px);opacity:1}96%{transform:translateX(34px);opacity:0}97%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+[data-pasos-lista="b"] .pb4n{animation-name:pb4n}
+@keyframes pb4n{0%,28%,34%,100%{transform:none}30.5%{transform:translateY(-4px)}}
+[data-pasos-lista="b"] .pb4u{opacity:0;transform-box:fill-box;transform-origin:center;animation-name:pb4u}
+@keyframes pb4u{0%,29%{opacity:0;transform:scale(.6)}30.5%{opacity:.8}38%,100%{opacity:0;transform:scale(2)}}
+/* la marca violeta pasa de «Retiro» a «Envío» */
+[data-pasos-lista="b"] .pb4s{transform:translateY(80px);animation-name:pb4s}
+@keyframes pb4s{0%,34%{transform:none;opacity:1}39.5%,95%{transform:translateY(80px);opacity:1}97%{transform:translateY(80px);opacity:0}97.5%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+/* el camión sale cargado y se para frente a la casa */
+[data-pasos-lista="b"] .pb4t{transform:translateX(20px);animation-name:pb4t;animation-timing-function:cubic-bezier(.45,0,.3,1)}
+@keyframes pb4t{0%,40%{transform:none;opacity:1}65%,94%{transform:translateX(20px);opacity:1}96%{transform:translateX(20px);opacity:0}97%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+
+/* ===== Opción C · «Escenas» (pasos animados de «Cómo pedir», pedido de Sergio, 28-oct-2026) =====
+   Mini ilustraciones planas; la misma peinadora lila de KM protagoniza los 4 pasos.
+   Cada escena es una historia corta en bucle: arranca, cuenta su idea y se queda quieta unos 2 s en el cuadro final.
+   Los estilos normales de cada pieza SON ese cuadro final (así lo ve quien pidió «menos movimiento» en su teléfono);
+   las animaciones solo cuentan cómo se llega ahí. Solo se anima transform, opacity y el trazo (stroke-dashoffset).
+   OJO: aquí no se usa el atajo «animation:», sino sus partes sueltas (animation-name, -duration...), porque el
+   atajo pisaría la pausa de escenas.css (el dibujo se movería aunque no esté en pantalla). */
+
+/* --- la lista y cada paso: la misma grilla, bombillo, número y texto de hoy --- */
+[data-pasos-lista="c"] { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,230px),1fr)); gap: clamp(36px,3vw,48px) clamp(24px,3vw,40px) }
+[data-pasos-lista="c"] > li { display: flex; flex-direction: column; gap: 20px }
+[data-pasos-lista="c"] .pc-f { display: flex; align-items: center; gap: 12px }
+[data-pasos-lista="c"] .pc-b { flex: none; width: 14px; height: 14px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent), 0 0 10px 2px rgba(255,250,244,.9), 0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent)) }
+[data-pasos-lista="c"] .pc-r { flex: 1; height: 1px; background: color-mix(in srgb,var(--km-tinta) 18%,transparent) }
+[data-pasos-lista="c"] .pc-n { font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 200; font-size: clamp(72px,7vw,104px); line-height: .8; letter-spacing: -.04em }
+[data-pasos-lista="c"] .pc-p { font-size: clamp(18px,1.45vw,21px); line-height: 1.45; max-width: 22ch; text-wrap: pretty }
+
+/* --- la tarjeta del dibujo: blanca, borde finito y esquinas redondas, como las tarjetas de la web --- */
+[data-pasos-lista="c"] .pc-e { border-radius: 16px; overflow: hidden; background: #FFFFFF; border: 1px solid color-mix(in srgb,var(--km-tinta) 8%,transparent) }
+[data-pasos-lista="c"] .pc-e svg { display: block; width: 100%; height: auto; aspect-ratio: 8/5 }
+
+/* --- movimiento común: cada pieza animada solo trae su animation-name (en el HTML) --- */
+[data-pasos-lista="c"] .pc-e * { animation-duration: 8s; animation-iteration-count: infinite; animation-fill-mode: both; animation-timing-function: cubic-bezier(.16,1,.3,1) }
+[data-pasos-lista="c"] .pc-9 * { animation-duration: 9s }
+/* lo que cae (billete y monedas) acelera como en la vida real */
+[data-pasos-lista="c"] .fa { animation-timing-function: cubic-bezier(.55,0,1,.45) }
+/* al final de cada vuelta lo que apareció se desvanece suave y la historia empieza otra vez */
+[data-pasos-lista="c"] .R { animation-name: pcR }
+@keyframes pcR { 0%, 95% { opacity: 1 } to { opacity: 0 } }
+
+/* --- colores: todos de la web, así cambian solos con las marcas C y E --- */
+[data-pasos-lista="c"] .k { fill: var(--km-tinta) }
+[data-pasos-lista="c"] .g { fill: var(--km-gris) }
+[data-pasos-lista="c"] .v { fill: var(--km-violeta) }
+[data-pasos-lista="c"] .v3 { fill: var(--km-violeta3) }
+[data-pasos-lista="c"] .w { fill: #FFFFFF }
+[data-pasos-lista="c"] .ls { fill: var(--km-lila-suave) }
+[data-pasos-lista="c"] .lb { fill: var(--km-lila-borde) }
+[data-pasos-lista="c"] .lg { fill: var(--km-lila-gris) }
+[data-pasos-lista="c"] .n { fill: var(--km-dia3) }
+[data-pasos-lista="c"] .d { fill: var(--km-dia) }
+[data-pasos-lista="c"] .wa { fill: #25D366 }
+[data-pasos-lista="c"] .sh { fill: color-mix(in srgb,var(--km-tinta) 7%,transparent) }
+[data-pasos-lista="c"] .o { stroke: color-mix(in srgb,var(--km-tinta) 10%,transparent) }
+/* la peinadora: fill = el mueble y color = sus sombras (lila, blanca u oscura) */
+[data-pasos-lista="c"] .vl { fill: var(--km-lila-borde); color: var(--km-lila-gris) }
+[data-pasos-lista="c"] .vw { fill: #FFFFFF; color: var(--km-dia3) }
+[data-pasos-lista="c"] .vd { fill: var(--km-gris); color: var(--km-tinta) }
+/* bombillo encendido: punto blanco con halo lila */
+[data-pasos-lista="c"] .gl { fill: #FFFFFF; stroke: color-mix(in srgb,var(--km-halo) 70%,transparent); stroke-width: 6; paint-order: stroke }
+/* el doble check del mensaje */
+[data-pasos-lista="c"] .ck { fill: none; stroke: var(--km-violeta2); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 }
+/* letras dentro del dibujo (las de la web) */
+[data-pasos-lista="c"] .tx { font: 700 12px Karla,sans-serif; fill: var(--km-tinta) }
+[data-pasos-lista="c"] .mo { font: 500 11px 'DM Mono',monospace; letter-spacing: .1em }
+[data-pasos-lista="c"] .ka { font: 300 18px Kalnia,serif; fill: var(--km-violeta); text-anchor: middle }
+
+/* ===== PASO 1 · WhatsApp (8 s) ===== */
+/* el pulgar toca la pantalla: al enviar y al elegir */
+@keyframes pc1Pu { 0%, 16%, 20%, 51%, 55%, to { transform: none } 18%, 53% { transform: rotate(-7deg) } }
+/* «escribiendo...»: aparece, espera y se va cuando sale el mensaje */
+@keyframes pc1Ty { 0%, 3% { opacity: 0; transform: scale(.6) } 7%, 17% { opacity: 1; transform: none } 19.5%, to { opacity: 0; transform: scale(.9) } }
+/* los tres puntitos saltan */
+@keyframes pc1Do { 0%, 8%, 12%, 16% { transform: none } 10%, 14% { transform: translateY(-3px) } }
+/* el mensaje sale y luego se dibuja el doble check */
+@keyframes pc1Ms { 0%, 18% { opacity: 0; transform: scale(.5) } 23% { opacity: 1; transform: none } }
+@keyframes pc1Ck { 0%, 25% { stroke-dashoffset: 1 } 29% { stroke-dashoffset: 0 } }
+/* KM responde y aparecen los 3 modelos, uno tras otro */
+@keyframes pc1In { 0%, 35% { opacity: 0; transform: scale(.6) } 40% { opacity: 1; transform: none } }
+@keyframes pc1T1 { 0%, 40% { opacity: 0; transform: scale(.6) } 44%, 55% { opacity: 1; transform: none } 60% { opacity: .45 } }
+@keyframes pc1T3 { 0%, 44% { opacity: 0; transform: scale(.6) } 48%, 55% { opacity: 1; transform: none } 60% { opacity: .45 } }
+/* la elegida salta (los otros dos se apagan un poco), se marca y se encienden sus bombillos */
+@keyframes pc1T2 { 0%, 42% { opacity: 0; transform: scale(.6) } 46%, 54% { opacity: 1; transform: none } 57.5% { transform: translateY(-9px) scale(1.11) } 61% { transform: translateY(-6px) scale(1.08) } }
+@keyframes pc1Ri { 0%, 54% { opacity: 0 } 58% { opacity: 1 } }
+/* el corazón */
+@keyframes pc1He { 0%, 58% { transform: scale(0) } 62% { transform: scale(1.25) } 65% { transform: none } }
+
+/* ===== PASO 2 · Abono del 50 % (8 s) ===== */
+/* el billete y las 5 monedas caen una por una (desde arriba de la tarjeta) y rebotan apenas */
+@keyframes pc2M0 { 0%, 4% { transform: translateY(-190px) } 9% { transform: none } 10.5% { transform: translateY(-3px) } 12% { transform: none } }
+@keyframes pc2M1 { 0%, 9.5% { transform: translateY(-190px) } 14.5% { transform: none } 16% { transform: translateY(-3px) } 17.5% { transform: none } }
+@keyframes pc2M2 { 0%, 15% { transform: translateY(-190px) } 20% { transform: none } 21.5% { transform: translateY(-3px) } 23% { transform: none } }
+@keyframes pc2M3 { 0%, 20.5% { transform: translateY(-190px) } 25.5% { transform: none } 27% { transform: translateY(-3px) } 28.5% { transform: none } }
+@keyframes pc2M4 { 0%, 26% { transform: translateY(-190px) } 31% { transform: none } 32.5% { transform: translateY(-3px) } 34% { transform: none } }
+@keyframes pc2M5 { 0%, 32% { transform: translateY(-190px) } 37% { transform: none } 38.5% { transform: translateY(-3px) } 40% { transform: none } }
+/* llegó al 50 %: la marca se completa y el número late una vez */
+@keyframes pc2Ln { 0%, 38% { stroke-dashoffset: 1 } 43% { stroke-dashoffset: 0 } }
+@keyframes pc2Nu { 0%, 41% { transform: none } 45% { transform: scale(1.18) } 50% { transform: none } }
+/* la etiqueta «Reservado» llega balanceándose y se queda quieta */
+@keyframes pc2Ta { 0%, 44% { opacity: 0; transform: rotate(-24deg) } 48% { opacity: 1; transform: rotate(9deg) } 52% { transform: rotate(-5deg) } 56% { transform: rotate(2deg) } 60% { transform: none } }
+/* se encienden los bombillos de la peinadora */
+@keyframes pc2Lu { 0%, 58% { opacity: 0 } 65% { opacity: 1 } }
+
+/* ===== PASO 3 · Taller, 10 a 15 días hábiles (8 s) ===== */
+/* el reloj: el minutero da 3 vueltas y el horario 1 (el tiempo pasa) y terminan donde empezaron */
+@keyframes pc3Mi { 0% { transform: rotate(-1080deg) } 68% { transform: none } }
+@keyframes pc3Ho { 0% { transform: rotate(-360deg) } 68% { transform: none } }
+/* las piezas llegan una por una: cuerpo, gavetas, espejo y banquito */
+@keyframes pc3Lo { 0%, 3% { opacity: 0; transform: translateY(-36px) } 10% { opacity: 1; transform: none } }
+@keyframes pc3Dr { 0%, 10.5% { opacity: 0; transform: translateX(24px) } 17.5% { opacity: 1; transform: none } }
+@keyframes pc3Up { 0%, 18.5% { opacity: 0; transform: translateY(-40px) } 26.5% { opacity: 1; transform: none } }
+@keyframes pc3St { 0%, 27.5% { opacity: 0; transform: translateX(-26px) } 34% { opacity: 1; transform: none } }
+/* el martillo: aparece, da 4 golpecitos y se va */
+@keyframes pc3Ha { 0%, 8% { opacity: 0; transform: rotate(-30deg) } 11% { opacity: 1 } 12.5%, 18%, 23.5%, 29% { transform: none } 15%, 20.5%, 26% { transform: rotate(-30deg) } 33% { opacity: 1; transform: rotate(-30deg) } 36%, to { opacity: 0 } }
+/* se encienden los bombillos */
+@keyframes pc3Lu { 0%, 36% { opacity: 0 } 42% { opacity: 1 } }
+/* el plástico la envuelve de arriba abajo */
+@keyframes pc3Fi { 0%, 47% { opacity: 0; transform: scaleY(.02) } 49% { opacity: 1 } 62% { transform: none } }
+/* listo: sale el check */
+@keyframes pc3Ok { 0%, 63% { transform: scale(0) } 67% { transform: scale(1.2) } 70% { transform: none } }
+
+/* ===== PASO 4 · Retiro o envío (9 s) ===== */
+/* la puerta se abre y al final de la vuelta se cierra */
+@keyframes pc4Do { 0%, 3% { transform: none } 8%, 95% { transform: scaleX(.18) } to { transform: none } }
+/* la persona sale por la puerta y camina con su carrito hacia la izquierda (con un saltito en cada paso) */
+@keyframes pc4Wa { 0%, 5% { opacity: 0; transform: translateX(58px) } 8% { opacity: 1; transform: translateX(54px) } 29% { transform: none } }
+@keyframes pc4Bo { 0%, 7%, 10%, 13%, 16%, 19%, 22%, 25%, 28% { transform: none } 8.5%, 11.5%, 14.5%, 17.5%, 20.5%, 23.5%, 26.5% { transform: translateY(-2px) } }
+@keyframes pc4L1 { 0%, 29% { opacity: 0 } 33% { opacity: 1 } }
+/* el portón se enrolla hacia arriba, el camión sale y va hacia la casita */
+@keyframes pc4Ga { 0%, 33% { transform: none } 39%, 95% { transform: scaleY(.1) } to { transform: none } }
+@keyframes pc4Tr { 0%, 39% { transform: none; animation-timing-function: cubic-bezier(.45,0,.25,1) } 68% { transform: translateX(84px) } }
+/* se enciende la ventana de la casita y aparece «Envío» */
+@keyframes pc4Wi { 0%, 66% { opacity: 0 } 71% { opacity: 1 } }
+
+</style>
+<script data-km-pasos="">
+// «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py).
+// 1) Cada dibujo [data-escena] se anima solo mientras se ve: al entrar en pantalla le pone data-visible y al salir se lo
+//    quita (escenas.css deja las animaciones en pausa sin ese atributo).
+// 2) Mientras Sergio escoge, los botones A · B · C cambian de opción. La elegida queda en <html data-pasos="…">, fuera
+//    de lo que dibuja la página (así no se borra), y se recuerda en el navegador. También sirve ?pasos=b en la dirección.
+(function () {
+  var io = null;
+
+  // busca los dibujos que todavía no se están mirando y los pone a mirar
+  function mirar() {
+    var nuevas = document.querySelectorAll("[data-escena]:not([data-escena-io])");
+    if (!nuevas.length) return;
+    if (!io && "IntersectionObserver" in window) {
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting) en.target.setAttribute("data-visible", "");
+          else en.target.removeAttribute("data-visible");
+        });
+      }, { threshold: 0.3 });
+    }
+    for (var i = 0; i < nuevas.length; i++) {
+      nuevas[i].setAttribute("data-escena-io", "");
+      if (io) io.observe(nuevas[i]);
+      else nuevas[i].setAttribute("data-visible", "");      // navegador viejo, sin IntersectionObserver: se anima siempre
+    }
+  }
+
+  // la página se dibuja con su propio código después de cargar (y puede volver a dibujar partes): cada vez que cambia
+  // algo se vuelve a buscar, como mucho una vez por cuadro
+  var pendiente = false;
+  function empezar() {
+    mirar();
+    if (!("MutationObserver" in window)) return;
+    new MutationObserver(function () {
+      if (pendiente) return;
+      pendiente = true;
+      requestAnimationFrame(function () { pendiente = false; mirar(); });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.body) empezar(); else document.addEventListener("DOMContentLoaded", empezar);
+
+  // botones A · B · C (solo existen mientras Sergio escoge la opción)
+  var OPS = ["a", "b", "c"];
+  function poner(op) {
+    if (OPS.indexOf(op) < 0) return;
+    document.documentElement.setAttribute("data-pasos", op);
+    try { localStorage.setItem("km-pasos", op); } catch (e) {}
+  }
+  var inicial = null;
+  try { inicial = new URLSearchParams(location.search).get("pasos"); } catch (e) {}
+  if (!inicial) { try { inicial = localStorage.getItem("km-pasos"); } catch (e) {} }
+  if (inicial) poner(inicial);
+  document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest("[data-pasos-op]") : null;
+    if (b) poner(b.getAttribute("data-pasos-op"));
+  });
+})();
+
+</script>
 <style data-km-marcas="">
 /* ===== Marcas de prueba C y E (Karla, 24-oct-2026; ver marcas_km.py) ===== */
 /* Sin data-marca la web se ve como hoy. Cada variable --km-* reemplaza un color que antes iba escrito a mano. */
@@ -804,28 +1341,584 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Así de fácil.</span></span>
       </h2>
     </div>
-    <ol style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(36px,3vw,48px) clamp(24px,3vw,40px)">
-      <li data-reveal="up" style="display:flex;flex-direction:column;gap:20px">
-        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">1</span>
-        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Escríbenos por WhatsApp y elige tu modelo.</p>
-      </li>
-      <li data-reveal="up" data-delay="100" style="display:flex;flex-direction:column;gap:20px">
-        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="300" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
-        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Resérvalo con el 50 % de abono.</p>
-      </li>
-      <li data-reveal="up" data-delay="200" style="display:flex;flex-direction:column;gap:20px">
-        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="600" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">3</span>
-        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
-      </li>
-      <li data-reveal="up" data-delay="300" style="display:flex;flex-direction:column;gap:20px">
-        <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="900" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
-        <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">4</span>
-        <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
-      </li>
-    </ol>
+        <div data-pasos-ops="" role="group" aria-label="Opciones de animación"><span>Opción</span><button type="button" data-pasos-op="a">A · Trazo fino</button><button type="button" data-pasos-op="b">B · Pantallitas</button><button type="button" data-pasos-op="c">C · Escenas</button></div>
+<!-- ===== Opción A · Trazo fino («Cómo pedir», 28-oct-2026) =====
+     Los 4 pasos de siempre (bombillo, número y texto) con un dibujo de línea fina entre el bombillo y el número.
+     Cada dibujo es una tarjeta blanca con un SVG de 280 x 200 que crece con el ancho del paso.
+     Los colores, trazos y animaciones están en opcion-a.css; aquí cada pieza dice qué animación usa
+     (style="animation-name:…"). Sin movimiento, cada dibujo se queda en su último cuadro. -->
+<ol data-pasos-lista="a" style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(36px,3vw,48px) clamp(24px,3vw,40px)">
+
+  <!-- Paso 1 · WhatsApp: eliges el modelo (sale el check), escribes «Quiero este modelo», lo envías y KM ya te está escribiendo -->
+  <li data-reveal="up" style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
+    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+      <defs>
+        <!-- el brillo lila de los bombillos (lo usan los 4 dibujos) -->
+        <radialGradient id="pa-g"><stop offset="0" class="pa-g0"/><stop offset=".45" class="pa-g1"/><stop offset="1" class="pa-g2"/></radialGradient>
+      </defs>
+      <!-- el teléfono, cortado abajo por la tarjeta -->
+      <path class="pa-l" d="M58 216V40a22 22 0 0 1 22-22h120a22 22 0 0 1 22 22v176"/>
+      <path class="pa-s" style="stroke-width:3" d="M128 27.5h24"/>
+      <!-- arriba: el chat de KM (el bombillo es su foto, con el puntito verde de «en línea») -->
+      <circle class="pa-h" cx="80" cy="45.5" r="13"/><circle class="pa-b" cx="80" cy="45.5" r="4.8"/>
+      <circle class="pa-wa" cx="84.4" cy="49.6" r="2.5"/>
+      <text class="pa-t pa-tb" x="93" y="49">KM · Karla Marquez</text>
+      <path class="pa-s" d="M58 61h164"/>
+      <!-- el mensaje: empieza abajo (el modelo elegido, listo para mandar) y al enviarlo sube al chat -->
+      <g class="pa-k" style="animation-name:pa1m">
+        <path class="pa-k pa-bu" style="animation-name:pa1f" d="M108 67h104l-7 8v68a8 8 0 0 1-8 8h-89a8 8 0 0 1-8-8V75a8 8 0 0 1 8-8z"/>
+        <rect class="pa-cd" x="106" y="73" width="93" height="50" rx="7"/>
+        <!-- la peinadora en miniatura: sus bombillos se encienden al elegirla -->
+        <g class="pa-k" style="animation-name:pa1g"><circle class="pa-h" cx="147" cy="82" r="5.5"/><circle class="pa-h" cx="147" cy="88.5" r="5.5"/><circle class="pa-h" cx="147" cy="95" r="5.5"/><circle class="pa-h" cx="170" cy="82" r="5.5"/><circle class="pa-h" cx="170" cy="88.5" r="5.5"/><circle class="pa-h" cx="170" cy="95" r="5.5"/></g>
+        <rect class="pa-l pa-th" x="147" y="78" width="23" height="21" rx="1.5"/>
+        <path class="pa-pk pa-pk1" d="M147 82v13M170 82v13"/><path class="pa-pk pa-pk2" d="M147 82v13M170 82v13"/>
+        <path class="pa-l pa-th" d="M140 99h37v15h-37zM158.5 99v15M146.5 106.5h5M165.5 106.5h5M143 114v4M174 114v4M124 105h12M125.5 105l-1.5 13M134.5 105l1.5 13"/>
+        <!-- el check de «este es el que quiero» -->
+        <g class="pa-k pa-o" style="animation-name:pa1o"><circle class="pa-vf" cx="197" cy="75" r="7"/><path class="pa-wl" d="m193.7 75.2 2.3 2.3 4.4-4.6"/></g>
+        <text class="pa-k pa-t" style="animation-name:pa1x" x="107" y="137.5">Quiero este modelo</text>
+        <!-- los dos checks de «enviado» -->
+        <path class="pa-k pa-l pa-th" style="animation-name:pa1v" d="M188 142.6l2.3 2.3 4.4-4.6M192.6 144.9l4.4-4.6"/>
+      </g>
+      <!-- KM te está escribiendo (los tres puntitos) -->
+      <g class="pa-k" style="animation-name:pa1d">
+        <rect class="pa-cd pa-cd2" x="66" y="156" width="36" height="13" rx="6.5"/>
+        <circle class="pa-k pa-vf pa-dt" style="animation-name:pa1p" cx="76" cy="162.5" r="1.7"/>
+        <circle class="pa-k pa-vf pa-dt" style="animation-name:pa1p;animation-delay:.12s" cx="84" cy="162.5" r="1.7"/>
+        <circle class="pa-k pa-vf pa-dt" style="animation-name:pa1p;animation-delay:.24s" cx="92" cy="162.5" r="1.7"/>
+      </g>
+      <!-- abajo: la barra donde se escribe (las letras salen una a una y la rayita las sigue) y el botón verde de enviar -->
+      <rect class="pa-in" x="66" y="173" width="122" height="21" rx="10.5"/>
+      <text class="pa-k pa-t pa-iy" style="animation-name:pa1y" x="77" y="187.3">Quiero este modelo</text>
+      <rect class="pa-k pa-cv" style="animation-name:pa1c" x="76" y="176" width="96" height="15"/>
+      <path class="pa-k pa-l pa-cr" style="animation-name:pa1r" d="M77 177.5v12"/>
+      <g class="pa-k pa-o" style="animation-name:pa1s"><circle class="pa-wa" cx="203" cy="183.5" r="10.5"/><path class="pa-wf" d="m198.4 178.4 10.6 5.1-10.6 5.1 1.9-5.1z"/></g>
+    </svg></div>
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">1</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Escríbenos por WhatsApp y elige tu modelo.</p>
+  </li>
+
+  <!-- Paso 2 · Abono: un aro de bombillos se enciende hasta la mitad mientras el número cuenta hasta 50 %, y sale «Reservado» -->
+  <li data-reveal="up" data-delay="100" style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="300" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
+    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+      <defs>
+        <!-- el brillo de los bombillos se destapa siguiendo la línea violeta (misma animación) -->
+        <mask id="pa-m2"><path class="pa-k pa-mk" style="animation-name:pa2a" pathLength="1" d="M140 36a52 52 0 0 1 0 104"/></mask>
+        <!-- ventanita donde ruedan los números -->
+        <clipPath id="pa-c2"><rect x="84" y="68" width="66" height="38"/></clipPath>
+      </defs>
+      <circle class="pa-s" cx="140" cy="88" r="52"/>
+      <!-- brillo de los 8 bombillos de la mitad derecha (la mitad = 50 %) -->
+      <g mask="url(#pa-m2)"><circle class="pa-h" cx="150.1" cy="37" r="11"/><circle class="pa-h" cx="168.9" cy="44.8" r="11"/><circle class="pa-h" cx="183.2" cy="59.1" r="11"/><circle class="pa-h" cx="191" cy="77.9" r="11"/><circle class="pa-h" cx="191" cy="98.1" r="11"/><circle class="pa-h" cx="183.2" cy="116.9" r="11"/><circle class="pa-h" cx="168.9" cy="131.2" r="11"/><circle class="pa-h" cx="150.1" cy="139" r="11"/></g>
+      <!-- la línea violeta que llega hasta la mitad -->
+      <path class="pa-k pa-l pa-d pa-ar" style="animation-name:pa2a" pathLength="1" d="M140 36a52 52 0 0 1 0 104"/>
+      <!-- los 16 bombillos del aro (puntitos blancos con su borde) -->
+      <circle class="pa-rg pa-rg1" cx="140" cy="88" r="52" pathLength="16"/><circle class="pa-rg pa-rg2" cx="140" cy="88" r="52" pathLength="16"/>
+      <!-- el número que cuenta: 0, 10, 20, 30, 40 y 50 en fila; la fila sube y se ve uno a la vez -->
+      <g clip-path="url(#pa-c2)"><g class="pa-k pa-ct" style="animation-name:pa2n">
+        <text class="pa-n pa-nb" x="148" y="98">0</text><text class="pa-n pa-nb" x="148" y="134">10</text><text class="pa-n pa-nb" x="148" y="170">20</text><text class="pa-n pa-nb" x="148" y="206">30</text><text class="pa-n pa-nb" x="148" y="242">40</text><text class="pa-n pa-nb" x="148" y="278">50</text>
+      </g></g>
+      <text class="pa-n pa-pc" x="151" y="98">%</text>
+      <text class="pa-m" x="140" y="116">ABONO</text>
+      <!-- «Reservado» con su check -->
+      <g class="pa-k" style="animation-name:pa2r">
+        <rect class="pa-pl" x="94" y="158" width="92" height="25" rx="12.5"/>
+        <circle class="pa-vf" cx="108" cy="170.5" r="7.5"/>
+        <path class="pa-k pa-wl pa-d" style="animation-name:pa2c" pathLength="1" d="m104.6 170.6 2.4 2.4 4.6-4.8"/>
+        <text class="pa-t pa-tb pa-tv" x="120.5" y="174.6">Reservado</text>
+      </g>
+    </svg></div>
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">2</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Resérvalo con el 50 % de abono.</p>
+  </li>
+
+  <!-- Paso 3 · Taller: del plano punteado a la peinadora dibujada, pintada, con luces y envuelta en plástico, mientras el reloj corre -->
+  <li data-reveal="up" data-delay="200" style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="600" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
+    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+      <defs>
+        <!-- por dónde pasa la pintura: tablero, cajón, marco del espejo y banquito -->
+        <clipPath id="pa-c3"><path clip-rule="evenodd" d="M146 124h100v6H146zM150 130h92v38h-92zM166 124V50a4 4 0 0 1 4-4h52a4 4 0 0 1 4 4v74zM173 118h46V54h-46zM118 146h28v6h-28z"/></clipPath>
+      </defs>
+      <path class="pa-s" d="M18 174H262"/>
+      <!-- el reloj: las agujas corren y paran a las 10:10 -->
+      <circle class="pa-f" cx="62" cy="66" r="30"/>
+      <circle class="pa-tk" cx="62" cy="66" r="25.5" pathLength="12"/>
+      <path class="pa-k pa-hd pa-hh" style="animation-name:pa3h" d="M62 66V51"/>
+      <path class="pa-k pa-hd pa-mh" style="animation-name:pa3m" d="M62 66V44"/>
+      <circle class="pa-vf" cx="62" cy="66" r="2.6"/>
+      <text class="pa-n pa-dd" x="62" y="125">10 a 15</text>
+      <text class="pa-m" x="62" y="140">DÍAS HÁBILES</text>
+      <!-- el plano punteado: es lo primero que se ve y se apaga cuando se arma el mueble -->
+      <path class="pa-k pa-bp" style="animation-name:pa3b" d="M166 124V46h60v78M146 124h100v6H146zM150 130v38h92v-38M118 146h28v6h-28zM122 152l-2 22M142 152l2 22"/>
+      <!-- la pintura lila: pasa de izquierda a derecha -->
+      <g clip-path="url(#pa-c3)"><rect class="pa-k pa-pt" style="animation-name:pa3p" x="112" y="40" width="140" height="136"/></g>
+      <!-- la peinadora en UN solo trazo: tablero, cajones, patas, espejo y banquito se dibujan en ese orden -->
+      <path class="pa-k pa-l pa-d" style="animation-name:pa3l" pathLength="1" d="M146 124h100v6H146zM150 130v38h92v-38M150 149h92M196 130v38M168 139.5h8M214 139.5h8M168 158.5h8M214 158.5h8M154 168v6M238 168v6M166 124V50a4 4 0 0 1 4-4h52a4 4 0 0 1 4 4v74M173 118V54h46v64zM118 146h28a3 3 0 0 1 0 6h-28a3 3 0 0 1 0-6zM122 152l-2 22M142 152l2 22M120.6 166h22.8"/>
+      <!-- los bombillos del espejo: se ponen (accesorios) y se encienden -->
+      <g class="pa-k" style="animation-name:pa3g"><circle class="pa-h" cx="166" cy="58" r="11"/><circle class="pa-h" cx="166" cy="76" r="11"/><circle class="pa-h" cx="166" cy="94" r="11"/><circle class="pa-h" cx="166" cy="112" r="11"/><circle class="pa-h" cx="226" cy="58" r="11"/><circle class="pa-h" cx="226" cy="76" r="11"/><circle class="pa-h" cx="226" cy="94" r="11"/><circle class="pa-h" cx="226" cy="112" r="11"/></g>
+      <g class="pa-k" style="animation-name:pa3c"><path class="pa-pk pa-pk1 pa-pg" d="M166 58v54M226 58v54"/><path class="pa-pk pa-pk2 pa-pg" d="M166 58v54M226 58v54"/></g>
+      <!-- embalado: el plástico transparente envuelve el mueble y le salen sus brillos -->
+      <path class="pa-k pa-wr" style="animation-name:pa3w" d="M152 40C176 34 216 34 240 40C250 90 251 140 248 174H144C141 140 142 90 152 40Z"/>
+      <path class="pa-k pa-wo pa-d" style="animation-name:pa3o" pathLength="1" d="M152 40C176 34 216 34 240 40C250 90 251 140 248 174H144C141 140 142 90 152 40Z"/>
+      <path class="pa-k pa-sh" style="animation-name:pa3s" d="M158 72l16-16M158 90l28-28M226 160l16-16"/>
+    </svg></div>
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">3</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+  </li>
+
+  <!-- Paso 4 · Retiro o envío: el taller abre su santamaría, tú llegas a buscar tu peinadora, «o» el camión (de un transporte aliado, sin logo) sale cargado -->
+  <li data-reveal="up" data-delay="300" style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:center;gap:12px"><span data-reveal="bulb" data-delay="900" style="flex:none;width:14px;height:14px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 1px color-mix(in srgb,var(--km-tinta) 14%,transparent),0 0 10px 2px rgba(255,250,244,.9),0 0 26px 8px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))"></span><span style="flex:1;height:1px;background:color-mix(in srgb,var(--km-tinta) 18%,transparent)"></span></div>
+    <div class="pa-c" data-escena="" aria-hidden="true"><svg viewBox="0 0 280 200">
+      <defs>
+        <!-- la peinadora envuelta en plástico va dibujada dos veces (en la puerta y en el camión): dentro de un <use> perdía sus colores -->
+        
+        <!-- el hueco de la puerta: la santamaría se esconde al subir -->
+        <clipPath id="pa-c4"><rect x="56.8" y="114" width="38.4" height="52"/></clipPath>
+      </defs>
+      <path class="pa-s" d="M6 166H274"/>
+      <!-- el taller: techo de dientes, letrero con bombillos, ventana y puerta -->
+      <path class="pa-l" d="M12 166V84L41 68V84L70 68V84L100 68V166M12 84H100"/>
+      <path class="pa-l pa-th" d="M20 116h26v26H20zM33 116v26M20 129h26"/>
+      <rect class="pa-l pa-th" x="22" y="90" width="68" height="14" rx="2.5"/>
+      <text class="pa-m pa-ms" x="56" y="100.6">TALLER</text>
+      <g class="pa-k" style="animation-name:pa4g"><circle class="pa-h" cx="28.5" cy="97" r="8"/><circle class="pa-h" cx="83.5" cy="97" r="8"/></g>
+      <circle class="pa-b" cx="28.5" cy="97" r="2.3"/><circle class="pa-b" cx="83.5" cy="97" r="2.3"/>
+      <!-- adentro, la peinadora lista y envuelta; la santamaría (la puerta de rayas) sube y la deja ver -->
+      <g transform="translate(61 114)"><path class="pa-wr pa-wb" d="M4 3Q15 0 26 3Q29.5 27 28.5 52H1.5Q.5 27 4 3Z"/><path class="pa-l pa-th" d="M8.5 29V7h13v22M5 29h20v19H5zM15 29v19M7.5 48v3M22.5 48v3"/><path class="pa-sh pa-sh2" d="M6.5 16l5-5M6.5 23l9-9"/></g>
+      <g clip-path="url(#pa-c4)"><g class="pa-k pa-dr" style="animation-name:pa4d"><path class="pa-dp" d="M76 114v52"/><path class="pa-sl" d="M76 114v52"/></g></g>
+      <path class="pa-l" d="M56 114v52M96 114v52"/>
+      <rect class="pa-f pa-th" x="54" y="108" width="44" height="6" rx="1.5"/>
+      <!-- tú: llegas caminando a retirarla -->
+      <g class="pa-k" style="animation-name:pa4p"><circle class="pa-f" cx="115" cy="118" r="5.6"/><path class="pa-l" d="M109 150v-14a6 6 0 0 1 12 0v14M111.6 150l-.6 16M118.4 150l.6 16M109.6 136.5l-8.6 7.5"/></g>
+      <!-- la «o»: una cosa o la otra -->
+      <g class="pa-k pa-o" style="animation-name:pa4o"><path class="pa-s" d="M144 96v20M144 146v18"/><text class="pa-n pa-or" x="144" y="137">o</text></g>
+      <!-- el camión del transporte aliado (sin nombre ni logo), cargado con la peinadora envuelta -->
+      <g class="pa-k" style="animation-name:pa4t">
+        <g transform="translate(179 98)"><path class="pa-wr pa-wb" d="M4 3Q15 0 26 3Q29.5 27 28.5 52H1.5Q.5 27 4 3Z"/><path class="pa-l pa-th" d="M8.5 29V7h13v22M5 29h20v19H5zM15 29v19M7.5 48v3M22.5 48v3"/><path class="pa-sh pa-sh2" d="M6.5 16l5-5M6.5 23l9-9"/></g>
+        <path class="pa-l" d="M162 152V126h64v26M162 138h64M194 126v26M158 152h110"/>
+        <path class="pa-f" d="M228 152v-32a4 4 0 0 1 4-4h20l14 18v18"/>
+        <path class="pa-l pa-th" d="M234 121h16l9.5 12H234zM238 141h6"/>
+        <circle class="pa-k pa-h" style="animation-name:pa4h" cx="266" cy="141" r="9"/><circle class="pa-b" cx="265.6" cy="141" r="2.3"/>
+      </g>
+      <g class="pa-k pa-o" style="animation-name:pa4w"><circle class="pa-f" cx="182" cy="157" r="8.5"/><path class="pa-l pa-th" d="M182 152v10M177 157h10"/></g>
+      <g class="pa-k pa-o" style="animation-name:pa4w"><circle class="pa-f" cx="246" cy="157" r="8.5"/><path class="pa-l pa-th" d="M246 152v10M241 157h10"/></g>
+      <!-- la calle: sus rayas corren mientras el camión arranca -->
+      <path class="pa-k pa-rd" style="animation-name:pa4r" d="M150 182H280"/>
+    </svg></div>
+    <span style="font-family:'Kalnia','Bodoni 72',Didot,serif;font-weight:200;font-size:clamp(72px,7vw,104px);line-height:.8;letter-spacing:-.04em">4</span>
+    <p style="font-size:clamp(18px,1.45vw,21px);line-height:1.45;max-width:22ch;text-wrap:pretty">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+  </li>
+</ol>
+<!-- ===== Opción B · «Pantallitas» (pedido de Sergio, 28-oct-2026) =====
+  Cada paso trae una pantallita de app dibujada con SVG (sin imágenes). Se mueve sola con opcion-b.css.
+  Orden dentro de cada paso: bombillo con su rayita, la pantallita (el dibujo), el número y el texto. -->
+<ol data-pasos-lista="b">
+<!-- 1 · Chat de WhatsApp: elige el modelo, escribe, envía, KM lo lee y responde -->
+<li data-reveal="up">
+<div class="pbl"><span data-reveal="bulb"></span><span></span></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<defs>
+<!-- la peinadora (se dibuja una vez y se repite con <use>): espejo con bombillos, tope, gavetas y patas -->
+<symbol id="pbP" viewBox="0 0 60 72">
+<rect x="12" y="2" width="36" height="36" rx="5"/>
+<rect x="17" y="7" width="26" height="26" rx="2" style="fill:var(--km-lila-suave);stroke:none"/>
+<path d="M22 27l9-15M27 30l7-12" style="stroke:#FFFFFF;stroke-width:1.6"/>
+<rect x="14.5" y="4.5" width="31" height="31" rx="3.5" style="fill:none;stroke:color-mix(in srgb,var(--km-halo) 85%,transparent);stroke-width:5.6;stroke-dasharray:0 7.87;opacity:var(--pbo,1)"/>
+<rect x="14.5" y="4.5" width="31" height="31" rx="3.5" style="fill:none;stroke:#FFFFFF;stroke-width:3;stroke-dasharray:0 7.87"/>
+<path d="M3 38h54v4H3zM5 42h50v19H5z"/>
+<path d="M30 42v19M5 51.5h50M15 46.5h5M40 46.5h5M15 56h5M40 56h5M9 61v8M51 61v8" style="fill:none"/>
+</symbol>
+<!-- el plástico transparente (film) con que sale embalado: no va en cajas -->
+<symbol id="pbF" viewBox="0 0 60 72">
+<path d="M14 .5h32A3.5 3.5 0 0 1 49.5 4v33H55a3.5 3.5 0 0 1 3.5 3.5V67a3.5 3.5 0 0 1-3.5 3.5H5A3.5 3.5 0 0 1 1.5 67V40.5A3.5 3.5 0 0 1 5 37h5.5V4A3.5 3.5 0 0 1 14 .5z" style="fill:color-mix(in srgb,var(--km-halo) 22%,transparent);stroke:color-mix(in srgb,var(--km-violeta) 42%,transparent);stroke-width:1"/>
+<path d="M10.5 23l39-7M1.5 53l57-9M1.5 66l57-8" style="fill:none;stroke:color-mix(in srgb,var(--km-violeta) 22%,transparent);stroke-width:1"/>
+<path d="M15 33l7-12M44 66l7-12" style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round"/>
+</symbol>
+<!-- silueta de la peinadora para el paso 3 (el plano y el trazo del corte) -->
+<path id="pbO" d="M17 2h26a5 5 0 0 1 5 5v26a5 5 0 0 1-5 5H17a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zM3 38h54v4H3zM5 42h50v19H5zM9 61v8M51 61v8"/>
+</defs>
+<!-- encabezado del chat: KM · Karla Marquez, «en línea» o «escribiendo…» -->
+<circle class="pbs" cx="25" cy="20" r="13"/>
+<text class="pbq pbv pbe" x="25" y="24">KM</text>
+<text class="pbb" x="46" y="18">KM · Karla Marquez</text>
+<text class="pbg pb1l" x="46" y="31">en línea</text>
+<text class="pbg pbv pb1e" x="46" y="31">escribiendo…</text>
+<path class="pbh" d="M0 40.5h260"/>
+<rect class="pbz" y="41" width="260" height="167"/>
+<!-- mensaje enviado: tarjeta del modelo + texto + dos checks (los violeta = leído) -->
+<g class="pb1o">
+<rect class="pbs" x="90" y="50" width="158" height="92" rx="11"/>
+<path class="pbs" d="M236 50h16l-9 9z"/>
+<rect class="pbw" x="96" y="56" width="146" height="50" rx="8"/>
+<rect class="pbd" x="100" y="60" width="38" height="42" rx="6"/>
+<use class="pbu" href="#pbP" x="103" y="62" width="32" height="38"/>
+<text class="pbb" x="145" y="78">Peinadora LED</text>
+<text class="pbg" x="145" y="92">Espejo con luces</text>
+<text x="97" y="123">Hola, quiero este modelo</text>
+<path class="pbk pbck" d="M220 131.5l2.5 2.5 5.5-6M225 134l5.5-6"/>
+<path class="pbk pbck2 pb1k" d="M220 131.5l2.5 2.5 5.5-6M225 134l5.5-6"/>
+</g>
+<!-- KM escribiendo (tres puntos) y su respuesta -->
+<g class="pb1y"><rect class="pbw" x="12" y="150" width="42" height="20" rx="10"/><circle class="pb1d" cx="24" cy="160" r="2.3"/><circle class="pb1d" cx="33" cy="160" r="2.3"/><circle class="pb1d" cx="42" cy="160" r="2.3"/></g>
+<g class="pb1m"><rect class="pbw" x="12" y="150" width="152" height="20" rx="10"/><text x="21" y="163.5">¡Hola! Con gusto te ayudamos.</text></g>
+<!-- el modelo elegido del catálogo, listo para enviar -->
+<g class="pb1v">
+<rect class="pbw" x="10" y="142" width="204" height="30" rx="8"/>
+<rect class="pbv" x="14" y="146" width="3" height="22" rx="1.5"/>
+<rect class="pbd" x="21" y="145" width="22" height="24" rx="4"/>
+<use class="pbu pbu2" href="#pbP" x="22" y="146" width="20" height="22"/>
+<text class="pbb" x="50" y="155">Peinadora LED</text>
+<text class="pbg" x="50" y="166">Catálogo KM</text>
+</g>
+<!-- caja de texto: el mensaje se escribe letra por letra y se envía con el botón verde -->
+<rect class="pbw" x="10" y="178" width="204" height="24" rx="12"/>
+<text class="pb1t" x="22" y="193.5">Hola, quiero este modelo</text>
+<rect class="pbw pb1c" x="20" y="181" width="122" height="18"/>
+<text class="pbg pb1p" x="22" y="193.5">Mensaje</text>
+<path class="pbk pbck2 pb1r" d="M22 184v13"/>
+<g class="pb1s"><circle class="pbwa" cx="236" cy="190" r="13"/><path class="pbw" d="M230.5 184.5l12 5.5-12 5.5 2.4-5.5z"/></g>
+</svg></div>
+<span class="pbn">1</span>
+<p>Escríbenos por WhatsApp y elige tu modelo.</p>
+</li>
+<!-- 2 · Abono: el 50 % se llena, se ven las formas de pago y cae el sello «Reservado» -->
+<li data-reveal="up" data-delay="100">
+<div class="pbl"><span data-reveal="bulb" data-delay="300"></span><span></span></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
+<rect class="pbi" x="17" y="14.5" width="16" height="11.5" rx="2"/><path class="pbi" d="M17 18.5h16M20 22.5h4"/>
+<text class="pbb" x="46" y="18">Tu reserva</text>
+<text class="pbm" x="46" y="31">PEINADORA LED</text>
+<rect class="pbd" x="220" y="6" width="28" height="28" rx="8"/>
+<use class="pbu pbu2" href="#pbP" x="224" y="8" width="20" height="24"/>
+<path class="pbh" d="M0 40.5h260"/>
+<text class="pbm" x="14" y="60">ABONO</text>
+<!-- el número sube como un contador (0 % a 50 %): solo se ve lo que cabe en la ventanita -->
+<svg x="10" y="64" width="104" height="40"><g class="pb2o">
+<text class="pbq pbv pbbig" x="4" y="33">0 %</text><text class="pbq pbv pbbig" x="4" y="73">10 %</text><text class="pbq pbv pbbig" x="4" y="113">20 %</text><text class="pbq pbv pbbig" x="4" y="153">30 %</text><text class="pbq pbv pbbig" x="4" y="193">40 %</text><text class="pbq pbv pbbig" x="4" y="233">50 %</text>
+</g></svg>
+<!-- barra: se llena hasta la mitad, con su perilla -->
+<rect class="pbs" x="118" y="80" width="128" height="10" rx="5"/>
+<path class="pbt" d="M182 74v22"/>
+<rect class="pbv pb2f" x="118" y="80" width="64" height="10" rx="5"/>
+<circle class="pbw pbri pb2h" cx="182" cy="85" r="7"/>
+<text class="pbm" x="14" y="124">PAGA CON</text>
+<!-- formas de pago: se encienden una por una -->
+<g class="pb2c"><rect class="pbs" x="14" y="132" width="58" height="22" rx="11"/><text class="pbb pbv pbe" x="43" y="146.5">Efectivo</text></g>
+<g class="pb2c"><rect class="pbs" x="78" y="132" width="46" height="22" rx="11"/><text class="pbb pbv pbe" x="101" y="146.5">Zelle</text></g>
+<g class="pb2c"><rect class="pbs" x="130" y="132" width="48" height="22" rx="11"/><text class="pbb pbv pbe" x="154" y="146.5">USDT</text></g>
+<g class="pb2c"><rect class="pbs" x="184" y="132" width="34" height="22" rx="11"/><text class="pbb pbv pbe" x="201" y="146.5">Bs</text></g>
+<!-- el sello «Reservado» cae suave al final -->
+<g class="pb2s">
+<rect class="pbst" x="62" y="164" width="136" height="32" rx="8"/>
+<rect class="pbi pbst2" x="65.5" y="167.5" width="129" height="25" rx="5.5"/>
+<path class="pbi pbst3" d="M77 180l4.5 4.5 8.5-9"/>
+<text class="pbm pbv pbsl" x="97" y="184.5">RESERVADO</text>
+</g>
+</svg></div>
+<span class="pbn">2</span>
+<p>Resérvalo con el 50 % de abono.</p>
+</li>
+<!-- 3 · Taller: pasan los días (reloj y contador), se encienden las etapas y sale embalado en plástico -->
+<li data-reveal="up" data-delay="200">
+<div class="pbl"><span data-reveal="bulb" data-delay="600"></span><span></span></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
+<circle class="pbw pbi" cx="25" cy="20" r="8"/><path class="pbi" d="M25 20l3.2 2.2"/><path class="pbi pb3m" d="M25 20v-5.6"/>
+<text class="pbb" x="46" y="18">En el taller</text>
+<text class="pbm" x="46" y="31">10 A 15 DÍAS HÁBILES</text>
+<!-- contador de días (ventanita) y, al final, «Listo» -->
+<rect class="pbs" x="194" y="11" width="54" height="18" rx="9"/>
+<svg x="194" y="11" width="54" height="18"><g class="pb3d">
+<text class="pbb pbv pbe pbsm" x="27" y="12.6">Día 1</text><text class="pbb pbv pbe pbsm" x="27" y="30.6">Día 4</text><text class="pbb pbv pbe pbsm" x="27" y="48.6">Día 7</text><text class="pbb pbv pbe pbsm" x="27" y="66.6">Día 10</text><text class="pbb pbv pbe pbsm" x="27" y="84.6">Día 12</text>
+</g></svg>
+<g class="pb3k"><rect class="pbv" x="194" y="11" width="54" height="18" rx="9"/><path class="pbk pbwk" d="M205 20.2l2.4 2.4 4.4-4.8"/><text class="pbb pbsm pbwt" x="216" y="23.6">Listo</text></g>
+<path class="pbh" d="M0 40.5h260"/>
+<!-- etapas: la barra violeta baja y destapa los checks blancos -->
+<path class="pbtk" d="M22 52V178"/>
+<path class="pbtk pb3p" d="M22 52V178"/>
+<path class="pbk pbwk" d="M18.6 58.2l2.3 2.3 4.4-4.8M18.6 88.2l2.3 2.3 4.4-4.8M18.6 118.2l2.3 2.3 4.4-4.8M18.6 148.2l2.3 2.3 4.4-4.8M18.6 178.2l2.3 2.3 4.4-4.8"/>
+<text x="36" y="61.5">Corte</text><text x="36" y="91.5">Armado</text><text x="36" y="121.5">Pintura</text><text x="36" y="151.5">Accesorios</text><text x="36" y="181.5">Embalado</text>
+<!-- el mueble: plano, armado (madera), pintado, luces y plástico -->
+<rect class="pbd" x="110" y="50" width="138" height="148" rx="12"/>
+<ellipse class="pbsh" cx="179" cy="178" rx="44" ry="4"/>
+<g transform="translate(134 72) scale(1.5)">
+<use class="pb3o" href="#pbO"/>
+<use class="pb3b" href="#pbO"/>
+<use class="pbu pb3r" href="#pbP" width="60" height="72" style="fill:var(--km-dia3);--pbo:0"/>
+<use class="pbu pb3t" href="#pbP" width="60" height="72" style="--pbo:0"/>
+<g class="pb3g"><rect class="pbgl" x="14.5" y="4.5" width="31" height="31" rx="3.5"/><rect class="pbgl pbgl2" x="14.5" y="4.5" width="31" height="31" rx="3.5"/></g>
+<use class="pb3f" href="#pbF" width="60" height="72"/>
+</g>
+</svg></div>
+<span class="pbn">3</span>
+<p>Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+</li>
+<!-- 4 · Entrega: dos opciones; la marca violeta pasa de «Retiro» a «Envío», tú llegas al taller o sale el camión -->
+<li data-reveal="up" data-delay="300">
+<div class="pbl"><span data-reveal="bulb" data-delay="900"></span><span></span></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
+<path class="pbi" d="M25 28.5s-6-5.6-6-10a6 6 0 0 1 12 0c0 4.4-6 10-6 10z"/><circle class="pbi" cx="25" cy="18.5" r="2"/>
+<text class="pbb" x="46" y="18">Entrega</text>
+<text class="pbm" x="46" y="31">RETIRO O ENVÍO</text>
+<path class="pbh" d="M0 40.5h260"/>
+<!-- opción 1: retiro en el taller (mapita con el punto del taller y tú llegando) -->
+<rect class="pbd" x="12" y="48" width="236" height="72" rx="12"/>
+<rect class="pbz" x="18" y="54" width="86" height="60" rx="8"/>
+<path class="pbrd" d="M18 92h86M70 54v60M18 70h52"/>
+<path class="pbdt" d="M30 92h34"/>
+<circle class="pbi pb4u" cx="70" cy="88" r="6"/>
+<g class="pb4n"><path class="pbv" d="M70 87s-7-6.4-7-11.4a7 7 0 0 1 14 0c0 5-7 11.4-7 11.4z"/><circle class="pbw" cx="70" cy="75.6" r="2.6"/></g>
+<g class="pb4m"><circle class="pbw pbri" cx="28" cy="92" r="6.5"/><circle class="pbv" cx="28" cy="90" r="1.7"/><path class="pbi" d="M24.9 95.4a3.1 3.1 0 0 1 6.2 0"/></g>
+<text class="pbb" x="112" y="73">Retiro en el taller</text>
+<text class="pbg" x="112" y="88">Calle 13 entre 7A y 8</text>
+<text class="pbg" x="112" y="101">Santa Isabel</text>
+<circle class="pbw pbrr" cx="236" cy="62" r="6"/>
+<!-- opción 2: envío aparte (carretera con un camión sin logo que lleva la peinadora en plástico) -->
+<rect class="pbd" x="12" y="128" width="236" height="72" rx="12"/>
+<rect class="pbz" x="18" y="134" width="86" height="60" rx="8"/>
+<path class="pbrd pbrd2" d="M18 182h86"/>
+<path class="pbk pbhs" d="M86 172v-11l7-6 7 6v11zM91.5 172v-6h3v6"/>
+<g class="pb4t">
+<use class="pbu pbu3" href="#pbP" x="24" y="150" width="19" height="22"/>
+<use href="#pbF" x="24" y="150" width="19" height="22"/>
+<path class="pbk pbtr" d="M21 172h27v4H21zM48 176v-14h8.5l5.5 6.5v7.5z"/>
+<path class="pbs" d="M50.5 164.5h5l3.4 4h-8.4z"/>
+<circle class="pbwh" cx="28" cy="178.5" r="3.6"/><circle class="pbwh" cx="55" cy="178.5" r="3.6"/>
+</g>
+<text class="pbb" x="112" y="153">Envío aparte</text>
+<text class="pbg" x="112" y="168">Lo pagas al chofer</text>
+<text class="pbg" x="112" y="181">al recibirlo</text>
+<circle class="pbw pbrr" cx="236" cy="142" r="6"/>
+<!-- la marca violeta de la opción elegida (pasa de una a otra) -->
+<g class="pb4s"><rect class="pbsel" x="12" y="48" width="236" height="72" rx="12"/><circle class="pbv" cx="236" cy="62" r="3.4"/></g>
+</svg></div>
+<span class="pbn">4</span>
+<p>Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+</li>
+</ol>
+<!-- ===== Opción C · «Escenas» (pasos animados de «Cómo pedir», pedido de Sergio, 28-oct-2026) =====
+     Cuatro mini ilustraciones planas, una por paso. La protagonista es siempre la misma peinadora lila de KM
+     (espejo con 5 bombillos, repisa, gavetas y banquito, como en las fotos): se elige, se reserva, se fabrica y se
+     entrega. Al final de cada historia se encienden bombillos (punto blanco con halo lila), el sello de KM.
+     El dibujo va arriba de cada paso; debajo quedan el bombillo con su rayita, el número y el texto de hoy.
+     Los colores y movimientos están en opcion-c.css. Los dibujos son decorativos (aria-hidden): el texto lo dice todo. -->
+<ol data-pasos-lista="c">
+
+  <!-- PASO 1 · WhatsApp: la persona escribe, el mensaje sale con su doble check, KM le manda 3 modelos y la
+       peinadora lila «salta», se marca y le sale un corazón. -->
+  <li data-reveal="up">
+    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+      <defs>
+        <!-- LA PEINADORA: se dibuja una vez aquí y los 4 pasos la reusan con <use>.
+             Quien la usa le da el color: fill = el mueble y color = sus sombras (clases vl, vw y vd del CSS). -->
+        <!-- abajo: el cuerpo, el tablero y el hueco de las piernas -->
+        <g id="pcL"><rect x="2" y="44" width="60" height="44" fill="currentColor"/><rect y="40" width="64" height="5" rx="1"/><path d="M4 56h24v32H4z" style="fill:color-mix(in srgb,var(--km-tinta) 12%,transparent)"/></g>
+        <!-- las 5 gavetas con sus tiradores -->
+        <g id="pcD"><path d="M4 46.5h24v8H4zm26 0h30v8.6H30zm0 10h30v8.6H30zm0 10h30v8.6H30zm0 10h30v9.5H30z"/><path d="M12 50.5h8m21 .3h8m-8 10h8m-8 10h8m-8 10.5h8" style="fill:none;stroke:color-mix(in srgb,var(--km-tinta) 30%,transparent);stroke-width:1.2;stroke-linecap:round"/></g>
+        <!-- arriba: el espejo con sus 5 bombillos (apagados) y la repisa -->
+        <g id="pcU"><rect x="3" width="40" height="40" rx="1.5"/><rect x="44" width="17" height="40" rx="1.5"/><path d="M46.5 2.5h12V13h-12zm0 12.3h12v10.5h-12zm0 12.3h12v10.4h-12z" fill="currentColor"/><rect x="10" y="7" width="26" height="26" style="fill:var(--km-lila-suave)"/><path d="M13 33 22 7h5l-9 26z" style="fill:#FFFFFF;opacity:.85"/><g style="fill:#FFFFFF;stroke:color-mix(in srgb,var(--km-tinta) 25%,transparent);stroke-width:.7"><circle cx="23" cy="3.5" r="2.2"/><circle cx="6.5" cy="13" r="2.2"/><circle cx="6.5" cy="27" r="2.2"/><circle cx="39.5" cy="13" r="2.2"/><circle cx="39.5" cy="27" r="2.2"/></g></g>
+        <!-- el banquito -->
+        <g id="pcS"><rect x="6" y="69" width="19" height="19" rx="1"/><rect x="5" y="66" width="21" height="5" rx="2" style="fill:var(--km-lila-suave)"/></g>
+        <!-- la peinadora completa -->
+        <g id="pcV"><use href="#pcL"/><use href="#pcD"/><use href="#pcU"/><use href="#pcS"/></g>
+        <!-- los 5 bombillos encendidos -->
+        <g id="pcH" style="fill:#FFFFFF;stroke:color-mix(in srgb,var(--km-halo) 70%,transparent);stroke-width:6;paint-order:stroke"><circle cx="23" cy="3.5" r="2.4"/><circle cx="6.5" cy="13" r="2.4"/><circle cx="6.5" cy="27" r="2.4"/><circle cx="39.5" cy="13" r="2.4"/><circle cx="39.5" cy="27" r="2.4"/></g>
+        <!-- el plástico transparente con que sale del taller (con brillos) -->
+        <g id="pcF"><rect x="-3" y="-3" width="70" height="94" rx="6" style="fill:color-mix(in srgb,var(--km-halo) 24%,transparent);stroke:color-mix(in srgb,var(--km-halo) 90%,transparent)"/><path d="M4 24 26 2M6 66l40-40M28 88l34-34" style="fill:none;stroke:#FFFFFF;stroke-width:2.4;stroke-linecap:round;opacity:.8"/></g>
+        <!-- moneda y billete del paso 2 -->
+        <g id="pcM"><circle r="11"/><circle r="7.5" style="fill:none;stroke:#FFFFFF;stroke-width:1.2;opacity:.45"/><text y="4.2" style="font:800 12px Karla,sans-serif;fill:#FFFFFF;text-anchor:middle">$</text></g>
+        <g id="pcB"><rect x="-22" y="-10" width="44" height="20" rx="2.5"/><rect x="-18.5" y="-6.5" width="37" height="13" rx="1.5" style="fill:none;stroke:#FFFFFF;stroke-width:1"/><circle r="5.5" style="fill:#FFFFFF"/><text y="4" style="font:800 11px Karla,sans-serif;fill:var(--km-violeta);text-anchor:middle">$</text></g>
+      </defs>
+      <!-- halo lila de fondo -->
+      <circle class="ls" cx="78" cy="146" r="70"/>
+      <!-- la mano con el teléfono (un poco inclinado); el pulgar toca la pantalla dos veces -->
+      <g transform="rotate(-8 75 140)">
+        <path class="n" d="M54 200c0-20 4-34 14-40l34-6c14 4 20 22 20 46z"/>
+        <rect class="k" x="44" y="74" width="62" height="122" rx="11"/>
+        <rect class="d" x="48" y="79" width="54" height="112" rx="8"/>
+        <path class="wa" d="M48 87a8 8 0 0 1 8-8h38a8 8 0 0 1 8 8v6H48z"/>
+        <circle class="w" cx="57" cy="86" r="3"/><rect class="w" x="63" y="84.5" width="22" height="3" rx="1.5"/>
+        <rect class="ls" x="70" y="100" width="27" height="9" rx="4.5"/>
+        <rect class="w" x="53" y="114" width="36" height="22" rx="5"/>
+        <rect class="w" x="53" y="174" width="34" height="10" rx="5"/><circle class="wa" cx="94" cy="179" r="5"/>
+        <g class="n"><rect x="38" y="118" width="12" height="10" rx="5"/><rect x="37" y="131" width="13" height="10" rx="5"/><rect x="38" y="144" width="12" height="10" rx="5"/></g>
+        <path class="n" style="animation-name:pc1Pu;transform-origin:118px 182px" d="M121 180c-6-9-14-16-24-20a5.5 5.5 0 0 0-4 10c8 3 14 8 19 15z"/>
+        <rect class="v" x="58" y="190" width="66" height="18" rx="5"/>
+      </g>
+      <!-- el chat de KM: el nombre del WhatsApp y el punto verde de «en línea» -->
+      <rect class="w o" x="128" y="14" width="164" height="28" rx="14"/>
+      <circle class="v" cx="142" cy="28" r="9"/><circle class="gl" cx="142" cy="28" r="2.6"/>
+      <text class="tx" x="157" y="32.2">KM · Karla Marquez</text>
+      <circle class="wa" cx="279" cy="28" r="3.5"/>
+      <!-- la historia (al final de la vuelta se desvanece y empieza otra vez) -->
+      <g class="R">
+        <!-- 1) escribiendo: burbuja con tres puntitos que saltan -->
+        <g style="opacity:0;animation-name:pc1Ty;transform-box:fill-box;transform-origin:100% 100%">
+          <rect class="ls" x="264" y="50" width="44" height="26" rx="13"/>
+          <g class="lg"><circle cx="276" cy="63" r="2.6" style="animation-name:pc1Do"/><circle cx="286" cy="63" r="2.6" style="animation-name:pc1Do;animation-delay:.12s"/><circle cx="296" cy="63" r="2.6" style="animation-name:pc1Do;animation-delay:.24s"/></g>
+        </g>
+        <!-- 2) el mensaje enviado, con su doble check -->
+        <g style="animation-name:pc1Ms;transform-box:fill-box;transform-origin:100% 100%">
+          <rect class="ls" x="136" y="50" width="172" height="26" rx="13"/>
+          <text class="tx" x="148" y="67.2">Quiero una peinadora</text>
+          <path class="ck" pathLength="1" d="M278 63.5l3 3 6-6.5m-.5 6.5 6-6.5" style="animation-name:pc1Ck"/>
+        </g>
+        <!-- 3) KM responde con 3 modelos (blanca, lila y oscura) -->
+        <g style="animation-name:pc1In;transform-box:fill-box;transform-origin:0 0">
+          <rect class="w o" x="128" y="86" width="146" height="84" rx="14"/>
+          <g style="opacity:.45;animation-name:pc1T1;transform-box:fill-box;transform-origin:center"><rect class="d" x="138" y="97" width="38" height="62" rx="6"/><g transform="translate(141 106) scale(.5)"><use href="#pcV" class="vw"/></g></g>
+          <g style="opacity:.45;animation-name:pc1T3;transform-box:fill-box;transform-origin:center"><rect class="d" x="224" y="97" width="38" height="62" rx="6"/><g transform="translate(227 106) scale(.5)"><use href="#pcV" class="vd"/></g></g>
+          <!-- 4) la elegida: salta, se marca, se encienden sus bombillos y le sale un corazón -->
+          <g style="transform:translateY(-6px) scale(1.08);animation-name:pc1T2;transform-box:fill-box;transform-origin:center">
+            <rect class="d" x="181" y="97" width="38" height="62" rx="6"/>
+            <g transform="translate(184 106) scale(.5)"><use href="#pcV" class="vl"/><use href="#pcH" style="animation-name:pc1Ri"/></g>
+            <rect x="181" y="97" width="38" height="62" rx="6" style="fill:none;stroke:var(--km-violeta2);stroke-width:2;animation-name:pc1Ri"/>
+            <g style="animation-name:pc1He;transform-box:fill-box;transform-origin:center"><circle class="v" cx="218" cy="99" r="9"/><path class="w" d="M218 103c-4-3-5-5.2-5-6.8a2.6 2.6 0 0 1 5-1 2.6 2.6 0 0 1 5 1c0 1.6-1 3.8-5 6.8z"/></g>
+          </g>
+        </g>
+      </g>
+    </svg></div>
+    <div class="pc-f"><span data-reveal="bulb" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">1</span>
+    <p class="pc-p">Escríbenos por WhatsApp y elige tu modelo.</p>
+  </li>
+
+  <!-- PASO 2 · Abono: un billete y 5 monedas caen en el frasco hasta la marca del 50 %; la marca se completa,
+       a la peinadora le cuelgan la etiqueta «Reservado» y se le encienden los bombillos. -->
+  <li data-reveal="up" data-delay="100">
+    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+      <rect class="d" y="150" width="320" height="50"/>
+      <circle class="ls" cx="268" cy="110" r="60"/>
+      <ellipse class="sh" cx="268" cy="172" rx="40" ry="4"/><ellipse class="sh" cx="88" cy="172" rx="48" ry="4"/>
+      <!-- la peinadora (sus bombillos se encienden al final) -->
+      <g transform="translate(236 84)"><use href="#pcV" class="vl"/><g class="R"><use href="#pcH" style="animation-name:pc2Lu"/></g></g>
+      <!-- el frasco del abono: fondo del vidrio -->
+      <rect x="46" y="68" width="84" height="104" rx="16" style="fill:color-mix(in srgb,var(--km-halo) 14%,transparent)"/>
+      <!-- el billete y las monedas: caen una por una y se apilan hasta la marca -->
+      <g class="R">
+        <g transform="translate(74 160) rotate(-8)"><use href="#pcB" class="lb fa" style="animation-name:pc2M0"/></g>
+        <g transform="translate(108 158)"><use href="#pcM" class="v3 fa" style="animation-name:pc2M1"/></g>
+        <g transform="translate(66 141)"><use href="#pcM" class="lg fa" style="animation-name:pc2M2"/></g>
+        <g transform="translate(89 145)"><use href="#pcM" class="v fa" style="animation-name:pc2M3"/></g>
+        <g transform="translate(112 138)"><use href="#pcM" class="lg fa" style="animation-name:pc2M4"/></g>
+        <g transform="translate(93 135)"><use href="#pcM" class="v3 fa" style="animation-name:pc2M5"/></g>
+      </g>
+      <!-- el frasco: vidrio de adelante, brillos y la boca -->
+      <rect x="46" y="68" width="84" height="104" rx="16" style="fill:none;stroke:var(--km-lila-borde);stroke-width:2.2"/>
+      <path d="M56 86v66M120 90v20" style="fill:none;stroke:#FFFFFF;stroke-width:3.5;stroke-linecap:round;opacity:.9"/>
+      <rect class="w" x="52" y="60" width="72" height="11" rx="4" style="stroke:var(--km-lila-borde);stroke-width:2"/>
+      <!-- la marca del 50 % (punteada) con su número -->
+      <path d="M50 124h76" style="fill:none;stroke:var(--km-violeta);stroke-width:1.4;stroke-dasharray:4 3;opacity:.6"/>
+      <text class="ka" x="88" y="116" style="animation-name:pc2Nu;transform-box:fill-box;transform-origin:center">50 %</text>
+      <g class="R">
+        <!-- al llegar al 50 % la marca se completa -->
+        <path pathLength="1" d="M50 124h76" style="fill:none;stroke:var(--km-violeta);stroke-width:2;stroke-dasharray:1;animation-name:pc2Ln"/>
+        <!-- la etiqueta «Reservado» cuelga de la esquina del espejo y se balancea -->
+        <g style="animation-name:pc2Ta;transform-origin:239px 86px">
+          <path d="M239 86 224 96" style="fill:none;stroke:var(--km-lila-gris);stroke-width:1.2"/>
+          <g transform="rotate(-6 224 96)"><rect class="v" x="138" y="92" width="92" height="22" rx="5"/><circle class="w" cx="224" cy="97" r="2"/><path d="M146 103l2.8 2.8 5.5-6" style="fill:none;stroke:#FFFFFF;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"/><text class="mo w" x="158" y="107">RESERVADO</text></g>
+        </g>
+      </g>
+    </svg></div>
+    <div class="pc-f"><span data-reveal="bulb" data-delay="300" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">2</span>
+    <p class="pc-p">Resérvalo con el 50 % de abono.</p>
+  </li>
+
+  <!-- PASO 3 · Taller: mientras el reloj da vueltas (pasan los días), la peinadora se arma pieza por pieza
+       (cuerpo, gavetas, espejo y banquito) con el martillo, se encienden sus bombillos y la envuelven en plástico. -->
+  <li data-reveal="up" data-delay="200">
+    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200">
+      <rect class="d" y="150" width="320" height="50"/>
+      <circle class="ls" cx="226" cy="104" r="66"/>
+      <!-- el reloj de pared: las agujas dan vueltas y terminan donde empezaron -->
+      <circle class="w" cx="60" cy="54" r="24" style="stroke:var(--km-gris);stroke-width:3"/>
+      <path d="M60 35v4m0 30v4M41 54h4m30 0h4" style="fill:none;stroke:var(--km-lila-gris);stroke-width:2;stroke-linecap:round"/>
+      <path d="M60 54 50 48" style="fill:none;stroke:var(--km-tinta);stroke-width:3;stroke-linecap:round;animation-name:pc3Ho;animation-timing-function:cubic-bezier(.45,0,.3,1);transform-origin:60px 54px"/>
+      <path d="M60 54 74 46" style="fill:none;stroke:var(--km-violeta);stroke-width:2;stroke-linecap:round;animation-name:pc3Mi;animation-timing-function:cubic-bezier(.45,0,.3,1);transform-origin:60px 54px"/>
+      <circle class="k" cx="60" cy="54" r="2.4"/>
+      <!-- el banco de trabajo con una tabla y el serrucho -->
+      <path d="M26 128v46M110 128v46M24 158h88" style="fill:none;stroke:var(--km-gris);stroke-width:4;stroke-linecap:round"/>
+      <rect class="n" x="16" y="121" width="104" height="8" rx="2"/>
+      <rect class="w o" x="26" y="111" width="52" height="10" rx="1.5"/>
+      <path class="lb" d="M66 107l38 6-1 6-37-4z"/><rect class="v" x="56" y="104" width="12" height="13" rx="3" transform="rotate(8 62 110)"/>
+      <ellipse class="sh" cx="226" cy="179" rx="44" ry="4"/>
+      <!-- la peinadora: llegan sus piezas una por una -->
+      <g transform="translate(190 80) scale(1.12)">
+        <g class="R">
+          <use href="#pcL" class="vl" style="animation-name:pc3Lo"/>
+          <use href="#pcD" class="vl" style="animation-name:pc3Dr"/>
+          <use href="#pcU" class="vl" style="animation-name:pc3Up"/>
+          <use href="#pcS" class="vl" style="animation-name:pc3St"/>
+          <use href="#pcH" style="animation-name:pc3Lu"/>
+          <use href="#pcF" style="animation-name:pc3Fi;transform-box:fill-box;transform-origin:50% 0"/>
+        </g>
+      </g>
+      <!-- el martillo que la arma (aparece, da 4 golpecitos y se va) -->
+      <g class="R"><g style="opacity:0;animation-name:pc3Ha;transform-origin:290px 120px">
+        <path d="M290 120 274 104" style="fill:none;stroke:var(--km-lila-gris);stroke-width:4;stroke-linecap:round"/>
+        <path d="M278.2 99.8 269.8 108.2" style="fill:none;stroke:var(--km-tinta);stroke-width:7"/>
+      </g></g>
+      <!-- listo: un check violeta -->
+      <g class="R"><g style="animation-name:pc3Ok;transform-box:fill-box;transform-origin:center"><circle class="v" cx="266" cy="80" r="11"/><path d="M261 80l3.5 3.5 6.5-7" style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/></g></g>
+    </svg></div>
+    <div class="pc-f"><span data-reveal="bulb" data-delay="600" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">3</span>
+    <p class="pc-p">Lo fabricamos a mano en 10 a 15 días hábiles.</p>
+  </li>
+
+  <!-- PASO 4 · Entrega, dos caminos: una persona sale del taller con su peinadora embalada en un carrito (retiro)
+       y un camión ya cargado (sin logo: es un transporte aliado) sale hacia una casita (envío). -->
+  <li data-reveal="up" data-delay="300">
+    <div class="pc-e" data-escena="" aria-hidden="true"><svg viewBox="0 0 320 200" class="pc-9">
+      <rect class="d" y="170" width="320" height="30"/>
+      <circle class="ls" cx="298" cy="146" r="40"/>
+      <!-- la casita (su ventana redonda se enciende al final) -->
+      <rect class="n" x="278" y="138" width="38" height="32"/><path class="lg" d="M274 140l23-22 23 22z"/><rect class="lb" x="291" y="152" width="12" height="18"/>
+      <circle class="w o" cx="297" cy="131" r="3.2"/>
+      <g class="R"><circle class="gl" cx="297" cy="131" r="3" style="animation-name:pc4Wi"/></g>
+      <!-- adentro del taller (oscuro) -->
+      <rect class="g" x="84" y="106" width="26" height="64"/><rect class="g" x="124" y="100" width="62" height="70"/>
+      <!-- el camión cargado: espera adentro, sale por el portón y va hacia la casita -->
+      <g class="R"><g style="transform:translateX(84px);animation-name:pc4Tr">
+        <rect class="lg" x="116" y="146" width="52" height="8"/>
+        <g transform="translate(124 102) scale(.5)"><use href="#pcV" class="vl"/><use href="#pcF"/></g>
+        <path class="g" d="M166 158v-30a4 4 0 0 1 4-4h12l12 14v20z"/><path class="ls" d="M172 129h9l8 10h-17z"/><circle class="k" cx="177" cy="134" r="3"/>
+        <rect class="k" x="116" y="154" width="78" height="6" rx="2"/>
+        <circle class="k" cx="132" cy="163" r="7"/><circle class="k" cx="180" cy="163" r="7"/><circle class="lb" cx="132" cy="163" r="2.6"/><circle class="lb" cx="180" cy="163" r="2.6"/>
+        <circle class="gl" cx="193" cy="148" r="1.8"/>
+      </g></g>
+      <!-- la fachada del taller, con su letrero y bombillos encendidos -->
+      <path class="ls" style="fill-rule:evenodd" d="M70 56h126v114H70zM84 106v64h26v-64zM124 100v70h62v-70z"/>
+      <rect class="lg" x="66" y="48" width="134" height="10" rx="2"/>
+      <g class="gl"><circle cx="80" cy="53" r="2"/><circle cx="102" cy="53" r="2"/><circle cx="124" cy="53" r="2"/><circle cx="146" cy="53" r="2"/><circle cx="168" cy="53" r="2"/><circle cx="190" cy="53" r="2"/></g>
+      <rect class="k" x="96" y="64" width="74" height="18" rx="3"/><text class="mo w" x="133" y="77" style="text-anchor:middle">TALLER</text>
+      <!-- el portón: se enrolla hacia arriba (normal = abierto) -->
+      <g style="transform:scaleY(.1);transform-box:fill-box;transform-origin:50% 0;animation-name:pc4Ga"><rect class="w" x="124" y="100" width="62" height="70"/><path d="M124 110h62m-62 10h62m-62 10h62m-62 10h62m-62 10h62m-62 10h62" style="stroke:var(--km-lila-borde)"/></g>
+      <!-- la puerta: se abre (normal = abierta) -->
+      <rect class="w o" x="84" y="106" width="26" height="64" style="transform:scaleX(.18);transform-box:fill-box;transform-origin:0 50%;animation-name:pc4Do"/>
+      <!-- la persona que retira: sale por la puerta y camina con su carrito -->
+      <g class="R"><g style="animation-name:pc4Wa"><g style="animation-name:pc4Bo">
+        <g transform="translate(18 122) scale(.52)"><use href="#pcV" class="vl"/><use href="#pcF"/></g>
+        <path d="M54 118v50H16" style="fill:none;stroke:var(--km-gris);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/><circle class="k" cx="50" cy="166" r="4"/>
+        <path d="M64 146l-3 22M70 146l3 22" style="fill:none;stroke:var(--km-tinta);stroke-width:5;stroke-linecap:round"/>
+        <rect class="v" x="58" y="120" width="16" height="30" rx="7"/>
+        <path d="M62 128 54 122" style="fill:none;stroke:var(--km-dia3);stroke-width:4;stroke-linecap:round"/>
+        <circle class="n" cx="66" cy="110" r="7"/><path class="k" d="M59 109a7 7 0 0 1 14 0c0 2-1 3-2 4-1-4-5-6-12-4z"/><circle class="k" cx="74" cy="104" r="3.5"/>
+      </g></g></g>
+      <!-- las dos opciones, escritas abajo -->
+      <g class="R"><text class="mo v" x="45" y="189" style="text-anchor:middle;animation-name:pc4L1">RETIRO</text><text class="mo v" x="239" y="189" style="text-anchor:middle;animation-name:pc4Wi">ENVÍO</text></g>
+    </svg></div>
+    <div class="pc-f"><span data-reveal="bulb" data-delay="900" class="pc-b"></span><span class="pc-r"></span></div>
+    <span class="pc-n">4</span>
+    <p class="pc-p">Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
+  </li>
+</ol>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
       <a href="{{ waPedido }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:var(--km-tinta);color:var(--km-marfil);font-size:16px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.25)"></span>Empezar mi pedido</a>
       <span style="font-size:15px;color:color-mix(in srgb,var(--km-tinta) 68%,transparent)">Atendemos todos los días, de 8 am a 9 pm.</span>
