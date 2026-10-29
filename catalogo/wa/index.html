@@ -349,7 +349,7 @@ html[data-marca="c"][data-cot-noche] [data-cot-flota] > span { background: #2D1A
   #a-tu-gusto [data-gusto-fila] { flex-direction: column !important; flex-wrap: nowrap !important; align-items: stretch !important; gap: 16px !important }
   /* el recuadro con la forma de las fotos (4:5, 800 × 1000): el mueble completo, sin cortes (Sergio, 29-oct-2026:
      «se ve muy apretada… se le corta una parte de arriba»). Todo el ancho; en pantallas bajitas, un poco más angosto */
-  #a-tu-gusto [data-gusto-fig] { --gusto-ancho: min(calc(100vw - 40px), calc(52svh * .8)); --gusto-alto: calc(var(--gusto-ancho) * 1.25);
+  #a-tu-gusto [data-gusto-fig] { --gusto-ancho: min(calc(100vw - 40px), calc(48svh * .8)); --gusto-alto: calc(var(--gusto-ancho) * 1.25);
     flex: none !important; width: var(--gusto-ancho) !important; max-width: none !important; align-self: center }
   /* en columna, el «flex: 1 1 360px» de la lista se volvía 360 px de alto: así nada se estira */
   #a-tu-gusto [data-gusto-fila] > div { flex: none !important; gap: 18px !important }
@@ -3344,7 +3344,7 @@ class Component extends DCLogic {
   fitGusto() {
     const el = document.querySelector("[data-gfit]"); if (!el) return;
     el.style.transform = "none";
-    const h = el.offsetHeight, vh = window.innerHeight;
+    const h = el.offsetHeight, vh = (el.parentElement && el.parentElement.clientHeight) || window.innerHeight; /* alto de la parte fija (29-oct-2026) */
     if (h > vh) el.style.transform = "scale(" + (vh / h).toFixed(4) + ")";
   }
   updateGusto() {
