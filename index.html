@@ -313,14 +313,17 @@ html[data-marca="c"][data-cot-noche] [data-cot-flota] > span { background: #2D1A
 #a-tu-gusto [data-gusto-fig] { position: relative; margin: 0 }
 #a-tu-gusto [data-gusto-foto] { box-shadow: 0 30px 70px -40px color-mix(in srgb,var(--km-tinta) 55%,transparent) !important; background: rgba(0,0,0,.06) !important }
 #a-tu-gusto [data-gusto-foto] img { object-position: 50% 50% }
-/* «Desliza ↓» sobre la foto (Sergio, 29-oct-2026: «pareciera que llega hasta ahí»): invita a seguir bajando para ver
+/* «Desliza» con un dedito sobre la foto (Sergio, 29-oct-2026: «pareciera que llega hasta ahí»): invita a seguir bajando para ver
    los otros colores; se esconde en el último («Con temática») y vuelve si sube */
 #a-tu-gusto [data-gusto-desliza] { position: absolute; z-index: 2; left: 50%; top: calc(var(--gusto-alto) - 52px); transform: translateX(-50%);
   display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px 0 12px; border-radius: 999px; pointer-events: none;
   background: color-mix(in srgb,var(--km-noche) 55%,transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #FFFFFF; white-space: nowrap;
   font-family: 'DM Mono',ui-monospace,monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; transition: opacity .4s ease }
-#a-tu-gusto [data-gusto-desliza] svg { animation: gDesliza 1.4s ease-in-out infinite }
-@keyframes gDesliza { 0%, 100% { transform: translateY(-2px) } 50% { transform: translateY(3px) } }
+/* el dedito sube y baja despacio, como el gesto de deslizar en el teléfono (Sergio, 29-oct-2026: «la silueta de un dedo…
+   subiendo y bajando… algo sutil»): sube rápido y se desvanece arriba, baja quieto y vuelve a aparecer */
+#a-tu-gusto [data-gusto-desliza] svg { flex: none; animation: gDedo 2s cubic-bezier(.45,0,.25,1) infinite }
+@keyframes gDedo { 0% { transform: translateY(4px); opacity: 0 } 15% { opacity: 1 } 55% { transform: translateY(-5px); opacity: 1 }
+  75% { transform: translateY(-6px); opacity: 0 } 100% { transform: translateY(4px); opacity: 0 } }
 #a-tu-gusto:has([data-gusto-lista] > button:last-of-type[aria-checked="true"]) [data-gusto-desliza] { opacity: 0 }
 @media (prefers-reduced-motion: reduce) { #a-tu-gusto [data-gusto-desliza] svg { animation: none } }
 /* la línea lila fina alrededor de la foto (como en el PDF), separada unos px */
@@ -1984,7 +1987,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             <img data-on="{{ g.on }}" src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy" decoding="async" width="600" height="800" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ g.op }};transition:opacity .8s ease">
           </sc-for>
         </div>
-        <span data-gusto-desliza="" aria-hidden="true"><svg width="12" height="14" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1v11"></path><path d="M1.5 7.5 6 12l4.5-4.5"></path></svg>Desliza</span>
+        <span data-gusto-desliza="" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 14a8 8 0 0 1-8 8"></path><path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"></path><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"></path><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>Desliza</span>
         <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font-family:'DM Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ gx.muted }}">
           <span>{{ gx.code }} · {{ gx.name }}</span>
           <button type="button" onClick="{{ gx.open }}" style="flex:none;height:36px;color:{{ gx.fg }};border-bottom:1px solid currentColor">Ver de cerca →</button>
