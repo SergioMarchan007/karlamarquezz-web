@@ -442,6 +442,10 @@ html[data-marca="c"][data-cot-noche] [data-cot-flota] > span { background: #2D1A
 /* la ficha ya muestra los medios de pago y cómo pedir: los acordeones «Formas de pago» y «Cómo pedir» sobran (29-oct-2026) */
 [data-formas-pago]{display:none!important}
 </style>
+<style data-km-segunda-foto="">
+/* las fotos de las tarjetas no se acercan al pasar el mouse: solo cambian a la 2.ª foto, a tamaño normal (29-oct-2026) */
+[data-pcard] button[data-flip] img{transform:none!important}
+</style>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
@@ -3513,6 +3517,14 @@ PIEZAS.forEach((p) => { const f = FOTOS_KM[p.code]; if (f) p.front = f; if (LADO
 // falta su segunda foto real, la ficha muestra una sola; las piezas escondidas (OCULTOS) no se muestran.
 const FOTO_IA = /_0[12]_(frontal|lateral)\.webp$/;
 PIEZAS.forEach((p) => { if (FOTO_IA.test(p.front)) p.front = ""; if (FOTO_IA.test(p.side)) p.side = ""; });
+// 2.ª foto (29-oct-2026, ver segunda_foto_29oct.py): nunca un acercamiento («…-detalle»); otra foto real o la de una versión
+PIEZAS.forEach((p) => {
+  p.sideLabel = "Otra foto";
+  if (!p.side || p.side.indexOf("-detalle.") < 0) return;     // ya es otra foto real (o no hay): se queda
+  p.side = "";
+  const otra = (p.fam || []).map((c) => PIEZAS[iOf(c)]).find((q) => q && q.code !== p.code && !q.oculto && q.front && q.front !== p.front);
+  if (otra) { p.side = otra.front; p.sideLabel = otra.name; }
+});
 const kmOm = (p, i) => { const x = PRECIOS_KM[p.code]; return x && x.om && x.om[i] ? x.om[i] : ""; };
 // best sellers first: peinadoras, clósets and vanitys, then the rest (Sergio, 20-oct-2026); the featured ones too
 const KM_ORDEN = CATS.map((c) => c[0]).join("");
@@ -4509,9 +4521,9 @@ class Component extends DCLogic {
       DEST.forEach((i) => { if (rel.length < 4 && i !== s.viewer && rel.indexOf(i) < 0) rel.push(i); });
       v = {
         name: p.name, code: p.code, cat: p.cat, pos: s.mobile ? pad(at + 1) + " / " + pad(same.length) : kmPuertaNombre(p) + " · " + pad(at + 1) + " de " + pad(same.length),
-        img: s.gi && p.side ? p.side : p.front, imgAlt: p.name + (s.gi && p.side ? ", de cerca" : ""),
-        gpos: (s.gi + 1) + " / 2 · " + (s.gi ? "De cerca" : "Completo"), dos: !!p.side, // 2.ª foto: acercamiento real (fotos_reales.py)
-        thumbs: [[p.front, "Completo"], [p.side, "De cerca"]].filter((t) => t[0]).map((t, g) => { const on = g === s.gi; return { src: t[0], label: t[1], on: on ? "true" : "false", pick: () => this.setState({ gi: g }),
+        img: s.gi && p.side ? p.side : p.front, imgAlt: p.name + (s.gi && p.side ? " · " + p.sideLabel : ""),
+        gpos: (s.gi + 1) + " / 2 · " + (s.gi ? (p.sideLabel === "Otra foto" ? "Otra foto" : "Versión") : "Completo"), dos: !!p.side, // 2.ª foto: acercamiento real (fotos_reales.py)
+        thumbs: [[p.front, "Completo"], [p.side, p.sideLabel === "Otra foto" ? "Otra foto" : "Versión"]].filter((t) => t[0]).map((t, g) => { const on = g === s.gi; return { src: t[0], label: t[1], on: on ? "true" : "false", pick: () => this.setState({ gi: g }),
           ol: on ? "1.5px solid var(--km-tinta)" : "1.5px solid color-mix(in srgb,var(--km-tinta) 0%,transparent)", op: on ? 1 : .62 }; }),
         feats: p.feats.map((t) => ({ t })),
         ...this.vDetalles(p), // detalles a la vista en la ficha (Sergio, 23-oct-2026)
@@ -4524,7 +4536,7 @@ class Component extends DCLogic {
         hasCorr: false /* las versiones van en la tabla de precios (26-oct-2026) */, qty: String(s.fq),
         corrOpts: VERS.map((label) => { const on = s.fv === label; return { label, on: on ? "true" : "false", pick: () => this.setState({ fv: label }), bg: on ? "var(--km-tinta)" : "color-mix(in srgb,var(--km-tinta) 0%,transparent)", fg: on ? "var(--km-dia)" : "var(--km-tinta)", bd: on ? "var(--km-tinta)" : "color-mix(in srgb,var(--km-tinta) 20%,transparent)" }; }),
         sticky: s.mobile ? "relative" : "sticky",
-        front: p.front, side: p.side, altF: p.name, altS: p.name + ", de cerca",
+        front: p.front, side: p.side, altF: p.name, altS: p.name + " · " + p.sideLabel,
         showPrevImg: !s.mobile && s.gi === 1 && !!p.side, showNextImg: !s.mobile && s.gi === 0 && !!p.side,
         d0: s.gi === 0 ? "20px" : "6px", d1: s.gi === 1 ? "20px" : "6px", o0: s.gi === 0 ? 1 : .6, o1: s.gi === 1 ? 1 : .6,
         align: s.mobile ? "flex-end" : "center", outerPad: s.mobile ? "0" : "clamp(16px,3vw,40px)",
