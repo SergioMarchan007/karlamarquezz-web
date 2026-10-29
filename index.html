@@ -752,6 +752,17 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
   background: var(--km-tinta); color: var(--km-dia); font-size: 17px; font-weight: 700; box-shadow: 0 8px 22px color-mix(in srgb,var(--km-tinta) 18%,transparent) }
 [data-tut-play]:focus-visible { outline: 2px solid var(--km-violeta); outline-offset: 3px }
 [data-tut-play][data-estado="sonando"] { background: var(--km-violeta) }
+/* para que llame la atención (Sergio, 29-oct-2026): las ondas de la bocinita se mueven una tras otra y la flechita
+   empuja hacia el botón. La flechita se va cuando la voz suena por primera vez (<html data-tut-oido>, lo pone el JS);
+   las ondas se quedan quietas con la voz en pausa */
+[data-tut-play] [data-onda] { transform-box: fill-box; transform-origin: 0 50%; animation: gtOnda 1.4s ease-in-out infinite }
+[data-tut-play] [data-onda="2"] { animation-delay: .22s }
+[data-tut-play][data-estado="pausa"] [data-onda] { animation: none }
+@keyframes gtOnda { 0%, 100% { opacity: .3; transform: scale(.82) } 45% { opacity: 1; transform: none } }
+[data-tut-flecha] { display: inline-flex; color: var(--km-violeta); animation: gtFlecha 1.2s ease-in-out infinite }
+@keyframes gtFlecha { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(-9px) } }
+html[data-tut-oido] [data-tut-flecha] { display: none }
+@media (prefers-reduced-motion: reduce) { [data-tut-play] [data-onda], [data-tut-flecha] { animation: none } }
 [data-tut-nota] { font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--km-gris) }
 /* los subtítulos: solo aparecen mientras suena la voz */
 [data-tut-sub] { max-width: 30ch; margin: 18px 0 0; font-size: 19px; font-weight: 700; line-height: 1.4; text-wrap: balance; color: var(--km-tinta) }
@@ -812,7 +823,8 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
     if (audio.ended) audio.currentTime = 0;
     var p = audio.play();
     estado("sonando", "Pausar");
-    if (p && p.then) p.then(cuadro, function () { estado("listo", "Escúchalo"); if (alFallar) alFallar(); }); else cuadro();
+    var oido = function () { document.documentElement.setAttribute("data-tut-oido", ""); cuadro(); };  // se va la flechita
+    if (p && p.then) p.then(oido, function () { estado("listo", "Escúchalo"); if (alFallar) alFallar(); }); else oido();
   }
   function pausar() { audio.pause(); estado("pausa", "Seguir escuchando"); }
   document.addEventListener("click", function (ev) {
@@ -1339,7 +1351,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <section id="tutorial" data-tone="day" data-screen-label="Tutorial" aria-labelledby="tutorial-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <div data-escena="" style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Tutorial</p><h2 id="tutorial-t">Cómo cotizar</h2></div>
-    <div data-tut-voz=""><button type="button" data-tut-play="" aria-label="Escuchar cómo cotizar"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.5a8 8 0 0 1 0 11"></path></svg><span data-tut-txt="">Escúchalo</span></button></div>
+    <div data-tut-voz=""><button type="button" data-tut-play="" aria-label="Escuchar cómo cotizar"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path data-onda="1" d="M15.5 9a4.2 4.2 0 0 1 0 6"></path><path data-onda="2" d="M18.3 6.5a8 8 0 0 1 0 11"></path></svg><span data-tut-txt="">Escúchalo</span></button><span data-tut-flecha="" aria-hidden="true"><svg width="46" height="24" viewBox="0 0 46 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 12H5"></path><path d="M12 5 5 12l7 7"></path></svg></span></div>
 <!-- ===== Opción 1 · «Teléfono» (pedido de Sergio, 28-oct-2026) =====
   Va en la entrada de /catalogo/, debajo de «Nuestro catálogo.». Enseña en un vistazo cómo se usa el catálogo:
   agregas lo que te gusta, se guarda en la bolsita de tu cotización y un botón abre WhatsApp con el mensaje ya armado.
