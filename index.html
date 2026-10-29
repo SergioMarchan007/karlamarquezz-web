@@ -1734,7 +1734,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   <div data-flip="" style="position:absolute;z-index:-1;top:clamp(78px,10vh,104px);right:clamp(0px,calc(9vw - 30px),150px);height:min(76vh,125vw);aspect-ratio:4/5;max-width:100%">
     <div data-hintro="" style="position:absolute;inset:0">
       <div data-hfotos="" style="position:absolute;inset:1px;overflow:hidden;opacity:{{ heroDim }};transition:opacity .7s ease;-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 16%,black 84%,transparent 100%),linear-gradient(180deg,transparent 0%,black 12%,black 74%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,black 16%,black 84%,transparent 100%),linear-gradient(180deg,transparent 0%,black 12%,black 74%,transparent 100%);mask-composite:intersect">
-        <img data-on="{{ h0.on }}" src="fotos-km/portada-F025.webp" alt="Peinadora de 9 gavetas con bombillos, encendida" width="800" height="1000" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.06);opacity:{{ h0.op }};transform:scale({{ h0.sc }});transition:opacity 1.6s ease,transform 7s linear">
+        <img data-on="{{ h0.on }}" src="fotos-km/KM-P-0108-v2-g.webp" alt="Peinadora grande con espejo LED de KM" width="800" height="1000" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.06);opacity:{{ h0.op }};transform:scale({{ h0.sc }});transition:opacity 1.6s ease,transform 7s linear">
         <sc-if value="{{ heroMore }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ heroSlides }}" as="s" hint-placeholder-count="0">
           <img data-on="{{ s.on }}" src="{{ s.src }}" alt="{{ s.alt }}" width="800" height="1000" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.06);opacity:{{ s.op }};transform:scale({{ s.sc }});transition:opacity 1.6s ease,transform 7s linear">
         </sc-for></sc-if>
@@ -3090,13 +3090,10 @@ h1,h2,h3,p,ol,figure,address{margin:0}
             </div>
             <button type="button" onClick="{{ vAdd }}" style="flex:1;height:58px;padding:0 16px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:16px;font-weight:700;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease" style-hover="transform:translateY(-2px);box-shadow:0 18px 40px -16px color-mix(in srgb,var(--km-tinta) 60%,transparent)"><span style="display:inline-flex;align-items:center;justify-content:center;gap:10px"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>Agregar a mi cotización</span></button>
           </div>
-          <!-- «a mi medida o personalizado»: se marca aquí y va con el modelo en la cotización (29-oct-2026) -->
-          <div data-vmedida="" style="display:flex;flex-direction:column;gap:10px;margin-top:4px;padding:14px;border-radius:14px;background:var(--km-lila-suave);border:1px solid color-mix(in srgb,var(--km-violeta) 16%,transparent)">
-            <button type="button" onClick="{{ vMedToggle }}" aria-pressed="{{ v.medPress }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 18px;border-radius:999px;border:1.5px solid var(--km-violeta);background:{{ v.medBg }};color:{{ v.medFg }};font-size:15px;font-weight:700;transition:background-color .25s ease,color .25s ease"><span aria-hidden="true" style="font-size:17px">{{ v.medIco }}</span>Lo quiero a mi medida o personalizado</button>
-            <sc-if value="{{ v.medOn }}" hint-placeholder-val="{{ false }}">
-              <textarea value="{{ v.medNota }}" onChange="{{ vMedNota }}" rows="2" placeholder="Cuéntanos tu idea: medidas, color, diseño…" aria-label="Qué quieres a tu medida o personalizado" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--km-violeta) 30%,transparent);background:#FFFFFF;font:inherit;font-size:16px;line-height:1.4;color:var(--km-tinta);resize:vertical"></textarea>
-            </sc-if>
-            <p style="font-size:13px;line-height:1.45;text-align:center;color:var(--km-gris)">{{ v.medAyuda }}</p>
+          <!-- «a mi medida o personalizado»: solo un aviso (se pide por WhatsApp; costo aparte). 29-oct-2026 -->
+          <div data-vmedida="" style="display:flex;gap:10px;align-items:flex-start;margin-top:4px;padding:12px 14px;border-radius:14px;background:var(--km-lila-suave);border:1px solid color-mix(in srgb,var(--km-violeta) 16%,transparent)">
+            <span aria-hidden="true" style="flex:none;font-size:16px;line-height:1.4;color:var(--km-violeta)">✎</span>
+            <p style="margin:0;font-size:13.5px;line-height:1.45;color:var(--km-gris)"><b style="font-weight:700;color:var(--km-tinta)">¿A tu medida, con cambios o uno parecido a otro modelo?</b> Pídelo por WhatsApp al cotizar: lo evaluamos con el equipo y tiene un costo aparte.</p>
           </div>
           <a href="{{ v.wa }}" onClick="{{ vWaTodo }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;height:50px;border-radius:999px;border:1px solid color-mix(in srgb,var(--km-tinta) 25%,transparent);color:var(--km-tinta);font-size:15px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.22)"></span>{{ v.waTxt }}</a>
           <p style="font-size:13.5px;text-align:center;color:color-mix(in srgb,var(--km-tinta) 64%,transparent)">Arma tu lista con varios modelos y cotiza todo en un solo mensaje.</p>
@@ -3465,7 +3462,7 @@ PIEZAS.forEach((p) => { const f = FICHAS[p.code] || {}; p.precio = f.precio == n
   if (BANQ.includes(p.code)) { p.banq = true; p.gratis = ["banquito"]; }
   if (GAV_MAN[p.code]) { p.gav = GAV_MAN[p.code][0]; p.manillas = GAV_MAN[p.code][1]; } else p.gav = 0; });
 const DEST = ["T04", "C07", "T09", "T22", "A13", "B01", "T29", "C01", "T19", "A10", "B02", "T21"].map(iOf);
-const HERO = ["T04", "C07", "T09", "T22"].map(iOf);
+const HERO = ["T12", "T04", "C07", "T09", "T22"].map(iOf);   // T12 primero (29-oct-2026)
 const PAGE = 12;
 const VR_SPEED = 25; // px por segundo
 const VR = {
