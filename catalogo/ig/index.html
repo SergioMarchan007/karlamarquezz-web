@@ -2919,7 +2919,7 @@ PIEZAS.forEach((p) => { const x = PRECIOS_KM[p.code] || {};
   if (x.man) p.feats.push("Manillas: " + x.man);
 });
 // one card per family, the other versions inside its page (Sergio, 18-oct-2026)
-const FAMILIAS_KM = [["T19", "T29"], ["T05", "T06", "T15", "T10"], ["C03", "C04"], ["T07", "T17"], ["T12", "T24", "T31"], ["C01", "C02", "C05", "C08", "C09"], ["T20", "T16"], ["A09", "A12", "A10"], ["A04", "A03"], ["A06", "A07"], ["T11", "T08"], ["D01", "D02"], ["B01", "B12", "B03", "B07"], ["B04", "B09"], ["B08", "B11"], ["B05", "B10", "B02"]];
+const FAMILIAS_KM = [["T19", "T29"], ["T05", "T06", "T15", "T10"], ["C03", "C04"], ["T07", "T17"], ["T12", "T24", "T31"], ["C01", "C02", "C05", "C08", "C09"], ["T20", "T16"], ["A09", "A12", "A10"], ["A04", "A03"], ["A06", "A07"], ["T11", "T08"], ["D01", "D02"]];
 const REEMPLAZO = {"A05": "A04", "C06": "C03", "C07": "C03", "C10": "C03", "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": "T19", "T23": "T19", "T30": "T19"}; // discarded -> shown instead
 FAMILIAS_KM.forEach((F) => { F.forEach((c) => { const q = PIEZAS[iOf(c)]; if (q) { q.fam = F; q.lider = F[0]; } }); const L = PIEZAS[iOf(F[0])]; if (L) L.badge = F.length + " versiones"; });
 PIEZAS.forEach((p) => { p.enGrilla = !p.oculto && (!p.lider || p.lider === p.code); });
