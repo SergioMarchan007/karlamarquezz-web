@@ -311,14 +311,10 @@ html[data-cot-noche] [data-cot-flota] > span { background: #FFFFFF !important; c
 /* la línea lila fina alrededor de la foto (como en el PDF), separada unos px */
 #a-tu-gusto [data-gusto-fig]::before { content: ""; position: absolute; z-index: 1; pointer-events: none; border: 1.5px solid var(--km-halo); opacity: .9 }
 
-/* A · Corte del PDF: la esquina de arriba a la izquierda en curva grande */
-html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-foto] { border-radius: 38% 18px 18px 18px / 30% 18px 18px 18px !important }
-html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top: -7px; right: 7px; height: calc(var(--gusto-alto) + 0px);
+/* el corte del PDF: la esquina de arriba a la izquierda en curva grande */
+#a-tu-gusto [data-gusto-foto] { border-radius: 38% 18px 18px 18px / 30% 18px 18px 18px !important }
+#a-tu-gusto [data-gusto-fig]::before { left: -7px; top: -7px; right: 7px; height: calc(var(--gusto-alto) + 0px);
   border-radius: 38% 22px 22px 22px / 30% 22px 22px 22px }
-/* B · Espejo: la foto en arco, como un espejo de peinadora */
-html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-foto] { border-radius: 50% 50% 18px 18px / 28% 28% 18px 18px !important }
-html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top: -7px; right: -7px; height: calc(var(--gusto-alto) + 14px);
-  border-radius: 50% 50% 24px 24px / 28% 28% 24px 24px }
 
 /* computadora: la foto a la derecha, grande (hasta 560 px de ancho y lo que deje el alto de la pantalla) */
 @media (min-width: 761px) {
@@ -333,7 +329,6 @@ html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top:
   /* en columna, el «flex: 1 1 360px» de la lista se volvía 360 px de alto: así nada se estira */
   #a-tu-gusto [data-gusto-fila] > div { flex: none !important; gap: 18px !important }
   #a-tu-gusto [data-gusto-foto] { aspect-ratio: auto !important; height: var(--gusto-alto) }
-  html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-fig]::before { right: 7px }
   #a-tu-gusto [data-gusto-fig] figcaption { margin-top: 10px !important }
   #a-tu-gusto [data-gusto-fig] figcaption > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0 }
   /* los colores: pastillas pequeñas en filas; la elegida con su borde y en negrita */
@@ -345,16 +340,6 @@ html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top:
   #a-tu-gusto [data-gusto-lista] > button[aria-checked="true"] { opacity: 1 !important; font-weight: 800 !important; box-shadow: inset 0 0 0 1.5px currentColor }
 }
 </style>
-<script data-km-gusto="">
-// opción del diseño de «Hecho a tu gusto» mientras Sergio escoge (29-oct-2026; ver gusto_29oct.py)
-(function () {
-  var op = null;
-  try { op = new URLSearchParams(location.search).get("gusto") || localStorage.getItem("km-gusto"); } catch (e) {}
-  if (op !== "a" && op !== "b") op = "a";
-  document.documentElement.setAttribute("data-gusto-ver", op);
-  try { localStorage.setItem("km-gusto", op); } catch (e) {}
-})();
-</script>
 <style data-km-aviso-wa="">
 /* aviso «¿Ya elegiste tu mueble?» antes de ir a WhatsApp con la cotización vacía (29-oct-2026; ver aviso_wa_29oct.py) */
 [data-aviso-wa] { position: fixed; inset: 0; z-index: 120; display: flex; align-items: flex-end; justify-content: center;
