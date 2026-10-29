@@ -34,6 +34,8 @@
 - T22 · Peinadora con parales (Peinadoras): Sencilla $160 (en Bs $200) · con telescópicas $225 (en Bs $285)
 - T24 · Peinadora grande de 9 gavetas con 1 sola repisa (Peinadoras): Sencilla $250 (en Bs $315) · con telescópicas $300 (en Bs $375)
 - T25 · Peinadora Aurora de 6 gavetas (Peinadoras): Sencilla $265 (en Bs $335) · con telescópicas $310 (en Bs $390)
+- T26 · Peinadora LED de 9 gavetas (Peinadoras): Sencilla $200 (en Bs $250) · con telescópicas $265 (en Bs $335)
+- T27 · Peinadora con espejo horizontal (Peinadoras): Sencilla $265 (en Bs $335) · con telescópicas $330 (en Bs $415) · medidas 1.25 × 1.59
 - T28 · Peinadora Aldita con espejo LED y banquito (Peinadoras): $280 (en Bs $350) · correderas telescópicas incluidas
 - T29 · Peinadora grande LED con espejo personalizado (Peinadoras): Sencilla $220 (en Bs $275) · con telescópicas $285 (en Bs $360)
 - T31 · Peinadora grande espejo LED 1.25 con push open (Peinadoras): $475 (en Bs $595) · correderas telescópicas incluidas · incluye push open
@@ -43,9 +45,12 @@
 - A04 · Clóset grande (Clósets): $380 (en Bs $475) · correderas telescópicas incluidas · medidas 1.90 x 2 x 0.45
 - A06 · Clóset bebé (Clósets): Sencilla $180 (en Bs $225) · con telescópicas $205 (en Bs $260) · medidas 1.80 x 1.20 x 0.40
 - A07 · Clóset abierto con barra y repisas (Clósets): $170 (en Bs $215)
+- A08 · Clóset abierto con maletero (Clósets): Sencilla $180 (en Bs $225) · con telescópicas $205 (en Bs $260) · medidas 1.80 × 1.20 × 0.40
 - A09 · Clóset de lujo con espejo LED táctil (Clósets): Sencilla $380 (en Bs $475) · con telescópicas $410 (en Bs $515) · medidas 1.80 x 1.70 x 0.45
 - A10 · Clóset con gran puerta espejo LED (Clósets): $320 (en Bs $400) · correderas telescópicas incluidas
+- A11 · Clóset de puertas lisas (Clósets): $380 (en Bs $475) · correderas telescópicas incluidas
 - A12 · Clóset de lujo con espejo LED táctil (Clósets): Sencilla $380 (en Bs $475) · con telescópicas $410 (en Bs $515) · medidas 1.80 x 1.70 x 0.45
+- A13 · Clóset abierto fucsia (Clósets): Sencilla $180 (en Bs $225) · con telescópicas $205 (en Bs $260)
 - C01 · Vanity doble lujo (Vanitys): Sencilla $385 (en Bs $485) · con telescópicas $445 (en Bs $560) · medidas 1.70 x 1.50
 - C02 · Vanity doble lujo (Vanitys): Sencilla $385 (en Bs $485) · con telescópicas $430 (en Bs $540) · medidas 1.70 x 1.50
 - C03 · Vanity de lujo (Vanitys): Sencilla $280 (en Bs $350) · con telescópicas $340 (en Bs $425) · medidas 1.70 x 1.50
