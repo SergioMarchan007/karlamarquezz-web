@@ -744,6 +744,21 @@ html[data-apilar-frente="4"] [data-apilar] li:nth-child(4) [data-escena][data-vi
    «quita eso, es redundante» (cada carta ya dice «Paso N de 4»). La carta queda sola y centrada en el escenario. */
 [data-apilar="b"] .api{display:none!important}
 
+/* ---------- teléfono: la carta a pantalla completa, como en la computadora (Sergio, 29-oct-2026: «hacer la personalización
+   para la versión móvil, algo parecido») ----------
+   Antes la carta quedaba chica en el medio, con mucho vacío arriba y abajo. Ahora llena el escenario: arriba «Paso N de 4»,
+   el número bien grande y el texto debajo (en columna, como la computadora), y la pantallita grande abajo, a todo lo ancho. */
+@media (prefers-reduced-motion:no-preference) and (max-width:859px){
+  html[data-apilar-on="b"] [data-apilar="b"] [data-pasos-lista="b"]>li{align-self:stretch}
+  html[data-apilar-on="b"] [data-apilar="b"] .apc{height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:22px 20px 20px}
+  /* número y texto: uno debajo del otro, centrados en el alto que sobra arriba de la pantallita */
+  html[data-apilar-on="b"] [data-apilar="b"] .apx{flex:1;min-height:0;grid-template-columns:minmax(0,1fr);align-content:center;row-gap:8px}
+  html[data-apilar-on="b"] [data-apilar="b"] .pbn{font-size:clamp(96px,32vw,150px);line-height:.9}
+  html[data-apilar-on="b"] [data-apilar="b"] .apx>p{font-size:clamp(19px,5.4vw,23px);max-width:none}
+  /* la pantallita: a todo lo ancho, pero nunca tan alta que no quepa el número y el texto en teléfonos bajitos */
+  html[data-apilar-on="b"] [data-apilar="b"] .pbc{flex:none;width:min(100%,calc((100vh - 370px) * 1.25));width:min(100%,calc((100svh - 370px) * 1.25))}
+}
+
 </style>
 <script data-km-pasos="">
 // «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py).
