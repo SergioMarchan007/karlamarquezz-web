@@ -640,6 +640,110 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
 [data-pasos-lista="b"] .pb4t{transform:translateX(20px);animation-name:pb4t;animation-timing-function:cubic-bezier(.45,0,.3,1)}
 @keyframes pb4t{0%,40%{transform:none;opacity:1}65%,94%{transform:translateX(20px);opacity:1}96%{transform:translateX(20px);opacity:0}97%{transform:none;opacity:0}100%{transform:none;opacity:1}}
 
+/* ===== «Así de fácil» · Opción B «Una pantalla a la vez» (pedido de Sergio, 29-oct-2026; ver apilar_armar.py) =====
+   La sección se queda quieta en pantalla (position: sticky) mientras se hace scroll por los 4 pasos. Cada carta
+   es oscura y grande, con la pantallita como protagonista. Al bajar, la carta nueva entra desde abajo y tapa a la
+   anterior (que se achica y se apaga un poco, asomando arriba); al subir, se va hacia abajo y vuelve la anterior.
+   Arriba (teléfono) o a la izquierda (computadora) va el indicador 1 · 2 · 3 · 4, que se llena con el scroll.
+   apilar.js dice qué carta va al frente (<html data-apilar-frente>) y cuánto se avanzó (--ap-avance).
+   Va junto con opcion-b.css (que pinta y mueve las pantallitas). Colores: los mismos hex de opcion-b.css. */
+
+/* ---------- la lista normal (sin JS o con «menos movimiento»): una carta debajo de otra ---------- */
+[data-apilar="b"] .api{display:none}
+[data-apilar="b"] [data-pasos-lista="b"]{display:flex;flex-direction:column;gap:20px;margin:0;padding:0}
+[data-apilar="b"] [data-pasos-lista="b"]>li{display:block}
+
+/* la carta oscura */
+[data-apilar="b"] .apc{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;
+  padding:clamp(18px,3vw,44px);border-radius:28px;background:var(--km-tinta);color:var(--km-dia);
+  box-shadow:0 30px 60px -36px color-mix(in srgb,var(--km-tinta) 70%,transparent)}
+/* «Paso 1 de 4» con su bombillo encendido */
+[data-apilar="b"] .apk{display:flex;align-items:center;gap:10px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--km-lila-t)}
+[data-apilar="b"] .apk>span{flex:none;width:9px;height:9px;border-radius:50%;background:#FFFFFF;
+  box-shadow:0 0 8px 2px color-mix(in srgb,var(--km-halo) 90%,transparent),0 0 22px 8px color-mix(in srgb,var(--km-halo) 45%,transparent)}
+/* número y texto: en el teléfono, «Paso» arriba y número + texto lado a lado */
+[data-apilar="b"] .apx{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:16px;row-gap:10px}
+[data-apilar="b"] .apk{grid-column:1 / -1}
+[data-apilar="b"] .pbn{color:var(--km-lila-t);font-size:clamp(76px,22vw,110px)}
+[data-apilar="b"] .apx>p{font-size:clamp(18px,1.9vw,30px);line-height:1.35;max-width:22ch;text-wrap:pretty;color:var(--km-dia)}
+/* la pantallita: blanca y con un brillo lila alrededor, como una pantalla encendida */
+[data-apilar="b"] .pbc{justify-self:center;width:100%;border-color:color-mix(in srgb,var(--km-halo) 25%,transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--km-halo) 18%,transparent),0 26px 70px -30px color-mix(in srgb,var(--km-halo) 60%,transparent)}
+
+/* computadora: número y texto a la izquierda (grandes), pantallita a la derecha */
+@media (min-width:860px){
+  [data-apilar="b"] .apc{grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(28px,3.4vw,56px);align-items:center}
+  [data-apilar="b"] .apx{grid-template-columns:minmax(0,1fr);align-content:center;row-gap:22px}
+  [data-apilar="b"] .pbn{font-size:clamp(110px,12vw,200px)}
+  [data-apilar="b"] .pbc{width:min(40vw,580px)}
+}
+
+/* ---------- el modo «una pantalla a la vez» (solo con JS y sin «menos movimiento») ---------- */
+@media (prefers-reduced-motion:no-preference){
+  /* la caja alta: su alto extra es el recorrido del scroll (unos 70 % de pantalla por carta) */
+  html[data-apilar-on="b"] [data-apilar="b"]{--ap-cab:68px;height:calc(100vh - var(--ap-cab) + 280vh);height:calc(100svh - var(--ap-cab) + 280svh)}
+  /* el escenario: se pega debajo de la barra de arriba de la web y ocupa el resto de la pantalla.
+     overflow: clip esconde las cartas que esperan abajo (clip no rompe el sticky, hidden tampoco aquí adentro) */
+  html[data-apilar-on="b"] [data-apilar="b"] .aps{position:sticky;top:var(--ap-cab);height:calc(100vh - var(--ap-cab));height:calc(100svh - var(--ap-cab));
+    display:flex;flex-direction:column;gap:12px;padding:12px 0 16px;overflow:hidden}
+  /* las 4 cartas en el mismo lugar, una encima de otra; arriba queda aire para que asome la de atrás */
+  html[data-apilar-on="b"] [data-apilar="b"] [data-pasos-lista="b"]{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr);padding-top:22px;gap:0}
+  html[data-apilar-on="b"] [data-apilar="b"] [data-pasos-lista="b"]>li{grid-area:1 / 1;transform-origin:50% 0;
+    align-self:center;transform:translateY(110vh);   /* la carta mide lo que su contenido, centrada; espera abajo, fuera de vista */
+    transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .6s ease}
+  /* la pantallita nunca más alta que el escenario (100svh menos la barra, el indicador, el texto y los márgenes) */
+  html[data-apilar-on="b"] [data-apilar="b"] .pbc{width:min(100%,calc((100vh - 330px) * 1.25));width:min(100%,calc((100svh - 330px) * 1.25))}
+
+  /* al frente */
+  html[data-apilar-frente="1"] [data-apilar="b"] li:nth-child(1),html[data-apilar-frente="2"] [data-apilar="b"] li:nth-child(2),
+  html[data-apilar-frente="3"] [data-apilar="b"] li:nth-child(3),html[data-apilar-frente="4"] [data-apilar="b"] li:nth-child(4){transform:none;opacity:1}
+  /* justo detrás: sube un poquito, se achica y se apaga (asoma arriba de la del frente) */
+  html[data-apilar-frente="2"] [data-apilar="b"] li:nth-child(1),html[data-apilar-frente="3"] [data-apilar="b"] li:nth-child(2),
+  html[data-apilar-frente="4"] [data-apilar="b"] li:nth-child(3){transform:translateY(-18px) scale(.94);opacity:.5}
+  /* más atrás: se esconde del todo */
+  html[data-apilar-frente="3"] [data-apilar="b"] li:nth-child(1),html[data-apilar-frente="4"] [data-apilar="b"] li:nth-child(-n+2){transform:translateY(-30px) scale(.88);opacity:0}
+
+  /* --- el indicador: 4 rayitas que se llenan con el scroll (cada una, su cuarto del recorrido) --- */
+  html[data-apilar-on="b"] [data-apilar="b"] .api{display:flex;gap:8px;flex:none}
+  [data-apilar="b"] .apb{flex:1;display:flex;flex-direction:column;gap:6px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--km-gris);transition:color .4s ease}
+  [data-apilar="b"] .apb>i{display:block;height:3px;border-radius:2px;background:color-mix(in srgb,var(--km-tinta) 12%,transparent);overflow:hidden}
+  [data-apilar="b"] .apb>i>b{display:block;height:100%;background:var(--km-violeta);transform-origin:0 50%;transform:scaleX(var(--ap-f,0))}
+  [data-apilar="b"] .apb:nth-child(1){--ap-f:clamp(0,calc(var(--ap-avance,0) * 4),1)}
+  [data-apilar="b"] .apb:nth-child(2){--ap-f:clamp(0,calc(var(--ap-avance,0) * 4 - 1),1)}
+  [data-apilar="b"] .apb:nth-child(3){--ap-f:clamp(0,calc(var(--ap-avance,0) * 4 - 2),1)}
+  [data-apilar="b"] .apb:nth-child(4){--ap-f:clamp(0,calc(var(--ap-avance,0) * 4 - 3),1)}
+  [data-apilar="b"] .apb>em{display:none;font-style:normal}
+  /* el paso del frente se marca en tinta */
+  html[data-apilar-frente="1"] [data-apilar="b"] .apb:nth-child(1),html[data-apilar-frente="2"] [data-apilar="b"] .apb:nth-child(2),
+  html[data-apilar-frente="3"] [data-apilar="b"] .apb:nth-child(3),html[data-apilar-frente="4"] [data-apilar="b"] .apb:nth-child(4){color:var(--km-tinta)}
+
+  /* computadora: el indicador va a la izquierda, en columna, con el nombre de cada paso */
+  @media (min-width:860px){
+    html[data-apilar-on="b"] [data-apilar="b"] .aps{flex-direction:row;gap:clamp(24px,3vw,48px);padding:20px 0 24px}
+    html[data-apilar-on="b"] [data-apilar="b"] .api{flex-direction:column;justify-content:center;gap:22px;width:170px;padding-top:22px}
+    [data-apilar="b"] .apb{flex:none;display:grid;grid-template-columns:3px auto;grid-template-rows:auto auto;column-gap:14px;row-gap:2px}
+    [data-apilar="b"] .apb>i{grid-row:1 / 3;width:3px;height:auto}
+    [data-apilar="b"] .apb>i>b{transform-origin:50% 0;transform:scaleY(var(--ap-f,0))}
+    [data-apilar="b"] .apb>em{display:block;font-family:'Karla',system-ui,sans-serif;font-size:16px;letter-spacing:0;text-transform:none}
+    html[data-apilar-on="b"] [data-apilar="b"] [data-pasos-lista="b"]{flex:1;min-width:0}
+    html[data-apilar-on="b"] [data-apilar="b"] .pbc{width:min(40vw,580px,calc((100vh - 230px) * 1.25));width:min(40vw,580px,calc((100svh - 230px) * 1.25))}
+  }
+}
+
+/* --- solo corre la pantallita de la carta del frente (las de atrás se quedan quietas). Va con !important porque
+   escenas.css también usa !important para su pausa. --- */
+html[data-apilar-frente] [data-apilar] [data-escena][data-visible] *{animation-play-state:paused!important}
+html[data-apilar-frente="1"] [data-apilar] li:nth-child(1) [data-escena][data-visible] *,
+html[data-apilar-frente="2"] [data-apilar] li:nth-child(2) [data-escena][data-visible] *,
+html[data-apilar-frente="3"] [data-apilar] li:nth-child(3) [data-escena][data-visible] *,
+html[data-apilar-frente="4"] [data-apilar] li:nth-child(4) [data-escena][data-visible] *{animation-play-state:running!important}
+
+/* Sin el indicador 1 · 2 · 3 · 4 (ni las rayitas del teléfono ni la columna de la computadora): Sergio, 29-oct-2026,
+   «quita eso, es redundante» (cada carta ya dice «Paso N de 4»). La carta queda sola y centrada en el escenario. */
+[data-apilar="b"] .api{display:none!important}
+
 </style>
 <script data-km-pasos="">
 // «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py).
@@ -698,6 +802,95 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
     var b = ev.target && ev.target.closest ? ev.target.closest("[data-pasos-op]") : null;
     if (b) poner(b.getAttribute("data-pasos-op"));
   });
+})();
+
+</script>
+<script data-km-pasos="">
+// «Así de fácil» con cartas apiladas (pedido de Sergio, 29-oct-2026; ver apilar_armar.py). Sirve para las dos opciones.
+// Lo que hace: mira el scroll y decide qué carta está AL FRENTE. Eso queda en <html data-apilar-frente="1…4">
+// (en <html> porque la página vuelve a dibujar la sección y borraría lo que se guarde en sus elementos).
+// Con eso el CSS deja correr solo la pantallita del frente y pausa las de atrás.
+//   · Opción A «Mazo» (data-apilar="a"): el apilado lo hace el CSS solo (position: sticky). Aquí solo se calcula cuánto
+//     está tapada cada carta (--ap-d: 0 = libre, 1 = una carta encima, 2 = dos…) para achicarla y oscurecerla un poco.
+//   · Opción B «Una pantalla a la vez» (data-apilar="b"): se calcula cuánto se avanzó dentro de la caja alta
+//     (--ap-avance de 0 a 1, llena la barrita) y de ahí qué carta va al frente; el CSS la hace entrar desde abajo.
+// Quien pidió «menos movimiento» no ve nada de esto: se quitan los atributos y queda la lista normal.
+(function () {
+  var root = document.documentElement;
+  var menos = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var pendiente = 0;
+
+  // como mucho una medida por cuadro de pantalla (el scroll dispara muchos eventos seguidos)
+  function pedir() { if (!pendiente) pendiente = requestAnimationFrame(medir); }
+
+  function limitar(x, a, b) { return x < a ? a : x > b ? b : x; }
+
+  // escribe un atributo o una variable solo si cambió (escribir lo mismo también hace trabajar al navegador)
+  function attr(el, nombre, valor) {
+    if (valor === null) { if (el.hasAttribute(nombre)) el.removeAttribute(nombre); }
+    else if (el.getAttribute(nombre) !== valor) el.setAttribute(nombre, valor);
+  }
+  function variable(el, nombre, valor) {
+    if (el.style.getPropertyValue(nombre) !== valor) el.style.setProperty(nombre, valor);
+  }
+
+  function medir() {
+    pendiente = 0;
+    var caja = document.querySelector("[data-apilar]");
+    if (!caja || (menos && menos.matches)) {          // no está la sección, o «menos movimiento»: lista normal
+      attr(root, "data-apilar-on", null);
+      attr(root, "data-apilar-frente", null);
+      return;
+    }
+    var modo = caja.getAttribute("data-apilar");
+    attr(root, "data-apilar-on", modo);                 // el CSS de la opción B solo se activa con esto
+    var r = caja.getBoundingClientRect();
+    var alto = window.innerHeight;
+    if (r.bottom < -alto || r.top > alto * 2) return;   // la sección está lejos: no se mide nada
+    var frente = modo === "b" ? pantalla(caja, r) : mazo(caja, alto);
+    attr(root, "data-apilar-frente", String(frente));
+  }
+
+  // Opción A: p[j] = cuánto subió la carta j sobre la anterior (0 = todavía abajo, 1 = ya pegada en su escalón)
+  function mazo(ol, alto) {
+    var cartas = ol.children, p = [], frente = 1, j;
+    for (j = 0; j < cartas.length; j++) {
+      if (j === 0) { p.push(1); continue; }
+      var pega = parseFloat(getComputedStyle(cartas[j]).top) || 0;      // dónde se pega (su «top» del CSS)
+      var arriba = cartas[j].getBoundingClientRect().top;
+      var recorrido = Math.max(1, Math.min(cartas[j - 1].offsetHeight, alto * 0.8));
+      p.push(limitar(1 - (arriba - pega) / recorrido, 0, 1));
+      if (p[j] >= 0.5) frente = j + 1;                  // pasó la mitad del camino: ya es la del frente
+    }
+    // cuánto tiene encima cada carta = la suma de lo que subieron las de después
+    for (j = 0; j < cartas.length; j++) {
+      var d = 0;
+      for (var k = j + 1; k < cartas.length; k++) d += p[k];
+      variable(cartas[j], "--ap-d", d.toFixed(3));
+    }
+    return frente;
+  }
+
+  // Opción B: el escenario (.aps) se queda quieto mientras la caja alta pasa; el avance va de 0 a 1
+  function pantalla(caja, r) {
+    var escena = caja.querySelector(".aps");
+    if (!escena) return 1;
+    var pega = parseFloat(getComputedStyle(escena).top) || 0;
+    var recorrido = Math.max(1, r.height - escena.offsetHeight);
+    var avance = limitar((pega - r.top) / recorrido, 0, 1);
+    variable(caja, "--ap-avance", avance.toFixed(4));
+    return Math.min(4, Math.floor(avance * 4) + 1);     // cada cuarto del recorrido es una carta
+  }
+
+  addEventListener("scroll", pedir, { passive: true });
+  addEventListener("resize", pedir);
+  if (menos && menos.addEventListener) menos.addEventListener("change", pedir);
+  // la página se dibuja con su propio código después de cargar (y vuelve a dibujar partes): se mide de nuevo
+  function empezar() {
+    pedir();
+    if ("MutationObserver" in window) new MutationObserver(pedir).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.body) empezar(); else document.addEventListener("DOMContentLoaded", empezar);
 })();
 
 </script>
@@ -911,6 +1104,177 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
 /* «menos movimiento»: las frases quedan quietas y encendidas (el dibujo ya lo detiene escenas.css) */
 @media (prefers-reduced-motion:reduce){
   [data-guia="1"] .g1-frases>li,[data-guia="1"] .g1-foco::after{animation:none !important}
+}
+
+/* ===== Laptop · la historia del teléfono contada en una computadora (pedido de Sergio, 29-oct-2026) =====
+   Va DESPUÉS de opcion-1.css: reusa sus colores (.g1w, .g1t, .g1v…), su ritmo (18 s en bucle, la misma curva) y
+   varias de sus animaciones (@keyframes g1a1, g1bd, g1vB…), así la laptop y el teléfono cuentan lo mismo en el mismo
+   segundo. Lo que cambia de lugar en la pantalla ancha tiene sus propias animaciones, todas con nombre «g1L…»:
+   el código de la voz mueve todas las que empiezan por «g1», así que la laptop sigue a Carito sin tocar nada.
+     0 s     se ve la tienda con 4 tarjetas en fila
+     2,5 s   clic en «Agregar» de la peinadora; un puntito vuela a la bolsita y marca 1 (3,5 s)
+     5 s     el ratón pasa al clóset (la tarjeta se levanta un poquito, como en la web)
+     7,5 s   clic en «Agregar» del clóset; la bolsita marca 2 (8,5 s)
+     10 s    clic en «Cotizar por WhatsApp» y entra WhatsApp Web
+     11 s    el mensaje se arma solo, línea por línea (listo a los 13 s)
+     14 s    clic en enviar: el mensaje sube, sale enviado (15 s) y leído (15,7 s)
+     17,5 s  se desvanece y vuelve a empezar
+   Igual que en el teléfono, los estilos normales de cada pieza son el CUADRO FINAL (lo que ve quien pidió «menos
+   movimiento»), y solo se mueven transform y opacity. Este archivo solo dibuja la laptop; dónde va en la página
+   (centrada con las frases debajo, o a la izquierda con las frases al lado) lo dicen laptop-a.css y laptop-b.css. */
+
+/* --- la caja de la laptop: escondida en el teléfono y en tabletas (allá sigue el teléfono de siempre) --- */
+[data-guia="1"] .g1L-lap{display:none}
+[data-guia="1"] .g1L-lap>svg{display:block;width:100%;height:auto;aspect-ratio:720/456;overflow:visible}
+@media (min-width:1024px){
+  [data-guia="1"] .g1-tel{display:none}
+  [data-guia="1"] .g1L-lap{display:block}
+}
+
+/* ---------- el dibujo de la laptop: tapa, base, sombra ---------- */
+[data-guia="1"] .g1L-lap svg .g1Lcam{fill:var(--km-gris)}
+[data-guia="1"] .g1L-lap svg .g1Lbase{fill:var(--km-dia3);stroke:color-mix(in srgb,var(--km-tinta) 16%,transparent);stroke-width:1}
+[data-guia="1"] .g1L-lap svg .g1Lnotch{fill:color-mix(in srgb,var(--km-tinta) 16%,transparent)}
+[data-guia="1"] .g1L-lap svg .g1Lsombra{fill:url(#g1LSombra)}
+[data-guia="1"] .g1L-lap svg .g1Lst1{stop-color:var(--km-violeta);stop-opacity:.3}
+[data-guia="1"] .g1L-lap svg .g1Lst2{stop-color:var(--km-violeta);stop-opacity:0}
+/* los puntitos de la barra del navegador y las rayitas grises de relleno de la lista de chats */
+[data-guia="1"] .g1L-lap svg .g1Lpt{fill:color-mix(in srgb,var(--km-tinta) 16%,transparent)}
+[data-guia="1"] .g1L-lap svg .g1Lph{fill:color-mix(in srgb,var(--km-tinta) 8%,transparent)}
+
+/* ---------- letras de la laptop (un poco más grandes que en el teléfono: la pantalla es más ancha) ---------- */
+[data-guia="1"] .g1L-lap svg .g1Lurl{font-family:'DM Mono',ui-monospace,monospace;font-size:8.5px;letter-spacing:.02em;fill:var(--km-gris)}
+[data-guia="1"] .g1L-lap svg .g1Lq{font-size:23px}
+[data-guia="1"] .g1L-lap svg .g1Lnav{font-size:11.5px}
+[data-guia="1"] .g1L-lap svg .g1Lnom{font-size:13px}
+[data-guia="1"] .g1L-lap svg .g1Len{font-size:11px}
+[data-guia="1"] .g1L-lap svg .g1Ldk{font-size:12.5px;font-weight:500}
+[data-guia="1"] .g1L-lap svg .g1Lpl{font-size:12.5px}
+[data-guia="1"] .g1L-lap svg .g1Lchats{font-size:15px}
+[data-guia="1"] .g1L-lap svg .g1Lms{font-size:12px}
+/* la flechita del ratón: tinta con borde blanco (se ve sobre lo claro y sobre lo oscuro) y su onda violeta */
+[data-guia="1"] .g1L-lap svg .g1Lcur{fill:var(--km-tinta);stroke:#FFFFFF;stroke-width:1.6;stroke-linejoin:round}
+[data-guia="1"] .g1L-lap svg .g1L-onda{fill:none;stroke:var(--km-violeta2);stroke-width:2}
+/* los dibujos de los muebles van agrandados con «transform» en el HTML: así se agrandan desde su esquina (lo normal en SVG) */
+[data-guia="1"] .g1L-lap svg .g1L-art{transform-box:view-box;transform-origin:0 0}
+
+/* ---------- lo que se mueve (18 s en bucle; el ritmo y la curva los pone opcion-1.css a todo el dibujo) ---------- */
+
+/* el ratón: va a cada botón, se achica al hacer clic y suelta una onda; mientras el mensaje se arma, se va */
+[data-guia="1"] .g1L-dedo{opacity:0;transform:translate(584px,360px);animation-name:g1Ldedo;animation-timing-function:cubic-bezier(.45,0,.25,1)}
+@keyframes g1Ldedo{0%,5.56%{opacity:0;transform:translate(300px,190px)}8.33%{opacity:1}12.22%,16.11%{transform:translate(98px,283px)}19.44%,26.67%{transform:translate(132px,318px)}36.67%{transform:translate(236px,170px)}40%,43.89%{transform:translate(245px,283px)}47.22%,51.11%{transform:translate(300px,318px)}54.44%,57.78%{opacity:1;transform:translate(480px,357px)}60.56%,72.22%{opacity:0;transform:translate(470px,300px)}74.44%{opacity:1}76.67%,81.11%{opacity:1;transform:translate(584px,360px)}84.44%,100%{opacity:0;transform:translate(584px,360px)}}
+/* el clic: la flechita se achica desde su punta (arriba a la izquierda), los mismos 4 clics del teléfono */
+[data-guia="1"] .g1L-yema{transform-origin:0 0;animation-name:g1Lyema}
+@keyframes g1Lyema{0%,13.06%,15.28%,40.83%,43.06%,54.72%,56.94%,76.94%,79.17%,100%{transform:none}13.89%,41.67%,55.56%,77.78%{transform:scale(.82)}}
+[data-guia="1"] .g1L-onda{opacity:0;animation-name:g1Londa;animation-timing-function:ease-out}
+@keyframes g1Londa{0%,13.89%,17.78%,41.67%,45.56%,55.56%,59.44%,77.78%,81.67%,100%{opacity:0;transform:scale(2.3)}14%,41.78%,55.67%,77.89%{opacity:0;transform:scale(.7)}14.44%,42.22%,56.11%,78.33%{opacity:.9;transform:scale(.9)}}
+
+/* las tarjetas se levantan 4 px mientras el ratón está encima (como en la web de verdad) */
+[data-guia="1"] .g1L-c1{animation-name:g1Lc1}
+@keyframes g1Lc1{0%,10.56%{transform:none}12.22%,19.44%{transform:translateY(-4px)}21.11%,100%{transform:none}}
+[data-guia="1"] .g1L-c2{animation-name:g1Lc2}
+@keyframes g1Lc2{0%,33.33%{transform:none}36.67%,47.22%{transform:translateY(-4px)}50%,100%{transform:none}}
+
+/* los botones «Agregar»: se hunden al hacer clic y pasan a «En tu cotización» (los mismos tiempos del teléfono) */
+[data-guia="1"] .g1L-p1{animation-name:g1p1}
+[data-guia="1"] .g1L-a1{animation-name:g1a1}
+[data-guia="1"] .g1L-p2{animation-name:g1p2}
+[data-guia="1"] .g1L-a2{animation-name:g1a2}
+
+/* los velos de foco: los de la bolsita, el botón de WhatsApp y el chat son los del teléfono; los de los dos «Agregar»
+   van aparte porque aquí cada botón está en su tarjeta (en el teléfono la lista subía y quedaban en el mismo lugar) */
+[data-guia="1"] .g1L-vA1,[data-guia="1"] .g1L-vA2,[data-guia="1"] .g1L-vB,[data-guia="1"] .g1L-vC,[data-guia="1"] .g1L-vD,[data-guia="1"] .g1L-vE{opacity:0;transform-box:view-box;transform-origin:0 0;animation-timing-function:ease-in-out}
+[data-guia="1"] .g1L-vA1{animation-name:g1LvA1}
+@keyframes g1LvA1{0%,8.89%,18.89%,100%{opacity:0}11.11%,16.67%{opacity:1}}
+[data-guia="1"] .g1L-vA2{animation-name:g1LvA2}
+@keyframes g1LvA2{0%,37.78%,46.67%,100%{opacity:0}40%,44.44%{opacity:1}}
+[data-guia="1"] .g1L-vB{animation-name:g1vB}
+[data-guia="1"] .g1L-vC{animation-name:g1vC}
+[data-guia="1"] .g1L-vD{animation-name:g1vD}
+[data-guia="1"] .g1L-vE{animation-name:g1vE}
+
+/* los puntitos vuelan de cada botón a la bolsita: un grupo los corre de lado y el otro los sube (así hacen curva) */
+[data-guia="1"] .g1L-vx1,[data-guia="1"] .g1L-vx2{opacity:0;transform-box:view-box;animation-timing-function:cubic-bezier(.5,0,.75,1)}
+[data-guia="1"] .g1L-vy1,[data-guia="1"] .g1L-vy2{animation-timing-function:cubic-bezier(.2,.7,.4,1)}
+[data-guia="1"] .g1L-vx1{animation-name:g1Lvx1}
+@keyframes g1Lvx1{0%,15%{opacity:0;transform:none}15.56%,18.61%{opacity:1}19.17%,100%{opacity:0;transform:translateX(510.5px)}}
+[data-guia="1"] .g1L-vy1{animation-name:g1Lvy1}
+@keyframes g1Lvy1{0%,15%{transform:none}19.17%,100%{transform:translateY(-241px) scale(.5)}}
+[data-guia="1"] .g1L-vx2{animation-name:g1Lvx2}
+@keyframes g1Lvx2{0%,42.78%{opacity:0;transform:none}43.33%,46.39%{opacity:1}46.94%,100%{opacity:0;transform:translateX(363.5px)}}
+[data-guia="1"] .g1L-vy2{animation-name:g1Lvy2}
+@keyframes g1Lvy2{0%,42.78%{transform:none}46.94%,100%{transform:translateY(-241px) scale(.5)}}
+
+/* la bolsita: el numerito sale con un saltito (1 y después 2) y la bolsita se mece (igual que en el teléfono) */
+[data-guia="1"] .g1L-bd{animation-name:g1bd}
+[data-guia="1"] .g1L-n1{opacity:0;animation-name:g1n1}
+[data-guia="1"] .g1L-n2{animation-name:g1n2}
+[data-guia="1"] .g1L-bolsa{transform-origin:50% 25%;animation-name:g1bolsa;animation-timing-function:ease-in-out}
+
+/* abajo, la barra sube con el primer mueble; su texto pasa de «1 mueble» a «2 muebles» cuando la bolsita marca 2 */
+[data-guia="1"] .g1L-dock{animation-name:g1Ldock}
+@keyframes g1Ldock{0%,22.22%{transform:translateY(62px)}26.11%,95.56%{transform:none}96.11%,100%{transform:translateY(62px)}}
+[data-guia="1"] .g1L-d1{opacity:0;animation-name:g1n1}
+[data-guia="1"] .g1L-d2{animation-name:g1n2}
+[data-guia="1"] .g1L-pill{animation-name:g1pill}
+
+/* cambio de pantalla: la tienda se corre a la izquierda y WhatsApp Web entra desde la derecha (al final se desvanece).
+   Cuando el chat ya la tapó, la tienda se apaga: si no, asomaba una rayita de 1 px en el borde izquierdo de la pantalla */
+[data-guia="1"] .g1L-tienda{opacity:0;transform:translateX(-120px);transform-box:view-box;animation-name:g1Ltienda;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes g1Ltienda{0%,57.22%{opacity:1;transform:none}61.11%{opacity:1;transform:translateX(-120px)}61.67%,95.56%{opacity:0;transform:translateX(-120px)}96.11%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1L-chat{transform-box:view-box;animation-name:g1Lchat;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes g1Lchat{0%,57.22%{transform:translateX(624px);opacity:1}61.11%,97.22%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+
+/* el mensaje se arma solo: 4 líneas, una tras otra, entre los 11,3 s y los 13,25 s (como en el teléfono) */
+[data-guia="1"] .g1L-l1{animation-name:g1Ll1}
+@keyframes g1Ll1{0%,62.78%{opacity:0;transform:translateY(3px)}64.72%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1L-l2{animation-name:g1Ll2}
+@keyframes g1Ll2{0%,65.56%{opacity:0;transform:translateY(3px)}67.5%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1L-l3{animation-name:g1Ll3}
+@keyframes g1Ll3{0%,68.33%{opacity:0;transform:translateY(3px)}70.28%,100%{opacity:1;transform:none}}
+[data-guia="1"] .g1L-l4{animation-name:g1Ll4}
+@keyframes g1Ll4{0%,71.67%{opacity:0;transform:translateY(3px)}73.61%,100%{opacity:1;transform:none}}
+
+/* al enviar: el mensaje sube de la caja de escribir (blanca) a su burbuja (lila) y salen sus dos checks */
+[data-guia="1"] .g1L-msg{transform-box:view-box;animation-name:g1Lmsg;animation-timing-function:cubic-bezier(.45,0,.25,1)}
+@keyframes g1Lmsg{0%,78.33%{transform:translate(-130px,52px)}82.22%,100%{transform:none}}
+[data-guia="1"] .g1L-mi{opacity:0;animation-name:g1mi}
+[data-guia="1"] .g1L-mb{animation-name:g1mb}
+[data-guia="1"] .g1L-env{animation-name:g1env}
+[data-guia="1"] .g1L-k1{animation-name:g1k1}
+[data-guia="1"] .g1L-k2{animation-name:g1k2}
+
+/* ===== Laptop · opción B «Lado a lado» (pedido de Sergio, 29-oct-2026) =====
+   Solo en la computadora (desde 1024 px de ancho). Un bloque centrado en la página con dos columnas:
+     a la izquierda la laptop (un poco a la izquierda del centro) y a la derecha, en columna y centrado de alto,
+     la cejita «Tutorial», el título, el botón «Escúchalo», las 3 frases y los subtítulos de la voz.
+   Cómo se arma: la caja de la sección se vuelve una cuadrícula de 2 columnas y 6 filas. El bloque del dibujo
+   (data-guia) ocupa toda la cuadrícula y comparte esas mismas filas y columnas («subgrid»): así la laptop va en la
+   columna 1 y las frases caen en la columna 2, justo debajo del botón, aunque en el HTML estén en otro lugar.
+   Si el navegador no entiende «subgrid» (muy viejos), queda el título arriba y debajo la laptop con las frases al
+   lado (sin esta cuadrícula). Va DESPUÉS de opcion-1.css y laptop.css. */
+@media (min-width:1024px){
+  @supports (grid-template-rows:subgrid){
+    /* la cuadrícula: columna de la laptop (según el ancho y el alto de la pantalla, entre 540 y 800 px) y columna del
+       texto (entre 280 y 480 px). Las filas 1 y 6 son colchones que centran el texto a lo alto de la laptop */
+    #tutorial > [data-escena]{display:grid;justify-content:center;align-items:start;
+      grid-template-columns:clamp(540px,min(56vw,calc((100vh - 150px) * 1.58)),800px) minmax(280px,480px);
+      grid-template-rows:1fr auto auto auto auto 1fr;column-gap:clamp(40px,5vw,96px)}
+    /* el texto en la columna 2. Va por encima (z-index) porque el bloque del dibujo ocupa toda la cuadrícula y si no
+       taparía el botón «Escúchalo» y no se podría tocar */
+    #tutorial [data-cat-titulo]{grid-column:2;grid-row:2;position:relative;z-index:1;margin-bottom:22px}
+    #tutorial [data-cat-titulo]>h2{font-size:clamp(44px,4.2vw,68px)}
+    #tutorial [data-tut-voz]{grid-column:2;grid-row:3;position:relative;z-index:1}
+    #tutorial [data-tut-sub]{grid-column:2;grid-row:5;position:relative;z-index:1;max-width:28ch}
+
+    /* el bloque del dibujo: toda la cuadrícula, con las mismas filas y columnas de la sección */
+    [data-guia="1"]{grid-column:1/-1;grid-row:1/-1;display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid;gap:normal;margin:0}
+    [data-guia="1"] .g1L-lap{grid-column:1;grid-row:1/-1;align-self:center;width:100%}
+    /* las 3 frases en columna, en la fila 4 (debajo del botón) */
+    [data-guia="1"] .g1-lado{grid-column:2;grid-row:4;margin-top:30px}
+    [data-guia="1"] .g1-frases{gap:20px}
+    [data-guia="1"] .g1-frases>li{font-size:clamp(19px,1.45vw,23px)}
+  }
 }
 
 
@@ -1679,6 +2043,222 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <rect class="g1fr g1ho" x="66" y="307" width="40" height="3" rx="1.5"/>
 </svg></div>
 <!-- las tres frases: se encienden (bombillo y texto) cuando la historia llega a cada parte -->
+<!-- ===== Laptop · la misma historia del teléfono, pero como se ve en una computadora (pedido de Sergio, 29-oct-2026) =====
+  Va DENTRO del mismo bloque del teléfono (el div data-guia de opcion-1.html), justo antes de las 3 frases (la caja g1-lado).
+  Desde 1024 px de ancho se esconde el teléfono y sale esta laptop; más angosto, todo queda como antes (laptop escondida).
+  Cuenta lo mismo y en los mismos segundos (así la voz de Carito sigue sincronizada sin tocar el código de la voz):
+  la tienda con 4 tarjetas en fila, el ratón agrega la peinadora y el clóset, la bolsita marca 1 y 2, abajo aparece
+  «Cotizar por WhatsApp» y se abre WhatsApp Web con el mensaje que se arma solo.
+  Medidas: el dibujo mide 720 × 456; la pantalla mide 616 × 385 y todo lo de adentro se cuenta desde su esquina.
+  Los colores van en laptop.css (y los de siempre en opcion-1.css), nunca aquí, así cambian solos con las marcas C y E. -->
+<div class="g1L-lap" data-escena="" aria-hidden="true"><svg viewBox="0 0 720 456">
+<defs>
+<!-- la forma de la pantalla: lo que se sale de ella no se ve (así el chat entra de lado) -->
+<clipPath id="g1LClip"><rect width="616" height="385" rx="3"/></clipPath>
+<!-- la sombra lila suave debajo de la laptop (sus colores van en laptop.css) -->
+<radialGradient id="g1LSombra"><stop class="g1Lst1" offset="0"/><stop class="g1Lst2" offset="1"/></radialGradient>
+</defs>
+<!-- la sombra en la mesa -->
+<ellipse class="g1Lsombra" cx="360" cy="444" rx="350" ry="12"/>
+<!-- la tapa: marco oscuro (solo redondeado arriba) con un filo un poquito más claro y la camarita -->
+<path class="g1fr" d="M60 0h600a20 20 0 0 1 20 20v402H40V20A20 20 0 0 1 60 0z"/>
+<path class="g1fl" d="M60 1h600a19 19 0 0 1 19 19v402H41V20A19 19 0 0 1 60 1z"/>
+<circle class="g1Lcam" cx="360" cy="10" r="3"/>
+<!-- la base (el teclado visto de frente): una lámina color arena con la muesca para abrir la tapa -->
+<path class="g1Lbase" d="M0 420h720v7c0 7-16 13-34 13H34C16 440 0 434 0 427z"/>
+<path class="g1Lnotch" d="M316 420h88v2.5a4.5 4.5 0 0 1-4.5 4.5h-79a4.5 4.5 0 0 1-4.5-4.5z"/>
+
+<!-- ========== LA PANTALLA (todo lo de adentro se cuenta desde su esquina de arriba a la izquierda) ========== -->
+<g clip-path="url(#g1LClip)" transform="translate(52 20)">
+
+<!-- ========== PANTALLA 1 · la tienda en la computadora (se corre a la izquierda cuando entra el chat) ========== -->
+<g class="g1L-tienda">
+<rect class="g1d" width="616" height="385"/>
+<!-- arriba, la barrita del navegador: tres puntitos y la dirección de la web -->
+<rect class="g1z" width="616" height="26"/>
+<path class="g1h" d="M0 26.5h616"/>
+<circle class="g1Lpt" cx="14" cy="13" r="4.5"/><circle class="g1Lpt" cx="28" cy="13" r="4.5"/><circle class="g1Lpt" cx="42" cy="13" r="4.5"/>
+<rect class="g1w" x="188" y="6" width="240" height="14" rx="7"/>
+<text class="g1Lurl g1c" x="308" y="16.5">karlamarquezz.com/catalogo</text>
+<!-- la cabecera de la tienda: «Catálogo», el menú y (más abajo en este archivo) la bolsita -->
+<path class="g1h" d="M0 78.5h616"/>
+<text class="g1q g1Lq" x="20" y="62">Catálogo</text>
+<text class="g1g g1Lnav" x="228" y="57">Peinadoras</text>
+<text class="g1g g1Lnav" x="304" y="57">Clósets</text>
+<text class="g1g g1Lnav" x="360" y="57">Vanitys</text>
+
+<!-- tarjeta 1 · peinadora con espejo de bombillos (se levanta un poquito cuando el ratón pasa por encima) -->
+<g class="g1L-c1">
+<rect class="g1w g1ln" x="20" y="90" width="135" height="220" rx="12"/>
+<rect class="g1z" x="26" y="96" width="123" height="138" rx="8"/>
+<!-- el mismo dibujo del teléfono, agrandado (scale) y movido (translate) al centro de la foto -->
+<g class="g1L-art" transform="translate(-48.5 -11.8) scale(1.7)">
+<ellipse class="g1sh" cx="80" cy="133" rx="30" ry="2.5"/>
+<rect class="g1m" x="63" y="75" width="34" height="31" rx="4"/>
+<rect class="g1s" x="67" y="79" width="26" height="23" rx="2"/>
+<path class="g1br" d="M72 98l8-13M77 100l6-10"/>
+<rect class="g1fo" x="65" y="77" width="30" height="27" rx="3"/>
+<rect class="g1fo g1fo2" x="65" y="77" width="30" height="27" rx="3"/>
+<rect class="g1fo g1fo3" x="65" y="77" width="30" height="27" rx="3"/>
+<path class="g1m" d="M52 106h56v3.5H52zM55 109.5h50v18H55z"/>
+<path class="g1k" d="M80 109.5v18M55 118.5h50M65 114h5M90 114h5M65 123h5M90 123h5M59 127.5v5M101 127.5v5"/>
+</g>
+<text class="g1b g1Lnom" x="30" y="258">Peinadora LED</text>
+<!-- su botón: «Agregar» (oscuro, como en la web) y, al tocarlo, «En tu cotización» -->
+<g class="g1L-p1">
+<rect class="g1t" x="27" y="272" width="121" height="26" rx="13"/>
+<text class="g1bt g1c g1cl" x="87.5" y="289">Agregar</text>
+<g class="g1L-a1">
+<rect class="g1s g1sb" x="27" y="272" width="121" height="26" rx="13"/>
+<path class="g1i" d="M40 285l2.6 2.6 5-5.4"/>
+<text class="g1bt g1vt g1Len" x="51" y="289">En tu cotización</text>
+</g>
+</g>
+</g>
+
+<!-- tarjeta 2 · clóset con una puerta de espejo -->
+<g class="g1L-c2">
+<rect class="g1w g1ln" x="167" y="90" width="135" height="220" rx="12"/>
+<rect class="g1z" x="173" y="96" width="123" height="138" rx="8"/>
+<g class="g1L-art" transform="translate(102.5 -227.7) scale(1.65)">
+<ellipse class="g1sh" cx="80" cy="269" rx="28" ry="2.5"/>
+<path class="g1m" d="M56 207h48v3H56zM58 210h44v56H58z"/>
+<rect class="g1s" x="61.5" y="213.5" width="15" height="45" rx="1.5"/>
+<path class="g1br" d="M64 236l9-14M66 248l8-12"/>
+<rect class="g1pn" x="83.5" y="213.5" width="15" height="45" rx="1.5"/>
+<path class="g1k" d="M80 210v52M77.5 233v7M82.5 233v7M58 262h44M61.5 266v3M98.5 266v3"/>
+</g>
+<text class="g1b g1Lnom" x="177" y="258">Clóset grande</text>
+<g class="g1L-p2">
+<rect class="g1t" x="174" y="272" width="121" height="26" rx="13"/>
+<text class="g1bt g1c g1cl" x="234.5" y="289">Agregar</text>
+<g class="g1L-a2">
+<rect class="g1s g1sb" x="174" y="272" width="121" height="26" rx="13"/>
+<path class="g1i" d="M187 285l2.6 2.6 5-5.4"/>
+<text class="g1bt g1vt g1Len" x="198" y="289">En tu cotización</text>
+</g>
+</g>
+</g>
+
+<!-- tarjeta 3 · vanity (no se toca: está para que se vea que hay más) -->
+<rect class="g1w g1ln" x="314" y="90" width="135" height="220" rx="12"/>
+<rect class="g1z" x="320" y="96" width="123" height="138" rx="8"/>
+<g class="g1L-art" transform="translate(253.5 -431.4) scale(1.6)">
+<ellipse class="g1sh" cx="80" cy="404" rx="34" ry="2.5"/>
+<path class="g1m" d="M62 376v-16a18 14 0 0 1 36 0v16z"/>
+<path class="g1s" d="M66 374v-13.5a14 10.5 0 0 1 28 0V374z"/>
+<path class="g1gl" d="M63.8 375v-15a16.2 12.4 0 0 1 32.4 0v15"/>
+<path class="g1m" d="M46 376h68v3.5H46zM48 379.5h18v20H48zM94 379.5h18v20H94z"/>
+<path class="g1k" d="M48 389.5h18M94 389.5h18M55 384.5h4M101 384.5h4M55 394.5h4M101 394.5h4M50 399.5v4M110 399.5v4"/>
+</g>
+<text class="g1b g1Lnom" x="324" y="258">Vanity</text>
+<rect class="g1t" x="321" y="272" width="121" height="26" rx="13"/>
+<text class="g1bt g1c g1cl" x="381.5" y="289">Agregar</text>
+
+<!-- tarjeta 4 · gavetero de 5 gavetas (tampoco se toca) -->
+<rect class="g1w g1ln" x="461" y="90" width="135" height="220" rx="12"/>
+<rect class="g1z" x="467" y="96" width="123" height="138" rx="8"/>
+<g class="g1L-art" transform="translate(392.5 -12.2) scale(1.7)">
+<ellipse class="g1sh" cx="80" cy="132" rx="27" ry="2.5"/>
+<path class="g1m" d="M55 77h50v3.5H55zM58 80.5h44v46H58z"/>
+<path class="g1k" d="M58 89.7h44M58 98.9h44M58 108.1h44M58 117.3h44M77 85.1h6M77 94.3h6M77 103.5h6M77 112.7h6M77 121.9h6M61 126.5v5M99 126.5v5"/>
+</g>
+<text class="g1b g1Lnom" x="471" y="258">Gavetero</text>
+<rect class="g1t" x="468" y="272" width="121" height="26" rx="13"/>
+<text class="g1bt g1c g1cl" x="528.5" y="289">Agregar</text>
+
+<!-- arriba a la derecha: la bolsita de la cotización con su numerito -->
+<g class="g1L-bolsa">
+<circle class="g1w g1ln2" cx="586" cy="52" r="15"/>
+<path class="g1k g1kb" d="M580.5 49.5h11l-.8 9.5h-9.4zM583.3 49.5v-1.6a2.7 2.7 0 0 1 5.4 0v1.6"/>
+</g>
+<g class="g1L-bd">
+<circle class="g1v g1rw" cx="598" cy="40" r="9"/>
+<text class="g1bt g1c g1wt g1L-n1" x="598" y="44">1</text>
+<text class="g1bt g1c g1wt g1L-n2" x="598" y="44">2</text>
+</g>
+<!-- los puntitos violeta que «vuelan» de cada botón a la bolsita (un grupo los lleva de lado y otro hacia arriba, así hacen curva) -->
+<g class="g1L-vx1"><circle class="g1v g1L-vy1" cx="87.5" cy="281" r="6"/></g>
+<g class="g1L-vx2"><circle class="g1v g1L-vy2" cx="234.5" cy="281" r="6"/></g>
+
+<!-- abajo: la barra que aparece con el primer mueble y se queda. Dice cuántos llevas y tiene el botón a WhatsApp -->
+<g class="g1L-dock">
+<rect class="g1d" y="326" width="616" height="59"/>
+<path class="g1h" d="M0 326.5h616"/>
+<text class="g1Ldk g1L-d1" x="20" y="360">1 mueble en tu cotización</text>
+<text class="g1Ldk g1L-d2" x="20" y="360">2 muebles en tu cotización</text>
+<g class="g1L-pill">
+<rect class="g1t" x="392" y="338" width="204" height="34" rx="17"/>
+<circle class="g1wa2" cx="413" cy="355" r="8"/>
+<circle class="g1wa" cx="413" cy="355" r="4.5"/>
+<text class="g1bt g1cl g1Lpl" x="429" y="359.5">Cotizar por WhatsApp</text>
+</g>
+</g>
+
+<!-- los velos de foco: aclaran todo menos lo que se va a tocar (un hueco con su aro violeta), así se mira una sola cosa -->
+<g class="g1L-vA1"><path class="g1velo" d="M0 0h616v385H0zM40 262h95a19 19 0 0 1 0 38H40a19 19 0 0 1 0-38z"/><rect class="g1aro" x="21" y="262" width="133" height="38" rx="19"/></g>
+<g class="g1L-vA2"><path class="g1velo" d="M0 0h616v385H0zM187 262h95a19 19 0 0 1 0 38h-95a19 19 0 0 1 0-38z"/><rect class="g1aro" x="168" y="262" width="133" height="38" rx="19"/></g>
+<g class="g1L-vB"><path class="g1velo" d="M0 0h616v385H0zM563 48a27 27 0 1 0 54 0a27 27 0 1 0-54 0z"/><circle class="g1aro" cx="590" cy="48" r="27"/></g>
+<g class="g1L-vC"><path class="g1velo" d="M0 0h616v385H0zM409 332h170a23 23 0 0 1 0 46H409a23 23 0 0 1 0-46z"/><rect class="g1aro" x="386" y="332" width="216" height="46" rx="23"/></g>
+</g>
+
+<!-- ========== PANTALLA 2 · WhatsApp Web con el chat de KM (entra desde la derecha) ========== -->
+<g class="g1L-chat">
+<rect class="g1z" width="616" height="385"/>
+<!-- la barrita del navegador, ahora con la dirección de WhatsApp Web -->
+<rect class="g1d" width="616" height="26"/>
+<path class="g1h" d="M0 26.5h616"/>
+<circle class="g1Lpt" cx="14" cy="13" r="4.5"/><circle class="g1Lpt" cx="28" cy="13" r="4.5"/><circle class="g1Lpt" cx="42" cy="13" r="4.5"/>
+<rect class="g1w" x="188" y="6" width="240" height="14" rx="7"/>
+<text class="g1Lurl g1c" x="308" y="16.5">web.whatsapp.com</text>
+<!-- a la izquierda, la lista de chats: el de KM marcado y dos más de relleno (rayitas grises) -->
+<rect class="g1w" y="27" width="190" height="358"/>
+<path class="g1h" d="M190.5 27v358"/>
+<text class="g1b g1Lchats" x="16" y="56">Chats</text>
+<rect class="g1s" y="70" width="190" height="52"/>
+<circle class="g1w" cx="32" cy="96" r="16"/>
+<text class="g1q g1qs g1c g1vt" x="32" y="100">KM</text>
+<text class="g1b g1bn" x="56" y="92">KM · Karla Marquez</text>
+<text class="g1g" x="56" y="108">en línea</text>
+<circle class="g1Lph" cx="32" cy="148" r="16"/><rect class="g1Lph" x="56" y="140" width="92" height="7" rx="3.5"/><rect class="g1Lph" x="56" y="152" width="60" height="6" rx="3"/>
+<circle class="g1Lph" cx="32" cy="200" r="16"/><rect class="g1Lph" x="56" y="192" width="80" height="7" rx="3.5"/><rect class="g1Lph" x="56" y="204" width="70" height="6" rx="3"/>
+<!-- a la derecha, la conversación: arriba quién es, en el medio «HOY» y abajo la caja de escribir -->
+<rect class="g1w" x="191" y="27" width="425" height="49"/>
+<path class="g1h" d="M191 76.5h425"/>
+<circle class="g1s" cx="218" cy="51" r="15"/>
+<text class="g1q g1qs g1c g1vt" x="218" y="55">KM</text>
+<text class="g1b g1bn" x="242" y="48">KM · Karla Marquez</text>
+<text class="g1g" x="242" y="63">en línea</text>
+<rect class="g1hoy" x="386" y="88" width="34" height="17" rx="8.5"/>
+<text class="g1mo g1c" x="403" y="100">HOY</text>
+<rect class="g1d" x="191" y="337" width="425" height="48"/>
+<rect class="g1w" x="204" y="346" width="358" height="30" rx="15"/>
+<text class="g1g" x="220" y="365">Mensaje</text>
+<g class="g1L-env">
+<circle class="g1wa" cx="586" cy="361" r="15"/>
+<path class="g1w" d="M580.5 355.5l12 5.5-12 5.5 2.4-5.5z"/>
+</g>
+<!-- el mensaje: primero está en la caja de escribir (blanca) y se arma solo, línea por línea;
+     al enviarlo sube a su lugar en el chat (burbuja lila) y salen sus dos checks -->
+<g class="g1L-msg">
+<rect class="g1w g1L-mi" x="346" y="226" width="252" height="100" rx="14"/>
+<g class="g1L-mb"><rect class="g1s" x="346" y="226" width="252" height="100" rx="10"/><path class="g1s" d="M590 226h12l-9 8.5z"/></g>
+<text class="g1Lms g1L-l1" x="360" y="250">¡Hola, KM! Vengo del catálogo y quiero</text>
+<text class="g1Lms g1L-l2" x="360" y="267">cotizar:</text>
+<text class="g1b g1Lms g1L-l3" x="360" y="287">• 1 × Peinadora LED</text>
+<text class="g1b g1Lms g1L-l4" x="360" y="304">• 1 × Clóset grande</text>
+<path class="g1ck g1L-k1" d="M578 315.5l2.5 2.5 5.5-6M583 318l5.5-6"/>
+<path class="g1ck g1ck2 g1L-k2" d="M578 315.5l2.5 2.5 5.5-6M583 318l5.5-6"/>
+</g>
+<!-- velos de foco del chat: primero el mensaje que se arma solo, después el botón verde de enviar -->
+<g class="g1L-vD"><path class="g1velo" d="M0 0h616v385H0zM224 270h232a16 16 0 0 1 16 16v82a16 16 0 0 1-16 16H224a16 16 0 0 1-16-16v-82a16 16 0 0 1 16-16z"/><rect class="g1aro" x="208" y="270" width="264" height="114" rx="16"/></g>
+<g class="g1L-vE"><path class="g1velo" d="M0 0h616v385H0zM564 361a22 22 0 1 0 44 0a22 22 0 1 0-44 0z"/><circle class="g1aro" cx="586" cy="361" r="22"/></g>
+</g>
+
+<!-- el ratón: una flechita que va a cada botón, se achica un poquito al hacer clic y suelta una onda -->
+<g class="g1L-dedo"><circle class="g1L-onda" r="12"/><g class="g1L-yema"><path class="g1Lcur" d="M0 0v21l5.2-5 3.5 8 3.7-1.6-3.5-7.9H16.5z"/></g></g>
+</g>
+</svg></div>
 <div class="g1-lado">
 <ol class="g1-frases">
 <li class="g1-f1"><span class="g1-foco" aria-hidden="true"></span>Elige lo que te gusta.</li>
@@ -2018,16 +2598,18 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" style="display:block">Así de fácil.</span></span>
       </h2>
     </div>
-    <!-- ===== Opción B · «Pantallitas» (pedido de Sergio, 28-oct-2026) =====
-  Cada paso trae una pantallita de app dibujada con SVG (sin imágenes). Se mueve sola con opcion-b.css.
-  Orden dentro de cada paso: bombillo con su rayita, la pantallita (el dibujo), el número y el texto. -->
+    <!-- ===== «Así de fácil» · Opción B «Una pantalla a la vez» (pedido de Sergio, 29-oct-2026; se arma con apilar_armar.py) =====
+  La caja de afuera es alta (da el recorrido del scroll); el escenario de adentro se queda quieto en pantalla
+  mientras la carta nueva entra desde abajo y tapa a la anterior. Estilos en apilar-b.css; código en apilar.js. -->
+<div data-apilar="b">
+<div class="aps">
+<div class="api" aria-hidden="true"><span class="apb"><i><b></b></i><span>01</span><em>Escríbenos</em></span><span class="apb"><i><b></b></i><span>02</span><em>Resérvalo</em></span><span class="apb"><i><b></b></i><span>03</span><em>Lo fabricamos</em></span><span class="apb"><i><b></b></i><span>04</span><em>Entrega</em></span></div>
 <ol data-pasos-lista="b">
-<!-- 1 · Chat de WhatsApp: elige el modelo, escribe, envía, KM lo lee y responde -->
-<li data-reveal="up">
-<div class="pbl"><span data-reveal="bulb"></span><span></span></div>
-<span class="pbn">1</span>
-<p>Escríbenos por WhatsApp y elige tu modelo.</p>
-      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<!-- carta 1 -->
+<li>
+<article class="apc">
+<div class="apx"><span class="apk"><span data-reveal="bulb"></span>Paso 1 de 4</span><span class="pbn">1</span><p>Escríbenos por WhatsApp y elige tu modelo.</p></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <defs>
 <!-- la peinadora (se dibuja una vez y se repite con <use>): espejo con bombillos, tope, gavetas y patas -->
 <symbol id="pbP" viewBox="0 0 60 72">
@@ -2089,13 +2671,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <path class="pbk pbck2 pb1r" d="M22 184v13"/>
 <g class="pb1s"><circle class="pbwa" cx="236" cy="190" r="13"/><path class="pbw" d="M230.5 184.5l12 5.5-12 5.5 2.4-5.5z"/></g>
 </svg></div>
+</article>
 </li>
-<!-- 2 · Abono: el 50 % se llena, se ven las formas de pago y cae el sello «Reservado» -->
-<li data-reveal="up" data-delay="100">
-<div class="pbl"><span data-reveal="bulb" data-delay="300"></span><span></span></div>
-<span class="pbn">2</span>
-<p>Resérvalo con el 50 % de abono.</p>
-      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<!-- carta 2 -->
+<li>
+<article class="apc">
+<div class="apx"><span class="apk"><span data-reveal="bulb"></span>Paso 2 de 4</span><span class="pbn">2</span><p>Resérvalo con el 50 % de abono.</p></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <rect class="pbi" x="17" y="14.5" width="16" height="11.5" rx="2"/><path class="pbi" d="M17 18.5h16M20 22.5h4"/>
 <text class="pbb" x="46" y="18">Tu reserva</text>
@@ -2127,13 +2709,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <text class="pbm pbv pbsl" x="97" y="184.5">RESERVADO</text>
 </g>
 </svg></div>
+</article>
 </li>
-<!-- 3 · Taller: pasan los días (reloj y contador), se encienden las etapas y sale embalado en plástico -->
-<li data-reveal="up" data-delay="200">
-<div class="pbl"><span data-reveal="bulb" data-delay="600"></span><span></span></div>
-<span class="pbn">3</span>
-<p>Lo fabricamos a mano en 10 a 15 días hábiles.</p>
-      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<!-- carta 3 -->
+<li>
+<article class="apc">
+<div class="apx"><span class="apk"><span data-reveal="bulb"></span>Paso 3 de 4</span><span class="pbn">3</span><p>Lo fabricamos a mano en 10 a 15 días hábiles.</p></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <circle class="pbw pbi" cx="25" cy="20" r="8"/><path class="pbi" d="M25 20l3.2 2.2"/><path class="pbi pb3m" d="M25 20v-5.6"/>
 <text class="pbb" x="46" y="18">En el taller</text>
@@ -2162,13 +2744,13 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <use class="pb3f" href="#pbF" width="60" height="72"/>
 </g>
 </svg></div>
+</article>
 </li>
-<!-- 4 · Entrega: dos opciones; la marca violeta pasa de «Retiro» a «Envío», tú llegas al taller o sale el camión -->
-<li data-reveal="up" data-delay="300">
-<div class="pbl"><span data-reveal="bulb" data-delay="900"></span><span></span></div>
-<span class="pbn">4</span>
-<p>Lo retiras en el taller o te lo enviamos (el envío va aparte).</p>
-      <div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
+<!-- carta 4 -->
+<li>
+<article class="apc">
+<div class="apx"><span class="apk"><span data-reveal="bulb"></span>Paso 4 de 4</span><span class="pbn">4</span><p>Lo retiras en el taller o te lo enviamos (el envío va aparte).</p></div>
+<div class="pbc" data-escena="" aria-hidden="true"><svg viewBox="0 0 260 208">
 <rect class="pbs" x="12" y="7" width="26" height="26" rx="8"/>
 <path class="pbi" d="M25 28.5s-6-5.6-6-10a6 6 0 0 1 12 0c0 4.4-6 10-6 10z"/><circle class="pbi" cx="25" cy="18.5" r="2"/>
 <text class="pbb" x="46" y="18">Entrega</text>
@@ -2205,8 +2787,11 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <!-- la marca violeta de la opción elegida (pasa de una a otra) -->
 <g class="pb4s"><rect class="pbsel" x="12" y="48" width="236" height="72" rx="12"/><circle class="pbv" cx="236" cy="62" r="3.4"/></g>
 </svg></div>
+</article>
 </li>
 </ol>
+</div>
+</div>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
       <a href="#puertas" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:var(--km-tinta);color:var(--km-marfil);font-size:16px;font-weight:700">Empezar mi pedido <span aria-hidden="true">→</span></a>
       <span style="font-size:15px;color:color-mix(in srgb,var(--km-tinta) 68%,transparent)">Atendemos todos los días, de 8 am a 9 pm.</span>
