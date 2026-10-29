@@ -274,6 +274,11 @@ html[data-cot-noche] [data-cot-flota] { color: #FFFFFF !important;
   box-shadow: 0 14px 32px -14px rgba(91,63,160,.85), inset 0 0 0 1px rgba(255,255,255,.22) !important }
 html[data-cot-noche] [data-cot-flota]::before { opacity: 1 }
 html[data-cot-noche] [data-cot-flota] > span { background: #FFFFFF !important; color: #2A1B47 !important }
+/* marca C (la de la web desde el 29-oct-2026): sobre el chocolate, el rosado de la marca con letra chocolate, igual que
+   «Escribir por WhatsApp» del cierre (el morado se perdía sobre el chocolate) */
+html[data-marca="c"][data-cot-noche] [data-cot-flota]::before { background: #F0AFC0 }
+html[data-marca="c"][data-cot-noche] [data-cot-flota] { color: #2D1A13 !important; box-shadow: 0 14px 32px -14px rgba(240,175,192,.65), inset 0 0 0 1px rgba(255,255,255,.3) !important }
+html[data-marca="c"][data-cot-noche] [data-cot-flota] > span { background: #2D1A13 !important; color: #F0AFC0 !important }
 @media (prefers-reduced-motion: reduce) { [data-cot-flota], [data-cot-flota]::before, [data-cot-flota] > span { transition: none } }
 </style>
 <script data-km-cot-flota="">
@@ -1212,6 +1217,8 @@ html[data-marca] .km-brillo { background: linear-gradient(135deg, var(--km-tinta
   var dev = /^(localhost|127\.0\.0\.1|\[::1\]|192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(h) || /\.local$/.test(h) || params.has("marca");
   var elegida = params.get("marca");
   if (elegida === null && dev) { try { elegida = localStorage.getItem("km-marca"); } catch (e) {} }
+  // la marca de la web es la C (Sergio, 29-oct-2026: «branding c»); «Hoy» solo con ?marca=hoy o el botón de prueba
+  if (!elegida) elegida = "c";
   function poner(m) {
     if (m !== "c" && m !== "e") m = "";
     if (m) document.documentElement.setAttribute("data-marca", m); else document.documentElement.removeAttribute("data-marca");
