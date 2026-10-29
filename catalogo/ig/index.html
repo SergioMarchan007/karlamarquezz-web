@@ -447,6 +447,58 @@ html[data-marca="c"][data-cot-noche] [data-cot-flota] > span { background: #2D1A
 /* las fotos de las tarjetas no se acercan al pasar el mouse: solo cambian a la 2.ª foto, a tamaño normal (29-oct-2026) */
 [data-pcard] button[data-flip] img{transform:none!important}
 </style>
+<style data-km-precios="">
+/* ===== precios más finos (29-oct-2026; ver precios_29oct.py) ===== */
+/* tienda: el precio en divisas (2.º renglón de cada columna) y el de Bs (3.º) */
+html[data-precios] [data-pcol] > span:nth-child(2){font-weight:600!important;letter-spacing:-.01em!important}
+html[data-precios] [data-pcol] > span:nth-child(3){font-weight:500!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important;
+  text-decoration:line-through;text-decoration-thickness:1px}
+/* «Los más vendidos» */
+html[data-precios] [data-mv-precio] b{font-weight:600!important;letter-spacing:-.01em}
+html[data-precios] [data-mv-precio] > span{font-weight:500!important;font-size:14px!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important;
+  text-decoration:line-through;text-decoration-thickness:1px}
+/* ficha: la tabla de precios (versión, divisas, Bs) */
+html[data-precios] [data-vtabla] [role="cell"]:nth-child(2){font-weight:600!important;letter-spacing:-.01em!important}
+html[data-precios] [data-vtabla] [role="cell"]:nth-child(3){font-weight:500!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important;
+  text-decoration:line-through;text-decoration-thickness:1px}
+
+/* la pastillita del descuento, al lado del precio en divisas (el texto sale de data-desc) */
+html[data-precios] [data-desc]:not([data-desc=""])::after{content:attr(data-desc);display:inline-block;margin-left:6px;padding:1px 6px;
+  border-radius:999px;background:var(--km-lila-suave);color:var(--km-violeta);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--km-violeta) 18%,transparent);font-family:'DM Mono',ui-monospace,monospace;
+  font-size:10.5px;font-weight:500;letter-spacing:0;line-height:1.5;vertical-align:middle;text-decoration:none}
+/* en las tarjetas de la tienda la columna es angosta: la pastilla va debajo del precio */
+html[data-precios] [data-pcol] > [data-desc]:not([data-desc=""])::after{display:block;width:max-content;margin:2px auto 0;font-size:9.5px}
+/* «sin descuento» después del Bs tachado (inline-block: así no le llega la raya del tachado) */
+html[data-precios] [data-mv-precio] > span::after,html[data-precios] [data-vtabla] [role="cell"]:nth-child(3)::after{
+  content:"sin descuento";display:inline-block;margin-left:5px;font-size:11px;font-weight:500;color:color-mix(in srgb,var(--km-tinta) 50%,transparent);text-decoration:none}
+
+/* A: el precio en divisas en el morado de la marca */
+html[data-precios="a"] [data-pcol] > span:nth-child(2),html[data-precios="a"] [data-mv-precio] b,
+html[data-precios="a"] [data-vtabla] [role="cell"]:nth-child(2){color:var(--km-violeta3)!important}
+</style>
+<script data-km-precios="">
+document.documentElement.setAttribute("data-precios", "a");
+// El descuento de cada precio: (precio en Bs a tasa BCV - precio en divisas) / precio en Bs, en %.
+// Se escribe en data-desc del precio en divisas; el estilo lo muestra como pastilla («-20 %»).
+(function () {
+  var pendiente = 0;
+  function numero(t) { var m = String(t || "").replace(/[.,]/g, "").match(/\d+/); return m ? +m[0] : 0; }
+  function marcar(usd, bs) {
+    var u = numero(usd.textContent), b = numero(bs.textContent);
+    var d = u && b && b > u ? "-" + Math.round((b - u) / b * 100) + " %" : "";
+    if (usd.getAttribute("data-desc") !== d) usd.setAttribute("data-desc", d);
+  }
+  function revisar() {
+    pendiente = 0;
+    document.querySelectorAll("[data-pcol]").forEach(function (c) { if (c.children.length >= 3) marcar(c.children[1], c.children[2]); });
+    document.querySelectorAll("[data-mv-precio]").forEach(function (c) { var u = c.querySelector("b"), b = c.querySelector(":scope > span"); if (u && b) marcar(u, b); });
+    document.querySelectorAll('[data-vtabla] [role="row"]').forEach(function (r) { var c = r.querySelectorAll('[role="cell"]'); if (c.length >= 3) marcar(c[1], c[2]); });
+  }
+  // cada vez que la página se redibuja (o cambian los textos), se vuelve a calcular, una vez por cuadro como mucho
+  new MutationObserver(function () { if (!pendiente) pendiente = requestAnimationFrame(revisar); })
+    .observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+})();
+</script>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
