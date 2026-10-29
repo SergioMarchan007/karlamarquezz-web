@@ -264,6 +264,45 @@ html[data-cat-abierta] #tienda { padding-top: 68px }
   [data-puerta-t] { font-size: clamp(22px,2.4vw,38px) }
 }
 </style>
+<style data-km-cot-flota="">
+/* «Mi cotización» flotante sobre las partes oscuras: el morado de «Ver la web completa» (29-oct-2026; ver cotizacion_flota_29oct.py) */
+[data-cot-flota] { isolation: isolate; transition: color .35s ease, box-shadow .35s ease }
+[data-cot-flota]::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, #2A1B47 0%, var(--km-violeta3) 55%, #8C6BD8 100%); opacity: 0; transition: opacity .35s ease }
+[data-cot-flota] > span { transition: background-color .35s ease, color .35s ease }
+html[data-cot-noche] [data-cot-flota] { color: #FFFFFF !important;
+  box-shadow: 0 14px 32px -14px rgba(91,63,160,.85), inset 0 0 0 1px rgba(255,255,255,.22) !important }
+html[data-cot-noche] [data-cot-flota]::before { opacity: 1 }
+html[data-cot-noche] [data-cot-flota] > span { background: #FFFFFF !important; color: #2A1B47 !important }
+@media (prefers-reduced-motion: reduce) { [data-cot-flota], [data-cot-flota]::before, [data-cot-flota] > span { transition: none } }
+</style>
+<script data-km-cot-flota="">
+// ¿El botón flotante «Mi cotización» está encima de una parte oscura? (29-oct-2026; ver cotizacion_flota_29oct.py)
+(function () {
+  var pendiente = 0;
+  function revisar() {
+    pendiente = 0;
+    var b = document.querySelector("[data-cot-flota]");
+    if (!b) return;
+    var r = b.getBoundingClientRect();
+    if (!r.width) return;
+    // lo que hay debajo del centro del botón (sin contar el botón mismo) y la sección con tono más cercana
+    var abajo = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2), noche = false;
+    for (var i = 0; i < abajo.length; i++) {
+      if (b.contains(abajo[i])) continue;
+      var t = abajo[i].closest("[data-tone]");
+      if (t) { noche = t.getAttribute("data-tone") === "night"; break; }
+    }
+    if (noche !== document.documentElement.hasAttribute("data-cot-noche")) document.documentElement.toggleAttribute("data-cot-noche", noche);
+  }
+  // se revisa una vez por cuadro como mucho: al bajar, al cambiar el tamaño y cuando la página se vuelve a dibujar
+  function pedir() { if (!pendiente) pendiente = requestAnimationFrame(revisar); }
+  addEventListener("scroll", pedir, { passive: true });
+  addEventListener("resize", pedir);
+  new MutationObserver(pedir).observe(document.documentElement, { childList: true, subtree: true });
+  pedir();
+})();
+</script>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
@@ -2402,7 +2441,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
   </div>
 </sc-if>
 <sc-if value="{{ showPill }}" hint-placeholder-val="{{ false }}">
-  <button type="button" onClick="{{ openCart }}" style="position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:10px;height:52px;padding:0 20px 0 8px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15px;font-weight:700;box-shadow:0 18px 44px -14px rgba(0,0,0,.55)"><span style="min-width:36px;height:36px;padding:0 10px;border-radius:999px;background:var(--km-lila-f);color:var(--km-noche-t);display:grid;place-items:center;font-size:14px">{{ cartCount }}</span>Mi cotización</button>
+  <button type="button" data-cot-flota="" onClick="{{ openCart }}" style="position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:10px;height:52px;padding:0 20px 0 8px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:15px;font-weight:700;box-shadow:0 18px 44px -14px rgba(0,0,0,.55)"><span style="min-width:36px;height:36px;padding:0 10px;border-radius:999px;background:var(--km-lila-f);color:var(--km-noche-t);display:grid;place-items:center;font-size:14px">{{ cartCount }}</span>Mi cotización</button>
 </sc-if>
 <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
   <div data-toast="" role="status" style="position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:97;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:var(--km-tinta);color:var(--km-dia);font-size:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.5);white-space:nowrap">
