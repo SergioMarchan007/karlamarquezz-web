@@ -303,6 +303,133 @@ html[data-cot-noche] [data-cot-flota] > span { background: #FFFFFF !important; c
   pedir();
 })();
 </script>
+<style data-km-gusto="">
+/* ===== «Hecho a tu gusto»: foto grande y bien presentada (29-oct-2026; ver gusto_29oct.py) ===== */
+/* la foto: sin el tope viejo de tamaño; el tamaño lo dan estas reglas */
+#a-tu-gusto [data-gusto-fig] { position: relative; margin: 0 }
+#a-tu-gusto [data-gusto-foto] { box-shadow: 0 30px 70px -40px color-mix(in srgb,var(--km-tinta) 55%,transparent) !important; background: rgba(0,0,0,.06) !important }
+#a-tu-gusto [data-gusto-foto] img { object-position: 50% 55% }
+/* la línea lila fina alrededor de la foto (como en el PDF), separada unos px */
+#a-tu-gusto [data-gusto-fig]::before { content: ""; position: absolute; z-index: 1; pointer-events: none; border: 1.5px solid var(--km-halo); opacity: .9 }
+
+/* A · Corte del PDF: la esquina de arriba a la izquierda en curva grande */
+html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-foto] { border-radius: 38% 18px 18px 18px / 30% 18px 18px 18px !important }
+html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top: -7px; right: 7px; height: calc(var(--gusto-alto) + 0px);
+  border-radius: 38% 22px 22px 22px / 30% 22px 22px 22px }
+/* B · Espejo: la foto en arco, como un espejo de peinadora */
+html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-foto] { border-radius: 50% 50% 18px 18px / 28% 28% 18px 18px !important }
+html[data-gusto-ver="b"] #a-tu-gusto [data-gusto-fig]::before { left: -7px; top: -7px; right: -7px; height: calc(var(--gusto-alto) + 14px);
+  border-radius: 50% 50% 24px 24px / 28% 28% 24px 24px }
+
+/* computadora: la foto a la derecha, grande (hasta 560 px de ancho y lo que deje el alto de la pantalla) */
+@media (min-width: 761px) {
+  #a-tu-gusto [data-gusto-fig] { flex: none !important; width: min(44vw, calc((100svh - 250px) * .8), 560px) !important; max-width: none !important }
+  #a-tu-gusto [data-gusto-fig] { --gusto-alto: calc(min(44vw, calc((100svh - 250px) * .8), 560px) * 1.25) }
+}
+/* teléfono: la foto a todo lo ancho y los colores en pastillas */
+@media (max-width: 760px) {
+  #a-tu-gusto [data-gfit] { padding-top: 84px !important }   /* justo debajo de la barra de arriba, así cabe todo sin encogerse */
+  #a-tu-gusto [data-gusto-fila] { flex-direction: column !important; flex-wrap: nowrap !important; align-items: stretch !important; gap: 16px !important }
+  #a-tu-gusto [data-gusto-fig] { flex: none !important; width: 100% !important; max-width: none !important; --gusto-alto: min(46svh, calc((100vw - 40px) * 1.25)) }
+  /* en columna, el «flex: 1 1 360px» de la lista se volvía 360 px de alto: así nada se estira */
+  #a-tu-gusto [data-gusto-fila] > div { flex: none !important; gap: 18px !important }
+  #a-tu-gusto [data-gusto-foto] { aspect-ratio: auto !important; height: var(--gusto-alto) }
+  html[data-gusto-ver="a"] #a-tu-gusto [data-gusto-fig]::before { right: 7px }
+  #a-tu-gusto [data-gusto-fig] figcaption { margin-top: 10px !important }
+  #a-tu-gusto [data-gusto-fig] figcaption > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0 }
+  /* los colores: pastillas pequeñas en filas; la elegida con su borde y en negrita */
+  #a-tu-gusto [data-gusto-lista] { flex-direction: row !important; flex-wrap: wrap; gap: 6px }
+  #a-tu-gusto [data-gusto-lista] > button { flex: none !important; height: 34px; padding: 0 12px 0 8px !important; border-radius: 999px; font-family: 'Karla', system-ui, sans-serif !important;
+    font-size: 14px !important; letter-spacing: 0 !important; gap: 6px !important; line-height: 1 !important; opacity: .72 !important; font-weight: 500 !important;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent) }
+  #a-tu-gusto [data-gusto-lista] > button > span:first-child { width: 12px !important; height: 12px !important }   /* el puntito del color */
+  #a-tu-gusto [data-gusto-lista] > button[aria-checked="true"] { opacity: 1 !important; font-weight: 800 !important; box-shadow: inset 0 0 0 1.5px currentColor }
+}
+</style>
+<script data-km-gusto="">
+// opción del diseño de «Hecho a tu gusto» mientras Sergio escoge (29-oct-2026; ver gusto_29oct.py)
+(function () {
+  var op = null;
+  try { op = new URLSearchParams(location.search).get("gusto") || localStorage.getItem("km-gusto"); } catch (e) {}
+  if (op !== "a" && op !== "b") op = "a";
+  document.documentElement.setAttribute("data-gusto-ver", op);
+  try { localStorage.setItem("km-gusto", op); } catch (e) {}
+})();
+</script>
+<style data-km-aviso-wa="">
+/* aviso «¿Ya elegiste tu mueble?» antes de ir a WhatsApp con la cotización vacía (29-oct-2026; ver aviso_wa_29oct.py) */
+[data-aviso-wa] { position: fixed; inset: 0; z-index: 120; display: flex; align-items: flex-end; justify-content: center;
+  padding: 16px max(16px, env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)) }
+[data-aviso-wa][hidden] { display: none }
+[data-aviso-wa] > [data-aviso-fondo] { position: absolute; inset: 0; background: color-mix(in srgb,var(--km-noche) 50%,transparent); animation: avFondo .3s ease both }
+[data-aviso-wa] > [data-aviso-caja] { position: relative; width: min(100%, 420px); display: flex; flex-direction: column; gap: 14px;
+  padding: 26px 22px 20px; border-radius: 22px; background: var(--km-dia); color: var(--km-tinta); box-shadow: 0 30px 80px -30px rgba(0,0,0,.6);
+  animation: avSube .45s cubic-bezier(.16,1,.3,1) both }
+[data-aviso-wa] h3 { margin: 0; padding-right: 44px; font-family: 'Kalnia','Bodoni 72',Didot,serif; font-weight: 400; font-size: 27px; line-height: 1.1; letter-spacing: -.02em }
+[data-aviso-wa] p { margin: 0; font-size: 16px; line-height: 1.45; color: color-mix(in srgb,var(--km-tinta) 75%,transparent) }
+[data-aviso-wa] [data-aviso-cat] { display: flex; align-items: center; justify-content: center; gap: 10px; height: 54px; border-radius: 999px;
+  background: var(--km-tinta); color: var(--km-dia); font-size: 16px; font-weight: 700 }
+[data-aviso-wa] [data-aviso-wa-ir] { display: flex; align-items: center; justify-content: center; gap: 10px; height: 48px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb,var(--km-tinta) 25%,transparent); color: var(--km-tinta); font-size: 15px; font-weight: 700; text-decoration: none }
+[data-aviso-wa] [data-aviso-wa-ir] > span { width: 8px; height: 8px; border-radius: 50%; background: #2FBF71; box-shadow: 0 0 0 3px rgba(47,191,113,.22) }
+[data-aviso-wa] [data-aviso-cerrar] { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb,var(--km-tinta) 18%,transparent); display: grid; place-items: center; font-size: 14px; color: var(--km-tinta) }
+@keyframes avFondo { from { opacity: 0 } }
+@keyframes avSube { from { opacity: 0; transform: translateY(30px) } }
+@media (min-width: 761px) { [data-aviso-wa] { align-items: center } }
+@media (prefers-reduced-motion: reduce) { [data-aviso-wa] > * { animation: none !important } }
+</style>
+<script data-km-aviso-wa="">
+// Antes de ir a WhatsApp: ¿ya eligió algo? (29-oct-2026; ver aviso_wa_29oct.py)
+(function () {
+  var CART_KEY = "km-cotizacion", caja = null, destino = "";
+  function cotizacion() { try { var c = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); return Array.isArray(c) ? c : []; } catch (e) { return []; } }
+  function cerrar() { if (caja) caja.hidden = true; document.body.style.overflow = ""; }
+  function alCatalogo() {
+    cerrar();
+    // el mismo camino que «Ver catálogo» de arriba (va a las categorías); si no está, se baja a ellas
+    var b = document.querySelector('a[href="/catalogo/#tienda"][data-dc-tpl], header a[href="/catalogo/#tienda"], a[href="/catalogo/#tienda"]');
+    if (b) b.click(); else { var pu = document.getElementById("puertas"); if (pu) pu.scrollIntoView({ behavior: "smooth" }); }
+  }
+  function armar() {
+    caja = document.createElement("div");
+    caja.setAttribute("data-aviso-wa", "");
+    caja.setAttribute("role", "dialog"); caja.setAttribute("aria-modal", "true"); caja.setAttribute("aria-labelledby", "aviso-wa-t");
+    caja.innerHTML = '<div data-aviso-fondo=""></div><div data-aviso-caja="">'
+      + '<button type="button" data-aviso-cerrar="" aria-label="Cerrar">✕</button>'
+      + '<h3 id="aviso-wa-t">¿Ya elegiste tu mueble?</h3>'
+      + '<p>Elige en el catálogo lo que te gusta y nos llega todo en un solo mensaje, así te respondemos más rápido y con el precio.</p>'
+      + '<button type="button" data-aviso-cat="">Ver el catálogo <span aria-hidden="true">→</span></button>'
+      + '<a data-aviso-wa-ir="" href="/catalogo/#" target="_blank" rel="noopener"><span></span>Escribir sin elegir</a></div>';
+    document.body.appendChild(caja);
+    caja.querySelector("[data-aviso-fondo]").addEventListener("click", cerrar);
+    caja.querySelector("[data-aviso-cerrar]").addEventListener("click", cerrar);
+    caja.querySelector("[data-aviso-cat]").addEventListener("click", alCatalogo);
+    caja.querySelector("[data-aviso-wa-ir]").addEventListener("click", function () { setTimeout(cerrar, 50); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && caja && !caja.hidden) cerrar(); });
+  }
+  function avisar(href) {
+    if (!caja) armar();
+    destino = href;
+    caja.querySelector("[data-aviso-wa-ir]").setAttribute("href", destino);
+    caja.hidden = false; document.body.style.overflow = "hidden";
+    try { caja.querySelector("[data-aviso-cat]").focus({ preventScroll: true }); } catch (e) {}
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href*="wa.me/"], a[href*="api.whatsapp.com"]') : null;
+    if (!a || a.hasAttribute("data-aviso-wa-ir")) return;
+    // los que ya mandan muebles no se tocan: los de «Tu cotización» y el «Cotizar … por WhatsApp» de la ficha
+    if (a.closest("[data-cpanel]") || /Cotizar (solo este|todo)/.test(a.textContent || "")) return;
+    ev.preventDefault(); ev.stopPropagation();
+    if (cotizacion().length) {
+      // ya eligió: se abre «Tu cotización», que manda todo junto
+      var bolsa = document.querySelector("[data-cot-flota]") || document.querySelector('button[aria-label*="otizaci"]');
+      if (bolsa) { bolsa.click(); return; }
+    }
+    avisar(a.href);
+  }, true);
+})();
+</script>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
@@ -1766,9 +1893,9 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <span style="display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em"><span data-reveal="line" data-delay="90" style="display:block">que lo sueñes.</span></span>
       </h2>
     </div>
-    <div style="display:flex;flex-direction:row-reverse;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:clamp(32px,5vw,96px)">
-      <figure data-flip="" data-reveal="up" style="flex:1 1 300px;max-width:{{ gx.figW }}">
-        <div style="position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:rgba(0,0,0,.08);box-shadow:0 40px 100px -50px color-mix(in srgb,var(--km-tinta) 60%,transparent)">
+    <div data-gusto-fila="" style="display:flex;flex-direction:row-reverse;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:clamp(32px,5vw,96px)">
+      <figure data-flip="" data-reveal="up" data-gusto-fig="" style="flex:1 1 300px;max-width:{{ gx.figW }}">
+        <div data-gusto-foto="" style="position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:rgba(0,0,0,.08);box-shadow:0 40px 100px -50px color-mix(in srgb,var(--km-tinta) 60%,transparent)">
           <sc-for list="{{ gustos }}" as="g" hint-placeholder-count="1">
             <img data-on="{{ g.on }}" src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy" decoding="async" width="600" height="800" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ g.op }};transition:opacity .8s ease">
           </sc-for>
@@ -1779,7 +1906,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         </figcaption>
       </figure>
       <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:clamp(26px,4vh,40px)">
-        <div role="radiogroup" aria-label="Elige un color" style="display:flex;flex-direction:column">
+        <div role="radiogroup" aria-label="Elige un color" data-gusto-lista="" style="display:flex;flex-direction:column">
           <sc-for list="{{ gustos }}" as="g" hint-placeholder-count="5">
             <button type="button" role="radio" aria-checked="{{ g.on }}" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:.3em;padding:.04em 0;font-family:'Kalnia','Bodoni 72',Didot,serif;font-size:clamp(26px,min(6vw,6.2svh),88px);line-height:1.04;white-space:nowrap;letter-spacing:-.03em;font-weight:{{ g.fw }};opacity:{{ g.op2 }};transition:font-weight .6s cubic-bezier(.16,1,.3,1),opacity .6s ease"><span style="flex:none;width:.28em;height:.28em;border-radius:50%;background:{{ g.sw }};box-shadow:{{ g.ring }};transition:box-shadow .6s ease"></span>{{ g.label }}</button>
           </sc-for>
@@ -1990,7 +2117,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 </li>
 </ol>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
-      <a href="{{ waPedido }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:var(--km-tinta);color:var(--km-marfil);font-size:16px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#2FBF71;box-shadow:0 0 0 3px rgba(47,191,113,.25)"></span>Empezar mi pedido</a>
+      <a href="/catalogo/#puertas" onClick="{{ goTienda }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;background:var(--km-tinta);color:var(--km-marfil);font-size:16px;font-weight:700">Empezar mi pedido <span aria-hidden="true">→</span></a>
       <span style="font-size:15px;color:color-mix(in srgb,var(--km-tinta) 68%,transparent)">Atendemos todos los días, de 8 am a 9 pm.</span>
     </div>
   </div>
@@ -3865,7 +3992,7 @@ class Component extends DCLogic {
       gustos,
       gx: {
         tone: gNight ? "night" : "day", bg: G.bg, desk: !s.mobile,
-        figW: s.mobile ? "min(100%,calc(26svh * .8))" : "min(100%,420px,calc((100svh - 230px) * .8))", fg: gNight ? "#F2ECE4" : "var(--km-tinta)",
+        figW: "none" /* el tamaño lo da gusto_29oct.py (29-oct-2026) */, fg: gNight ? "#F2ECE4" : "var(--km-tinta)",
         muted: gNight ? "rgba(242,236,228,.76)" : "color-mix(in srgb,var(--km-tinta) 72%,transparent)", eyebrow: gNight ? "#C9B8EE" : "var(--km-violeta)",
         ctaBg: gNight ? "#F2ECE4" : "var(--km-tinta)", ctaFg: gNight ? "#17141A" : "var(--km-dia)",
         code: "Ref. " + gp.code, name: gp.name, open: (e) => this.openViewer(iOf(G.code), e),
