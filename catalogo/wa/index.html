@@ -499,6 +499,14 @@ document.documentElement.setAttribute("data-precios", "a");
     .observe(document.documentElement, { childList: true, subtree: true, characterData: true });
 })();
 </script>
+<style data-km-logo-movil="">
+/* A: en el teléfono, el logo oficial completo (el horizontal) en vez del KM solo (29-oct-2026; ver logo_movil_29oct.py) */
+@media (max-width:599px){
+  a[aria-label="KM, Karla Marquez Vanity Home"] > span:nth-child(1){max-width:none!important;height:32px!important}
+  a[aria-label="KM, Karla Marquez Vanity Home"] > span:nth-child(2){max-width:0!important}
+}
+@media (max-width:374px){ a[aria-label="KM, Karla Marquez Vanity Home"] > span:nth-child(1){height:28px!important} }
+</style>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
