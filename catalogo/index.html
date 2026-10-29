@@ -2721,7 +2721,10 @@ PIEZAS.forEach((p) => { p.puerta = GRUPO_DE[p.code] || p.k; });
 // Un mueble con una letra sin categoría va al final
 const PUERTA_ORDEN = PUERTAS_KM.map((d) => d[0]).join("");
 const kmLugarCat = (p) => { const i = PUERTA_ORDEN.indexOf(p.puerta); return i < 0 ? 99 : i; };
-const kmTodoPuertas = (a, b) => (kmLugarCat(PIEZAS[a]) - kmLugarCat(PIEZAS[b])) || kmTodo(a, b);
+// dentro de cada categoría, el orden de lo más vendido del catálogo de Karla (lugar_km: su número KM-P)
+const KM_LUGAR = {"T19": 101, "T18": 102, "T05": 103, "C03": 104, "T14": 105, "T07": 106, "T09": 107, "T12": 108, "C01": 109, "T21": 110, "T20": 111, "T22": 112, "T02": 113, "E02": 114, "A02": 115, "A01": 116, "A04": 118, "A06": 119, "E01": 120, "M02": 121, "T29": 122, "T24": 123, "T31": 124, "T17": 125, "T25": 126, "T28": 127, "T08": 128, "T11": 129, "C05": 130, "C09": 131, "A10": 132, "A07": 133, "D01": 134, "B01": 135, "B03": 136, "B07": 137, "B12": 138, "B04": 139, "B09": 140, "B08": 141, "B11": 142, "B02": 143, "B05": 144, "B10": 145, "B06": 146, "A09": 147};
+const kmVende = (a, b) => ((KM_LUGAR[PIEZAS[a].code] || 900) - (KM_LUGAR[PIEZAS[b].code] || 900)) || (a - b);
+const kmTodoPuertas = (a, b) => (kmLugarCat(PIEZAS[a]) - kmLugarCat(PIEZAS[b])) || kmVende(a, b);
 // una categoría solo sale si tiene algún modelo a la vista (si Karla esconde el único gavetero, «Gaveteros» no sale)
 const kmConModelos = (d) => PIEZAS.some((p) => p.puerta === d[0] && p.enGrilla);
 const kmPuertaNombre = (p) => { const d = PUERTAS_KM.find((x) => x[0] === p.puerta); return d ? d[1] : p.cat; };
@@ -3210,7 +3213,7 @@ class Component extends DCLogic {
   filtered() {
     const s = this.state, q = norm(s.q.trim());
     const all = PIEZAS.map((_, i) => i).filter((i) => PIEZAS[i].enGrilla);
-    let L = s.cat === "all" ? all.slice().sort(kmTodoPuertas) : all.filter((i) => PIEZAS[i].puerta === s.cat); // pestañas = puertas (26-oct-2026)
+    let L = s.cat === "all" ? all.slice().sort(kmTodoPuertas) : all.filter((i) => PIEZAS[i].puerta === s.cat).sort(kmVende); // pestañas = puertas (26-oct-2026), en el orden de lo más vendido (28-oct-2026)
     if (q) { const w = q.split(/\s+/); L = L.filter((i) => w.every((x) => PIEZAS[i].s.indexOf(x) >= 0)); }
     return L;
   }
