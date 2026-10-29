@@ -245,7 +245,7 @@ html[data-cat-abierta] #tienda { padding-top: 68px }
   [data-puerta-orn] { width: min(100%, 190px) }
 }
 @media (min-width: 760px) {
-  [data-mv-grid] { grid-template-columns: repeat(4,minmax(0,1fr)) }
+  [data-mv-grid] { grid-template-columns: repeat(3,minmax(0,1fr)) }  /* 6 más vendidos: 2 filas de 3 */
   [data-puertas-chicas] { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px }
   [data-mv-card] { padding: 10px }
   /* con 4 por fila el cuadrito mide 163 a 195 px en la tableta: el nombre crece con la pantalla (24 px desde 1090 px).
@@ -2648,7 +2648,7 @@ const kmTodo = (a, b) => (KM_ORDEN.indexOf(PIEZAS[a].k) - KM_ORDEN.indexOf(PIEZA
 const VERS = ["Sencillas", "Telescópicas"];
 // ===== Catálogo simple: «Los más vendidos» y puertas por tipo de mueble (26-oct-2026, ver catalogo_simple.py) =====
 // Los más vendidos: pedidos reales del taller desde marzo de 2026. Karla los cambia en catalogo_simple.py (MAS_VENDIDOS).
-const MAS_VENDIDOS = ["T19", "T18", "T05", "A02"];
+const MAS_VENDIDOS = ["T19", "T18", "T27", "T05", "A01", "A09"];
 // los que se muestran: un código escondido pasa al modelo que se muestra en su lugar, y ninguno se repite
 const MV = [];
 MAS_VENDIDOS.forEach((c) => { const i = aVisible(c); if (i >= 0 && MV.indexOf(i) < 0) MV.push(i); });
