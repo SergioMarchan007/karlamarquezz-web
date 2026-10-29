@@ -818,193 +818,6 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
 })();
 </script>
 <style data-km-portada="">
-/* ===== Portada del catálogo · Opción 1 · «Vitrina de noche» (28-oct-2026) =====
-   Una vitrina oscura con una peinadora real encendida. Teléfono primero: la foto llena la vitrina y las letras van
-   abajo, sobre un velo oscuro. Desde 760 px de ancho: letras a la izquierda y foto a la derecha.
-   Los colores son los de la web (el armado los pasa a las variables de las marcas Hoy, C y E). En la marca E la
-   vitrina pasa a nude claro y las letras a café: el velo usa el mismo color del fondo, así se lee en las tres.
-   Solo se animan transform y opacity, una sola vez al cargar. */
-
-/* --- el bloque completo: deja un aire debajo antes de «Los más vendidos» --- */
-[data-portada="1"] { position: relative; margin: 0 0 clamp(8px, 2vw, 20px) }
-
-/* --- la vitrina: la caja oscura con esquinas redondas --- */
-[data-portada="1"] .pp1-vitrina {
-  position: relative; isolation: isolate; overflow: hidden;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  border-radius: 26px; container-type: inline-size;
-  background: var(--km-noche); color: var(--km-marfil);
-  box-shadow: 0 1px 0 color-mix(in srgb,var(--km-marfil) 8%,transparent) inset, 0 28px 60px -34px color-mix(in srgb,var(--km-tinta) 55%,transparent);
-  animation: pp1Entra .7s cubic-bezier(.2,.7,.2,1) .05s both;
-}
-/* el marco fino de vidrio por dentro, como el borde de una vitrina */
-[data-portada="1"] .pp1-vitrina::after {
-  content: ""; position: absolute; inset: 8px; z-index: 6; pointer-events: none;
-  border-radius: 19px; border: 1px solid color-mix(in srgb,var(--km-marfil) 12%,transparent);
-}
-
-/* --- la foto: en el teléfono va arriba, a todo lo ancho, completa (4 de ancho por 5 de alto) --- */
-[data-portada="1"] .pp1-foto { --pp1-cx: 66%; --pp1-cy: 25%; position: absolute; top: 0; left: 0; right: 0; aspect-ratio: 4 / 5; z-index: 0; margin: 0; overflow: hidden }
-/* luz de noche: todo se oscurece alrededor del espejo, que queda como la única luz encendida */
-[data-portada="1"] .pp1-foto::after {
-  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(var(--pp1-rx, 54%) var(--pp1-ry, 34%) at var(--pp1-cx) var(--pp1-cy), color-mix(in srgb,var(--km-noche) 0%,transparent) 0%, color-mix(in srgb,var(--km-noche) 0%,transparent) 58%, color-mix(in srgb,var(--km-noche) 55%,transparent) 86%, color-mix(in srgb,var(--km-noche) 82%,transparent) 100%);
-}
-[data-portada="1"] .pp1-foto img {
-  width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 0%;
-  filter: brightness(.94) contrast(1.1) saturate(1.04);
-  transform-origin: 66% 24%;
-  animation: pp1Acerca 2.6s cubic-bezier(.2,.6,.2,1) both;
-}
-/* capa oscura que se quita al cargar: el espejo «se enciende» (parpadea como los bombillitos de arriba) */
-[data-portada="1"] .pp1-apagado {
-  position: absolute; inset: 0; z-index: 3; background: var(--km-noche); opacity: 0;
-  animation: pp1Enciende 1.5s ease-out .75s both;
-}
-/* brillo suave alrededor del espejo (lila de la web y un poco de blanco cálido en el centro) */
-[data-portada="1"] .pp1-brillo {
-  position: absolute; z-index: 2; left: var(--pp1-cx); top: var(--pp1-cy); width: 86%; aspect-ratio: 1; margin: -43% 0 0 -43%; border-radius: 50%;
-  background: radial-gradient(closest-side, color-mix(in srgb, #FFFFFF 34%, transparent), color-mix(in srgb,var(--km-halo) 22%,transparent) 46%, transparent 100%);
-  mix-blend-mode: screen; pointer-events: none;
-  animation: pp1Brilla 1.6s ease-out 1.25s both;
-}
-
-/* --- el velo: oscurece abajo (donde van las letras) y un poco los bordes, como luz de noche --- */
-[data-portada="1"] .pp1-velo {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(180deg, color-mix(in srgb,var(--km-noche) 20%,transparent) 0%, color-mix(in srgb,var(--km-noche) 0%,transparent) 12%, color-mix(in srgb,var(--km-noche) 0%,transparent) 25%, color-mix(in srgb,var(--km-noche) 60%,transparent) 34%, color-mix(in srgb,var(--km-noche) 90%,transparent) 43%, var(--km-noche) 56%);
-}
-
-/* --- el reflejo de vidrio: una franja clara que cruza una sola vez --- */
-[data-portada="1"] .pp1-reflejo {
-  position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; z-index: 2; pointer-events: none;
-  background: linear-gradient(100deg, transparent 0%, color-mix(in srgb, #FFFFFF 9%, transparent) 45%, color-mix(in srgb, #FFFFFF 14%, transparent) 50%, transparent 100%);
-  transform: translateX(-120%) skewX(-14deg); opacity: 0;
-  animation: pp1Reflejo 1.8s cubic-bezier(.4,0,.2,1) 1.5s both;
-}
-
-/* --- la etiqueta de la vitrina, arriba a la izquierda --- */
-[data-portada="1"] .pp1-etiqueta {
-  position: absolute; top: 18px; left: 18px; z-index: 5;
-  display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border-radius: 999px;
-  font-family: 'DM Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--km-marfil); background: color-mix(in srgb,var(--km-noche) 55%,transparent); border: 1px solid color-mix(in srgb,var(--km-marfil) 16%,transparent);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  animation: pp1Sube .6s ease-out 1.4s both;
-}
-[data-portada="1"] .pp1-etiqueta b { display: none; font-weight: inherit }
-[data-portada="1"] .pp1-etiqueta span {
-  width: 7px; height: 7px; border-radius: 50%; background: #FFFFFF;
-  box-shadow: 0 0 0 2px color-mix(in srgb,var(--km-halo) 35%,transparent), 0 0 10px 2px color-mix(in srgb,var(--km-halo) 70%,transparent);
-}
-
-/* --- las letras --- */
-[data-portada="1"] .pp1-texto {
-  position: relative; z-index: 4;
-  display: flex; flex-direction: column; align-items: flex-start;
-  padding: 52vw 22px 22px; padding-top: 55cqw;
-}
-/* la cejita «KM · Karla Marquez Vanity Home» con su punto lila */
-[data-portada="1"] .pp1-ceja {
-  display: flex; align-items: center; gap: 10px; margin: 0 0 10px;
-  font-family: 'DM Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--km-lila-t);
-  animation: pp1Sube .6s ease-out .35s both;
-}
-[data-portada="1"] .pp1-ceja span {
-  flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--km-lila-f);
-  box-shadow: 0 0 0 3px color-mix(in srgb,var(--km-halo) 25%,transparent), 0 0 12px 2px color-mix(in srgb,var(--km-halo) 55%,transparent);
-}
-/* el título grande en Kalnia, en dos líneas */
-[data-portada="1"] .pp1-titulo {
-  margin: 0; max-width: 9ch;
-  font-family: 'Kalnia', 'Bodoni 72', Didot, serif; font-weight: 300;
-  font-size: clamp(42px, 12.2vw, 96px); line-height: .92; letter-spacing: -.035em;
-  color: var(--km-marfil); text-shadow: 0 2px 24px color-mix(in srgb,var(--km-noche) 60%,transparent);
-  animation: pp1Sube .8s cubic-bezier(.2,.7,.2,1) .45s both;
-}
-/* el texto corto debajo del título */
-[data-portada="1"] .pp1-bajada {
-  margin: 12px 0 0; max-width: 34ch;
-  font-size: 16px; line-height: 1.45; text-wrap: pretty;
-  color: color-mix(in srgb,var(--km-marfil) 84%,transparent);
-  animation: pp1Sube .7s ease-out .6s both;
-}
-
-/* --- los tres datos en cajitas --- */
-[data-portada="1"] .pp1-datos {
-  list-style: none; margin: 14px 0 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: 8px;
-}
-[data-portada="1"] .pp1-datos li {
-  display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 5px 12px 5px 10px;
-  border-radius: 999px; font-size: 14px; font-weight: 600; line-height: 1.2; white-space: nowrap;
-  color: var(--km-marfil); background: color-mix(in srgb,var(--km-marfil) 7%,transparent); border: 1px solid color-mix(in srgb,var(--km-marfil) 20%,transparent);
-  animation: pp1Sube .6s ease-out both;
-}
-[data-portada="1"] .pp1-datos li:nth-child(1) { animation-delay: .72s }
-[data-portada="1"] .pp1-datos li:nth-child(2) { animation-delay: .82s }
-[data-portada="1"] .pp1-datos li:nth-child(3) { animation-delay: .92s }
-[data-portada="1"] .pp1-datos svg { flex: none; color: var(--km-lila-t) }
-
-/* --- el botón «Ver los modelos ↓» --- */
-[data-portada="1"] .pp1-ir {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  align-self: stretch; min-height: 52px; margin: 18px 0 0; padding: 0 22px; border-radius: 999px;
-  font-size: 17px; font-weight: 700; letter-spacing: .01em; text-decoration: none;
-  color: var(--km-noche-t); background: var(--km-lila-f);
-  box-shadow: 0 10px 30px -10px color-mix(in srgb,var(--km-halo) 70%,transparent);
-  animation: pp1Sube .6s ease-out .95s both;
-}
-[data-portada="1"] .pp1-ir svg { flex: none; animation: pp1Baja .9s ease-in-out 2.1s 2 both }
-[data-portada="1"] .pp1-ir:focus-visible { outline: 3px solid var(--km-marfil); outline-offset: 3px }
-@media (hover: hover) {
-  [data-portada="1"] .pp1-ir { transition: transform .2s ease }
-  [data-portada="1"] .pp1-ir:hover { transform: translateY(-2px) }
-}
-
-/* --- teléfonos chicos (360 px): un poco más compacto para que todo quepa --- */
-@media (max-width: 374px) {
-  [data-portada="1"] .pp1-vitrina { border-radius: 22px }
-  [data-portada="1"] .pp1-texto { padding-left: 18px; padding-right: 18px; padding-bottom: 18px }
-  [data-portada="1"] .pp1-etiqueta { top: 16px; left: 16px }
-  [data-portada="1"] .pp1-ceja { letter-spacing: .06em; gap: 8px }
-  [data-portada="1"] .pp1-datos li { font-size: 13px; padding: 6px 10px 6px 9px }
-}
-
-/* --- tableta y computadora: letras a la izquierda, foto a la derecha --- */
-@media (min-width: 760px) {
-  [data-portada="1"] .pp1-vitrina { min-height: clamp(440px, 40vw, 540px); border-radius: 30px; justify-content: center }
-  [data-portada="1"] .pp1-vitrina::after { inset: 10px; border-radius: 22px }
-  /* la foto ocupa la mitad derecha y se desvanece hacia la izquierda */
-  [data-portada="1"] .pp1-foto { left: auto; right: 0; bottom: 0; width: 56%; aspect-ratio: auto; --pp1-cx: 64%; --pp1-cy: 36%; --pp1-rx: 62%; --pp1-ry: 52%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #FFFFFF 42%); mask-image: linear-gradient(90deg, transparent 0%, #FFFFFF 42%) }
-  [data-portada="1"] .pp1-foto img { object-position: 60% 6% }
-  [data-portada="1"] .pp1-velo { background: linear-gradient(90deg, var(--km-noche) 0%, var(--km-noche) 40%, color-mix(in srgb,var(--km-noche) 55%,transparent) 54%, color-mix(in srgb,var(--km-noche) 0%,transparent) 68%), linear-gradient(0deg, color-mix(in srgb,var(--km-noche) 50%,transparent) 0%, color-mix(in srgb,var(--km-noche) 0%,transparent) 34%) }
-  [data-portada="1"] .pp1-etiqueta { top: auto; left: auto; right: 28px; bottom: 26px }
-  [data-portada="1"] .pp1-etiqueta b { display: inline }
-  [data-portada="1"] .pp1-texto { max-width: 58%; padding: 48px clamp(32px, 5vw, 72px) }
-  [data-portada="1"] .pp1-ceja { margin-bottom: 18px }
-  [data-portada="1"] .pp1-bajada { font-size: 18px; margin-top: 18px }
-  [data-portada="1"] .pp1-datos { margin-top: 22px; gap: 10px }
-  [data-portada="1"] .pp1-datos li { font-size: 15px; min-height: 38px; padding: 7px 14px 7px 12px }
-  [data-portada="1"] .pp1-datos { flex-wrap: nowrap }
-  [data-portada="1"] .pp1-ir { align-self: flex-start; margin-top: 28px; min-height: 56px; padding: 0 24px 0 28px; font-size: 18px }
-}
-
-/* --- las animaciones (una sola vez, nada en bucle) --- */
-@keyframes pp1Entra { from { opacity: 0; transform: translateY(16px) scale(.985) } to { opacity: 1; transform: none } }
-@keyframes pp1Acerca { from { transform: scale(1.09) } to { transform: scale(1) } }
-@keyframes pp1Enciende { 0% { opacity: .82 } 22% { opacity: .2 } 36% { opacity: .62 } 100% { opacity: 0 } }
-@keyframes pp1Brilla { from { opacity: 0; transform: scale(.8) } to { opacity: 1; transform: none } }
-@keyframes pp1Reflejo { 0% { opacity: 0; transform: translateX(-120%) skewX(-14deg) } 15% { opacity: 1 } 85% { opacity: 1 } 100% { opacity: 0; transform: translateX(320%) skewX(-14deg) } }
-@keyframes pp1Sube { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
-@keyframes pp1Baja { 0%, 100% { transform: none } 50% { transform: translateY(4px) } }
-
-/* --- si la persona pidió menos movimiento: nada se mueve, todo aparece ya listo --- */
-@media (prefers-reduced-motion: reduce) {
-  [data-portada="1"] *, [data-portada="1"] *::before, [data-portada="1"] *::after { animation: none !important; transition: none !important }
-}
-
 /* ===== PORTADA DEL CATÁLOGO · OPCIÓN 2 «ESPEJOS» (28-oct-2026) =====
    Un banner claro, del mismo lila con marco fino de las categorías de abajo («¿Qué mueble buscas?»), que baja a nude.
    Adentro, tres fotos reales en marcos con arco como espejos (clóset, peinadora y vanity) en abanico, con los
@@ -1149,30 +962,7 @@ html[data-pasos="c"] [data-pasos-ops] ~ [data-pasos-lista]:not([data-pasos-lista
   [data-portada="2"] [data-pp2-espejo="centro"] [data-pp2-vidrio]::after { transform: none }
 }
 
-
-/* --- botones 1 · 2 para escoger la portada del catálogo (solo mientras Sergio escoge; ver portada_catalogo.py) --- */
-[data-portada-ops] { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0 }
-[data-portada-op] { display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 999px; background: #FFFFFF;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--km-tinta) 18%,transparent); font-family: 'DM Mono',ui-monospace,monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--km-tinta) }
-html:not([data-portada-ver]) [data-portada-op="1"], html[data-portada-ver="1"] [data-portada-op="1"], html[data-portada-ver="2"] [data-portada-op="2"] { background: var(--km-tinta); color: var(--km-dia) }
-html:not([data-portada-ver]) [data-portada]:not([data-portada="1"]),
-html[data-portada-ver="1"] [data-portada]:not([data-portada="1"]),
-html[data-portada-ver="2"] [data-portada]:not([data-portada="2"]) { display: none !important }
-
 </style>
-<script data-km-portada="">
-// botones 1 · 2 de la portada del catálogo (solo mientras Sergio escoge; ver portada_catalogo.py)
-(function () {
-  function poner(op) { if (op === "1" || op === "2") { document.documentElement.setAttribute("data-portada-ver", op); try { localStorage.setItem("km-portada", op); } catch (e) {} } }
-  var ini = null;
-  try { ini = new URLSearchParams(location.search).get("portada") || localStorage.getItem("km-portada"); } catch (e) {}
-  poner(ini);
-  document.addEventListener("click", function (ev) {
-    var b = ev.target && ev.target.closest ? ev.target.closest("[data-portada-op]") : null;
-    if (b) poner(b.getAttribute("data-portada-op"));
-  });
-})();
-</script>
 <style data-km-marcas="">
 /* ===== Marcas de prueba C y E (Karla, 24-oct-2026; ver marcas_km.py) ===== */
 /* Sin data-marca la web se ve como hoy. Cada variable --km-* reemplaza un color que antes iba escrito a mano. */
@@ -1400,44 +1190,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
 <section id="entrada" data-tone="day" data-screen-label="Entrada del catálogo" aria-labelledby="entrada-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(74px,9vh,92px) clamp(14px,4vw,56px) 0">
     <div data-cs-guirnalda="" aria-hidden="true"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 2 Q50 38 100 2"></path></svg><div data-cs-focos=""><span data-cs-foco="" style="left:3.00%;top:10.2%"><i style="animation-delay:250ms"></i></span><span data-cs-foco="" style="left:8.88%;top:19.6%"><i style="animation-delay:310ms"></i></span><span data-cs-foco="" style="left:14.75%;top:27.6%"><i style="animation-delay:370ms"></i></span><span data-cs-foco="" style="left:20.62%;top:34.5%"><i style="animation-delay:430ms"></i></span><span data-cs-foco="" style="left:26.50%;top:40.1%"><i style="animation-delay:490ms"></i></span><span data-cs-foco="" style="left:32.38%;top:44.4%"><i style="animation-delay:550ms"></i></span><span data-cs-foco="" style="left:38.25%;top:47.5%"><i style="animation-delay:610ms"></i></span><span data-cs-foco="" style="left:44.12%;top:49.4%"><i style="animation-delay:670ms"></i></span><span data-cs-foco="" style="left:50.00%;top:50.0%"><i style="animation-delay:730ms"></i></span><span data-cs-foco="" style="left:55.88%;top:49.4%"><i style="animation-delay:790ms"></i></span><span data-cs-foco="" style="left:61.75%;top:47.5%"><i style="animation-delay:850ms"></i></span><span data-cs-foco="" style="left:67.62%;top:44.4%"><i style="animation-delay:910ms"></i></span><span data-cs-foco="" style="left:73.50%;top:40.1%"><i style="animation-delay:970ms"></i></span><span data-cs-foco="" style="left:79.38%;top:34.5%"><i style="animation-delay:1030ms"></i></span><span data-cs-foco="" style="left:85.25%;top:27.6%"><i style="animation-delay:1090ms"></i></span><span data-cs-foco="" style="left:91.12%;top:19.6%"><i style="animation-delay:1150ms"></i></span><span data-cs-foco="" style="left:97.00%;top:10.2%"><i style="animation-delay:1210ms"></i></span></div></div>
-<!-- ===== Portada del catálogo · Opción 1 · «Vitrina de noche» (pedido de Sergio, 28-oct-2026) =====
-  Reemplaza el título y el texto de la entrada de /catalogo/ (la guirnalda de bombillitos queda arriba, igual).
-  Es una vitrina oscura: una peinadora real con su espejo encendido, el título grande encima, tres datos en
-  cajitas y un botón para bajar a «Los más vendidos». Al cargar, el espejo «se enciende» una sola vez.
-  Los estilos están en opcion-1.css (todo dentro del bloque de la opción 1). -->
-<div data-portada="1">
-  <div class="pp1-vitrina">
-    <!-- la foto protagonista: va arriba de todo, por eso carga primero (fetchpriority="high") -->
-    <figure class="pp1-foto" aria-hidden="true">
-      <img src="fotos-km/T28-F096.webp" srcset="fotos-km/T28-F096.webp 800w, fotos-km/T28-F096-g.webp 1200w" sizes="(min-width: 760px) 50vw, 100vw" alt="" width="800" height="1000" decoding="async" fetchpriority="high" draggable="false">
-      <!-- capa oscura que se va quitando: así parece que el espejo se enciende -->
-      <span class="pp1-apagado"></span>
-      <!-- el brillo suave alrededor del espejo -->
-      <span class="pp1-brillo"></span>
-    </figure>
-    <!-- el velo oscuro que deja leer las letras encima de la foto -->
-    <span class="pp1-velo" aria-hidden="true"></span>
-    <!-- un reflejo de vidrio que pasa una sola vez, como en una vitrina -->
-    <span class="pp1-reflejo" aria-hidden="true"></span>
-    <!-- la etiqueta de la vitrina (solo adorno) -->
-    <p class="pp1-etiqueta" aria-hidden="true"><span></span>En vitrina<b> · espejo con luz</b></p>
-
-    <!-- los textos -->
-    <div class="pp1-texto">
-      <p class="pp1-ceja"><span aria-hidden="true"></span>KM · Karla Marquez Vanity Home</p>
-      <h1 id="entrada-t" class="pp1-titulo">Nuestro catálogo.</h1>
-      <p class="pp1-bajada">Peinadoras, clósets, vanitys y camas de nuestro taller en Barquisimeto.</p>
-      <!-- los tres datos en cajitas -->
-      <ul class="pp1-datos">
-        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>{{ tiendaN }} modelos</li>
-        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5l6 6-2.5 2.5-6-6z"></path><path d="M12.2 8.8L4 17l3 3 8.2-8.2"></path></svg>Hechos a mano</li>
-        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>Cotiza por WhatsApp</li>
-      </ul>
-      <!-- el botón para bajar a los modelos (un enlace normal, sin programación) -->
-      <a class="pp1-ir" href="#mas-vendidos">Ver los modelos<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
-    </div>
-  </div>
-</div>
 <!-- PORTADA DEL CATÁLOGO · OPCIÓN 2 «ESPEJOS» (28-oct-2026)
          Un banner claro (lila suave que baja a nude) con tres fotos reales dentro de marcos en arco, como espejos:
          el clóset a la izquierda, la peinadora en el centro (con sus bombillitos encendidos alrededor del arco) y el
@@ -1505,7 +1257,7 @@ h1,h2,h3,p,ol,figure,address{margin:0}
       <!-- el texto: cejita, título, una frase, los chips y el botón para bajar -->
       <div data-pp2-texto>
         <p data-pp2-ceja><span aria-hidden="true"></span>KM · Karla Marquez Vanity Home</p>
-        <h2 data-entrada-t2="" data-pp2-titulo>Nuestro catálogo.</h2>
+        <h1 id="entrada-t" data-pp2-titulo>Nuestro catálogo.</h1>
         <p data-pp2-frase>Peinadoras, clósets y vanitys de nuestro taller en Barquisimeto.</p>
         <ul data-pp2-chips>
           <li>{{ tiendaN }} modelos</li>
@@ -1515,7 +1267,6 @@ h1,h2,h3,p,ol,figure,address{margin:0}
         <a href="#mas-vendidos" data-pp2-boton>Ver los modelos <span aria-hidden="true">↓</span></a>
       </div>
     </div>
-    <div data-portada-ops="" role="group" aria-label="Opciones de portada"><button type="button" data-portada-op="1">1 · Vitrina de noche</button><button type="button" data-portada-op="2">2 · Espejos</button></div>
   </div>
 </section>
 </sc-if>
@@ -2870,8 +2621,8 @@ PIEZAS.forEach((p) => { const x = PRECIOS_KM[p.code] || {};
 const FAMILIAS_KM = [["T19", "T29"], ["T05", "T06", "T15", "T10"], ["C03", "C04"], ["T07", "T17"], ["T12", "T24", "T31"], ["C01", "C02", "C05", "C08", "C09"], ["T20", "T16"], ["A09", "A12", "A10"], ["A04", "A03"], ["A06", "A07"], ["T11", "T08"], ["D01", "D02"], ["B01", "B12", "B03", "B07"], ["B04", "B09"], ["B08", "B11"], ["B05", "B10", "B02"]];
 const REEMPLAZO = {"A05": "A04", "A08": "A06", "A11": "A04", "A13": "A06", "C06": "C03", "C07": "C03", "C10": "C03", "E01": null, "M01": "M02", "T01": "T02", "T03": "T05", "T04": "T18", "T13": "T19", "T23": "T19", "T26": "T19", "T27": "T12", "T30": "T19"}; // discarded -> shown instead
 FAMILIAS_KM.forEach((F) => { F.forEach((c) => { const q = PIEZAS[iOf(c)]; if (q) { q.fam = F; q.lider = F[0]; } }); const L = PIEZAS[iOf(F[0])]; if (L) L.badge = F.length + " versiones"; });
-PIEZAS.forEach((p) => { p.enGrilla = !p.oculto && (!p.lider || p.lider === p.code); });
-const aVisible = (c, n) => { const i = iOf(c); if (i < 0 || n > 3) return -1; const q = PIEZAS[i]; return q.oculto ? aVisible(REEMPLAZO[c], (n || 0) + 1) : iOf(q.lider || c); };
+PIEZAS.forEach((p) => { p.enGrilla = !p.oculto; }); // cada versión con su tarjeta (catalogo_simple.py, 28-oct-2026)
+const aVisible = (c, n) => { const i = iOf(c); if (i < 0 || n > 3) return -1; const q = PIEZAS[i]; return q.oculto ? aVisible(REEMPLAZO[c], (n || 0) + 1) : i; };
 { const D = []; DEST.forEach((i) => { const j = aVisible(PIEZAS[i].code); if (j >= 0 && D.indexOf(j) < 0) D.push(j); }); DEST.length = 0; D.forEach((j) => DEST.push(j)); }
 HERO.forEach((i, k) => { if (PIEZAS[i].oculto) { const j = iOf(REEMPLAZO[PIEZAS[i].code]); if (j >= 0) HERO[k] = j; } });
 // the 21 catalog models and the beds show Codex's improved real photos; features and the lines under the price
@@ -3851,7 +3602,7 @@ class Component extends DCLogic {
     let v = {};
     if (s.viewer != null) {
       const p = PIEZAS[s.viewer];
-      const same = PIEZAS.map((_, i) => i).filter((i) => PIEZAS[i].puerta === p.puerta && PIEZAS[i].enGrilla), at = same.indexOf(p.lider ? iOf(p.lider) : s.viewer); // mismo tipo que las pestañas (26-oct-2026)
+      const same = PIEZAS.map((_, i) => i).filter((i) => PIEZAS[i].puerta === p.puerta && PIEZAS[i].enGrilla), at = same.indexOf(s.viewer); // mismo tipo que las pestañas (26-oct-2026); cada versión es su propio modelo (28-oct-2026)
       const rel = [];
       for (let j = 1; j < same.length && rel.length < 4; j++) rel.push(same[(at + j) % same.length]);
       DEST.forEach((i) => { if (rel.length < 4 && i !== s.viewer && rel.indexOf(i) < 0) rel.push(i); });
