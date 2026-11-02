@@ -560,6 +560,60 @@ function kmFichaKarla(p) {
     kmHasSpecs: KM_FICHA_OP === "a" && specs.length > 0, kmSpecs: specs, specs };
 }
 </script>
+<style data-km-precios-orden="">
+/* ===== precios ordenados como la tienda de referencia (2-nov-2026; ver precios_orden_2nov.py) ===== */
+/* Tamaños medidos en la foto de Aldita (2-nov-2026; Sergio: «guíate por los tamaños… no está siendo fiel»): nombre 16 px
+   normal, precio 19 px en negrita, 2.º precio 17 px en negrita (casi del mismo tamaño), tachado 14 px y textos chicos 13 px.
+   Sin contornos: en la referencia solo se resalta la forma de pago (y el «% OFF»), con un fondo suave y sin borde. */
+/* el nombre del mueble: normal, como la referencia (16 px en la computadora) */
+html[data-precios] [data-pname]{font-weight:400!important}
+@media (min-width:600px){html[data-precios] [data-pname]{font-size:16px!important}}
+/* sin la cajita lila, todo a la izquierda y el precio justo debajo del nombre, como la referencia (antes la caja se pegaba
+   abajo y en las tarjetas sin oferta quedaba un hueco); el «Agregar» sí se queda abajo, parejo en toda la fila */
+html[data-precios] [data-pprecio]{background:transparent!important;border-color:transparent!important;padding:8px 0 0!important;margin-top:0!important;
+  flex:1 0 auto!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:12px!important}
+html[data-precios] [data-pprecio] > div:first-child{flex:0 0 auto!important;justify-content:flex-start!important}
+html[data-precios] [data-pprecio] > [data-padd]{margin-top:auto!important;flex:0 0 auto!important}
+html[data-precios] [data-pprecio] [data-pcol],html[data-precios] [data-pprecio] [data-ncol="1"] > [data-pcol]{flex-direction:column!important;flex-wrap:nowrap!important;justify-content:flex-start!important;
+  align-items:flex-start!important;text-align:left!important;gap:7px!important;padding:0 6px 0 0!important}
+html[data-precios] [data-pprecio] [data-pcol] + [data-pcol]{padding-left:10px!important}
+html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(1){order:0}
+/* 1. el precio en divisas: lila, en negrita, 19 px */
+html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(2),html[data-precios] [data-pprecio] [data-ncol="1"] > [data-pcol] > span:nth-child(2){order:1;font-size:19px!important;line-height:1.2!important;font-weight:700!important}
+/* 2. el precio en bolívares: oscuro, en negrita, 17 px */
+html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3){order:3;font-size:17px!important;line-height:1.3!important;font-weight:700!important;color:var(--km-tinta)!important;
+  white-space:normal!important}
+/* 3. con oferta: «-20 % OFF» al lado del precio grande (fondo suave, sin borde, como el «-45% OFF» de la referencia);
+   el de bolívares tachado y gris, 14 px */
+html[data-precios] [data-pprecio] [data-pcol] > [data-desc]:not([data-desc=""])::after{content:attr(data-desc) " OFF"!important;display:inline-block!important;
+  margin:0 0 0 8px!important;vertical-align:2px!important;padding:3px 8px!important;box-shadow:none!important;
+  font-family:inherit!important;font-size:10.5px!important;font-weight:700!important;letter-spacing:.02em!important}
+html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol] > span:nth-child(3){font-size:14px!important;font-weight:400!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important;
+  text-decoration:line-through;text-decoration-thickness:1px}
+
+/* «Los más vendidos»: igual, a la izquierda, un precio debajo del otro y los mismos tamaños */
+html[data-precios] [data-mv-precio]{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:flex-start!important;text-align:left!important;gap:7px!important}
+html[data-precios] [data-mv-precio] small{order:0;font-size:10.5px!important;letter-spacing:.12em!important}
+html[data-precios] [data-mv-precio] b{order:1;font-size:19px!important;line-height:1.2!important;font-weight:700!important}
+html[data-precios] [data-mv-precio] > span{order:3;font-size:17px!important;line-height:1.3!important;font-weight:700!important;color:var(--km-tinta)!important}
+html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"]) > span{font-size:14px!important;font-weight:400!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important}
+
+/* A · igual a Aldita: un precio por tarjeta. En las de 2 versiones va la sencilla con «Desde» (la de correderas, en la ficha) */
+html[data-precios] [data-pprecio] [data-ncol="2"]{grid-template-columns:minmax(0,1fr)!important}
+html[data-precios] [data-pprecio] [data-ncol="2"] > [data-pcol]:nth-child(2){display:none!important}
+html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(1){display:none!important}
+html[data-precios] [data-pprecio] [data-ncol="2"] > [data-pcol] > span:nth-child(2)::before{content:"Desde ";font-size:12px;font-weight:600;letter-spacing:0;color:color-mix(in srgb,var(--km-tinta) 60%,transparent)}
+/* debajo del precio grande: cómo se paga en divisas */
+html[data-precios] [data-pprecio] [data-pcol]::after,html[data-precios] [data-mv-precio]::after{content:"Efectivo · Zelle · USDT";order:2;align-self:flex-start;max-width:100%;display:inline-block;padding:4px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;line-height:1.35;text-decoration:none;background:var(--km-lila-suave);color:var(--km-violeta);box-shadow:none}
+/* al lado del precio en bolívares: que es por transferencia, en texto normal (inline-block: la raya del tachado no le llega) */
+html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio] > span::after{content:"transferencia en Bs"!important;display:inline-block!important;margin-left:6px!important;padding:0!important;background:none!important;box-shadow:none!important;font-size:13px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:1.3!important;color:color-mix(in srgb,var(--km-tinta) 60%,transparent)!important;text-decoration:none!important}
+/* en el teléfono no cabe al lado del precio: va en su renglón, alineado a la izquierda (width 100 % y sin sangría) */
+@media (max-width:599px){html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio] > span::after{margin-left:0!important;width:100%!important;margin-top:1px!important}}
+/* con oferta: en un renglón, como el tachado de la referencia: «$275 (tachado) transferencia en Bs · sin descuento»
+   (12,5 px para que quepa al lado del precio en la computadora; en el teléfono baja al renglón de abajo) */
+html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"]) > span::after{
+  content:"transferencia en Bs · sin descuento"!important;font-size:12.5px!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important}
+</style>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
@@ -4186,7 +4240,7 @@ class Component extends DCLogic {
     const desde = !!min && ((p.corr && p.tele != null) || vs.some((q) => q.precio !== min.precio));
     const precio = min ? usd(min.precio) : "Cotízalo por WhatsApp";
     return { code: p.code, num: pad(k + 1), name: p.name, src: p.front, desde, usd: precio, psize: min ? "clamp(19px,1.6vw,23px)" : "15px",
-      bs: min ? "Bs " + usd(min.bcv != null ? min.bcv : bcvDe(min.precio)) : "",
+      bs: min ? usd(min.bcv != null ? min.bcv : bcvDe(min.precio)) : "",
       aria: p.name + (min ? (desde ? ", desde " : ", ") + precio : "") + ". Ver su ficha", open: (e) => this.openViewer(i, e),
       addLabel: n ? "En tu lista · " + n : "Agregar",
       addAria: n ? "En tu lista · " + n + ". Agregar 1 más de " + p.name : "Agregar " + p.name + " a tu cotización",
@@ -4436,7 +4490,7 @@ class Component extends DCLogic {
     const r = this.precioDe(p, {}), med = p.med.ancho && p.med.fondo ? p.med.ancho + " × " + p.med.fondo : p.med.ancho;
     return { hasFree: p.gratis.length > 0, free: p.gratis.length ? "Banquito incluido" : "",
       ter: [med].concat(p.feats.filter((f) => !/banquito|banco/i.test(f)).slice(0, 2)).filter(Boolean).join(" · "), plabel: "Precio de contado",
-      cols: p.precio == null ? [{ t: "Precio de contado", usd: "Cotízalo por WhatsApp", size: KMT.q, bs: "", bsize: KMT.b1, sep: "" }] : [{ t: p.corr && p.tele != null ? "Sencilla" : p.k === "B" ? kmCamaDe(p).replace(" (la de la foto)", "") : "Precio de contado", usd: usd(p.precio), size: p.corr && p.tele != null ? KMT.p2 : KMT.p1, bs: "Bs " + usd(p.bcv != null ? p.bcv : bcvDe(p.precio)), bsize: p.corr && p.tele != null ? KMT.b2 : KMT.b1, sep: "" }].concat(p.corr && p.tele != null ? [{ t: "Correderas", usd: usd(p.tele), size: KMT.p2, bs: "Bs " + usd(p.bcvTele != null ? p.bcvTele : bcvDe(p.tele)), bsize: KMT.b2, sep: KMT.sep }] : []), ncol: p.precio != null && p.corr && p.tele != null ? 2 : 1,
+      cols: p.precio == null ? [{ t: "Precio de contado", usd: "Cotízalo por WhatsApp", size: KMT.q, bs: "", bsize: KMT.b1, sep: "" }] : [{ t: p.corr && p.tele != null ? "Sencilla" : p.k === "B" ? kmCamaDe(p).replace(" (la de la foto)", "") : "Precio de contado", usd: usd(p.precio), size: p.corr && p.tele != null ? KMT.p2 : KMT.p1, bs: usd(p.bcv != null ? p.bcv : bcvDe(p.precio)), bsize: p.corr && p.tele != null ? KMT.b2 : KMT.b1, sep: "" }].concat(p.corr && p.tele != null ? [{ t: "Correderas", usd: usd(p.tele), size: KMT.p2, bs: usd(p.bcvTele != null ? p.bcvTele : bcvDe(p.tele)), bsize: KMT.b2, sep: KMT.sep }] : []), ncol: p.precio != null && p.corr && p.tele != null ? 2 : 1,
       price: r.t == null ? "Cotízalo por WhatsApp" : usd(r.t), psize: r.t == null ? "16px" : "clamp(20px,1.7vw,24px)",
       abono: r.t == null ? "Resérvalo con el 50 %" : "✓ Resérvalo con el 50 %", bs: r.t == null ? "" : "En Bs: " + usd(r.tb) };
   }
