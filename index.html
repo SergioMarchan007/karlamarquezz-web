@@ -607,12 +607,23 @@ html[data-precios] [data-pprecio] [data-ncol="2"] > [data-pcol] > span:nth-child
 html[data-precios] [data-pprecio] [data-pcol]::after,html[data-precios] [data-mv-precio]::after{content:"Efectivo · Zelle · USDT";order:2;align-self:flex-start;max-width:100%;display:inline-block;padding:4px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;line-height:1.35;text-decoration:none;background:var(--km-lila-suave);color:var(--km-violeta);box-shadow:none}
 /* al lado del precio en bolívares: que es por transferencia, en texto normal (inline-block: la raya del tachado no le llega) */
 html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio] > span::after{content:"transferencia en Bs"!important;display:inline-block!important;margin-left:6px!important;padding:0!important;background:none!important;box-shadow:none!important;font-size:13px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;line-height:1.3!important;color:color-mix(in srgb,var(--km-tinta) 60%,transparent)!important;text-decoration:none!important}
-/* en el teléfono no cabe al lado del precio: va en su renglón, alineado a la izquierda (width 100 % y sin sangría) */
-@media (max-width:599px){html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio] > span::after{margin-left:0!important;width:100%!important;margin-top:1px!important}}
 /* con oferta: en un renglón, como el tachado de la referencia: «$275 (tachado) transferencia en Bs · sin descuento»
-   (12,5 px para que quepa al lado del precio en la computadora; en el teléfono baja al renglón de abajo) */
+   (12,5 px para que quepa al lado del precio en la computadora) */
 html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"]) > span::after{
   content:"transferencia en Bs · sin descuento"!important;font-size:12.5px!important;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)!important}
+/* En el teléfono «transferencia en Bs» va AL LADO del número, con su espacio (Sergio, 2-nov-2026: «se ve muy pegadita al número…
+   tampoco me gusta que esté debajo… que quede el número y al lado transferencia en bolívares, bien ajustadito»): número de 16 px,
+   letra chica que crece con la pantalla (cabe desde los teléfonos de 360 px) y sin partirse en dos renglones.
+   En las ofertas, al lado va solo «transferencia en Bs» y «sin descuento» baja a su renglón. */
+@media (max-width:599px){
+  html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3),html[data-precios] [data-mv-precio] > span{font-size:16px!important;white-space:nowrap!important}
+  html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol] > span:nth-child(3),html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"]) > span{font-size:14px!important}
+  html[data-precios] [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio] > span::after{margin-left:5px!important;font-size:clamp(10.5px,3vw,12px)!important}
+  html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol] > span:nth-child(3)::after,html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"]) > span::after{
+    content:"transferencia en Bs"!important}
+  html[data-precios] :is([data-code="T14"],[data-code="T07"]) [data-pprecio] [data-pcol]::before,html[data-precios] [data-mv-precio]:is([data-code="T14"],[data-code="T07"])::before{content:"sin descuento";order:4;
+    margin-top:-3px;font-size:clamp(10.5px,3vw,12px);line-height:1.2;color:color-mix(in srgb,var(--km-tinta) 50%,transparent)}
+}
 </style>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
