@@ -4243,16 +4243,16 @@ class Component extends DCLogic {
   }
   // ===== Catálogo simple (26-oct-2026, ver catalogo_simple.py) =====
   // Tarjeta de «Los más vendidos»: foto, número del puesto, nombre, precio y «Agregar».
-  // El precio es el más bajo del modelo y sus versiones; dice «Desde» solo si hay otro precio (otra versión o correderas).
+  // El precio es el mismo que sale al abrir su ficha: el del modelo (Sergio, 2-nov-2026: antes salía el más bajo de
+  // sus versiones, $250 en la T12, y al abrir la ficha decía $265). Dice «Desde» solo si la ficha trae dos precios
+  // (sencilla y con correderas), igual que las tarjetas del catálogo.
   tarjetaVendida(i, k, inC) {
-    const p = PIEZAS[i], n = inC[p.code] || 0;
-    const vs = (p.fam || [p.code]).map((c) => PIEZAS[iOf(c)]).filter((q) => q && !q.oculto && q.precio != null);
-    const min = vs.length ? vs.reduce((a, q) => (q.precio < a.precio ? q : a)) : null;
-    const desde = !!min && ((p.corr && p.tele != null) || vs.some((q) => q.precio !== min.precio));
-    const precio = min ? usd(min.precio) : "Cotízalo por WhatsApp";
-    return { code: p.code, num: pad(k + 1), name: p.name, src: p.front, desde, usd: precio, psize: min ? "clamp(19px,1.6vw,23px)" : "15px",
-      bs: min ? usd(min.bcv != null ? min.bcv : bcvDe(min.precio)) : "",
-      aria: p.name + (min ? (desde ? ", desde " : ", ") + precio : "") + ". Ver su ficha", open: (e) => this.openViewer(i, e),
+    const p = PIEZAS[i], n = inC[p.code] || 0, hay = p.precio != null;   // hay = el modelo tiene precio
+    const desde = hay && !!p.corr && p.tele != null;
+    const precio = hay ? usd(p.precio) : "Cotízalo por WhatsApp";
+    return { code: p.code, num: pad(k + 1), name: p.name, src: p.front, desde, usd: precio, psize: hay ? "clamp(19px,1.6vw,23px)" : "15px",
+      bs: hay ? usd(p.bcv != null ? p.bcv : bcvDe(p.precio)) : "",
+      aria: p.name + (hay ? (desde ? ", desde " : ", ") + precio : "") + ". Ver su ficha", open: (e) => this.openViewer(i, e),
       addLabel: n ? "En tu lista · " + n : "Agregar",
       addAria: n ? "En tu lista · " + n + ". Agregar 1 más de " + p.name : "Agregar " + p.name + " a tu cotización",
       abg: n ? "var(--km-en-carrito)" : "var(--km-tinta)", afg: n ? "var(--km-sobre-carrito)" : "var(--km-dia)",
