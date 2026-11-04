@@ -653,6 +653,19 @@ s[data-km-antes],[data-km-antes-linea] s{font-weight:400!important;color:color-m
   [data-mv-precio] > span:has(s[data-km-antes]:not([data-km-antes=""]))::after{display:block!important;margin:2px 0 0!important}
 }
 </style>
+<style data-km-fotos-iphone="">
+/* ===== fotos que no salían en algunos iPhone (3-nov-2026; ver fotos_iphone_3nov.py) ===== */
+/* las cajas de foto toman su alto de un relleno invisible, no de aspect-ratio */
+[data-mv-foto], article[data-pcard] > button[data-flip][data-flip], [data-gusto-foto][data-gusto-foto], [data-puerta][data-puerta] {
+  aspect-ratio: auto !important; height: auto !important }
+[data-mv-foto]::before, article[data-pcard] > button[data-flip]::before, [data-gusto-foto]::before, [data-puerta]::before {
+  content: ""; display: block; pointer-events: none }
+/* «Los más vendidos», tarjetas del catálogo y «Hecho a tu gusto»: foto 4:5 (alto = 125 % del ancho) */
+[data-mv-foto]::before, article[data-pcard] > button[data-flip]::before, [data-gusto-foto]::before { padding-top: 125% }
+/* categorías (Peinadoras, Clósets…): 3:2 en el teléfono y 2:1 desde 640 px, como estaban */
+[data-puerta]::before { padding-top: 66.6667% }
+@media (min-width: 640px) { [data-puerta]::before { padding-top: 50% } }
+</style>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
