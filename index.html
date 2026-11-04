@@ -1805,6 +1805,18 @@ html[data-tut-oido] [data-tut-flecha] { display: none }
 }
 
 </style>
+<script data-km-portada-bajar="">
+document.addEventListener("click", function (e) {
+  var a = e.target && e.target.closest && e.target.closest("[data-pp2-boton]");
+  if (!a) return;
+  var id = (a.getAttribute("href") || "").split("#")[1], t = id && document.getElementById(id);
+  if (!t) return;
+  e.preventDefault();
+  // con «menos movimiento» activado en el teléfono, salta sin animación
+  var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  t.scrollIntoView({ behavior: quieto ? "auto" : "smooth", block: "start" });
+});
+</script>
 <style data-km-marcas="">
 /* ===== Marcas de prueba C y E (Karla, 24-oct-2026; ver marcas_km.py) ===== */
 /* Sin data-marca la web se ve como hoy. Cada variable --km-* reemplaza un color que antes iba escrito a mano. */
@@ -2108,31 +2120,16 @@ h1,h2,h3,p,ol,figure,address{margin:0}
           <li>Hechos a mano</li>
           <li>Cotiza por WhatsApp</li>
         </ul>
-        <a href="#mas-vendidos" data-pp2-boton>Ver los modelos <span aria-hidden="true">↓</span></a>
+        <!-- baja al tutorial «Cómo cotizar», que desde el 3-nov-2026 va antes de «Los más vendidos» (Sergio) -->
+        <a href="#tutorial" data-pp2-boton>Ver los modelos <span aria-hidden="true">↓</span></a>
       </div>
     </div>
   </div>
 </section>
 </sc-if>
-<section id="mas-vendidos" data-tone="day" data-screen-label="Los más vendidos" aria-labelledby="mas-vendidos-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);{{ mvTope }}">
-  <div style="max-width:1440px;margin:0 auto;padding:{{ mvPad }} clamp(14px,4vw,56px) 0">
-    <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Pedidos reales del taller</p><h2 id="mas-vendidos-t">Los más vendidos</h2></div>
-    <div data-mv-grid="">
-      <sc-for list="{{ masVendidos }}" as="p" hint-placeholder-count="4">
-        <article data-mv-card="">
-          <button type="button" data-mv-abrir="" onClick="{{ p.open }}" aria-label="{{ p.aria }}">
-            <span data-mv-foto=""><img src="{{ p.src }}" alt="" loading="lazy" decoding="async" width="800" height="1000" draggable="false"><span data-mv-num="" aria-hidden="true"><i></i>{{ p.num }}</span></span>
-            <span data-mv-nombre="">{{ p.name }}</span>
-            <span data-mv-precio="" data-code="{{ p.code }}"><sc-if value="{{ p.desde }}" hint-placeholder-val="{{ true }}"><small>Desde</small></sc-if><b style="font-size:{{ p.psize }}">{{ p.usd }}<s data-km-antes="{{ p.antes }}">{{ p.antes }}</s></b><span>{{ p.bs }}<s data-km-antes="{{ p.antesBs }}">{{ p.antesBs }}</s></span><i data-km-antes-linea="{{ p.antes }}">Antes <s>{{ p.antes }}</s> · <s>{{ p.antesBs }}</s> en Bs</i></span>
-          </button>
-          <button type="button" data-mv-add="" onClick="{{ p.add }}" aria-label="{{ p.addAria }}" style="background:{{ p.abg }};color:{{ p.afg }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>{{ p.addLabel }}</button>
-        </article>
-      </sc-for>
-    </div>
-  </div>
-</section>
-<section id="tutorial" data-tone="day" data-screen-label="Tutorial" aria-labelledby="tutorial-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
-  <div data-escena="" style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) 0">
+
+<section id="tutorial" data-tone="day" data-screen-label="Tutorial" aria-labelledby="tutorial-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);{{ mvTope }}">
+  <div data-escena="" style="max-width:1440px;margin:0 auto;padding:{{ mvPad }} clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Tutorial</p><h2 id="tutorial-t">Cómo cotizar</h2></div>
     <div data-tut-voz=""><button type="button" data-tut-play="" aria-label="Escuchar cómo cotizar"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path data-onda="1" d="M15.5 9a4.2 4.2 0 0 1 0 6"></path><path data-onda="2" d="M18.3 6.5a8 8 0 0 1 0 11"></path></svg><span data-tut-txt="">Escúchalo</span></button><span data-tut-flecha="" aria-hidden="true"><svg width="46" height="24" viewBox="0 0 46 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 12H5"></path><path d="M12 5 5 12l7 7"></path></svg></span></div>
 <!-- ===== Opción 1 · «Teléfono» (pedido de Sergio, 28-oct-2026) =====
@@ -2512,7 +2509,23 @@ h1,h2,h3,p,ol,figure,address{margin:0}
     <p data-tut-sub="" aria-live="off"></p>
   </div>
 </section>
-
+<section id="mas-vendidos" data-tone="day" data-screen-label="Los más vendidos" aria-labelledby="mas-vendidos-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta)">
+  <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6vh,72px) clamp(14px,4vw,56px) 0">
+    <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Pedidos reales del taller</p><h2 id="mas-vendidos-t">Los más vendidos</h2></div>
+    <div data-mv-grid="">
+      <sc-for list="{{ masVendidos }}" as="p" hint-placeholder-count="4">
+        <article data-mv-card="">
+          <button type="button" data-mv-abrir="" onClick="{{ p.open }}" aria-label="{{ p.aria }}">
+            <span data-mv-foto=""><img src="{{ p.src }}" alt="" loading="lazy" decoding="async" width="800" height="1000" draggable="false"><span data-mv-num="" aria-hidden="true"><i></i>{{ p.num }}</span></span>
+            <span data-mv-nombre="">{{ p.name }}</span>
+            <span data-mv-precio="" data-code="{{ p.code }}"><sc-if value="{{ p.desde }}" hint-placeholder-val="{{ true }}"><small>Desde</small></sc-if><b style="font-size:{{ p.psize }}">{{ p.usd }}<s data-km-antes="{{ p.antes }}">{{ p.antes }}</s></b><span>{{ p.bs }}<s data-km-antes="{{ p.antesBs }}">{{ p.antesBs }}</s></span><i data-km-antes-linea="{{ p.antes }}">Antes <s>{{ p.antes }}</s> · <s>{{ p.antesBs }}</s> en Bs</i></span>
+          </button>
+          <button type="button" data-mv-add="" onClick="{{ p.add }}" aria-label="{{ p.addAria }}" style="background:{{ p.abg }};color:{{ p.afg }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>{{ p.addLabel }}</button>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
 <section id="puertas" data-tone="day" data-screen-label="Puertas por tipo de mueble" aria-labelledby="puertas-t" style="position:relative;z-index:2;background:var(--km-dia);color:var(--km-tinta);padding-bottom:{{ ptFin }}">
   <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vh,80px) clamp(14px,4vw,56px) 0">
     <div data-cat-titulo=""><p data-cat-ceja=""><span aria-hidden="true"></span>Toca uno y mira sus modelos</p><h2 id="puertas-t">¿Qué mueble buscas?</h2></div>
