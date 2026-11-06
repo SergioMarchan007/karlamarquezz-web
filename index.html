@@ -4628,7 +4628,7 @@ class Component extends DCLogic {
     if (!p || p.precio == null) return "\n   Precio: por cotizar";
     const dos = this.dosVersiones(p), tele = dos && ver === "Telescópicas";
     const u = tele ? p.tele : p.precio, b = tele ? (p.bcvTele != null ? p.bcvTele : bcvDe(p.tele)) : (p.bcv != null ? p.bcv : bcvDe(p.precio));
-    const nombre = dos ? (tele ? "Con correderas" : "Sencilla") : "Precio";
+    const nombre = dos ? (tele ? "Con correderas" : "Gavetas sencillas") : "Precio";   // «Gavetas sencillas»: Sergio, 5-nov-2026
     return "\n   " + nombre + ": " + (q > 1 ? q + " × " + usd(u) + " = " + usd(u * q) + " (Bs " + usd(b * q) + ")" : usd(u) + " (Bs " + usd(b) + ")");
   }
   // el total del mensaje con la versión elegida de cada mueble (ya no dice «desde»); sin total si falta un precio
@@ -4644,7 +4644,8 @@ class Component extends DCLogic {
   // los colores de elegida o no (KM_VER_EST). cur = la versión marcada («Sencillas» si no hay); pick(l) la cambia
   verOpts(p, cur, pick, donde) {
     const E = KM_VER_EST[donde] || KM_VER_EST.ficha, bsDe = (u, b) => "Bs " + usd(b != null ? b : bcvDe(u));
-    return [["Sencillas", "Sencilla", "Sin correderas", p.precio, p.bcv, kmAntesDe(p), "adicionales/corredera-sencilla-horizontal.webp"],
+    // el nombre visible es «Gavetas sencillas» (Sergio, 5-nov-2026: «en vez de que diga solamente sencilla»); la clave sigue siendo «Sencillas»
+    return [["Sencillas", "Gavetas sencillas", "Sin correderas", p.precio, p.bcv, kmAntesDe(p), "adicionales/corredera-sencilla-horizontal.webp"],
             ["Telescópicas", "Con correderas", "Telescópicas, de metal", p.tele, p.bcvTele, kmAntesTeleDe(p), "adicionales/corredera-telescopica-horizontal.webp"]]
       .map((x) => { const on = (cur || "Sencillas") === x[0];
         return Object.assign({ t: x[1], nota: x[2], usd: usd(x[3]), bs: bsDe(x[3], x[4]), antes: x[5].antes || "", antesBs: x[5].antesBs || "",
