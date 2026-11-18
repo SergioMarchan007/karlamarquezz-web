@@ -546,7 +546,7 @@ function kmFicha(p) { return (p && (FICHAS_KARLA[p.code] || (p.fam || []).map((c
 function kmDetallesKarla(p, det, med, chip) {
   const f = kmFicha(p);
   if (!f) return { det: det, hasDet: det.length > 0 };   // sin ficha: las etiquetas de antes
-  const m = f.m || med || "";
+  const m = (p && p.kmMedFicha) || f.m || med || "";   // medidas nuevas de la base (catalogo_vivo.py)
   const d = (m ? [chip("Medidas: " + m)] : []).concat((KM_FICHA_OP === "b" ? f.p : []).map((t) => chip(t))).slice(0, 3)
     .concat(p.gratis && p.gratis.length ? [chip("Banquito")] : []);
   return { det: d, hasDet: d.length > 0 };
@@ -556,7 +556,7 @@ function kmDetallesKarla(p, det, med, chip) {
 function kmFichaKarla(p) {
   const f = kmFicha(p);
   if (!f) return { kmConFicha: "0", kmHasDesc: false, kmHasPuntos: false, kmHasSpecs: false };
-  const specs = f.s.map((r) => ({ k: r[0], v: r[1], c: "var(--km-tinta)" }));
+  const specs = f.s.map((r) => ({ k: r[0], v: (p.kmMedSpecs && p.kmMedSpecs[/^ancho( total)?$/i.test(r[0]) ? "a" : /^alto( total.*)?$/i.test(r[0]) ? "h" : /^(profundidad|fondo)$/i.test(r[0]) ? "f" : ""]) || r[1], c: "var(--km-tinta)" }));   // medidas nuevas de la base (catalogo_vivo.py)
   return { kmConFicha: "1", kmHasDesc: !!f.d, kmDesc: f.d,
     kmHasPuntos: KM_FICHA_OP === "a" && f.p.length > 0, kmPuntos: f.p.map((t) => ({ t })),
     kmHasSpecs: KM_FICHA_OP === "a" && specs.length > 0, kmSpecs: specs, specs };
@@ -667,6 +667,51 @@ s[data-km-antes],[data-km-antes-linea] s{font-weight:400!important;color:color-m
 [data-puerta]::before { padding-top: 66.6667% }
 @media (min-width: 640px) { [data-puerta]::before { padding-top: 50% } }
 </style>
+<style data-km-vivo="">
+/* catálogo en vivo (18-nov-2026; ver catalogo_vivo.py): mientras llegan los precios de la base se ven tenues
+   (como mucho 1,2 s); después aparecen con un fundido corto */
+html[data-km-vivo] :is([data-pcol],[data-mv-precio],[data-vprecio],[data-vtabla]){transition:opacity .25s ease}
+html[data-km-vivo="espera"] :is([data-pcol],[data-mv-precio],[data-vprecio],[data-vtabla]){opacity:.15}
+</style>
+<script data-km-catalogo-vivo="">
+// Catálogo en vivo (18-nov-2026; ver catalogo_vivo.py): pide al mismo dominio (/api/catalogo, que nginx busca en la
+// base) los nombres, precios y medidas publicados. Aquí no va ninguna clave.
+// window.kmVivo guarda los datos; la página (más abajo) los aplica apenas puede. Si algo falla, queda lo armado.
+(function () {
+  var ACTIVO = true, URL_API = "/api/catalogo", ESPERA = 1500, VELO = 1200;
+  var raiz = document.documentElement;
+  var vivo = window.kmVivo = { datos: null, listo: false, avisar: [] };
+  // quitar el velo de los precios (con un fundido corto) y no volver a ponerlo
+  vivo.mostrar = function () {
+    if (raiz.getAttribute("data-km-vivo") !== "espera") return;
+    raiz.setAttribute("data-km-vivo", "listo");
+    setTimeout(function () { raiz.removeAttribute("data-km-vivo"); }, 400);
+  };
+  // cuando(fn): llama a fn con los datos apenas lleguen (si nunca llegan, no la llama)
+  vivo.cuando = function (fn) { if (vivo.datos) fn(vivo.datos); else if (!vivo.listo) vivo.avisar.push(fn); };
+  // apagado (KM_CATALOGO_VIVO = False) o un navegador muy viejo: no se pide nada
+  if (!ACTIVO || !window.fetch) { vivo.listo = true; return; }
+  raiz.setAttribute("data-km-vivo", "espera");
+  setTimeout(vivo.mostrar, VELO);
+  var ctl = window.AbortController ? new AbortController() : null;
+  var corte = setTimeout(function () { terminar(null); if (ctl) ctl.abort(); }, ESPERA);
+  // termina una sola vez: con los datos (y avisa a la página) o sin ellos (y quita el velo)
+  function terminar(d) {
+    if (vivo.listo) return;
+    vivo.listo = true; clearTimeout(corte);
+    var fns = vivo.avisar; vivo.avisar = [];
+    if (!d) { vivo.mostrar(); return; }
+    vivo.datos = d;
+    fns.forEach(function (fn) { try { fn(d); } catch (e) {} });
+  }
+  try {
+    fetch(URL_API, { method: "GET", credentials: "omit", signal: ctl ? ctl.signal : undefined, headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { terminar(d && Array.isArray(d.modelos) ? d : null); })
+      .catch(function () { terminar(null); });
+  } catch (e) { terminar(null); }
+})();
+</script>
 <style data-km-pasos="">
 /* ===== «Cómo pedir» con animaciones (pedido de Sergio, 28-oct-2026; ver pasos_animados.py) ===== */
 /* Cada dibujo animado va dentro de una caja [data-escena]. Mientras no se ve en pantalla, sus animaciones quedan en
@@ -3883,12 +3928,78 @@ const kmCon = (o, ids) => Object.assign(o, ids ? { content_ids: ids, content_typ
 const LIT = "0 0 8px 2px rgba(255,250,244,.9), 0 0 22px 6px var(--halo, color-mix(in srgb,var(--km-halo) 58%,transparent))";
 const EASE = "cubic-bezier(.16,1,.3,1)";
 
+// ===== Catálogo en vivo (18-nov-2026; ver catalogo_vivo.py) =====
+// Por pieza: m = modelo KM-P, n = 1 si es la principal (cambia el nombre), s = variante de u/b (sencilla o única),
+// c = variante de t/bt (con correderas), d = 1 si sus medidas siguen a las del modelo
+const KM_VIVO_MAPA = {"T19":{"m":"KM-P-0101","n":1,"s":"KM-P-0101-S","c":"KM-P-0101-C","d":1},"T18":{"m":"KM-P-0102","n":1,"s":"KM-P-0102-S","c":"KM-P-0102-C","d":1},"T05":{"m":"KM-P-0103","n":1,"s":"KM-P-0103-T","d":1},"C03":{"m":"KM-P-0104","n":1,"s":"KM-P-0104-S","c":"KM-P-0104-C","d":1},"T14":{"m":"KM-P-0105","n":1,"s":"KM-P-0105-PT","d":1},"T07":{"m":"KM-P-0106","n":1,"s":"KM-P-0106-T","d":1},"T09":{"m":"KM-P-0107","n":1,"s":"KM-P-0107-S","c":"KM-P-0107-C","d":1},"T12":{"m":"KM-P-0108","n":1,"s":"KM-P-0108-S","c":"KM-P-0108-C","d":1},"C01":{"m":"KM-P-0109","n":1,"s":"KM-P-0109-S","c":"KM-P-0109-C","d":1},"T21":{"m":"KM-P-0110","n":1,"s":"KM-P-0110-U","c":"KM-P-0110-C","d":1},"T20":{"m":"KM-P-0111","n":1,"s":"KM-P-0111-U","c":"KM-P-0111-C","d":1},"T22":{"m":"KM-P-0112","n":1,"s":"KM-P-0112-U","c":"KM-P-0112-C","d":1},"T02":{"m":"KM-P-0113","n":1,"s":"KM-P-0113-R","d":1},"E02":{"m":"KM-P-0114","n":1,"s":"KM-P-0114-U","d":1},"A02":{"m":"KM-P-0115","n":1,"s":"KM-P-0115-U","c":"KM-P-0115-C","d":1},"A01":{"m":"KM-P-0116","n":1,"s":"KM-P-0116-U","c":"KM-P-0116-C","d":1},"A04":{"m":"KM-P-0118","n":1,"s":"KM-P-0118-C","d":1},"A06":{"m":"KM-P-0119","n":1,"s":"KM-P-0119-U","c":"KM-P-0119-C","d":1},"M02":{"m":"KM-P-0121","n":1,"s":"KM-P-0121-S","c":"KM-P-0121-C","d":1},"T29":{"m":"KM-P-0122","n":1,"s":"KM-P-0122-S","c":"KM-P-0122-C","d":1},"T24":{"m":"KM-P-0123","n":1,"s":"KM-P-0123-S","c":"KM-P-0123-C","d":1},"T31":{"m":"KM-P-0124","n":1,"s":"KM-P-0124-PT","d":1},"T17":{"m":"KM-P-0125","n":1,"s":"KM-P-0125-T","d":1},"T25":{"m":"KM-P-0126","n":1,"s":"KM-P-0126-S","c":"KM-P-0126-C","d":1},"T28":{"m":"KM-P-0127","n":1,"s":"KM-P-0127-T","d":1},"T08":{"m":"KM-P-0128","n":1,"s":"KM-P-0128-S","c":"KM-P-0128-C","d":1},"T11":{"m":"KM-P-0129","n":1,"s":"KM-P-0129-S","c":"KM-P-0129-C","d":1},"C05":{"m":"KM-P-0130","n":1,"s":"KM-P-0130-S","c":"KM-P-0130-C","d":1},"C09":{"m":"KM-P-0131","n":1,"s":"KM-P-0131-S","c":"KM-P-0131-C","d":1},"A10":{"m":"KM-P-0132","n":1,"s":"KM-P-0132-C","d":1},"A07":{"m":"KM-P-0133","n":1,"s":"KM-P-0133-U","d":1},"D01":{"m":"KM-P-0134","n":1,"s":"KM-P-0134-S","c":"KM-P-0134-C","d":1},"B01":{"m":"KM-P-0135","n":1,"s":"KM-P-0135-U","d":1},"B03":{"m":"KM-P-0136","n":1,"s":"KM-P-0136-U","d":1},"B07":{"m":"KM-P-0137","n":1,"s":"KM-P-0137-U","d":1},"B12":{"m":"KM-P-0138","n":1,"s":"KM-P-0138-U","d":1},"B04":{"m":"KM-P-0139","n":1,"s":"KM-P-0139-U","d":1},"B09":{"m":"KM-P-0140","n":1,"s":"KM-P-0140-U","d":1},"B08":{"m":"KM-P-0141","n":1,"s":"KM-P-0141-U","d":1},"B11":{"m":"KM-P-0142","n":1,"s":"KM-P-0142-U","d":1},"B02":{"m":"KM-P-0143","n":1,"s":"KM-P-0143-U","d":1},"B05":{"m":"KM-P-0144","n":1,"s":"KM-P-0144-U","d":1},"B10":{"m":"KM-P-0145","n":1,"s":"KM-P-0145-U","d":1},"B06":{"m":"KM-P-0146","n":1,"s":"KM-P-0146-U","d":1},"A09":{"m":"KM-P-0147","n":1,"s":"KM-P-0147-C","d":1},"T06":{"m":"KM-P-0103","s":"KM-P-0103-T"},"T10":{"m":"KM-P-0103","s":"KM-P-0103-T"},"T15":{"m":"KM-P-0103","s":"KM-P-0103-T"},"C04":{"m":"KM-P-0104","s":"KM-P-0104-S","c":"KM-P-0104-C","d":1},"C02":{"m":"KM-P-0109","d":1},"C08":{"m":"KM-P-0109","d":1},"T16":{"m":"KM-P-0111","s":"KM-P-0111-U","c":"KM-P-0111-C"},"A12":{"m":"KM-P-0147","s":"KM-P-0147-C","d":1},"A03":{"m":"KM-P-0118","s":"KM-P-0118-C","d":1},"D02":{"m":"KM-P-0134","s":"KM-P-0134-S","c":"KM-P-0134-C"},"A14":{"m":"KM-P-0117","n":1,"s":"KM-P-0117-U","c":"KM-P-0117-C","d":1}};
+const kmVivoNum = (x) => typeof x === "number" && isFinite(x) && x > 0 ? x : null;
+// las medidas en el formato de la web: «1,25×1,59» → «1.25 x 1.59»
+const kmVivoMed = (t) => String(t || "").trim().replace(/,/g, ".").replace(/\s*[x×X]\s*/g, " x ");
+// para la ficha: «1.25 x 1.59» → la etiqueta «125 × 159 cm» y los renglones Ancho / Alto / Profundidad
+// (s.a = ancho, s.h = alto, s.f = profundidad; las especificaciones de Karla dicen «Ancho total», «Alto total (con espejo)»…)
+const kmVivoFicha = (md) => {
+  const n = md.split(" x ").map((t) => parseFloat(t));
+  if (n.length < 2 || n.length > 3 || n.some((x) => !(x > 0))) return { m: md.replace(/ x /g, " × ") + " m", s: null };
+  const cm = n.map((x) => Math.round(x < 10 ? x * 100 : x));   // en metros (1.25) o ya en cm (125)
+  return { m: cm[0] + " × " + cm[1] + " cm", s: { a: cm[0] + " cm", h: cm[1] + " cm", f: cm[2] ? cm[2] + " cm" : "" } };
+};
+let kmVivoHecho = false;
+const kmVivoCambiados = {};
+// pone los datos de la base en PIEZAS; devuelve true si cambió algo. Lo que falte o venga raro se queda como estaba.
+function kmVivoAplicar(d) {
+  if (kmVivoHecho || !d || !Array.isArray(d.modelos)) return false;
+  kmVivoHecho = true;
+  const mods = {}, vars = {};
+  d.modelos.forEach((m) => { if (m && m.codigo) { mods[m.codigo] = m; (Array.isArray(m.variantes) ? m.variantes : []).forEach((v) => { if (v && v.codigo) vars[v.codigo] = v; }); } });
+  PIEZAS.forEach((p) => {
+    const e = KM_VIVO_MAPA[p.code], m = e && mods[e.m];
+    if (!m) return;
+    const antes = [p.name, p.precio, p.bcv, p.tele, p.bcvTele, p.med.ancho].join("|");
+    // el nombre: solo en la pieza principal del modelo
+    const nom = typeof m.nombre === "string" ? m.nombre.trim() : "";
+    if (e.n && nom && nom !== p.name) { p.name = nom; p.s += " " + norm(nom); }   // p.s: para el buscador
+    // los precios: $ y Bs de la variante; si falta el Bs, sale con la regla de siempre (× 1,25)
+    const s = e.s && vars[e.s], c = e.c && vars[e.c];
+    if (s && kmVivoNum(s.divisas)) { p.precio = s.divisas; p.bcv = kmVivoNum(s.bcv) || bcvDe(s.divisas); }
+    if (c && kmVivoNum(c.divisas)) { p.tele = c.divisas; p.bcvTele = kmVivoNum(c.bcv) || bcvDe(c.divisas); }
+    // las medidas: solo si la base trae unas DISTINTAS a las armadas (así las de la ficha de Karla no cambian solas)
+    const md = e.d ? kmVivoMed(m.medidas) : "";
+    if (md && md !== kmVivoMed(p.med.ancho)) { p.med.ancho = md; const f = kmVivoFicha(md); p.kmMedFicha = f.m; p.kmMedSpecs = f.s; }
+    if ([p.name, p.precio, p.bcv, p.tele, p.bcvTele, p.med.ancho].join("|") !== antes) kmVivoCambiados[p.code] = true;
+  });
+  // la 2.ª foto de una ficha dice el nombre de la otra versión: si a esa le cambió el nombre, también aquí
+  PIEZAS.forEach((p) => { const q = p.side && PIEZAS.find((x) => x.code !== p.code && x.front === p.side); if (q && kmVivoCambiados[q.code]) p.sideLabel = q.name; });
+  return Object.keys(kmVivoCambiados).length > 0;
+}
+// los datos para Google (JSON-LD, ItemList): el nombre y el precio de las piezas que cambiaron. Ese <script> está dentro
+// de la plantilla (lo dibuja React), así que esto corre después del dibujo (en componentDidMount o tras el setState)
+function kmVivoDatosGoogle() {
+  try {
+    document.querySelectorAll('script[type="application/ld+json"]').forEach((el) => {
+      const j = JSON.parse(el.textContent); if (!j || j["@type"] !== "ItemList") return;
+      let cambio = false;
+      (j.itemListElement || []).forEach((li) => {
+        const it = li && li.item, p = it && kmVivoCambiados[it.sku] ? PIEZAS[iOf(it.sku)] : null; if (!p) return;
+        if (it.name !== p.name) { it.name = p.name; cambio = true; }
+        if (it.offers && p.precio != null && it.offers.price !== p.precio) { it.offers.price = p.precio; cambio = true; }
+      });
+      if (cambio) el.textContent = JSON.stringify(j);
+    });
+  } catch (e) {}
+}
+// si los datos ya llegaron (lo normal), se aplican aquí mismo, antes del primer dibujo: no se nota ningún cambio
+if (window.kmVivo && window.kmVivo.datos) { kmVivoAplicar(window.kmVivo.datos); window.kmVivo.via = "antes del dibujo"; window.kmVivo.mostrar(); }
+
 class Component extends DCLogic {
   state = { appEv: null, appSheet: false, appDone: false, pal: null, vCustom: null, cart: loadCart(), cartOpen: false, nombre: (() => { try { return localStorage.getItem(CART_KEY + "-nombre") || ""; } catch (e) { return ""; } })(), nameErr: false, ciudad: (() => { try { return localStorage.getItem(CART_KEY + "-ciudad") || ""; } catch (e) { return ""; } })(), msgCustom: null, toast: "", toastCart: true, dl: "", fq: 1, fv: "Sencillas", fm: "Estándar", fe: false, fn: false, fnt: "", cat: "all", q: "", shown: PAGE, elegida: false, viewer: null, gi: 0, va: -1, color: null, gusto: 0, faq: -1, menu: false, slide: 0, heroMore: false, lights: true, openNow: null, share: "", mapReady: false, mobile: window.innerWidth < 860, tablet: window.innerWidth >= 600 && window.innerWidth < 860 };
   rootRef = React.createRef(); headerRef = React.createRef(); heroRef = React.createRef(); manRef = React.createRef(); gridRef = React.createRef();
   mapRef = React.createRef(); viewerRef = React.createRef(); viewerImgRef = React.createRef(); grainRef = React.createRef(); cartRef = React.createRef(); trackRef = React.createRef(); vScrollRef = React.createRef();
 
   componentDidMount() {
+    // catálogo en vivo (catalogo_vivo.py): si los datos ya se aplicaron, falta ponerlos en los datos para Google; si
+    // llegan después de abrir la página, se aplican, se redibuja y después se quita el velo de los precios
+    if (window.kmVivo) { if (kmVivoHecho) kmVivoDatosGoogle(); else window.kmVivo.cuando((d) => {
+      if (kmVivoAplicar(d)) this.setState({ kmVivo: Date.now() }, () => { window.kmVivo.via = 'después del dibujo'; kmVivoDatosGoogle(); window.kmVivo.mostrar(); }); else window.kmVivo.mostrar(); }); }
     this._prevState = Object.assign({}, this.state);
     this.cleanups = [];
     document.documentElement.lang = "es";
