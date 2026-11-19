@@ -3933,6 +3933,7 @@ function kmVivoAplicar(d) {
   const mods = {}, vars = {};
   d.modelos.forEach((m) => { if (m && m.codigo) { mods[m.codigo] = m; (Array.isArray(m.variantes) ? m.variantes : []).forEach((v) => { if (v && v.codigo) vars[v.codigo] = v; }); } });
   const fotosViejas = {};   // foto de antes → foto nueva (la 2.ª foto de otra versión puede ser la de antes)
+  let ofertas = false;      // ¿cambió alguna oferta (precio de antes)?
   PIEZAS.forEach((p) => {
     const e = KM_VIVO_MAPA[p.code], m = e && mods[e.m];
     if (!m) return;
@@ -3947,6 +3948,9 @@ function kmVivoAplicar(d) {
     const s = e.s && vars[e.s], c = e.c && vars[e.c];
     if (s && kmVivoNum(s.divisas)) { p.precio = s.divisas; p.bcv = kmVivoNum(s.bcv) || bcvDe(s.divisas); }
     if (c && kmVivoNum(c.divisas)) { p.tele = c.divisas; p.bcvTele = kmVivoNum(c.bcv) || bcvDe(c.divisas); }
+    // la oferta (fase 3): el precio de ANTES de cada variante sale de la base; si viene sin oferta, se quita
+    if (kmVivoOferta(KM_ANTES, p.code, s)) ofertas = true;
+    if (kmVivoOferta(KM_ANTES_TELE, p.code, c)) ofertas = true;
     // las medidas: solo si la base trae unas DISTINTAS a las armadas (así las de la ficha de Karla no cambian solas)
     const md = e.d ? kmVivoMed(m.medidas) : "";
     if (md && md !== kmVivoMed(p.med.ancho)) { p.med.ancho = md; const f = kmVivoFicha(md); p.kmMedFicha = f.m; p.kmMedSpecs = f.s; }
@@ -3957,7 +3961,17 @@ function kmVivoAplicar(d) {
   // la 2.ª foto de una ficha dice el nombre de la otra versión: si a esa le cambió el nombre, también aquí
   PIEZAS.forEach((p) => { const q = p.side && PIEZAS.find((x) => x.code !== p.code && x.front === p.side); if (q && kmVivoCambiados[q.code]) p.sideLabel = q.name; });
   kmVivoAgregar(d.modelos);
-  return Object.keys(kmVivoCambiados).length > 0 || kmVivoNuevos.length > 0;
+  return Object.keys(kmVivoCambiados).length > 0 || kmVivoNuevos.length > 0 || ofertas;
+}
+// la oferta de una variante en KM_ANTES / KM_ANTES_TELE (oferta_antes_3nov.py): [$ de antes, Bs de antes].
+// antes_divisas con número = hay oferta; null = sin oferta (se quita: una oferta apagada en Modelos sale de la web).
+// Si la base no manda el dato (contrato viejo) o no trae la variante, queda lo armado. Devuelve true si cambió.
+function kmVivoOferta(tabla, code, v) {
+  if (!v || typeof v !== "object" || !("antes_divisas" in v)) return false;
+  const antes = JSON.stringify(tabla[code] == null ? null : kmAntesPar(tabla[code]));
+  const a = kmVivoNum(v.antes_divisas);
+  if (a) tabla[code] = [a, kmVivoNum(v.antes_bcv) || bcvDe(a)]; else delete tabla[code];
+  return JSON.stringify(tabla[code] == null ? null : tabla[code]) !== antes;
 }
 // los modelos NUEVOS (fase 2): un KM-P que la web no tiene, con foto, nombre, categoría conocida y algún precio,
 // entra a PIEZAS como una pieza más (su código es el mismo KM-P). Sin foto o con algo raro, no se agrega.
@@ -3991,6 +4005,8 @@ function kmVivoAgregar(modelos) {
       FICHAS_KARLA[code] = { d: typeof m.descripcion === "string" ? m.descripcion.trim() : "", p: puntos, s: specs, m: fm ? fm.m : "" };
       // el píxel de Meta y el «KM-P-…» del mensaje de WhatsApp
       KM_CAT[code] = [s.codigo, c ? c.codigo : null];
+      // su oferta, si la tiene (fase 3)
+      kmVivoOferta(KM_ANTES, code, s); kmVivoOferta(KM_ANTES_TELE, code, c);
       kmVivoNuevos.push(code);
     } catch (e) {}
   });
